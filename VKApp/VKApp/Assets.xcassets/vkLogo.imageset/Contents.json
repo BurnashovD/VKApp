@@ -1,6 +1,7 @@
 {
-  "colors" : [
+  "images" : [
     {
+      "filename" : "vkLogo.pdf",
       "idiom" : "universal"
     }
   ],

@@ -9,13 +9,14 @@
 /* Begin PBXBuildFile section */
 		A516BC3029104307008802FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516BC2F29104307008802FC /* AppDelegate.swift */; };
 		A516BC3229104307008802FC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516BC3129104307008802FC /* SceneDelegate.swift */; };
-		A516BC3429104307008802FC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516BC3329104307008802FC /* ViewController.swift */; };
+		A516BC3429104307008802FC /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516BC3329104307008802FC /* LogInViewController.swift */; };
 		A516BC3729104307008802FC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A516BC3529104307008802FC /* Main.storyboard */; };
-		A516BC3929104308008802FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A516BC3829104308008802FC /* Assets.xcassets */; };
 		A516BC3C29104308008802FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A516BC3A29104308008802FC /* LaunchScreen.storyboard */; };
 		A516BC4729104308008802FC /* VKAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516BC4629104308008802FC /* VKAppTests.swift */; };
 		A516BC5129104308008802FC /* VKAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516BC5029104308008802FC /* VKAppUITests.swift */; };
 		A516BC5329104308008802FC /* VKAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516BC5229104308008802FC /* VKAppUITestsLaunchTests.swift */; };
+		A516BC9E29108929008802FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A516BC9D29108929008802FC /* Assets.xcassets */; };
+		A516BCA02910A2F0008802FC /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516BC9F2910A2F0008802FC /* RegistrationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,9 +40,8 @@
 		A516BC2C29104307008802FC /* VKApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A516BC2F29104307008802FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A516BC3129104307008802FC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A516BC3329104307008802FC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A516BC3329104307008802FC /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		A516BC3629104307008802FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		A516BC3829104308008802FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A516BC3B29104308008802FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A516BC3D29104308008802FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A516BC4229104308008802FC /* VKAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VKAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -49,6 +49,8 @@
 		A516BC4C29104308008802FC /* VKAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VKAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A516BC5029104308008802FC /* VKAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKAppUITests.swift; sourceTree = "<group>"; };
 		A516BC5229104308008802FC /* VKAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		A516BC9D29108929008802FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A516BC9F2910A2F0008802FC /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,10 +103,11 @@
 			children = (
 				A516BC2F29104307008802FC /* AppDelegate.swift */,
 				A516BC3129104307008802FC /* SceneDelegate.swift */,
-				A516BC3329104307008802FC /* ViewController.swift */,
+				A516BC3329104307008802FC /* LogInViewController.swift */,
+				A516BC9F2910A2F0008802FC /* RegistrationViewController.swift */,
 				A516BC3529104307008802FC /* Main.storyboard */,
-				A516BC3829104308008802FC /* Assets.xcassets */,
 				A516BC3A29104308008802FC /* LaunchScreen.storyboard */,
+				A516BC9D29108929008802FC /* Assets.xcassets */,
 				A516BC3D29104308008802FC /* Info.plist */,
 			);
 			path = VKApp;
@@ -234,7 +237,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A516BC3C29104308008802FC /* LaunchScreen.storyboard in Resources */,
-				A516BC3929104308008802FC /* Assets.xcassets in Resources */,
+				A516BC9E29108929008802FC /* Assets.xcassets in Resources */,
 				A516BC3729104307008802FC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -299,8 +302,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A516BC3429104307008802FC /* ViewController.swift in Sources */,
+				A516BC3429104307008802FC /* LogInViewController.swift in Sources */,
 				A516BC3029104307008802FC /* AppDelegate.swift in Sources */,
+				A516BCA02910A2F0008802FC /* RegistrationViewController.swift in Sources */,
 				A516BC3229104307008802FC /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
