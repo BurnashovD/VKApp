@@ -11,7 +11,7 @@ final class LogInViewController: UIViewController {
     @IBOutlet var passwordTextField: UITextField!
 
     // MARK: - Private properties
-    
+
     private lazy var hideKeyboardGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboardAction))
 
     // MARK: - LifeCycle
@@ -31,7 +31,7 @@ final class LogInViewController: UIViewController {
         else { incorrectPasswordAlertAction()
             return
         }
-        print("ALL GOOD")
+        performSegue(withIdentifier: Constants.loginSegueIdentifier, sender: self)
     }
 
     // MARK: - Private methods
@@ -58,7 +58,7 @@ final class LogInViewController: UIViewController {
             self.view.frame.origin.y = 0.0
         }
     }
-    
+
     private func configTextFields() {
         emailTextField.delegate = self
         passwordTextField.delegate = self
@@ -71,7 +71,11 @@ final class LogInViewController: UIViewController {
     }
 
     private func incorrectPasswordAlertAction() {
-        let alertController = UIAlertController(title: Constants.incorrectPasswordText, message: nil, preferredStyle: .alert)
+        let alertController = UIAlertController(
+            title: Constants.incorrectPasswordText,
+            message: nil,
+            preferredStyle: .alert
+        )
         let alertAction = UIAlertAction(title: Constants.okText, style: .cancel)
         alertController.addAction(alertAction)
         present(alertController, animated: true)
@@ -85,10 +89,11 @@ final class LogInViewController: UIViewController {
 /// Constants
 extension LogInViewController {
     enum Constants {
-        static let incorrectPasswordText = "Неверный пароль"
-        static let okText = "Ok"
+        static let incorrectPasswordText = "Неверный логин или пароль"
+        static let okText = "Ок"
         static let userDefaultsLoginKey = "login"
         static let userDefaultsPasswordKey = "password"
+        static let loginSegueIdentifier = "login"
     }
 }
 

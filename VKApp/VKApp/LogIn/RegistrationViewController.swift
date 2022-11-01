@@ -27,7 +27,9 @@ final class RegistrationViewController: UIViewController {
     @IBAction func saveDataAction(_ sender: Any) {
         let userDefaults = UserDefaults.standard
 
-        guard loginTextField.text != Constants.emptyString, passwordTextField.text != Constants.emptyString else { changePlaceholderTextAction()
+        guard loginTextField.text != Constants.emptyString,
+              passwordTextField.text != Constants.emptyString
+        else { changePlaceholderTextAction()
             return
         }
         userDefaults.set(nameTextField.text, forKey: Constants.userDefaultsNameKey)
@@ -50,21 +52,33 @@ final class RegistrationViewController: UIViewController {
         nameTextField.textAlignment = .center
         loginTextField.textAlignment = .center
         passwordTextField.textAlignment = .center
+        nameTextField.autocorrectionType = .no
+        loginTextField.autocorrectionType = .no
+        passwordTextField.autocorrectionType = .no
     }
 
     private func changePlaceholderTextAction() {
         nameTextField.attributedPlaceholder = NSAttributedString(
-            string: "Укажите имя",
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.white,
-         NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13, weight: .medium)])
+            string: Constants.setNameText,
+            attributes: [
+                NSAttributedString.Key.foregroundColor: UIColor.white,
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13, weight: .medium)
+            ]
+        )
         loginTextField.attributedPlaceholder = NSAttributedString(
-            string: "Укажите логин",
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.white,
-         NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13, weight: .medium)])
+            string: Constants.setLoginText,
+            attributes: [
+                NSAttributedString.Key.foregroundColor: UIColor.white,
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13, weight: .medium)
+            ]
+        )
         passwordTextField.attributedPlaceholder = NSAttributedString(
-            string: "Укажите пароль",
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.white,
-         NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13, weight: .medium)])
+            string: Constants.setPasswordText,
+            attributes: [
+                NSAttributedString.Key.foregroundColor: UIColor.white,
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13, weight: .medium)
+            ]
+        )
     }
 
     @objc private func hideKeyboardAction() {
@@ -79,6 +93,9 @@ extension RegistrationViewController {
         static let userDefaultsLoginKey = "login"
         static let userDefaultsPasswordKey = "password"
         static let emptyString = ""
+        static let setNameText = "Укажите имя"
+        static let setLoginText = "Укажите логин"
+        static let setPasswordText = "Укажите пароль"
     }
 }
 

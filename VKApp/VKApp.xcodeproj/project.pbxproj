@@ -17,6 +17,10 @@
 		A516BC5329104308008802FC /* VKAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516BC5229104308008802FC /* VKAppUITestsLaunchTests.swift */; };
 		A516BC9E29108929008802FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A516BC9D29108929008802FC /* Assets.xcassets */; };
 		A516BCA02910A2F0008802FC /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516BC9F2910A2F0008802FC /* RegistrationViewController.swift */; };
+		A5F3D66B2911C8C6004EB22A /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F3D66A2911C8C6004EB22A /* FriendsTableViewController.swift */; };
+		A5F3D66F2911C926004EB22A /* PhotosCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F3D66E2911C926004EB22A /* PhotosCollectionViewController.swift */; };
+		A5F3D6712911C961004EB22A /* UserGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F3D6702911C961004EB22A /* UserGroupsTableViewController.swift */; };
+		A5F3D6732911C97B004EB22A /* GlobalSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F3D6722911C97B004EB22A /* GlobalSearchTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +55,10 @@
 		A516BC5229104308008802FC /* VKAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		A516BC9D29108929008802FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A516BC9F2910A2F0008802FC /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		A5F3D66A2911C8C6004EB22A /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
+		A5F3D66E2911C926004EB22A /* PhotosCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewController.swift; sourceTree = "<group>"; };
+		A5F3D6702911C961004EB22A /* UserGroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupsTableViewController.swift; sourceTree = "<group>"; };
+		A5F3D6722911C97B004EB22A /* GlobalSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalSearchTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,8 +111,8 @@
 			children = (
 				A516BC2F29104307008802FC /* AppDelegate.swift */,
 				A516BC3129104307008802FC /* SceneDelegate.swift */,
-				A516BC3329104307008802FC /* LogInViewController.swift */,
-				A516BC9F2910A2F0008802FC /* RegistrationViewController.swift */,
+				A5F3D66D2911C8F0004EB22A /* TabBar */,
+				A5F3D66C2911C8DC004EB22A /* LogIn */,
 				A516BC3529104307008802FC /* Main.storyboard */,
 				A516BC3A29104308008802FC /* LaunchScreen.storyboard */,
 				A516BC9D29108929008802FC /* Assets.xcassets */,
@@ -128,6 +136,26 @@
 				A516BC5229104308008802FC /* VKAppUITestsLaunchTests.swift */,
 			);
 			path = VKAppUITests;
+			sourceTree = "<group>";
+		};
+		A5F3D66C2911C8DC004EB22A /* LogIn */ = {
+			isa = PBXGroup;
+			children = (
+				A516BC9F2910A2F0008802FC /* RegistrationViewController.swift */,
+				A516BC3329104307008802FC /* LogInViewController.swift */,
+			);
+			path = LogIn;
+			sourceTree = "<group>";
+		};
+		A5F3D66D2911C8F0004EB22A /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				A5F3D66A2911C8C6004EB22A /* FriendsTableViewController.swift */,
+				A5F3D66E2911C926004EB22A /* PhotosCollectionViewController.swift */,
+				A5F3D6702911C961004EB22A /* UserGroupsTableViewController.swift */,
+				A5F3D6722911C97B004EB22A /* GlobalSearchTableViewController.swift */,
+			);
+			path = TabBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -303,8 +331,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				A516BC3429104307008802FC /* LogInViewController.swift in Sources */,
+				A5F3D66B2911C8C6004EB22A /* FriendsTableViewController.swift in Sources */,
 				A516BC3029104307008802FC /* AppDelegate.swift in Sources */,
+				A5F3D66F2911C926004EB22A /* PhotosCollectionViewController.swift in Sources */,
 				A516BCA02910A2F0008802FC /* RegistrationViewController.swift in Sources */,
+				A5F3D6712911C961004EB22A /* UserGroupsTableViewController.swift in Sources */,
+				A5F3D6732911C97B004EB22A /* GlobalSearchTableViewController.swift in Sources */,
 				A516BC3229104307008802FC /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
