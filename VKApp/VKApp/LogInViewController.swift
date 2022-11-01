@@ -5,14 +5,17 @@ import UIKit
 
 // Класс отвечает за экран входа
 final class LogInViewController: UIViewController {
-    
     // MARK: - IBOutlets
-    
+
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
 
-    // MARK: - LifeCycle
+    // MARK: - Private properties
     
+    private lazy var hideKeyboardGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboardAction))
+
+    // MARK: - LifeCycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         congigUI()
@@ -20,22 +23,22 @@ final class LogInViewController: UIViewController {
     }
 
     // MARK: - IBActions
-    
+
     @IBAction func checkDataAction(_ sender: Any) {
         let userDefaults = UserDefaults.standard
-        guard emailTextField.text == userDefaults.object(forKey: "login") as? String,
-              passwordTextField.text == userDefaults.object(forKey: "password") as? String
-        else { return }
+        guard emailTextField.text == userDefaults.object(forKey: Constants.userDefaultsLoginKey) as? String,
+              passwordTextField.text == userDefaults.object(forKey: Constants.userDefaultsPasswordKey) as? String
+        else { incorrectPasswordAlertAction()
+            return
+        }
         print("ALL GOOD")
     }
 
     // MARK: - Private methods
-    
+
     private func congigUI() {
-        emailTextField.delegate = self
-        passwordTextField.delegate = self
-        emailTextField.autocorrectionType = .no
-        passwordTextField.autocorrectionType = .no
+        view.addGestureRecognizer(hideKeyboardGesture)
+        configTextFields()
     }
 
     private func upAndDownViewAction() {
@@ -54,6 +57,38 @@ final class LogInViewController: UIViewController {
         ) { _ in
             self.view.frame.origin.y = 0.0
         }
+    }
+    
+    private func configTextFields() {
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+        emailTextField.clipsToBounds = true
+        emailTextField.layer.cornerRadius = 15
+        emailTextField.autocorrectionType = .no
+        passwordTextField.clipsToBounds = true
+        passwordTextField.layer.cornerRadius = 15
+        passwordTextField.autocorrectionType = .no
+    }
+
+    private func incorrectPasswordAlertAction() {
+        let alertController = UIAlertController(title: Constants.incorrectPasswordText, message: nil, preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: Constants.okText, style: .cancel)
+        alertController.addAction(alertAction)
+        present(alertController, animated: true)
+    }
+
+    @objc private func hideKeyboardAction() {
+        view.endEditing(true)
+    }
+}
+
+/// Constants
+extension LogInViewController {
+    enum Constants {
+        static let incorrectPasswordText = "Неверный пароль"
+        static let okText = "Ok"
+        static let userDefaultsLoginKey = "login"
+        static let userDefaultsPasswordKey = "password"
     }
 }
 
