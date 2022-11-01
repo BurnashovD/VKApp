@@ -7,8 +7,8 @@ import UIKit
 final class LogInViewController: UIViewController {
     // MARK: - IBOutlets
 
-    @IBOutlet var emailTextField: UITextField!
-    @IBOutlet var passwordTextField: UITextField!
+    @IBOutlet private var emailTextField: UITextField!
+    @IBOutlet private var passwordTextField: UITextField!
 
     // MARK: - Private properties
 

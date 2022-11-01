@@ -7,9 +7,9 @@ import UIKit
 final class RegistrationViewController: UIViewController {
     // MARK: - IBOutlets
 
-    @IBOutlet var nameTextField: UITextField!
-    @IBOutlet var loginTextField: UITextField!
-    @IBOutlet var passwordTextField: UITextField!
+    @IBOutlet private var nameTextField: UITextField!
+    @IBOutlet private var loginTextField: UITextField!
+    @IBOutlet private var passwordTextField: UITextField!
 
     // MARK: - Private properties
 
