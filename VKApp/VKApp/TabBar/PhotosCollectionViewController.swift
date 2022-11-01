@@ -19,7 +19,7 @@ extension PhotosCollectionViewController {
     }
 }
 
-// MARK: - UICollectionViewDataSource
+// MARK: - UICollectionViewDataSource, UICollectionViewDelegate
 
 extension PhotosCollectionViewController {
     override func numberOfSections(in collectionView: UICollectionView) -> Int {

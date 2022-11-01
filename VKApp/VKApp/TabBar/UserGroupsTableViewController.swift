@@ -19,7 +19,7 @@ extension UserGroupsTableViewController {
     }
 }
 
-// MARK: - UITableViewDataSource
+// MARK: - UITableViewDataSource, UITableViewDelegate
 
 extension UserGroupsTableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {

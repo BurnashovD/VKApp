@@ -19,7 +19,7 @@ extension GlobalSearchTableViewController {
     }
 }
 
-// MARK: - Table view data source
+// MARK: - UITableViewDelegate, UITableViewDataSource
 
 extension GlobalSearchTableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
