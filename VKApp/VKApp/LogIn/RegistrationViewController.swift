@@ -3,7 +3,7 @@
 
 import UIKit
 
-/// Класс овтечает за экран регистрации пользователя
+/// Экран регистрации
 final class RegistrationViewController: UIViewController {
     // MARK: - IBOutlets
 

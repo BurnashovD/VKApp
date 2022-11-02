@@ -3,14 +3,8 @@
 
 import UIKit
 
-/// Класс отвечает за отображение таблицы с группой пользователей
-final class UserGroupsTableViewController: UITableViewController {
-    // MARK: - LifeCycle
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-}
+/// Группы пользователей
+final class UserGroupsTableViewController: UITableViewController {}
 
 /// Constants
 extension UserGroupsTableViewController {

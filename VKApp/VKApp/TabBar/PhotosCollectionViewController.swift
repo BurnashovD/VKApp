@@ -3,14 +3,8 @@
 
 import UIKit
 
-/// Класс отвечает за коллекцию фотографий пользователя
-final class PhotosCollectionViewController: UICollectionViewController {
-    // MARK: - LifeCycle
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-}
+/// Экран фотографий пользователя
+final class PhotosCollectionViewController: UICollectionViewController {}
 
 /// Constants
 extension PhotosCollectionViewController {

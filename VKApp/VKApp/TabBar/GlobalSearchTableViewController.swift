@@ -3,14 +3,8 @@
 
 import UIKit
 
-/// Класс отвечает за таблицу глобального поиска групп, интересных пользователю
-final class GlobalSearchTableViewController: UITableViewController {
-    // MARK: - LifeCycle
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-}
+/// Глобальный поиск
+final class GlobalSearchTableViewController: UITableViewController {}
 
 /// Constants
 extension GlobalSearchTableViewController {

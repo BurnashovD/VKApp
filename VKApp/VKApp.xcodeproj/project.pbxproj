@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A5056EA629129E4E0073D407 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5056EA529129E4E0073D407 /* UIViewController.swift */; };
 		A516BC3029104307008802FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516BC2F29104307008802FC /* AppDelegate.swift */; };
 		A516BC3229104307008802FC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516BC3129104307008802FC /* SceneDelegate.swift */; };
 		A516BC3429104307008802FC /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516BC3329104307008802FC /* LogInViewController.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A5056EA529129E4E0073D407 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		A516BC2C29104307008802FC /* VKApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A516BC2F29104307008802FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A516BC3129104307008802FC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				A516BC3129104307008802FC /* SceneDelegate.swift */,
 				A5F3D66D2911C8F0004EB22A /* TabBar */,
 				A5F3D66C2911C8DC004EB22A /* LogIn */,
+				A5056EA529129E4E0073D407 /* UIViewController.swift */,
 				A516BC3529104307008802FC /* Main.storyboard */,
 				A516BC3A29104308008802FC /* LaunchScreen.storyboard */,
 				A516BC9D29108929008802FC /* Assets.xcassets */,
@@ -335,6 +338,7 @@
 				A516BC3029104307008802FC /* AppDelegate.swift in Sources */,
 				A5F3D66F2911C926004EB22A /* PhotosCollectionViewController.swift in Sources */,
 				A516BCA02910A2F0008802FC /* RegistrationViewController.swift in Sources */,
+				A5056EA629129E4E0073D407 /* UIViewController.swift in Sources */,
 				A5F3D6712911C961004EB22A /* UserGroupsTableViewController.swift in Sources */,
 				A5F3D6732911C97B004EB22A /* GlobalSearchTableViewController.swift in Sources */,
 				A516BC3229104307008802FC /* SceneDelegate.swift in Sources */,

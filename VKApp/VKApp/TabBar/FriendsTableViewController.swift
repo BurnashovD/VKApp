@@ -3,14 +3,8 @@
 
 import UIKit
 
-/// Класс отвечает за таблицу с друзьями пользователя
-final class FriendsTableViewController: UITableViewController {
-    // MARK: - LifeCycle
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-}
+/// Экран с друзьями пользователя
+final class FriendsTableViewController: UITableViewController {}
 
 /// Constants
 extension FriendsTableViewController {

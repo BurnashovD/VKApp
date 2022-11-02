@@ -3,7 +3,7 @@
 
 import UIKit
 
-/// Класс отвечает за экран входа
+/// Экран входа
 final class LogInViewController: UIViewController {
     // MARK: - IBOutlets
 
@@ -14,7 +14,7 @@ final class LogInViewController: UIViewController {
 
     // MARK: - Private properties
 
-    private lazy var hideKeyboardGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboardAction))
+    private lazy var hideKeyboardGesture = UITapGestureRecognizer()
 
     // MARK: - LifeCycle
 
@@ -32,8 +32,7 @@ final class LogInViewController: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        removeNotifications()
     }
 
     // MARK: - IBActions
@@ -42,7 +41,7 @@ final class LogInViewController: UIViewController {
         let userDefaults = UserDefaults.standard
         guard emailTextField.text == userDefaults.object(forKey: Constants.userDefaultsLoginKey) as? String,
               passwordTextField.text == userDefaults.object(forKey: Constants.userDefaultsPasswordKey) as? String
-        else { incorrectPasswordAlertAction()
+        else { callAlertAction(controllerTitle: Constants.incorrectPasswordText, actionTitle: Constants.okText)
             return
         }
         performSegue(withIdentifier: Constants.loginSegueIdentifier, sender: self)
@@ -53,6 +52,7 @@ final class LogInViewController: UIViewController {
     private func congigUI() {
         view.addGestureRecognizer(hideKeyboardGesture)
         loginScrollView.showsVerticalScrollIndicator = false
+        hideKeyboardGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboardAction))
         configTextFields()
     }
 
@@ -71,6 +71,11 @@ final class LogInViewController: UIViewController {
         )
     }
 
+    private func removeNotifications() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
     private func configTextFields() {
         emailTextField.delegate = self
         passwordTextField.delegate = self
@@ -80,17 +85,6 @@ final class LogInViewController: UIViewController {
         passwordTextField.clipsToBounds = true
         passwordTextField.layer.cornerRadius = 15
         passwordTextField.autocorrectionType = .no
-    }
-
-    private func incorrectPasswordAlertAction() {
-        let alertController = UIAlertController(
-            title: Constants.incorrectPasswordText,
-            message: nil,
-            preferredStyle: .alert
-        )
-        let alertAction = UIAlertAction(title: Constants.okText, style: .cancel)
-        alertController.addAction(alertAction)
-        present(alertController, animated: true)
     }
 
     @objc private func keyboardWillShowAction(notification: Notification) {
