@@ -42,10 +42,10 @@ final class RegistrationViewController: UIViewController {
 
     private func configUI() {
         view.addGestureRecognizer(hideKeyboardGesture)
-        configtextFields()
+        configTextFields()
     }
 
-    private func configtextFields() {
+    private func configTextFields() {
         nameTextField.delegate = self
         loginTextField.delegate = self
         passwordTextField.delegate = self
