@@ -7,8 +7,10 @@ import UIKit
 final class LogInViewController: UIViewController {
     // MARK: - IBOutlets
 
+    @IBOutlet private var loginScrollView: UIScrollView!
     @IBOutlet private var emailTextField: UITextField!
     @IBOutlet private var passwordTextField: UITextField!
+    @IBOutlet private var logInButton: UIButton!
 
     // MARK: - Private properties
 
@@ -19,12 +21,24 @@ final class LogInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         congigUI()
-        upAndDownViewAction()
+    }
+
+    // MARK: - Public methods
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        addNotifications()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     // MARK: - IBActions
 
-    @IBAction func checkDataAction(_ sender: Any) {
+    @IBAction private func checkDataAction(_ sender: Any) {
         let userDefaults = UserDefaults.standard
         guard emailTextField.text == userDefaults.object(forKey: Constants.userDefaultsLoginKey) as? String,
               passwordTextField.text == userDefaults.object(forKey: Constants.userDefaultsPasswordKey) as? String
@@ -38,25 +52,23 @@ final class LogInViewController: UIViewController {
 
     private func congigUI() {
         view.addGestureRecognizer(hideKeyboardGesture)
+        loginScrollView.showsVerticalScrollIndicator = false
         configTextFields()
     }
 
-    private func upAndDownViewAction() {
+    private func addNotifications() {
         NotificationCenter.default.addObserver(
-            forName: UIResponder.keyboardWillShowNotification,
-            object: nil,
-            queue: nil
-        ) { _ in
-            guard self.view.frame.origin.y >= -80 else { return }
-            self.view.frame.origin.y -= 40
-        }
+            self,
+            selector: #selector(keyboardWillShowAction),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
         NotificationCenter.default.addObserver(
-            forName: UIResponder.keyboardWillHideNotification,
-            object: nil,
-            queue: nil
-        ) { _ in
-            self.view.frame.origin.y = 0.0
-        }
+            self,
+            selector: #selector(keyboardWillHideAction),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
     }
 
     private func configTextFields() {
@@ -79,6 +91,27 @@ final class LogInViewController: UIViewController {
         let alertAction = UIAlertAction(title: Constants.okText, style: .cancel)
         alertController.addAction(alertAction)
         present(alertController, animated: true)
+    }
+
+    @objc private func keyboardWillShowAction(notification: Notification) {
+        guard let info = notification.userInfo as NSDictionary?,
+              let keyboardSize = (info.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as? NSValue)?.cgRectValue
+              .size else { return }
+        let contentInsent = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+        loginScrollView.contentInset = contentInsent
+        loginScrollView.scrollIndicatorInsets = contentInsent
+        let buttonRect = CGRect(
+            x: logInButton.frame.midX,
+            y: logInButton.frame.midY,
+            width: logInButton.frame.width,
+            height: logInButton.frame.height
+        )
+        loginScrollView.scrollRectToVisible(buttonRect, animated: true)
+    }
+
+    @objc private func keyboardWillHideAction() {
+        let contentInsent = UIEdgeInsets.zero
+        loginScrollView.contentInset = contentInsent
     }
 
     @objc private func hideKeyboardAction() {

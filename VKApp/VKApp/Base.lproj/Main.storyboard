@@ -121,21 +121,6 @@
                                     <constraint firstAttribute="width" constant="140" id="hSh-dp-prz"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email или телефон" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hon-2g-4LX">
-                                <rect key="frame" x="50" y="411.66666666666669" width="290" height="34"/>
-                                <color key="backgroundColor" red="0.4196078479" green="0.59607845540000004" blue="0.84705877299999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="34" id="zJv-OO-G35"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Пароль" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pjD-Xg-agS">
-                                <rect key="frame" x="50" y="463.66666666666669" width="290" height="34"/>
-                                <color key="backgroundColor" red="0.4196078479" green="0.59607845540000004" blue="0.84705877299999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V0v-nI-Reb">
                                 <rect key="frame" x="101.00000000000001" y="791" width="188.33333333333337" height="35"/>
                                 <state key="normal" title="Button"/>
@@ -146,45 +131,80 @@
                                     <segue destination="df0-Hx-vtt" kind="show" id="38z-xf-6nl"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="naU-IS-fm8">
-                                <rect key="frame" x="68" y="550" width="255" height="32"/>
-                                <color key="backgroundColor" red="0.2588235438" green="0.45490196350000001" blue="0.86274516580000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Войти">
-                                    <backgroundConfiguration key="background" cornerRadius="20">
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="strokeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </backgroundConfiguration>
-                                    <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="15"/>
-                                    <color key="baseForegroundColor" red="0.2588235438" green="0.45490196350000001" blue="0.86274516580000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="checkDataAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="huD-wB-S1W"/>
-                                </connections>
-                            </button>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D47-Dc-UcJ">
+                                <rect key="frame" x="16" y="226" width="358" height="557"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Пароль" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pjD-Xg-agS">
+                                        <rect key="frame" x="34" y="109" width="290" height="34"/>
+                                        <color key="backgroundColor" red="0.4196078479" green="0.59607845540000004" blue="0.84705877299999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="290" id="Njg-EC-Jlq"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email или телефон" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hon-2g-4LX">
+                                        <rect key="frame" x="34" y="67" width="290" height="34"/>
+                                        <color key="backgroundColor" red="0.4196078479" green="0.59607845540000004" blue="0.84705877299999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="290" id="Oar-yY-2Me"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="naU-IS-fm8">
+                                        <rect key="frame" x="51.666666666666686" y="249" width="255" height="32"/>
+                                        <color key="backgroundColor" red="0.2588235438" green="0.45490196350000001" blue="0.86274516580000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="255" id="pJN-1o-nX8"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Войти">
+                                            <backgroundConfiguration key="background" cornerRadius="20">
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="strokeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </backgroundConfiguration>
+                                            <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="15"/>
+                                            <color key="baseForegroundColor" red="0.2588235438" green="0.45490196350000001" blue="0.86274516580000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="checkDataAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="huD-wB-S1W"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="pjD-Xg-agS" firstAttribute="top" secondItem="hon-2g-4LX" secondAttribute="bottom" constant="8" symbolic="YES" id="1pD-TC-uuR"/>
+                                    <constraint firstItem="pjD-Xg-agS" firstAttribute="centerX" secondItem="hon-2g-4LX" secondAttribute="centerX" id="7VT-U2-mQ8"/>
+                                    <constraint firstItem="hon-2g-4LX" firstAttribute="centerX" secondItem="D47-Dc-UcJ" secondAttribute="centerX" id="Fb6-Ol-vgm"/>
+                                    <constraint firstAttribute="trailing" secondItem="hon-2g-4LX" secondAttribute="trailing" constant="34" id="Gct-Dt-Bia"/>
+                                    <constraint firstItem="naU-IS-fm8" firstAttribute="top" secondItem="pjD-Xg-agS" secondAttribute="bottom" constant="106" id="dtV-KB-shz"/>
+                                    <constraint firstItem="hon-2g-4LX" firstAttribute="top" secondItem="D47-Dc-UcJ" secondAttribute="top" constant="67" id="law-oS-ITn"/>
+                                    <constraint firstItem="naU-IS-fm8" firstAttribute="centerX" secondItem="pjD-Xg-agS" secondAttribute="centerX" id="ttF-C7-pOy"/>
+                                    <constraint firstAttribute="bottom" secondItem="naU-IS-fm8" secondAttribute="bottom" constant="276" id="xsc-t5-bKY"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="1Ae-pb-Rek"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="aeI-I2-jfR"/>
+                            </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.2588235438" green="0.45490196350000001" blue="0.86274516580000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="naU-IS-fm8" firstAttribute="top" secondItem="pjD-Xg-agS" secondAttribute="bottom" constant="52.333333333333314" id="0DH-xT-ecJ"/>
-                            <constraint firstItem="pjD-Xg-agS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="Ap5-wv-kK5"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="pjD-Xg-agS" secondAttribute="trailing" constant="50" id="I6L-D7-lGX"/>
                             <constraint firstItem="rh4-Xd-XAs" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="125" id="JkL-6v-syR"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="V0v-nI-Reb" secondAttribute="trailing" constant="100.66666666666663" id="PoD-8l-S1t"/>
+                            <constraint firstItem="D47-Dc-UcJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="R48-Ym-vh6"/>
                             <constraint firstItem="V0v-nI-Reb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="101" id="SF7-t6-fe2"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hon-2g-4LX" secondAttribute="trailing" constant="50" id="X0A-HN-GGB"/>
-                            <constraint firstItem="hon-2g-4LX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="azb-bu-JAj"/>
-                            <constraint firstItem="naU-IS-fm8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="68" id="f6y-sB-XHg"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="D47-Dc-UcJ" secondAttribute="trailing" constant="16" id="gbx-cd-9vB"/>
                             <constraint firstItem="rh4-Xd-XAs" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="49" id="gjG-eQ-ms5"/>
                             <constraint firstItem="V0v-nI-Reb" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="16" id="hKM-dy-2DJ"/>
-                            <constraint firstItem="pjD-Xg-agS" firstAttribute="top" secondItem="hon-2g-4LX" secondAttribute="bottom" constant="18" id="i1b-nM-Chz"/>
-                            <constraint firstItem="hon-2g-4LX" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="lOT-oa-Utj"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="rh4-Xd-XAs" secondAttribute="trailing" constant="125" id="noh-v0-5pa"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="naU-IS-fm8" secondAttribute="trailing" constant="67" id="oGe-Mx-EMb"/>
+                            <constraint firstItem="V0v-nI-Reb" firstAttribute="top" secondItem="D47-Dc-UcJ" secondAttribute="bottom" constant="8" id="r0Z-6e-kRW"/>
+                            <constraint firstItem="D47-Dc-UcJ" firstAttribute="top" secondItem="rh4-Xd-XAs" secondAttribute="bottom" constant="8" id="urJ-lx-6np"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="emailTextField" destination="hon-2g-4LX" id="jxq-oe-CDw"/>
+                        <outlet property="logInButton" destination="naU-IS-fm8" id="HzL-mz-vxX"/>
+                        <outlet property="loginScrollView" destination="D47-Dc-UcJ" id="hNm-ji-8pC"/>
                         <outlet property="passwordTextField" destination="pjD-Xg-agS" id="jCt-xg-Hlo"/>
                         <segue destination="NWn-8C-MxA" kind="presentation" identifier="login" modalPresentationStyle="fullScreen" id="UCN-N0-pTT"/>
                     </connections>
