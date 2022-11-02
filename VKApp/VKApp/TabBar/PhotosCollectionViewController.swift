@@ -3,7 +3,7 @@
 
 import UIKit
 
-// Класс отвечает за коллекцию фотографий пользователя
+/// Класс отвечает за коллекцию фотографий пользователя
 final class PhotosCollectionViewController: UICollectionViewController {
     // MARK: - LifeCycle
 

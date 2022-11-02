@@ -3,7 +3,7 @@
 
 import UIKit
 
-// Класс отвечает за таблицу глобального поиска групп, интересных пользователю
+/// Класс отвечает за таблицу глобального поиска групп, интересных пользователю
 final class GlobalSearchTableViewController: UITableViewController {
     // MARK: - LifeCycle
 

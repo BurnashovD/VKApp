@@ -3,7 +3,7 @@
 
 import UIKit
 
-// Класс отвечает за отображение таблицы с группой пользователей
+/// Класс отвечает за отображение таблицы с группой пользователей
 final class UserGroupsTableViewController: UITableViewController {
     // MARK: - LifeCycle
 

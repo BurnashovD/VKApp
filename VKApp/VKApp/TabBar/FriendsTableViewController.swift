@@ -3,7 +3,7 @@
 
 import UIKit
 
-// Класс отвечает за таблицу с друзьями пользователя
+/// Класс отвечает за таблицу с друзьями пользователя
 final class FriendsTableViewController: UITableViewController {
     // MARK: - LifeCycle
 

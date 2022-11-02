@@ -3,7 +3,7 @@
 
 import UIKit
 
-// Класс отвечает за экран входа
+/// Класс отвечает за экран входа
 final class LogInViewController: UIViewController {
     // MARK: - IBOutlets
 
