@@ -3,6 +3,7 @@
 
 import UIKit
 
+/// Ячейка профиля друга пользователя
 final class FriendTableViewCell: UITableViewCell {
     // MARK: - IBOutlets
 

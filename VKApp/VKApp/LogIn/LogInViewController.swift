@@ -41,7 +41,12 @@ final class LogInViewController: UIViewController {
         let userDefaults = UserDefaults.standard
         guard emailTextField.text == userDefaults.object(forKey: Constants.userDefaultsLoginKey) as? String,
               passwordTextField.text == userDefaults.object(forKey: Constants.userDefaultsPasswordKey) as? String
-        else { callAlertAction(controllerTitle: Constants.incorrectPasswordText, actionTitle: Constants.okText)
+        else {
+            callAlertAction(
+                controllerTitle: Constants.incorrectPasswordText,
+                actionTitle: Constants.okText,
+                textField: false
+            )
             return
         }
         performSegue(withIdentifier: Constants.loginSegueIdentifier, sender: self)
