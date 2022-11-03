@@ -7,8 +7,8 @@ import UIKit
 final class GlobalGroupsTableViewCell: UITableViewCell {
     // MARK: - IBOutlets
 
-    @IBOutlet var groupImageView: UIImageView!
-    @IBOutlet var groupNameLabel: UILabel!
+    @IBOutlet private var groupImageView: UIImageView!
+    @IBOutlet private var groupNameLabel: UILabel!
 
     // MARK: - Public methods
 

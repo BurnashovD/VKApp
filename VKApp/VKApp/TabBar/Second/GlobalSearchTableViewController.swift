@@ -18,7 +18,7 @@ final class GlobalSearchTableViewController: UITableViewController {
 
     // MARK: - Private methods
 
-    private func createGroups() {} //добавить группы и готово
+    private func createGroups() {} // добавить группы и готово
 }
 
 /// Constants

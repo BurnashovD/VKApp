@@ -7,8 +7,8 @@ import UIKit
 final class RecomendationsTableViewCell: UITableViewCell {
     // MARK: - IBOutlets
 
-    @IBOutlet var profileImageView: UIImageView!
-    @IBOutlet var nameLabel: UILabel!
+    @IBOutlet private var profileImageView: UIImageView!
+    @IBOutlet private var nameLabel: UILabel!
 
     // MARK: - Public methods
 
