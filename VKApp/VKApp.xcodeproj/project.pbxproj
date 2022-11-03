@@ -21,6 +21,9 @@
 		A5B221252912BED9005363EE /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B221242912BED9005363EE /* Model.swift */; };
 		A5B221272912C0B8005363EE /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B221262912C0B8005363EE /* FriendTableViewCell.swift */; };
 		A5B221292912CB50005363EE /* RecomendationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B221282912CB4F005363EE /* RecomendationsTableViewCell.swift */; };
+		A5B2212D29130874005363EE /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B2212C29130874005363EE /* PhotosCollectionViewCell.swift */; };
+		A5B2212F291339D0005363EE /* GroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B2212E291339D0005363EE /* GroupTableViewCell.swift */; };
+		A5B221332913407D005363EE /* GlobalGroupsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B221322913407D005363EE /* GlobalGroupsTableViewCell.swift */; };
 		A5F3D66B2911C8C6004EB22A /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F3D66A2911C8C6004EB22A /* FriendsTableViewController.swift */; };
 		A5F3D66F2911C926004EB22A /* PhotosCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F3D66E2911C926004EB22A /* PhotosCollectionViewController.swift */; };
 		A5F3D6712911C961004EB22A /* UserGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F3D6702911C961004EB22A /* UserGroupsTableViewController.swift */; };
@@ -63,6 +66,9 @@
 		A5B221242912BED9005363EE /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		A5B221262912C0B8005363EE /* FriendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
 		A5B221282912CB4F005363EE /* RecomendationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecomendationsTableViewCell.swift; sourceTree = "<group>"; };
+		A5B2212C29130874005363EE /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
+		A5B2212E291339D0005363EE /* GroupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTableViewCell.swift; sourceTree = "<group>"; };
+		A5B221322913407D005363EE /* GlobalGroupsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalGroupsTableViewCell.swift; sourceTree = "<group>"; };
 		A5F3D66A2911C8C6004EB22A /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		A5F3D66E2911C926004EB22A /* PhotosCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewController.swift; sourceTree = "<group>"; };
 		A5F3D6702911C961004EB22A /* UserGroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupsTableViewController.swift; sourceTree = "<group>"; };
@@ -148,6 +154,29 @@
 			path = VKAppUITests;
 			sourceTree = "<group>";
 		};
+		A5B22130291339EF005363EE /* First */ = {
+			isa = PBXGroup;
+			children = (
+				A5F3D66A2911C8C6004EB22A /* FriendsTableViewController.swift */,
+				A5B221282912CB4F005363EE /* RecomendationsTableViewCell.swift */,
+				A5B221262912C0B8005363EE /* FriendTableViewCell.swift */,
+				A5F3D66E2911C926004EB22A /* PhotosCollectionViewController.swift */,
+				A5B2212C29130874005363EE /* PhotosCollectionViewCell.swift */,
+			);
+			path = First;
+			sourceTree = "<group>";
+		};
+		A5B2213129133A03005363EE /* Second */ = {
+			isa = PBXGroup;
+			children = (
+				A5F3D6722911C97B004EB22A /* GlobalSearchTableViewController.swift */,
+				A5F3D6702911C961004EB22A /* UserGroupsTableViewController.swift */,
+				A5B2212E291339D0005363EE /* GroupTableViewCell.swift */,
+				A5B221322913407D005363EE /* GlobalGroupsTableViewCell.swift */,
+			);
+			path = Second;
+			sourceTree = "<group>";
+		};
 		A5F3D66C2911C8DC004EB22A /* LogIn */ = {
 			isa = PBXGroup;
 			children = (
@@ -160,12 +189,8 @@
 		A5F3D66D2911C8F0004EB22A /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
-				A5F3D66A2911C8C6004EB22A /* FriendsTableViewController.swift */,
-				A5B221282912CB4F005363EE /* RecomendationsTableViewCell.swift */,
-				A5B221262912C0B8005363EE /* FriendTableViewCell.swift */,
-				A5F3D66E2911C926004EB22A /* PhotosCollectionViewController.swift */,
-				A5F3D6702911C961004EB22A /* UserGroupsTableViewController.swift */,
-				A5F3D6722911C97B004EB22A /* GlobalSearchTableViewController.swift */,
+				A5B22130291339EF005363EE /* First */,
+				A5B2213129133A03005363EE /* Second */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
@@ -346,12 +371,15 @@
 				A5F3D66B2911C8C6004EB22A /* FriendsTableViewController.swift in Sources */,
 				A516BC3029104307008802FC /* AppDelegate.swift in Sources */,
 				A5F3D66F2911C926004EB22A /* PhotosCollectionViewController.swift in Sources */,
+				A5B2212D29130874005363EE /* PhotosCollectionViewCell.swift in Sources */,
 				A5B221272912C0B8005363EE /* FriendTableViewCell.swift in Sources */,
 				A516BCA02910A2F0008802FC /* RegistrationViewController.swift in Sources */,
+				A5B2212F291339D0005363EE /* GroupTableViewCell.swift in Sources */,
 				A5B221292912CB50005363EE /* RecomendationsTableViewCell.swift in Sources */,
 				A5B221252912BED9005363EE /* Model.swift in Sources */,
 				A5056EA629129E4E0073D407 /* UIViewController+Extension.swift in Sources */,
 				A5F3D6712911C961004EB22A /* UserGroupsTableViewController.swift in Sources */,
+				A5B221332913407D005363EE /* GlobalGroupsTableViewCell.swift in Sources */,
 				A5F3D6732911C97B004EB22A /* GlobalSearchTableViewController.swift in Sources */,
 				A516BC3229104307008802FC /* SceneDelegate.swift in Sources */,
 			);
