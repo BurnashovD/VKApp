@@ -5,14 +5,22 @@ import UIKit
 
 /// Экран с друзьями пользователя
 final class FriendsTableViewController: UITableViewController {
+    // MARK: - Private properties
+
     private let cellTypes: [CellTypes] = [.friends, .recomendations, .nextFriends]
 
+    // MARK: - Public properties
+
     var users: [User] = []
+
+    // MARK: - LifeCycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         createUsers()
     }
+
+    // MARK: - Public methods
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard segue.identifier == Constants.phototSegueIdentifier,
@@ -20,6 +28,8 @@ final class FriendsTableViewController: UITableViewController {
               let image = sender as? UIImage else { return }
         photoCollection.image = image
     }
+
+    // MARK: - Private methods
 
     private func createUsers() {
         let firstUser = User(name: Constants.elonName, profileImageName: Constants.elonImageName)
@@ -43,6 +53,15 @@ final class FriendsTableViewController: UITableViewController {
         users.append(eightUser)
         users.append(nineUser)
         users.append(tenUser)
+    }
+
+    private func selectedRowAction() {
+        let selectedRow = tableView.indexPathForSelectedRow
+        guard let selectedRow = selectedRow,
+              let user = tableView.cellForRow(at: selectedRow) as? FriendTableViewCell else { return }
+        let photosCVC = PhotosCollectionViewController()
+        photosCVC.refresh(tableViewController: user)
+        performSegue(withIdentifier: Constants.phototSegueIdentifier, sender: user.profileImageView.image)
     }
 }
 
@@ -96,7 +115,7 @@ extension FriendsTableViewController {
                 withIdentifier: Constants.friendsCellIdentifier,
                 for: indexPath
             ) as? FriendTableViewCell else { return UITableViewCell() }
-            cell.refresh(users[indexPath.row])
+            cell.configure(users[indexPath.row])
 
             return cell
 
@@ -105,7 +124,7 @@ extension FriendsTableViewController {
                 withIdentifier: Constants.recomendationsCellIdentifier,
                 for: indexPath
             ) as? RecomendationsTableViewCell else { return UITableViewCell() }
-            cell.refresh(users[Int.random(in: 0 ... (users.count - 1))])
+            cell.configure(users[Int.random(in: 0 ... (users.count - 1))])
 
             return cell
 
@@ -114,7 +133,7 @@ extension FriendsTableViewController {
                 withIdentifier: Constants.friendsCellIdentifier,
                 for: indexPath
             ) as? FriendTableViewCell else { return UITableViewCell() }
-            cell.refresh(users[indexPath.row])
+            cell.configure(users[indexPath.row])
 
             return cell
         }
@@ -125,11 +144,6 @@ extension FriendsTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedRow = tableView.indexPathForSelectedRow
-        guard let selectedRow = selectedRow,
-              let user = tableView.cellForRow(at: selectedRow) as? FriendTableViewCell else { return }
-        let photosCVC = PhotosCollectionViewController()
-        photosCVC.refresh(tableViewController: user)
-        performSegue(withIdentifier: Constants.phototSegueIdentifier, sender: user.profileImageView.image)
+        selectedRowAction()
     }
 }

@@ -85,7 +85,7 @@ extension UserGroupsTableViewController {
             withIdentifier: Constants.groupsCellIdentifier,
             for: indexPath
         ) as? GroupTableViewCell else { return UITableViewCell() }
-        cell.refresh(groups[indexPath.row])
+        cell.configure(groups[indexPath.row])
 
         return cell
     }

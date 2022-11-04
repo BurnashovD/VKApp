@@ -3,7 +3,7 @@
 
 import UIKit
 
-///  View с подсчетом лайков
+///  Контрол с подсчетом лайков
 @IBDesignable final class LikesControl: UIControl {
     // MARK: - Visual components
 

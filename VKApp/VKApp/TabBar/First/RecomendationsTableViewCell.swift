@@ -17,9 +17,9 @@ final class RecomendationsTableViewCell: UITableViewCell {
         configCell()
     }
 
-    func refresh(_ model: User) {
-        profileImageView.image = UIImage(named: model.profileImageName)
-        nameLabel.text = model.name
+    func configure(_ user: User) {
+        profileImageView.image = UIImage(named: user.profileImageName)
+        nameLabel.text = user.name
     }
 
     private func configCell() {

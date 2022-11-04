@@ -3,7 +3,7 @@
 
 import UIKit
 
-/// Настройка вью с фото
+/// Вью с фото
 @IBDesignable class PhotoView: UIView {
     // MARK: - Visual components
 
