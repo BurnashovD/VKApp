@@ -44,7 +44,6 @@ extension PhotosCollectionViewController {
             for: indexPath
         ) as? PhotosCollectionViewCell else { return UICollectionViewCell() }
         cell.refresh(pvc: self)
-//        cell.userPhotoImageView.image = image
         return cell
     }
 }

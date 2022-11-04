@@ -130,7 +130,6 @@ extension FriendsTableViewController {
               let user = tableView.cellForRow(at: selectedRow) as? FriendTableViewCell else { return }
         let photosCVC = PhotosCollectionViewController()
         photosCVC.refresh(tableViewController: user)
-//        navigationController?.pushViewController(photosCVC, animated: true)
         performSegue(withIdentifier: Constants.phototSegueIdentifier, sender: user.profileImageView.image)
     }
 }
