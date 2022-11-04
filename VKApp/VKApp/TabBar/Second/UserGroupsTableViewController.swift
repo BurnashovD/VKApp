@@ -7,7 +7,7 @@ import UIKit
 final class UserGroupsTableViewController: UITableViewController {
     // MARK: - Private properties
 
-    private var groups: [Group] = []
+    var groups: [Group] = []
 
     // MARK: - LifeCycle
 

@@ -24,6 +24,8 @@
 		A5B2212D29130874005363EE /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B2212C29130874005363EE /* PhotosCollectionViewCell.swift */; };
 		A5B2212F291339D0005363EE /* GroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B2212E291339D0005363EE /* GroupTableViewCell.swift */; };
 		A5B221332913407D005363EE /* GlobalGroupsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B221322913407D005363EE /* GlobalGroupsTableViewCell.swift */; };
+		A5B2213929146CC5005363EE /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B2213829146CC5005363EE /* PhotoView.swift */; };
+		A5B2213B291475B2005363EE /* LikesControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B2213A291475B2005363EE /* LikesControl.swift */; };
 		A5F3D66B2911C8C6004EB22A /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F3D66A2911C8C6004EB22A /* FriendsTableViewController.swift */; };
 		A5F3D66F2911C926004EB22A /* PhotosCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F3D66E2911C926004EB22A /* PhotosCollectionViewController.swift */; };
 		A5F3D6712911C961004EB22A /* UserGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F3D6702911C961004EB22A /* UserGroupsTableViewController.swift */; };
@@ -69,6 +71,8 @@
 		A5B2212C29130874005363EE /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
 		A5B2212E291339D0005363EE /* GroupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTableViewCell.swift; sourceTree = "<group>"; };
 		A5B221322913407D005363EE /* GlobalGroupsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalGroupsTableViewCell.swift; sourceTree = "<group>"; };
+		A5B2213829146CC5005363EE /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
+		A5B2213A291475B2005363EE /* LikesControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesControl.swift; sourceTree = "<group>"; };
 		A5F3D66A2911C8C6004EB22A /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		A5F3D66E2911C926004EB22A /* PhotosCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewController.swift; sourceTree = "<group>"; };
 		A5F3D6702911C961004EB22A /* UserGroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupsTableViewController.swift; sourceTree = "<group>"; };
@@ -173,6 +177,8 @@
 				A5F3D6702911C961004EB22A /* UserGroupsTableViewController.swift */,
 				A5B2212E291339D0005363EE /* GroupTableViewCell.swift */,
 				A5B221322913407D005363EE /* GlobalGroupsTableViewCell.swift */,
+				A5B2213829146CC5005363EE /* PhotoView.swift */,
+				A5B2213A291475B2005363EE /* LikesControl.swift */,
 			);
 			path = Second;
 			sourceTree = "<group>";
@@ -358,7 +364,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftformat >/dev/null; then\n  swiftformat .\nelse\n  echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftformat >/dev/null; then\n  swiftformat .\nelse\n  echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -372,6 +378,7 @@
 				A516BC3029104307008802FC /* AppDelegate.swift in Sources */,
 				A5F3D66F2911C926004EB22A /* PhotosCollectionViewController.swift in Sources */,
 				A5B2212D29130874005363EE /* PhotosCollectionViewCell.swift in Sources */,
+				A5B2213B291475B2005363EE /* LikesControl.swift in Sources */,
 				A5B221272912C0B8005363EE /* FriendTableViewCell.swift in Sources */,
 				A516BCA02910A2F0008802FC /* RegistrationViewController.swift in Sources */,
 				A5B2212F291339D0005363EE /* GroupTableViewCell.swift in Sources */,
@@ -382,6 +389,7 @@
 				A5B221332913407D005363EE /* GlobalGroupsTableViewCell.swift in Sources */,
 				A5F3D6732911C97B004EB22A /* GlobalSearchTableViewController.swift in Sources */,
 				A516BC3229104307008802FC /* SceneDelegate.swift in Sources */,
+				A5B2213929146CC5005363EE /* PhotoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

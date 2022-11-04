@@ -5,10 +5,6 @@ import UIKit
 
 /// Глобальный поиск
 final class GlobalSearchTableViewController: UITableViewController {
-    // MARK: - IBOutlets
-
-    @IBOutlet var addNewGroupBarButtonItem: UIBarButtonItem!
-
     // MARK: - Private properties
 
     private var globalGroups: [Group] = []
@@ -20,12 +16,18 @@ final class GlobalSearchTableViewController: UITableViewController {
         createGroups()
     }
 
+    // MARK: - IBActions
+
     @IBAction func addNewGroupAction(_ sender: Any) {
         addNewGroupAlertAction(
             controllerTitle: Constants.chooseGroupNameText,
             actionTitle: Constants.okText,
             textField: true
         )
+    }
+
+    @IBAction func backToGroupsAction(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
     }
 
     // MARK: - Private methods
