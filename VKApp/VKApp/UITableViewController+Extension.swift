@@ -8,7 +8,7 @@ extension UITableViewController {
         controllerTitle: String,
         actionTitle: String,
         groupImageName: String,
-        controller: GlobalSearchTableViewController
+        controller: UITableViewController
     ) {
         let alertController = UIAlertController(
             title: controllerTitle,
@@ -17,7 +17,8 @@ extension UITableViewController {
         )
         alertController.addTextField()
         let alertAction = UIAlertAction(title: actionTitle, style: .cancel) { _ in
-            guard let text = alertController.textFields?[0], let groupName = text.text else { return }
+            guard let text = alertController.textFields?[0], let groupName = text.text,
+                  let controller = controller as? GlobalSearchTableViewController else { return }
             controller.globalGroups.insert(Group(name: groupName, groupImageName: groupImageName), at: 0)
             self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .top)
         }
