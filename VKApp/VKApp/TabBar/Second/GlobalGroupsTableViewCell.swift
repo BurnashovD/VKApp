@@ -17,9 +17,9 @@ final class GlobalGroupsTableViewCell: UITableViewCell {
         configCell()
     }
 
-    func refresh(_ model: Group) {
-        groupImageView.image = UIImage(named: model.groupImageName)
-        groupNameLabel.text = model.name
+    func configure(_ group: Group) {
+        groupImageView.image = UIImage(named: group.groupImageName)
+        groupNameLabel.text = group.name
     }
 
     // MARK: - Private methods

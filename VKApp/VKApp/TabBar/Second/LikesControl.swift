@@ -63,20 +63,24 @@ import UIKit
         likesCounterLabel.widthAnchor.constraint(equalToConstant: 25).isActive = true
     }
 
+    private func doLikeAction() {
+        likeButton.setBackgroundImage(UIImage(systemName: Constants.heardtFillImageName), for: .normal)
+        likeButton.tintColor = .red
+        likesCounterLabel.textColor = .red
+        likesCount += 1
+        isTapped = true
+    }
+
+    private func cancelLikeAction() {
+        likeButton.setBackgroundImage(UIImage(systemName: Constants.hearthImageName), for: .normal)
+        likeButton.tintColor = .white
+        likesCounterLabel.textColor = .white
+        likesCount -= 1
+        isTapped = false
+    }
+
     @objc private func tapOnLikeAction() {
-        if isTapped == false {
-            likeButton.setBackgroundImage(UIImage(systemName: Constants.heardtFillImageName), for: .normal)
-            likeButton.tintColor = .red
-            likesCounterLabel.textColor = .red
-            likesCount += 1
-            isTapped = true
-        } else if isTapped == true {
-            likeButton.setBackgroundImage(UIImage(systemName: Constants.hearthImageName), for: .normal)
-            likeButton.tintColor = .white
-            likesCounterLabel.textColor = .white
-            likesCount -= 1
-            isTapped = false
-        }
+        isTapped ? cancelLikeAction() : doLikeAction()
         likesCounterLabel.text = String(likesCount)
     }
 }

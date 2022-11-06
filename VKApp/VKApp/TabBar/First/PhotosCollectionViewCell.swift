@@ -7,11 +7,5 @@ import UIKit
 final class PhotosCollectionViewCell: UICollectionViewCell {
     // MARK: - IBOutlets
 
-    @IBOutlet private var userPhotoImageView: UIImageView!
-
-    // MARK: - Public methods
-
-    func refresh(pvc: PhotosCollectionViewController) {
-        userPhotoImageView.image = pvc.image
-    }
+    @IBOutlet var userPhotoImageView: UIImageView!
 }

@@ -58,10 +58,9 @@ final class FriendsTableViewController: UITableViewController {
     private func selectedRowAction() {
         let selectedRow = tableView.indexPathForSelectedRow
         guard let selectedRow = selectedRow,
-              let user = tableView.cellForRow(at: selectedRow) as? FriendTableViewCell else { return }
-        let photosCVC = PhotosCollectionViewController()
-        photosCVC.refresh(tableViewController: user)
-        performSegue(withIdentifier: Constants.phototSegueIdentifier, sender: user.profileImageView.image)
+              let user = tableView.cellForRow(at: selectedRow) as? FriendTableViewCell,
+              let image = user.profileImageView.image else { return }
+        performSegue(withIdentifier: Constants.phototSegueIdentifier, sender: image)
     }
 }
 
@@ -115,6 +114,7 @@ extension FriendsTableViewController {
                 withIdentifier: Constants.friendsCellIdentifier,
                 for: indexPath
             ) as? FriendTableViewCell else { return UITableViewCell() }
+
             cell.configure(users[indexPath.row])
 
             return cell

@@ -8,13 +8,6 @@ final class PhotosCollectionViewController: UICollectionViewController {
     // MARK: - Public properties
 
     var image = UIImage()
-
-    // MARK: - Public methods
-
-    func refresh(tableViewController: FriendTableViewCell) {
-        guard let vcImage = tableViewController.profileImageView.image else { return }
-        image = vcImage
-    }
 }
 
 /// Constants
@@ -43,7 +36,7 @@ extension PhotosCollectionViewController {
             withReuseIdentifier: Constants.photosCellIdentifier,
             for: indexPath
         ) as? PhotosCollectionViewCell else { return UICollectionViewCell() }
-        cell.refresh(pvc: self)
+        cell.userPhotoImageView.image = image
         return cell
     }
 }

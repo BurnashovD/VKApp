@@ -7,7 +7,7 @@ import UIKit
 final class GlobalSearchTableViewController: UITableViewController {
     // MARK: - Private properties
 
-    private var globalGroups: [Group] = []
+    var globalGroups: [Group] = []
 
     // MARK: - LifeCycle
 
@@ -22,7 +22,8 @@ final class GlobalSearchTableViewController: UITableViewController {
         addNewGroupAlertAction(
             controllerTitle: Constants.chooseGroupNameText,
             actionTitle: Constants.okText,
-            textField: true
+            groupImageName: Constants.profileImageName,
+            controller: self
         )
     }
 
@@ -54,22 +55,6 @@ final class GlobalSearchTableViewController: UITableViewController {
         globalGroups.append(eightGroup)
         globalGroups.append(nineGroup)
         globalGroups.append(tenGroup)
-    }
-
-    private func addNewGroupAlertAction(controllerTitle: String, actionTitle: String, textField: Bool) {
-        let alertController = UIAlertController(
-            title: controllerTitle,
-            message: nil,
-            preferredStyle: .alert
-        )
-        alertController.addTextField()
-        let alertAction = UIAlertAction(title: actionTitle, style: .cancel) { text in
-            guard let text = alertController.textFields?[0], let groupName = text.text else { return }
-            self.globalGroups.insert(Group(name: groupName, groupImageName: Constants.profileImageName), at: 0)
-            self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .top)
-        }
-        alertController.addAction(alertAction)
-        present(alertController, animated: true)
     }
 }
 
@@ -117,7 +102,7 @@ extension GlobalSearchTableViewController {
             withIdentifier: Constants.globalGroupsCellIdentifier,
             for: indexPath
         ) as? GlobalGroupsTableViewCell else { return UITableViewCell() }
-        cell.refresh(globalGroups[indexPath.row])
+        cell.configure(globalGroups[indexPath.row])
 
         return cell
     }
