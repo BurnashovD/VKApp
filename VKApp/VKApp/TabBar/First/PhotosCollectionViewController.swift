@@ -4,7 +4,11 @@
 import UIKit
 
 /// Экран фотографий пользователя
-final class PhotosCollectionViewController: UICollectionViewController {}
+final class PhotosCollectionViewController: UICollectionViewController {
+    // MARK: - Public properties
+
+    var image = UIImage()
+}
 
 /// Constants
 extension PhotosCollectionViewController {
@@ -28,11 +32,11 @@ extension PhotosCollectionViewController {
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(
+        guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: Constants.photosCellIdentifier,
             for: indexPath
-        )
-
+        ) as? PhotosCollectionViewCell else { return UICollectionViewCell() }
+        cell.userPhotoImageView.image = image
         return cell
     }
 }
