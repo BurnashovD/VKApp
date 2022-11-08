@@ -20,8 +20,8 @@ final class UserGroupsTableViewController: UITableViewController {
 
     // MARK: - Private properties
 
-    var groups: [Group] = []
-    var searchResult: [Group] = []
+    private var groups: [Group] = []
+    private var searchResult: [Group] = []
 
     // MARK: - LifeCycle
 

@@ -3,11 +3,13 @@
 
 import UIKit
 
+///  Сортированный список друзей
 final class SortFriendsTableViewController: UITableViewController {
     // MARK: - Private properties
 
     private var users: [User] = []
     private var sections = [Character: [String]]()
+    private var imagesDict = [Character: [String]]()
     private var sectionTitles = [Character]()
 
     // MARK: - LifeCycle
@@ -15,7 +17,7 @@ final class SortFriendsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         createUsers()
-//        createSections()
+        createSections()
     }
 
     // MARK: - Private methods
@@ -89,18 +91,22 @@ final class SortFriendsTableViewController: UITableViewController {
     private func createSections() {
         for user in users {
             guard let firstLetter = user.surname.first else { return }
-            sections[firstLetter] = [user.surname]
-            sectionTitles = Array(sections.keys)
-            print("section \(sections)")
-            print("title \(sectionTitles)")
+            if sections[firstLetter] != nil {
+                sections[firstLetter]?.append(user.surname)
+                imagesDict[firstLetter]?.append(user.profileImageName)
+            } else {
+                sections[firstLetter] = [user.surname]
+                imagesDict[firstLetter] = [user.profileImageName]
+            }
         }
+        sectionTitles = Array(sections.keys)
     }
 }
 
 /// Constants
 extension SortFriendsTableViewController {
     enum Constants {
-        static let friendsCellIdentifier = "friend"
+        static let friendsCellIdentifier = "sort"
         static let phototSegueIdentifier = "photosSegue"
         static let elonImageName = "em3"
         static let secondElonImageName = "secondElon"
@@ -111,10 +117,10 @@ extension SortFriendsTableViewController {
         static let daniilName = "Daniil"
         static let elonName = "Elon"
         static let steveName = "Steve"
-        static let aleksandrSurname = "Nikolaevich"
-        static let elonSurname = "Musk"
-        static let steveSurname = "Jobs"
-        static let danilSurname = "Zebrov"
+        static let aleksandrSurname = "Aleksandr Nikolaevich"
+        static let elonSurname = "Elon Musk"
+        static let steveSurname = "Steve Jobs"
+        static let danilSurname = "Danil Zebrov"
         static let pizzaImageName = "pizza"
     }
 }
@@ -123,19 +129,24 @@ extension SortFriendsTableViewController {
 
 extension SortFriendsTableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
-        1
+        sections.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        users.count
+        guard let sectionNumbers = sections[sectionTitles[section]]?.count else { return Int() }
+        return sectionNumbers
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: Constants.friendsCellIdentifier,
             for: indexPath
-        ) as? FriendTableViewCell else { return UITableViewCell() }
-        cell.configure(users[indexPath.row])
+        ) as? SortFriendTableViewCell,
+            let user = sections[sectionTitles[indexPath.section]]?[indexPath.row],
+            let image = imagesDict[sectionTitles[indexPath.section]]?[indexPath.row]
+        else { return UITableViewCell() }
+        cell.profileImageView.image = UIImage(named: image)
+        cell.nameLabel.text = user
         return cell
     }
 
@@ -143,15 +154,19 @@ extension SortFriendsTableViewController {
         UITableView.automaticDimension
     }
 
-//    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        40
-//    }
-//
-//    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-//        sectionTitles.map { String($0) }
-//    }
-//
-//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        String(sectionTitles[section])
-//    }
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        30
+    }
+
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        tableView.tableHeaderView?.tintColor = .red
+    }
+
+    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        sectionTitles.map { String($0) }
+    }
+
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        String(sectionTitles[section])
+    }
 }

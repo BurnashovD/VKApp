@@ -12,14 +12,25 @@ final class PostsTableViewCell: UITableViewCell {
     @IBOutlet private var userNameLabel: UILabel!
     @IBOutlet private var owerviewLabel: UILabel!
     @IBOutlet private var postImageView: UIImageView!
+    @IBOutlet private var likeButton: UIButton!
+    @IBOutlet private var likeCountLabel: UILabel!
+    @IBOutlet private var shareButton: UIButton!
+    
+    // MARK: - Private properties
+    private var isTapped = false
+    private var likesCount = 0
+    private var likeImageName = ""
+    private var likeColor: UIColor = .white
+    
+    // MARK: - Public properties
+    
+    var callActivityAction: (([Any]) -> Void)?
 
     // MARK: - Public methods
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        configPostView()
-        configOverviewLabel()
-        configProfileImageView()
+        configCell()
     }
 
     func configure(_ post: Post?) {
@@ -32,6 +43,14 @@ final class PostsTableViewCell: UITableViewCell {
     }
 
     // MARK: - Private methods
+    
+    private func configCell() {
+        configPostView()
+        configOverviewLabel()
+        configProfileImageView()
+        likeButton.addTarget(self, action: #selector(tapOnLikeAction), for: .touchUpInside)
+        shareButton.addTarget(self, action: #selector(sharePostAction), for: .touchUpInside)
+    }
 
     private func configPostView() {
         postView.layer.cornerRadius = 10
@@ -50,5 +69,25 @@ final class PostsTableViewCell: UITableViewCell {
     private func configProfileImageView() {
         profileImageView.clipsToBounds = true
         profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
+    }
+
+    @objc private func tapOnLikeAction() {
+        isTapped = !isTapped
+        likesCount = isTapped ? 1 : 0
+        likeColor = isTapped ? .red : .white
+        likeCountLabel.textColor = likeColor
+        likeCountLabel.text = String(likesCount)
+    }
+    
+    @objc private func sharePostAction() {
+        callActivityAction?([profileImageView.image, owerviewLabel.text])
+    }
+}
+
+/// Constants
+extension PostsTableViewCell {
+    enum Constants {
+        static let heardtFillImageName = "heart.fill"
+        static let hearthImageName = "heart"
     }
 }

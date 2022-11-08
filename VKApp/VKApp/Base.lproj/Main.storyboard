@@ -234,16 +234,17 @@
             </objects>
             <point key="canvasLocation" x="968" y="-1"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Sort Friends Table View Controller-->
         <scene sceneID="L41-Vu-elJ">
             <objects>
-                <tableViewController id="9pY-9x-VgG" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="1Tn-36-fks">
+                <tableViewController id="9pY-9x-VgG" customClass="SortFriendsTableViewController" customModule="VKApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="1Tn-36-fks">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.1647058874" green="0.1647058874" blue="0.1764705926" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="separatorColor" red="0.1647058874" green="0.1647058874" blue="0.1764705926" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="friend" rowHeight="60" id="wK1-sZ-V6C" customClass="FriendTableViewCell" customModule="VKApp" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="sort" rowHeight="60" id="wK1-sZ-V6C" customClass="SortFriendTableViewCell" customModule="VKApp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="50" width="390" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wK1-sZ-V6C" id="V9u-bY-nDg">
@@ -313,9 +314,10 @@
                                         <constraint firstAttribute="trailing" secondItem="2NQ-0Z-iGx" secondAttribute="trailing" constant="9" id="tlg-8P-ej7"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.1647058874" green="0.1647058874" blue="0.1764705926" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <connections>
-                                    <outlet property="nameLabel" destination="ZtX-Yc-g6l" id="a1M-1m-c27"/>
-                                    <outlet property="profileImageView" destination="ubi-Gs-e7a" id="1N2-Je-NcW"/>
+                                    <outlet property="nameLabel" destination="ZtX-Yc-g6l" id="xob-Ft-Fq9"/>
+                                    <outlet property="profileImageView" destination="ubi-Gs-e7a" id="Mw7-pC-ARC"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -502,7 +504,7 @@
                     <navigationItem key="navigationItem" title="Друзья" id="kG5-WW-sX2">
                         <barButtonItem key="rightBarButtonItem" systemItem="organize" id="lCW-xv-s3y">
                             <connections>
-                                <segue destination="9pY-9x-VgG" kind="push" id="TDa-Zz-Bbn"/>
+                                <segue destination="9pY-9x-VgG" kind="push" id="I4Y-mi-dQ1"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -886,9 +888,16 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8dZ-rA-dat">
+                                                    <rect key="frame" x="46" y="503" width="19" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" red="0.1647058874" green="0.1647058874" blue="0.1764705926" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <constraints>
+                                                <constraint firstItem="8dZ-rA-dat" firstAttribute="leading" secondItem="YBk-Qt-jnI" secondAttribute="trailing" constant="3" id="0ah-8V-bcX"/>
                                                 <constraint firstItem="ugC-Ek-hCI" firstAttribute="leading" secondItem="tdB-l5-4d9" secondAttribute="leading" constant="16" id="304-M4-bYj"/>
                                                 <constraint firstItem="HuD-iZ-R4f" firstAttribute="top" secondItem="ugC-Ek-hCI" secondAttribute="bottom" constant="18" id="5dC-0x-bCG"/>
                                                 <constraint firstItem="YBk-Qt-jnI" firstAttribute="top" secondItem="ugC-Ek-hCI" secondAttribute="bottom" constant="18" id="7gy-mf-Qmf"/>
@@ -897,10 +906,12 @@
                                                 <constraint firstItem="HuD-iZ-R4f" firstAttribute="leading" secondItem="YBk-Qt-jnI" secondAttribute="trailing" constant="30" id="DjS-Kr-jN9"/>
                                                 <constraint firstItem="HZg-if-214" firstAttribute="leading" secondItem="HuD-iZ-R4f" secondAttribute="trailing" constant="30" id="EPZ-WC-Yqt"/>
                                                 <constraint firstItem="ugC-Ek-hCI" firstAttribute="top" secondItem="oDg-kN-fcC" secondAttribute="bottom" constant="8" symbolic="YES" id="HDh-bT-lou"/>
+                                                <constraint firstItem="HuD-iZ-R4f" firstAttribute="leading" secondItem="8dZ-rA-dat" secondAttribute="trailing" constant="8" symbolic="YES" id="NOu-4l-jvE"/>
                                                 <constraint firstItem="Ekv-kt-cHK" firstAttribute="centerY" secondItem="fNG-P9-HiU" secondAttribute="centerY" id="NRR-td-tS5"/>
                                                 <constraint firstAttribute="bottom" secondItem="ugC-Ek-hCI" secondAttribute="bottom" constant="62" id="P8t-tA-EkW"/>
                                                 <constraint firstItem="HZg-if-214" firstAttribute="top" secondItem="ugC-Ek-hCI" secondAttribute="bottom" constant="18" id="PKf-0r-BW1"/>
                                                 <constraint firstItem="fNG-P9-HiU" firstAttribute="top" secondItem="ugC-Ek-hCI" secondAttribute="bottom" constant="10.999999999999943" id="QAG-M3-xSk"/>
+                                                <constraint firstItem="8dZ-rA-dat" firstAttribute="top" secondItem="ugC-Ek-hCI" secondAttribute="bottom" constant="21" id="TDR-ON-8AJ"/>
                                                 <constraint firstAttribute="trailing" secondItem="ugC-Ek-hCI" secondAttribute="trailing" constant="16" id="TyX-be-STS"/>
                                                 <constraint firstItem="XeW-Vb-xXB" firstAttribute="top" secondItem="tdB-l5-4d9" secondAttribute="top" constant="8" id="TzO-ng-IFU"/>
                                                 <constraint firstItem="fNG-P9-HiU" firstAttribute="leading" secondItem="Ekv-kt-cHK" secondAttribute="trailing" constant="4" id="Xmv-Uc-kth"/>
@@ -927,10 +938,13 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
+                                    <outlet property="likeButton" destination="YBk-Qt-jnI" id="YMk-O0-vtb"/>
+                                    <outlet property="likeCountLabel" destination="8dZ-rA-dat" id="QIX-bQ-XmZ"/>
                                     <outlet property="owerviewLabel" destination="oDg-kN-fcC" id="BFG-O8-kCr"/>
                                     <outlet property="postImageView" destination="ugC-Ek-hCI" id="aRg-A3-KUU"/>
                                     <outlet property="postView" destination="tdB-l5-4d9" id="PcX-8r-kfy"/>
                                     <outlet property="profileImageView" destination="XeW-Vb-xXB" id="k3F-Oe-fmW"/>
+                                    <outlet property="shareButton" destination="HZg-if-214" id="VDg-kQ-tJ2"/>
                                     <outlet property="userNameLabel" destination="G9T-LI-dSw" id="2j7-Of-68T"/>
                                 </connections>
                             </tableViewCell>

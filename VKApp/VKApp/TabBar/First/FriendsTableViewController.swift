@@ -11,16 +11,13 @@ final class FriendsTableViewController: UITableViewController {
 
     // MARK: - Public properties
 
-    var users: [User] = []
-    var sections = [Character: [String]]()
-    var sectionTitles = [Character]()
+    private var users: [User] = []
 
     // MARK: - LifeCycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         createUsers()
-        createSections()
     }
 
     // MARK: - Public methods
@@ -100,19 +97,6 @@ final class FriendsTableViewController: UITableViewController {
         }
     }
 
-    private func createSections() {
-        for user in users {
-            guard let firstLetter = user.surname.first else { return }
-            sections[firstLetter] = [user.surname]
-            sectionTitles = Array(sections.keys)
-            print("section \(sections)")
-            print("title \(sectionTitles)")
-        }
-        sectionTitles.sort(by: { $0 > $1 })
-
-//        sectionTitles = Array(sections.keys)
-    }
-
     private func selectedRowAction() {
         let selectedRow = tableView.indexPathForSelectedRow
         guard let selectedRow = selectedRow,
@@ -187,6 +171,7 @@ extension FriendsTableViewController {
                 withIdentifier: Constants.recomendationsCellIdentifier,
                 for: indexPath
             ) as? RecomendationsTableViewCell else { return UITableViewCell() }
+
             cell.configure(users[Int.random(in: 0 ... (users.count - 1))])
 
             return cell
