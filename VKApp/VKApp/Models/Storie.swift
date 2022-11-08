@@ -1,10 +1,9 @@
-// User.swift
+// Storie.swift
 // Copyright © RoadMap. All rights reserved.
 
 import Foundation
 
-/// User model
-struct User {
-    let name: String
+struct Storie {
     let profileImageName: String
+    let profileName: String
 }

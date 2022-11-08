@@ -1,0 +1,14 @@
+// StoriesTableViewCell.swift
+// Copyright © RoadMap. All rights reserved.
+
+import UIKit
+
+final class StoriesTableViewCell: UITableViewCell {
+    // MARK: - IBOutlets
+
+    // MARK: - Public methods
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+    }
+}

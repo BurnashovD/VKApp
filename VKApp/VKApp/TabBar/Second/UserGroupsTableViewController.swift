@@ -5,15 +5,31 @@ import UIKit
 
 /// Группы пользователей
 final class UserGroupsTableViewController: UITableViewController {
+    // MARK: - Visual components
+
+    private let searchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.searchBarStyle = UISearchBar.Style.minimal
+        searchBar.searchTextField.textColor = .white
+        searchBar.searchTextField.attributedPlaceholder = NSAttributedString(
+            string: Constants.searchBarPlaceholderText,
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
+        )
+        return searchBar
+    }()
+
     // MARK: - Private properties
 
     var groups: [Group] = []
+    var searchResult: [Group] = []
 
     // MARK: - LifeCycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         createGroups()
+        searchResult = groups
+        searchBar.delegate = self
     }
 
     // MARK: - Private methods
@@ -66,6 +82,7 @@ extension UserGroupsTableViewController {
         static let adidasImageName = "adidas"
         static let profileImageName = "profile"
         static let pizzaImageName = "pizza"
+        static let searchBarPlaceholderText = " Поиск..."
     }
 }
 
@@ -77,7 +94,7 @@ extension UserGroupsTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        groups.count
+        searchResult.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -85,7 +102,7 @@ extension UserGroupsTableViewController {
             withIdentifier: Constants.groupsCellIdentifier,
             for: indexPath
         ) as? GroupTableViewCell else { return UITableViewCell() }
-        cell.configure(groups[indexPath.row])
+        cell.configure(searchResult[indexPath.row])
 
         return cell
     }
@@ -96,11 +113,34 @@ extension UserGroupsTableViewController {
         forRowAt indexPath: IndexPath
     ) {
         guard editingStyle == .delete else { return }
-        groups.remove(at: indexPath.row)
+        searchResult.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .automatic)
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         UITableView.automaticDimension
+    }
+
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        searchBar
+    }
+}
+
+// MARK: - UISearchBarDelegate
+
+extension UserGroupsTableViewController: UISearchBarDelegate {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchResult = groups
+    }
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.endEditing(true)
+    }
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchResult = searchText.isEmpty ? groups : groups.filter { group -> Bool in
+            group.name.range(of: searchText, options: .caseInsensitive) != nil
+        }
+        tableView.reloadData()
     }
 }

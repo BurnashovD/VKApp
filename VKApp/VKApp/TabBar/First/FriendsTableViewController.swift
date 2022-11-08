@@ -12,12 +12,15 @@ final class FriendsTableViewController: UITableViewController {
     // MARK: - Public properties
 
     var users: [User] = []
+    var sections = [Character: [String]]()
+    var sectionTitles = [Character]()
 
     // MARK: - LifeCycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         createUsers()
+        createSections()
     }
 
     // MARK: - Public methods
@@ -32,27 +35,82 @@ final class FriendsTableViewController: UITableViewController {
     // MARK: - Private methods
 
     private func createUsers() {
-        let firstUser = User(name: Constants.elonName, profileImageName: Constants.elonImageName)
-        let secondUser = User(name: Constants.elonName, profileImageName: Constants.secondElonImageName)
-        let thirdUser = User(name: Constants.steveName, profileImageName: Constants.steveImageName)
-        let fourUser = User(name: Constants.elonName, profileImageName: Constants.elonImageName)
-        let fiveUser = User(name: Constants.daniilName, profileImageName: Constants.dogImageName)
-        let sixUser = User(name: Constants.elonName, profileImageName: Constants.elonImageName)
-        let sevenUser = User(name: Constants.steveName, profileImageName: Constants.steveImageName)
-        let eightUser = User(name: Constants.daniilName, profileImageName: Constants.secondElonImageName)
-        let nineUser = User(name: Constants.aleksandrName, profileImageName: Constants.dogImageName)
-        let tenUser = User(name: Constants.steveName, profileImageName: Constants.steveImageName)
+        let firstUser = User(
+            name: Constants.elonName,
+            surname: Constants.elonSurname,
+            profileImageName: Constants.elonImageName
+        )
+        let secondUser = User(
+            name: Constants.elonName,
+            surname: Constants.elonSurname,
+            profileImageName: Constants.secondElonImageName
+        )
+        let thirdUser = User(
+            name: Constants.steveName,
+            surname: Constants.steveSurname,
+            profileImageName: Constants.steveImageName
+        )
+        let fourUser = User(
+            name: Constants.elonName,
+            surname: Constants.elonSurname,
+            profileImageName: Constants.elonImageName
+        )
+        let fiveUser = User(
+            name: Constants.daniilName,
+            surname: Constants.danilSurname,
+            profileImageName: Constants.pizzaImageName
+        )
+        let sixUser = User(
+            name: Constants.elonName,
+            surname: Constants.elonSurname,
+            profileImageName: Constants.elonImageName
+        )
+        let sevenUser = User(
+            name: Constants.steveName,
+            surname: Constants.steveSurname,
+            profileImageName: Constants.steveImageName
+        )
+        let eightUser = User(
+            name: Constants.daniilName,
+            surname: Constants.danilSurname,
+            profileImageName: Constants.pizzaImageName
+        )
+        let nineUser = User(
+            name: Constants.aleksandrName,
+            surname: Constants.aleksandrSurname,
+            profileImageName: Constants.dogImageName
+        )
+        let tenUser = User(
+            name: Constants.steveName,
+            surname: Constants.steveSurname,
+            profileImageName: Constants.steveImageName
+        )
 
-        users.append(firstUser)
-        users.append(secondUser)
-        users.append(thirdUser)
-        users.append(fourUser)
-        users.append(fiveUser)
-        users.append(sixUser)
-        users.append(sevenUser)
-        users.append(eightUser)
-        users.append(nineUser)
-        users.append(tenUser)
+        for _ in 0 ... 1 {
+            users.append(firstUser)
+            users.append(secondUser)
+            users.append(thirdUser)
+            users.append(fourUser)
+            users.append(fiveUser)
+            users.append(sixUser)
+            users.append(sevenUser)
+            users.append(eightUser)
+            users.append(nineUser)
+            users.append(tenUser)
+        }
+    }
+
+    private func createSections() {
+        for user in users {
+            guard let firstLetter = user.surname.first else { return }
+            sections[firstLetter] = [user.surname]
+            sectionTitles = Array(sections.keys)
+            print("section \(sections)")
+            print("title \(sectionTitles)")
+        }
+        sectionTitles.sort(by: { $0 > $1 })
+
+//        sectionTitles = Array(sections.keys)
     }
 
     private func selectedRowAction() {
@@ -74,10 +132,15 @@ extension FriendsTableViewController {
         static let steveImageName = "steve"
         static let dogImageName = "dogg"
         static let recomendationsCellIdentifier = "recomendations"
-        static let aleksandrName = "Aleksandr Aleksandrovich"
-        static let daniilName = "Daniil Daniilov"
-        static let elonName = "Elon Musk"
-        static let steveName = "Steve Jobs"
+        static let aleksandrName = "Aleksandr"
+        static let daniilName = "Daniil"
+        static let elonName = "Elon"
+        static let steveName = "Steve"
+        static let aleksandrSurname = "Nikolaevich"
+        static let elonSurname = "Musk"
+        static let steveSurname = "Jobs"
+        static let danilSurname = "Zebrov"
+        static let pizzaImageName = "pizza"
     }
 
     enum CellTypes {
@@ -91,7 +154,7 @@ extension FriendsTableViewController {
 
 extension FriendsTableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
-        3
+        cellTypes.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -127,12 +190,12 @@ extension FriendsTableViewController {
             cell.configure(users[Int.random(in: 0 ... (users.count - 1))])
 
             return cell
-
         case .nextFriends:
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: Constants.friendsCellIdentifier,
                 for: indexPath
             ) as? FriendTableViewCell else { return UITableViewCell() }
+
             cell.configure(users[indexPath.row])
 
             return cell
@@ -146,4 +209,17 @@ extension FriendsTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedRowAction()
     }
+
+
+//    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        40
+//    }
+
+//    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+//        sectionTitles.map { String($0) }
+//    }
+//
+//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        String(sectionTitles[section])
+//    }
 }
