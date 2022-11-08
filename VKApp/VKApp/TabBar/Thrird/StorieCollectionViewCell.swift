@@ -3,12 +3,13 @@
 
 import UIKit
 
+/// Ячейка с историей
 final class StorieCollectionViewCell: UICollectionViewCell {
     // MARK: - IBOutlets
 
-    @IBOutlet var underStorieView: UIView!
-    @IBOutlet var profilePhotoImageView: UIImageView!
-    @IBOutlet var profileNameLabel: UILabel!
+    @IBOutlet private var underStorieView: UIView!
+    @IBOutlet private var profilePhotoImageView: UIImageView!
+    @IBOutlet private var profileNameLabel: UILabel!
 
     // MARK: - Public methods
 

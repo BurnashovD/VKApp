@@ -25,6 +25,7 @@
 		A516BC5329104308008802FC /* VKAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516BC5229104308008802FC /* VKAppUITestsLaunchTests.swift */; };
 		A516BC9E29108929008802FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A516BC9D29108929008802FC /* Assets.xcassets */; };
 		A516BCA02910A2F0008802FC /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516BC9F2910A2F0008802FC /* RegistrationViewController.swift */; };
+		A57B1DF72919E64E004A5A9A /* SortFriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57B1DF62919E64E004A5A9A /* SortFriendsTableViewController.swift */; };
 		A5B221252912BED9005363EE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B221242912BED9005363EE /* User.swift */; };
 		A5B221272912C0B8005363EE /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B221262912C0B8005363EE /* FriendTableViewCell.swift */; };
 		A5B221292912CB50005363EE /* RecomendationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B221282912CB4F005363EE /* RecomendationsTableViewCell.swift */; };
@@ -81,6 +82,7 @@
 		A516BC5229104308008802FC /* VKAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		A516BC9D29108929008802FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A516BC9F2910A2F0008802FC /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		A57B1DF62919E64E004A5A9A /* SortFriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortFriendsTableViewController.swift; sourceTree = "<group>"; };
 		A5B221242912BED9005363EE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A5B221262912C0B8005363EE /* FriendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
 		A5B221282912CB4F005363EE /* RecomendationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecomendationsTableViewCell.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				A5F3D66A2911C8C6004EB22A /* FriendsTableViewController.swift */,
+				A57B1DF62919E64E004A5A9A /* SortFriendsTableViewController.swift */,
 				A5B221282912CB4F005363EE /* RecomendationsTableViewCell.swift */,
 				A5B221262912C0B8005363EE /* FriendTableViewCell.swift */,
 				A5F3D66E2911C926004EB22A /* PhotosCollectionViewController.swift */,
@@ -407,8 +410,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "
-";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftformat >/dev/null; then\n  swiftformat .\nelse\n  echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -434,6 +436,7 @@
 				A5B221292912CB50005363EE /* RecomendationsTableViewCell.swift in Sources */,
 				A5B221252912BED9005363EE /* User.swift in Sources */,
 				A5056EA629129E4E0073D407 /* UIViewController+Extension.swift in Sources */,
+				A57B1DF72919E64E004A5A9A /* SortFriendsTableViewController.swift in Sources */,
 				A5F3D6712911C961004EB22A /* UserGroupsTableViewController.swift in Sources */,
 				A5B2213F29185896005363EE /* UITableViewController+Extension.swift in Sources */,
 				A50F15562919A5810029C985 /* Posts.swift in Sources */,

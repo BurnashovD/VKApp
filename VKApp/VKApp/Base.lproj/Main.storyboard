@@ -241,15 +241,82 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="1Tn-36-fks">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.1647058874" green="0.1647058874" blue="0.1764705926" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="GuZ-ac-Aiy">
-                                <rect key="frame" x="0.0" y="50" width="390" height="43.666667938232422"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="friend" rowHeight="60" id="wK1-sZ-V6C" customClass="FriendTableViewCell" customModule="VKApp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="50" width="390" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GuZ-ac-Aiy" id="tqN-Bi-D4X">
-                                    <rect key="frame" x="0.0" y="0.0" width="390" height="43.666667938232422"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wK1-sZ-V6C" id="V9u-bY-nDg">
+                                    <rect key="frame" x="0.0" y="0.0" width="390" height="60"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZtX-Yc-g6l">
+                                            <rect key="frame" x="84" y="23" width="234" height="20.333333333333329"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="not" translatesAutoresizingMaskIntoConstraints="NO" id="2NQ-0Z-iGx">
+                                            <rect key="frame" x="293" y="9" width="88" height="48"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="88" id="CcX-H0-HbR"/>
+                                            </constraints>
+                                        </imageView>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rNA-xU-toA" customClass="PhotoView" customModule="VKApp" customModuleProvider="target">
+                                            <rect key="frame" x="20" y="5" width="50" height="50"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ubi-Gs-e7a">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="50" id="B6f-CX-ha8"/>
+                                                        <constraint firstAttribute="height" constant="50" id="Yqc-Nd-qhI"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="ubi-Gs-e7a" secondAttribute="trailing" id="6JR-nY-cwR"/>
+                                                <constraint firstAttribute="height" constant="50" id="KA9-aX-ldM"/>
+                                                <constraint firstItem="ubi-Gs-e7a" firstAttribute="leading" secondItem="rNA-xU-toA" secondAttribute="leading" id="f8G-r2-G5r"/>
+                                                <constraint firstItem="ubi-Gs-e7a" firstAttribute="top" secondItem="rNA-xU-toA" secondAttribute="top" id="gmU-cK-SYg"/>
+                                                <constraint firstAttribute="bottom" secondItem="ubi-Gs-e7a" secondAttribute="bottom" id="u92-Ym-CDJ"/>
+                                                <constraint firstAttribute="width" constant="50" id="vpL-Fh-5hY"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="25"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                    <color key="value" systemColor="systemGrayColor"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                    <real key="value" value="5"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                    <real key="value" value="1"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                    <size key="value" width="0.0" height="0.0"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" red="0.13725490870000001" green="0.13725490870000001" blue="0.14509806040000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <constraints>
+                                        <constraint firstItem="rNA-xU-toA" firstAttribute="centerY" secondItem="V9u-bY-nDg" secondAttribute="centerY" id="1Jx-yS-NEo"/>
+                                        <constraint firstItem="rNA-xU-toA" firstAttribute="leading" secondItem="V9u-bY-nDg" secondAttribute="leading" constant="20" symbolic="YES" id="EXR-RK-OrX"/>
+                                        <constraint firstAttribute="trailing" secondItem="ZtX-Yc-g6l" secondAttribute="trailing" constant="72" id="NUw-Ep-Xrk"/>
+                                        <constraint firstItem="ZtX-Yc-g6l" firstAttribute="leading" secondItem="rNA-xU-toA" secondAttribute="trailing" constant="14" id="Y4q-yG-zkc"/>
+                                        <constraint firstItem="rNA-xU-toA" firstAttribute="top" secondItem="V9u-bY-nDg" secondAttribute="top" constant="5" id="btI-hO-WYo"/>
+                                        <constraint firstItem="2NQ-0Z-iGx" firstAttribute="centerY" secondItem="ZtX-Yc-g6l" secondAttribute="centerY" id="iNm-TV-fAU"/>
+                                        <constraint firstItem="2NQ-0Z-iGx" firstAttribute="top" secondItem="V9u-bY-nDg" secondAttribute="top" constant="9" id="lNN-Dk-t8c"/>
+                                        <constraint firstAttribute="trailing" secondItem="2NQ-0Z-iGx" secondAttribute="trailing" constant="9" id="tlg-8P-ej7"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="nameLabel" destination="ZtX-Yc-g6l" id="a1M-1m-c27"/>
+                                    <outlet property="profileImageView" destination="ubi-Gs-e7a" id="1N2-Je-NcW"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

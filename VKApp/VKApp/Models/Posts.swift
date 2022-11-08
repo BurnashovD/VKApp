@@ -3,6 +3,7 @@
 
 import Foundation
 
+/// Post model
 struct Post {
     let profileImageName: String
     let userName: String

@@ -3,10 +3,13 @@
 
 import UIKit
 
+/// Таблица новостей
 final class MainTableViewController: UITableViewController {
-    let cellTypes: [CellTypes] = [.stories, .posts]
+    // MARK: - Private properties
 
-    var posts: [Post] = []
+    private let cellTypes: [CellTypes] = [.stories, .posts]
+
+    private var posts: [Post] = []
 
     // MARK: - LifeCycle
 
@@ -14,15 +17,30 @@ final class MainTableViewController: UITableViewController {
         super.viewDidLoad()
         createPosts()
     }
-    
+
     // MARK: - Private methods
-    
+
     private func createPosts() {
-        let firstPost = Post(profileImageName: Constants.secondElonImageName, userName: Constants.firstProfileName, overview: Constants.overviewText, postImageName: Constants.dogImageName)
-        let secondPost = Post(profileImageName: Constants.dogImageName, userName: Constants.secondProfileName, overview: Constants.overviewText, postImageName: Constants.secondElonImageName)
-        let thirdPost = Post(profileImageName: Constants.steveImageName, userName: Constants.thirdProfileName, overview: Constants.overviewText, postImageName: Constants.steveImageName)
-        
-        for _ in 0...3 {
+        let firstPost = Post(
+            profileImageName: Constants.secondElonImageName,
+            userName: Constants.firstProfileName,
+            overview: Constants.overviewText,
+            postImageName: Constants.dogImageName
+        )
+        let secondPost = Post(
+            profileImageName: Constants.dogImageName,
+            userName: Constants.secondProfileName,
+            overview: Constants.overviewText,
+            postImageName: Constants.secondElonImageName
+        )
+        let thirdPost = Post(
+            profileImageName: Constants.steveImageName,
+            userName: Constants.thirdProfileName,
+            overview: Constants.overviewText,
+            postImageName: Constants.steveImageName
+        )
+
+        for _ in 0 ... 3 {
             posts.append(firstPost)
             posts.append(secondPost)
             posts.append(thirdPost)
@@ -42,8 +60,8 @@ extension MainTableViewController {
         static let secondProfileName = "@kvakva01"
         static let thirdProfileName = "@blabla13"
         static let overviewText = """
-Создать экран новостей. Добавить туда таблицу и сделать ячейку для новости. Ячейка должна содержать то же самое, что и в оригинальном приложении «ВКонтакте»: надпись, фотографии, кнопки.
-"""
+        Создать экран новостей. Добавить туда таблицу и сделать ячейку для новости. Ячейка должна содержать то же самое, что и в оригинальном приложении «ВКонтакте»: надпись, фотографии, кнопки.
+        """
     }
 
     enum CellTypes {
@@ -74,18 +92,25 @@ extension MainTableViewController {
         switch type {
         case .stories:
             guard let cell = tableView
-                .dequeueReusableCell(withIdentifier: Constants.storiesCellIdentifier, for: indexPath) as? StoriesTableViewCell
+                .dequeueReusableCell(
+                    withIdentifier: Constants.storiesCellIdentifier,
+                    for: indexPath
+                ) as? StoriesTableViewCell
             else { return UITableViewCell() }
 
             return cell
         case .posts:
             guard let cell = tableView
-                .dequeueReusableCell(withIdentifier: Constants.postsCellIdentifier, for: indexPath) as? PostsTableViewCell
+                .dequeueReusableCell(
+                    withIdentifier: Constants.postsCellIdentifier,
+                    for: indexPath
+                ) as? PostsTableViewCell
             else { return UITableViewCell() }
             cell.configure(posts[indexPath.row])
             return cell
         }
     }
+
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         UITableView.automaticDimension
     }

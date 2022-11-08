@@ -3,17 +3,18 @@
 
 import UIKit
 
+/// Ячейка с постом
 final class PostsTableViewCell: UITableViewCell {
     // MARK: - IBOutlets
 
-    @IBOutlet weak var postView: UIView!
-    @IBOutlet weak var profileImageView: UIImageView!
-    @IBOutlet weak var userNameLabel: UILabel!
-    @IBOutlet weak var owerviewLabel: UILabel!
-    @IBOutlet weak var postImageView: UIImageView!
+    @IBOutlet private var postView: UIView!
+    @IBOutlet private var profileImageView: UIImageView!
+    @IBOutlet private var userNameLabel: UILabel!
+    @IBOutlet private var owerviewLabel: UILabel!
+    @IBOutlet private var postImageView: UIImageView!
 
     // MARK: - Public methods
-    
+
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         configPostView()
@@ -22,7 +23,8 @@ final class PostsTableViewCell: UITableViewCell {
     }
 
     func configure(_ post: Post?) {
-        guard let profileImage = post?.profileImageName, let name = post?.userName, let overview = post?.overview, let postImage = post?.postImageName else { return }
+        guard let profileImage = post?.profileImageName, let name = post?.userName, let overview = post?.overview,
+              let postImage = post?.postImageName else { return }
         profileImageView.image = UIImage(named: profileImage)
         userNameLabel.text = name
         owerviewLabel.text = overview
@@ -38,13 +40,13 @@ final class PostsTableViewCell: UITableViewCell {
         postView.layer.shadowRadius = 10
         postView.layer.shadowOpacity = 0.6
     }
-    
+
     private func configOverviewLabel() {
         owerviewLabel.adjustsFontSizeToFitWidth = true
         owerviewLabel.numberOfLines = 0
         owerviewLabel.minimumScaleFactor = 0.1
     }
-    
+
     private func configProfileImageView() {
         profileImageView.clipsToBounds = true
         profileImageView.layer.cornerRadius = profileImageView.frame.height / 2

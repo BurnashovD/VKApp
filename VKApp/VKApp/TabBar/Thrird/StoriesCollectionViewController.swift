@@ -3,8 +3,13 @@
 
 import UIKit
 
+/// Коллекция сторис
 final class StoriesCollectionView: UICollectionView {
-    var stories: [Storie] = []
+    // MARK: - Private properties
+
+    private var stories: [Storie] = []
+
+    // MARK: - init
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -12,6 +17,8 @@ final class StoriesCollectionView: UICollectionView {
         delegate = self
         dataSource = self
     }
+
+    // MARK: - Private methods
 
     private func createStories() {
         let firstStorie = Storie(
@@ -47,6 +54,8 @@ extension StoriesCollectionView {
     }
 }
 
+// MARK: - UICollectionViewDelegate, UICollectionViewDataSource
+
 extension StoriesCollectionView: UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         1
@@ -60,7 +69,9 @@ extension StoriesCollectionView: UICollectionViewDelegate, UICollectionViewDataS
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "storie", for: indexPath) as? StorieCollectionViewCell else { return UICollectionViewCell() }
+        guard let cell = collectionView
+            .dequeueReusableCell(withReuseIdentifier: "storie", for: indexPath) as? StorieCollectionViewCell
+        else { return UICollectionViewCell() }
         cell.configure(stories[indexPath.row])
         cell.configCell()
         return cell
