@@ -108,6 +108,28 @@
             </objects>
             <point key="canvasLocation" x="-803.07692307692309" y="-2.1327014218009479"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="6ng-CC-gHu">
+            <objects>
+                <viewController id="hcx-Yk-bL2" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="07v-v2-z23">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ckp-rS-Agi" customClass="LoadingDotsView" customModule="VKApp" customModuleProvider="target">
+                                <rect key="frame" x="75" y="403" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vTe-7o-deQ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jwt-vQ-7G3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-181" y="-818"/>
+        </scene>
         <!--Log In View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -173,6 +195,13 @@
                                             <action selector="checkDataAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="huD-wB-S1W"/>
                                         </connections>
                                     </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ri2-pS-4Kn" customClass="LoadingDotsView" customModule="VKApp" customModuleProvider="target">
+                                        <rect key="frame" x="112" y="175.66666666666669" width="134" height="54"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="54" id="anC-OK-QwT"/>
+                                            <constraint firstAttribute="width" constant="134" id="sAT-YT-PRx"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="pjD-Xg-agS" firstAttribute="top" secondItem="hon-2g-4LX" secondAttribute="bottom" constant="8" symbolic="YES" id="1pD-TC-uuR"/>
@@ -191,10 +220,12 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.2588235438" green="0.45490196350000001" blue="0.86274516580000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
+                            <constraint firstItem="Ri2-pS-4Kn" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="IdZ-RX-Swq"/>
                             <constraint firstItem="rh4-Xd-XAs" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="125" id="JkL-6v-syR"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="V0v-nI-Reb" secondAttribute="trailing" constant="100.66666666666663" id="PoD-8l-S1t"/>
                             <constraint firstItem="D47-Dc-UcJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="R48-Ym-vh6"/>
                             <constraint firstItem="V0v-nI-Reb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="101" id="SF7-t6-fe2"/>
+                            <constraint firstItem="Ri2-pS-4Kn" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="Ycq-QA-5us"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="D47-Dc-UcJ" secondAttribute="trailing" constant="16" id="gbx-cd-9vB"/>
                             <constraint firstItem="rh4-Xd-XAs" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="49" id="gjG-eQ-ms5"/>
                             <constraint firstItem="V0v-nI-Reb" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="16" id="hKM-dy-2DJ"/>
@@ -205,6 +236,7 @@
                     </view>
                     <connections>
                         <outlet property="emailTextField" destination="hon-2g-4LX" id="jxq-oe-CDw"/>
+                        <outlet property="loadingView" destination="Ri2-pS-4Kn" id="Bd6-RR-FFw"/>
                         <outlet property="logInButton" destination="naU-IS-fm8" id="HzL-mz-vxX"/>
                         <outlet property="loginScrollView" destination="D47-Dc-UcJ" id="hNm-ji-8pC"/>
                         <outlet property="passwordTextField" destination="pjD-Xg-agS" id="jCt-xg-Hlo"/>
@@ -356,6 +388,7 @@
                                         </label>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="not" translatesAutoresizingMaskIntoConstraints="NO" id="5xj-jJ-vaz">
                                             <rect key="frame" x="293" y="9" width="88" height="48"/>
+                                            <color key="backgroundColor" red="0.13725490870000001" green="0.13725490870000001" blue="0.14509806040000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="88" id="1zc-IZ-o4W"/>
                                             </constraints>
@@ -371,7 +404,8 @@
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <color key="backgroundColor" red="0.1647058874" green="0.1647058874" blue="0.1764705926" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <color key="tintColor" red="0.1647058874" green="0.1647058874" blue="0.1764705926" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <constraints>
                                                 <constraint firstItem="a6z-xc-K2F" firstAttribute="leading" secondItem="S2f-LE-Fb7" secondAttribute="leading" id="0Mb-jW-UAk"/>
                                                 <constraint firstAttribute="bottom" secondItem="a6z-xc-K2F" secondAttribute="bottom" id="1CZ-qL-t1Z"/>
@@ -395,6 +429,9 @@
                                                 </userDefinedRuntimeAttribute>
                                                 <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
                                                     <size key="value" width="0.0" height="0.0"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="backgroundColour">
+                                                    <color key="value" red="0.1647058874" green="0.1647058874" blue="0.1764705926" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </view>
@@ -994,6 +1031,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.13725490870000001" green="0.13725490870000001" blue="0.14509806040000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="tintColor" red="0.16583909599999999" green="0.16600060890000001" blue="0.17589430410000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="aua-Bp-JjI">
                             <size key="itemSize" width="129" height="128"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -1010,6 +1048,8 @@
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bIJ-10-CLH">
                                             <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <color key="backgroundColor" red="0.16583909599999999" green="0.16600060890000001" blue="0.17589430410000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <color key="tintColor" red="0.16583909599999999" green="0.16600060890000001" blue="0.17589430410000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </imageView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2qr-6A-XcL" customClass="LikesControl" customModule="VKApp" customModuleProvider="target">
                                             <rect key="frame" x="62" y="105" width="66" height="23"/>
@@ -1029,7 +1069,7 @@
                                         <constraint firstItem="bIJ-10-CLH" firstAttribute="centerY" secondItem="sRa-um-b6c" secondAttribute="centerY" id="wF9-iZ-13W"/>
                                     </constraints>
                                 </collectionViewCellContentView>
-                                <color key="backgroundColor" red="0.26666668059999998" green="0.58823531870000001" blue="0.96862745289999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.1647058874" green="0.1647058874" blue="0.1764705926" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <size key="customSize" width="128" height="128"/>
                                 <connections>
                                     <outlet property="userPhotoImageView" destination="bIJ-10-CLH" id="yiX-ze-ZKR"/>

@@ -86,6 +86,7 @@ final class SortFriendsTableViewController: UITableViewController {
             users.append(nineUser)
             users.append(tenUser)
         }
+        users.sort(by: { $0.surname < $1.surname })
     }
 
     private func createSections() {

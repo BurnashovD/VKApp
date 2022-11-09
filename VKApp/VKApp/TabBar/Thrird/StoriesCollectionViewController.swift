@@ -13,9 +13,8 @@ final class StoriesCollectionView: UICollectionView {
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        subscribeCollectionOnProtocols()
         createStories()
-        delegate = self
-        dataSource = self
     }
 
     // MARK: - Private methods
@@ -39,6 +38,11 @@ final class StoriesCollectionView: UICollectionView {
             stories.append(secondStorie)
             stories.append(thirdStorie)
         }
+    }
+
+    private func subscribeCollectionOnProtocols() {
+        delegate = self
+        dataSource = self
     }
 }
 

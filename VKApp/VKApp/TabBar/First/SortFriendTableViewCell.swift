@@ -10,6 +10,10 @@ final class SortFriendTableViewCell: UITableViewCell {
     @IBOutlet var profileImageView: UIImageView!
     @IBOutlet var nameLabel: UILabel!
 
+    // MARK: - Private properties
+
+    private lazy var tapImageGestureRecognizer = UITapGestureRecognizer()
+
     // MARK: - Public methods
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -23,5 +27,19 @@ final class SortFriendTableViewCell: UITableViewCell {
         profileImageView.contentMode = .scaleToFill
         profileImageView.clipsToBounds = true
         profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
+        profileImageView.isUserInteractionEnabled = true
+        tapImageGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(animateProfileImageAction))
+        profileImageView.addGestureRecognizer(tapImageGestureRecognizer)
+    }
+
+    @objc private func animateProfileImageAction() {
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0.3) {
+            self.profileImageView.bounds = CGRect(
+                x: self.profileImageView.center.x,
+                y: self.profileImageView.center.y,
+                width: 60,
+                height: 60
+            )
+        }
     }
 }

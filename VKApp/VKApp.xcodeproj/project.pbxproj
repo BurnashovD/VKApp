@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A5056EA629129E4E0073D407 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5056EA529129E4E0073D407 /* UIViewController+Extension.swift */; };
 		A507CFED291A897A00076C3A /* SortFriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A507CFEC291A897A00076C3A /* SortFriendTableViewCell.swift */; };
+		A507CFF3291AE50A00076C3A /* LoadingDotsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A507CFF2291AE50A00076C3A /* LoadingDotsView.swift */; };
 		A50F15522919A3F10029C985 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F15512919A3F10029C985 /* MainTableViewController.swift */; };
 		A50F15542919A5460029C985 /* PostsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F15532919A5460029C985 /* PostsTableViewCell.swift */; };
 		A50F15562919A5810029C985 /* Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F15552919A5810029C985 /* Posts.swift */; };
@@ -63,6 +64,7 @@
 /* Begin PBXFileReference section */
 		A5056EA529129E4E0073D407 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		A507CFEC291A897A00076C3A /* SortFriendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortFriendTableViewCell.swift; sourceTree = "<group>"; };
+		A507CFF2291AE50A00076C3A /* LoadingDotsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingDotsView.swift; sourceTree = "<group>"; };
 		A50F15512919A3F10029C985 /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
 		A50F15532919A5460029C985 /* PostsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsTableViewCell.swift; sourceTree = "<group>"; };
 		A50F15552919A5810029C985 /* Posts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Posts.swift; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 			children = (
 				A516BC9F2910A2F0008802FC /* RegistrationViewController.swift */,
 				A516BC3329104307008802FC /* LogInViewController.swift */,
+				A507CFF2291AE50A00076C3A /* LoadingDotsView.swift */,
 			);
 			path = LogIn;
 			sourceTree = "<group>";
@@ -413,8 +416,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "
-";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftformat >/dev/null; then\n  swiftformat .\nelse\n  echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -445,6 +447,7 @@
 				A5F3D6712911C961004EB22A /* UserGroupsTableViewController.swift in Sources */,
 				A5B2213F29185896005363EE /* UITableViewController+Extension.swift in Sources */,
 				A50F15562919A5810029C985 /* Posts.swift in Sources */,
+				A507CFF3291AE50A00076C3A /* LoadingDotsView.swift in Sources */,
 				A5B221332913407D005363EE /* GlobalGroupsTableViewCell.swift in Sources */,
 				A5F3D6732911C97B004EB22A /* GlobalSearchTableViewController.swift in Sources */,
 				A516BC3229104307008802FC /* SceneDelegate.swift in Sources */,

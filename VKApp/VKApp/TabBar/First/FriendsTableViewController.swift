@@ -9,8 +9,6 @@ final class FriendsTableViewController: UITableViewController {
 
     private let cellTypes: [CellTypes] = [.friends, .recomendations, .nextFriends]
 
-    // MARK: - Public properties
-
     private var users: [User] = []
 
     // MARK: - LifeCycle

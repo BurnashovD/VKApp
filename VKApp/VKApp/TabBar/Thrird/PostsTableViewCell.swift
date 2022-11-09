@@ -15,15 +15,16 @@ final class PostsTableViewCell: UITableViewCell {
     @IBOutlet private var likeButton: UIButton!
     @IBOutlet private var likeCountLabel: UILabel!
     @IBOutlet private var shareButton: UIButton!
-    
+
     // MARK: - Private properties
+
     private var isTapped = false
     private var likesCount = 0
     private var likeImageName = ""
     private var likeColor: UIColor = .white
-    
+
     // MARK: - Public properties
-    
+
     var callActivityAction: (([Any]) -> Void)?
 
     // MARK: - Public methods
@@ -43,7 +44,7 @@ final class PostsTableViewCell: UITableViewCell {
     }
 
     // MARK: - Private methods
-    
+
     private func configCell() {
         configPostView()
         configOverviewLabel()
@@ -76,11 +77,18 @@ final class PostsTableViewCell: UITableViewCell {
         likesCount = isTapped ? 1 : 0
         likeColor = isTapped ? .red : .white
         likeCountLabel.textColor = likeColor
-        likeCountLabel.text = String(likesCount)
+        UIView.transition(
+            with: likeCountLabel,
+            duration: 0.3,
+            options: .transitionFlipFromTop
+        ) {
+            self.likeCountLabel.text = String(self.likesCount)
+        }
     }
-    
+
     @objc private func sharePostAction() {
-        callActivityAction?([profileImageView.image, owerviewLabel.text])
+        guard let image = profileImageView.image, let text = owerviewLabel.text else { return }
+        callActivityAction?([image, text])
     }
 }
 

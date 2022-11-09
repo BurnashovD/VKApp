@@ -28,8 +28,7 @@ final class UserGroupsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         createGroups()
-        searchResult = groups
-        searchBar.delegate = self
+        configController()
     }
 
     // MARK: - Private methods
@@ -56,6 +55,11 @@ final class UserGroupsTableViewController: UITableViewController {
         groups.append(eightGroup)
         groups.append(nineGroup)
         groups.append(tenGroup)
+    }
+
+    private func configController() {
+        searchResult = groups
+        searchBar.delegate = self
     }
 }
 

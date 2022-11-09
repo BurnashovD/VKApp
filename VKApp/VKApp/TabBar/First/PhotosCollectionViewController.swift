@@ -37,6 +37,7 @@ extension PhotosCollectionViewController {
             for: indexPath
         ) as? PhotosCollectionViewCell else { return UICollectionViewCell() }
         cell.userPhotoImageView.image = image
+        cell.animatePhotosCellsAction()
         return cell
     }
 }
