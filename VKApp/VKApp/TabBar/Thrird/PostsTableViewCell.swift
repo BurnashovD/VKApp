@@ -25,7 +25,7 @@ final class PostsTableViewCell: UITableViewCell {
 
     // MARK: - Public properties
 
-    var callActivityAction: (([Any]) -> Void)?
+    var callActivityHandler: (([Any]) -> Void)?
 
     // MARK: - Public methods
 
@@ -88,7 +88,7 @@ final class PostsTableViewCell: UITableViewCell {
 
     @objc private func sharePostAction() {
         guard let image = profileImageView.image, let text = owerviewLabel.text else { return }
-        callActivityAction?([image, text])
+        callActivityHandler?([image, text])
     }
 }
 

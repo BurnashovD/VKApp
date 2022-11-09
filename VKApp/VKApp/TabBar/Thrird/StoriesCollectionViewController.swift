@@ -55,6 +55,7 @@ extension StoriesCollectionView {
         static let firstProfileName = "@lowbattery_o"
         static let secondProfileName = "@kvakva01"
         static let thirdProfileName = "@blabla13"
+        static let storieCellIdentifier = "storie"
     }
 }
 
@@ -74,7 +75,10 @@ extension StoriesCollectionView: UICollectionViewDelegate, UICollectionViewDataS
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         guard let cell = collectionView
-            .dequeueReusableCell(withReuseIdentifier: "storie", for: indexPath) as? StorieCollectionViewCell
+            .dequeueReusableCell(
+                withReuseIdentifier: Constants.storieCellIdentifier,
+                for: indexPath
+            ) as? StorieCollectionViewCell
         else { return UICollectionViewCell() }
         cell.configure(stories[indexPath.row])
         cell.configCell()

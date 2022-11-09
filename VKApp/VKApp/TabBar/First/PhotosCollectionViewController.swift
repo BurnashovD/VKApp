@@ -36,7 +36,7 @@ extension PhotosCollectionViewController {
             withReuseIdentifier: Constants.photosCellIdentifier,
             for: indexPath
         ) as? PhotosCollectionViewCell else { return UICollectionViewCell() }
-        cell.userPhotoImageView.image = image
+        cell.configure(image)
         cell.animatePhotosCellsAction()
         return cell
     }

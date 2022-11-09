@@ -107,7 +107,7 @@ extension MainTableViewController {
                 ) as? PostsTableViewCell
             else { return UITableViewCell() }
             cell.configure(posts[indexPath.row])
-            cell.callActivityAction = { items in
+            cell.callActivityHandler = { items in
                 self.callActivityAction(items: items)
             }
             return cell

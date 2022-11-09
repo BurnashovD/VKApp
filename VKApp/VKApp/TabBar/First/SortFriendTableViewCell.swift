@@ -7,8 +7,8 @@ import UIKit
 final class SortFriendTableViewCell: UITableViewCell {
     // MARK: - IBOutlets
 
-    @IBOutlet var profileImageView: UIImageView!
-    @IBOutlet var nameLabel: UILabel!
+    @IBOutlet private var profileImageView: UIImageView!
+    @IBOutlet private var nameLabel: UILabel!
 
     // MARK: - Private properties
 
@@ -19,6 +19,11 @@ final class SortFriendTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         configCell()
+    }
+
+    func configure(name: String, image: UIImage) {
+        nameLabel.text = name
+        profileImageView.image = image
     }
 
     // MARK: - Private methods

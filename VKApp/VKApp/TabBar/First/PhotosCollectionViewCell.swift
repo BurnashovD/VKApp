@@ -7,7 +7,7 @@ import UIKit
 final class PhotosCollectionViewCell: UICollectionViewCell {
     // MARK: - IBOutlets
 
-    @IBOutlet var userPhotoImageView: UIImageView!
+    @IBOutlet private var userPhotoImageView: UIImageView!
 
     // MARK: - Public methods
 
@@ -24,6 +24,10 @@ final class PhotosCollectionViewCell: UICollectionViewCell {
         sizeAnimate.toValue = 0
         sizeAnimate.duration = 1.5
         userPhotoImageView.layer.add(sizeAnimate, forKey: nil)
+    }
+
+    func configure(_ image: UIImage) {
+        userPhotoImageView.image = image
     }
 }
 

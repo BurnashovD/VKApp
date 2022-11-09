@@ -8,7 +8,7 @@ final class SortFriendsTableViewController: UITableViewController {
     // MARK: - Private properties
 
     private var users: [User] = []
-    private var sections = [Character: [String]]()
+    private var sectionsDict = [Character: [String]]()
     private var imagesDict = [Character: [String]]()
     private var sectionTitles = [Character]()
 
@@ -92,15 +92,15 @@ final class SortFriendsTableViewController: UITableViewController {
     private func createSections() {
         for user in users {
             guard let firstLetter = user.surname.first else { return }
-            if sections[firstLetter] != nil {
-                sections[firstLetter]?.append(user.surname)
+            if sectionsDict[firstLetter] != nil {
+                sectionsDict[firstLetter]?.append(user.surname)
                 imagesDict[firstLetter]?.append(user.profileImageName)
             } else {
-                sections[firstLetter] = [user.surname]
+                sectionsDict[firstLetter] = [user.surname]
                 imagesDict[firstLetter] = [user.profileImageName]
             }
         }
-        sectionTitles = Array(sections.keys)
+        sectionTitles = Array(sectionsDict.keys)
     }
 }
 
@@ -130,11 +130,11 @@ extension SortFriendsTableViewController {
 
 extension SortFriendsTableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
-        sections.count
+        sectionsDict.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let sectionNumbers = sections[sectionTitles[section]]?.count else { return Int() }
+        guard let sectionNumbers = sectionsDict[sectionTitles[section]]?.count else { return Int() }
         return sectionNumbers
     }
 
@@ -143,11 +143,11 @@ extension SortFriendsTableViewController {
             withIdentifier: Constants.friendsCellIdentifier,
             for: indexPath
         ) as? SortFriendTableViewCell,
-            let user = sections[sectionTitles[indexPath.section]]?[indexPath.row],
-            let image = imagesDict[sectionTitles[indexPath.section]]?[indexPath.row]
+            let user = sectionsDict[sectionTitles[indexPath.section]]?[indexPath.row],
+            let image = imagesDict[sectionTitles[indexPath.section]]?[indexPath.row],
+            let friendImage = UIImage(named: image)
         else { return UITableViewCell() }
-        cell.profileImageView.image = UIImage(named: image)
-        cell.nameLabel.text = user
+        cell.configure(name: user, image: friendImage)
         return cell
     }
 

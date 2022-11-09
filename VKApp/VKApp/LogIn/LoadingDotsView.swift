@@ -17,13 +17,13 @@ final class LoadingDotsView: UIView {
         return stack
     }()
 
-    private let firstDot = UIView()
-    private let secondDot = UIView()
-    private let thirdDot = UIView()
+    private let firstDotView = UIView()
+    private let secondDotView = UIView()
+    private let thirdDotView = UIView()
 
     // MARK: - Private properties
 
-    private lazy var dots = [firstDot, secondDot, thirdDot]
+    private lazy var dots = [firstDotView, secondDotView, thirdDotView]
 
     // MARK: - Public methods
 
@@ -60,15 +60,15 @@ final class LoadingDotsView: UIView {
 
     private func createAnimationAction() {
         UIView.animate(withDuration: 0.7, delay: 0, options: [.repeat, .autoreverse]) {
-            self.firstDot.alpha = 0.3
+            self.firstDotView.alpha = 0.3
         }
 
         UIView.animate(withDuration: 0.7, delay: 0.3, options: [.repeat, .autoreverse]) {
-            self.secondDot.alpha = 0.3
+            self.secondDotView.alpha = 0.3
         }
 
         UIView.animate(withDuration: 0.7, delay: 0.6, options: [.repeat, .autoreverse]) {
-            self.thirdDot.alpha = 0.3
+            self.thirdDotView.alpha = 0.3
         }
     }
 }
