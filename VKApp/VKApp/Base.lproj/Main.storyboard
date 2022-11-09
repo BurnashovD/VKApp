@@ -781,6 +781,9 @@
                                                     </connections>
                                                 </collectionViewCell>
                                             </cells>
+                                            <connections>
+                                                <outlet property="delegate" destination="dcb-Zd-fw6" id="vmr-Hm-34U"/>
+                                            </connections>
                                         </collectionView>
                                     </subviews>
                                     <constraints>

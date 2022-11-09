@@ -41,7 +41,6 @@ final class StoriesCollectionView: UICollectionView {
     }
 
     private func subscribeCollectionOnProtocols() {
-        delegate = self
         dataSource = self
     }
 }
