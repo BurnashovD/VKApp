@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// User model
+/// User
 struct User {
     let name: String
     let surname: String

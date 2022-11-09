@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Storie model
+/// Storie
 struct Storie {
     let profileImageName: String
     let profileName: String
