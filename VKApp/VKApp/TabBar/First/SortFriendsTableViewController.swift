@@ -86,7 +86,7 @@ final class SortFriendsTableViewController: UITableViewController {
             users.append(nineUser)
             users.append(tenUser)
         }
-        users.sort(by: { $0.surname < $1.surname })
+        users.sort(by: { $0.name < $1.name })
     }
 
     private func createSections() {
@@ -160,7 +160,9 @@ extension SortFriendsTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        tableView.tableHeaderView?.tintColor = .red
+        guard let headerView = view as? UITableViewHeaderFooterView else { return }
+        headerView.contentView.backgroundColor = .none
+        headerView.textLabel?.textColor = .white
     }
 
     override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
