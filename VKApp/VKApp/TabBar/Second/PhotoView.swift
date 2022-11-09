@@ -36,4 +36,10 @@ import UIKit
             layer.shadowOffset = shadowOffset
         }
     }
+
+    @IBInspectable private var backgroundColour: UIColor? {
+        didSet {
+            backgroundColor = backgroundColor
+        }
+    }
 }

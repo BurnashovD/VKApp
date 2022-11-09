@@ -11,6 +11,7 @@ import UIKit
         let button = UIButton()
         button.setBackgroundImage(UIImage(systemName: Constants.hearthImageName), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.tintColor = .white
         return button
     }()
 
@@ -73,7 +74,13 @@ import UIKit
         likeButton.tintColor = likeColor
         likesCounterLabel.textColor = likeColor
         likeButton.setBackgroundImage(UIImage(systemName: likeImageName), for: .normal)
-        likesCounterLabel.text = String(likesCount)
+        UIView.transition(
+            with: likesCounterLabel,
+            duration: 0.3,
+            options: .transitionFlipFromBottom
+        ) {
+            self.likesCounterLabel.text = String(self.likesCount)
+        }
     }
 }
 

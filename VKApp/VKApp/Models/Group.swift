@@ -1,10 +1,10 @@
-// User.swift
+// Group.swift
 // Copyright © RoadMap. All rights reserved.
 
 import Foundation
 
-/// User model
-struct User {
+/// Group
+struct Group {
     let name: String
-    let profileImageName: String
+    let groupImageName: String
 }

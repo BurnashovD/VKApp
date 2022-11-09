@@ -25,4 +25,9 @@ extension UITableViewController {
         alertController.addAction(alertAction)
         present(alertController, animated: true)
     }
+
+    func callActivityAction(items: [Any]) {
+        let activity = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        present(activity, animated: true)
+    }
 }

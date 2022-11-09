@@ -18,7 +18,7 @@ final class GlobalSearchTableViewController: UITableViewController {
 
     // MARK: - IBActions
 
-    @IBAction func addNewGroupAction(_ sender: Any) {
+    @IBAction private func addNewGroupAction(_ sender: Any) {
         addNewGroupAlertAction(
             controllerTitle: Constants.chooseGroupNameText,
             actionTitle: Constants.okText,
@@ -27,7 +27,7 @@ final class GlobalSearchTableViewController: UITableViewController {
         )
     }
 
-    @IBAction func backToGroupsAction(_ sender: Any) {
+    @IBAction private func backToGroupsAction(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
 

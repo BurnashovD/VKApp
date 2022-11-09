@@ -11,6 +11,7 @@ final class LogInViewController: UIViewController {
     @IBOutlet private var emailTextField: UITextField!
     @IBOutlet private var passwordTextField: UITextField!
     @IBOutlet private var logInButton: UIButton!
+    @IBOutlet private var loadingView: UIView!
 
     // MARK: - Private properties
 
@@ -49,7 +50,12 @@ final class LogInViewController: UIViewController {
             )
             return
         }
-        performSegue(withIdentifier: Constants.loginSegueIdentifier, sender: self)
+        loadingView.isHidden = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            guard let loadingViewTag = self.view.viewWithTag(2) else { return }
+            loadingViewTag.removeFromSuperview()
+            self.performSegue(withIdentifier: Constants.loginSegueIdentifier, sender: self)
+        }
     }
 
     // MARK: - Private methods
@@ -59,6 +65,8 @@ final class LogInViewController: UIViewController {
         loginScrollView.showsVerticalScrollIndicator = false
         hideKeyboardGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboardAction))
         configTextFields()
+        loadingView.isHidden = true
+        loadingView.tag = 2
     }
 
     private func addNotifications() {

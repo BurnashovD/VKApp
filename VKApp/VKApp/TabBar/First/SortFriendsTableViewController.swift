@@ -1,30 +1,23 @@
-// FriendsTableViewController.swift
+// SortFriendsTableViewController.swift
 // Copyright © RoadMap. All rights reserved.
 
 import UIKit
 
-/// Экран с друзьями пользователя
-final class FriendsTableViewController: UITableViewController {
+///  Сортированный список друзей
+final class SortFriendsTableViewController: UITableViewController {
     // MARK: - Private properties
 
-    private let cellTypes: [CellTypes] = [.friends, .recomendations, .nextFriends]
-
     private var users: [User] = []
+    private var sectionsDict = [Character: [String]]()
+    private var imagesDict = [Character: [String]]()
+    private var sectionTitles = [Character]()
 
     // MARK: - LifeCycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         createUsers()
-    }
-
-    // MARK: - Public methods
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == Constants.phototSegueIdentifier,
-              let photoCollection = segue.destination as? PhotosCollectionViewController,
-              let image = sender as? UIImage else { return }
-        photoCollection.image = image
+        createSections()
     }
 
     // MARK: - Private methods
@@ -93,21 +86,28 @@ final class FriendsTableViewController: UITableViewController {
             users.append(nineUser)
             users.append(tenUser)
         }
+        users.sort(by: { $0.name < $1.name })
     }
 
-    private func selectedRowAction() {
-        let selectedRow = tableView.indexPathForSelectedRow
-        guard let selectedRow = selectedRow,
-              let user = tableView.cellForRow(at: selectedRow) as? FriendTableViewCell,
-              let image = user.profileImageView.image else { return }
-        performSegue(withIdentifier: Constants.phototSegueIdentifier, sender: image)
+    private func createSections() {
+        for user in users {
+            guard let firstLetter = user.surname.first else { return }
+            if sectionsDict[firstLetter] != nil {
+                sectionsDict[firstLetter]?.append(user.surname)
+                imagesDict[firstLetter]?.append(user.profileImageName)
+            } else {
+                sectionsDict[firstLetter] = [user.surname]
+                imagesDict[firstLetter] = [user.profileImageName]
+            }
+        }
+        sectionTitles = Array(sectionsDict.keys)
     }
 }
 
 /// Constants
-extension FriendsTableViewController {
+extension SortFriendsTableViewController {
     enum Constants {
-        static let friendsCellIdentifier = "friends"
+        static let friendsCellIdentifier = "sort"
         static let phototSegueIdentifier = "photosSegue"
         static let elonImageName = "em3"
         static let secondElonImageName = "secondElon"
@@ -118,78 +118,58 @@ extension FriendsTableViewController {
         static let daniilName = "Daniil"
         static let elonName = "Elon"
         static let steveName = "Steve"
-        static let aleksandrSurname = "Nikolaevich"
-        static let elonSurname = "Musk"
-        static let steveSurname = "Jobs"
-        static let danilSurname = "Zebrov"
+        static let aleksandrSurname = "Aleksandr Nikolaevich"
+        static let elonSurname = "Elon Musk"
+        static let steveSurname = "Steve Jobs"
+        static let danilSurname = "Danil Zebrov"
         static let pizzaImageName = "pizza"
-    }
-
-    enum CellTypes {
-        case friends
-        case recomendations
-        case nextFriends
     }
 }
 
-// MARK: - UITableViewControllerDelegate, UITableViewControllerDataSource
+// MARK: - UITableViewDelegate, UITableViewDataSource
 
-extension FriendsTableViewController {
+extension SortFriendsTableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
-        cellTypes.count
+        sectionsDict.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let type = cellTypes[section]
-        switch type {
-        case .friends:
-            return users.count
-        case .recomendations:
-            return 1
-        case .nextFriends:
-            return users.count
-        }
+        guard let sectionNumbers = sectionsDict[sectionTitles[section]]?.count else { return Int() }
+        return sectionNumbers
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let type = cellTypes[indexPath.section]
-        switch type {
-        case .friends:
-            guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: Constants.friendsCellIdentifier,
-                for: indexPath
-            ) as? FriendTableViewCell else { return UITableViewCell() }
-
-            cell.configure(users[indexPath.row])
-
-            return cell
-
-        case .recomendations:
-            guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: Constants.recomendationsCellIdentifier,
-                for: indexPath
-            ) as? RecomendationsTableViewCell else { return UITableViewCell() }
-
-            cell.configure(users[Int.random(in: 0 ... (users.count - 1))])
-
-            return cell
-        case .nextFriends:
-            guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: Constants.friendsCellIdentifier,
-                for: indexPath
-            ) as? FriendTableViewCell else { return UITableViewCell() }
-
-            cell.configure(users[indexPath.row])
-
-            return cell
-        }
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: Constants.friendsCellIdentifier,
+            for: indexPath
+        ) as? SortFriendTableViewCell,
+            let user = sectionsDict[sectionTitles[indexPath.section]]?[indexPath.row],
+            let image = imagesDict[sectionTitles[indexPath.section]]?[indexPath.row],
+            let friendImage = UIImage(named: image)
+        else { return UITableViewCell() }
+        cell.configure(name: user, image: friendImage)
+        return cell
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         UITableView.automaticDimension
     }
 
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedRowAction()
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        30
+    }
+
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let headerView = view as? UITableViewHeaderFooterView else { return }
+        headerView.contentView.backgroundColor = .none
+        headerView.textLabel?.textColor = .white
+    }
+
+    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        sectionTitles.map { String($0) }
+    }
+
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        String(sectionTitles[section])
     }
 }

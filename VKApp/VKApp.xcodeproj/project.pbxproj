@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		A5056EA629129E4E0073D407 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5056EA529129E4E0073D407 /* UIViewController+Extension.swift */; };
+		A507CFED291A897A00076C3A /* SortFriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A507CFEC291A897A00076C3A /* SortFriendTableViewCell.swift */; };
+		A507CFF3291AE50A00076C3A /* LoadingDotsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A507CFF2291AE50A00076C3A /* LoadingDotsView.swift */; };
+		A50F15522919A3F10029C985 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F15512919A3F10029C985 /* MainTableViewController.swift */; };
+		A50F15542919A5460029C985 /* PostsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F15532919A5460029C985 /* PostsTableViewCell.swift */; };
+		A50F15562919A5810029C985 /* Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F15552919A5810029C985 /* Posts.swift */; };
+		A50F15582919A7410029C985 /* StoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F15572919A7410029C985 /* StoriesTableViewCell.swift */; };
+		A50F155A2919B0160029C985 /* StoriesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F15592919B0160029C985 /* StoriesCollectionViewController.swift */; };
+		A50F155C2919B0270029C985 /* StorieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F155B2919B0270029C985 /* StorieCollectionViewCell.swift */; };
+		A50F155E2919B1A30029C985 /* Storie.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F155D2919B1A30029C985 /* Storie.swift */; };
 		A516BC3029104307008802FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516BC2F29104307008802FC /* AppDelegate.swift */; };
 		A516BC3229104307008802FC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516BC3129104307008802FC /* SceneDelegate.swift */; };
 		A516BC3429104307008802FC /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516BC3329104307008802FC /* LogInViewController.swift */; };
@@ -18,6 +27,7 @@
 		A516BC5329104308008802FC /* VKAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516BC5229104308008802FC /* VKAppUITestsLaunchTests.swift */; };
 		A516BC9E29108929008802FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A516BC9D29108929008802FC /* Assets.xcassets */; };
 		A516BCA02910A2F0008802FC /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516BC9F2910A2F0008802FC /* RegistrationViewController.swift */; };
+		A57B1DF72919E64E004A5A9A /* SortFriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57B1DF62919E64E004A5A9A /* SortFriendsTableViewController.swift */; };
 		A5B221252912BED9005363EE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B221242912BED9005363EE /* User.swift */; };
 		A5B221272912C0B8005363EE /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B221262912C0B8005363EE /* FriendTableViewCell.swift */; };
 		A5B221292912CB50005363EE /* RecomendationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B221282912CB4F005363EE /* RecomendationsTableViewCell.swift */; };
@@ -53,6 +63,15 @@
 
 /* Begin PBXFileReference section */
 		A5056EA529129E4E0073D407 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		A507CFEC291A897A00076C3A /* SortFriendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortFriendTableViewCell.swift; sourceTree = "<group>"; };
+		A507CFF2291AE50A00076C3A /* LoadingDotsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingDotsView.swift; sourceTree = "<group>"; };
+		A50F15512919A3F10029C985 /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
+		A50F15532919A5460029C985 /* PostsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsTableViewCell.swift; sourceTree = "<group>"; };
+		A50F15552919A5810029C985 /* Posts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Posts.swift; sourceTree = "<group>"; };
+		A50F15572919A7410029C985 /* StoriesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesTableViewCell.swift; sourceTree = "<group>"; };
+		A50F15592919B0160029C985 /* StoriesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesCollectionViewController.swift; sourceTree = "<group>"; };
+		A50F155B2919B0270029C985 /* StorieCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorieCollectionViewCell.swift; sourceTree = "<group>"; };
+		A50F155D2919B1A30029C985 /* Storie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storie.swift; sourceTree = "<group>"; };
 		A516BC2C29104307008802FC /* VKApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A516BC2F29104307008802FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A516BC3129104307008802FC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +86,7 @@
 		A516BC5229104308008802FC /* VKAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		A516BC9D29108929008802FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A516BC9F2910A2F0008802FC /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		A57B1DF62919E64E004A5A9A /* SortFriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortFriendsTableViewController.swift; sourceTree = "<group>"; };
 		A5B221242912BED9005363EE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A5B221262912C0B8005363EE /* FriendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
 		A5B221282912CB4F005363EE /* RecomendationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecomendationsTableViewCell.swift; sourceTree = "<group>"; };
@@ -108,6 +128,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A50F154F2919A36D0029C985 /* Thrird */ = {
+			isa = PBXGroup;
+			children = (
+				A50F15512919A3F10029C985 /* MainTableViewController.swift */,
+				A50F15572919A7410029C985 /* StoriesTableViewCell.swift */,
+				A50F15532919A5460029C985 /* PostsTableViewCell.swift */,
+				A50F15592919B0160029C985 /* StoriesCollectionViewController.swift */,
+				A50F155B2919B0270029C985 /* StorieCollectionViewCell.swift */,
+			);
+			path = Thrird;
+			sourceTree = "<group>";
+		};
+		A50F15502919A3B60029C985 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A5B221242912BED9005363EE /* User.swift */,
+				A5B2213C2915AA74005363EE /* Group.swift */,
+				A50F15552919A5810029C985 /* Posts.swift */,
+				A50F155D2919B1A30029C985 /* Storie.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		A516BC2329104307008802FC = {
 			isa = PBXGroup;
 			children = (
@@ -135,10 +178,9 @@
 				A516BC3129104307008802FC /* SceneDelegate.swift */,
 				A5F3D66D2911C8F0004EB22A /* TabBar */,
 				A5F3D66C2911C8DC004EB22A /* LogIn */,
+				A50F15502919A3B60029C985 /* Models */,
 				A5056EA529129E4E0073D407 /* UIViewController+Extension.swift */,
 				A5B2213E29185896005363EE /* UITableViewController+Extension.swift */,
-				A5B221242912BED9005363EE /* User.swift */,
-				A5B2213C2915AA74005363EE /* Group.swift */,
 				A516BC3529104307008802FC /* Main.storyboard */,
 				A516BC3A29104308008802FC /* LaunchScreen.storyboard */,
 				A516BC9D29108929008802FC /* Assets.xcassets */,
@@ -168,6 +210,8 @@
 			isa = PBXGroup;
 			children = (
 				A5F3D66A2911C8C6004EB22A /* FriendsTableViewController.swift */,
+				A57B1DF62919E64E004A5A9A /* SortFriendsTableViewController.swift */,
+				A507CFEC291A897A00076C3A /* SortFriendTableViewCell.swift */,
 				A5B221282912CB4F005363EE /* RecomendationsTableViewCell.swift */,
 				A5B221262912C0B8005363EE /* FriendTableViewCell.swift */,
 				A5F3D66E2911C926004EB22A /* PhotosCollectionViewController.swift */,
@@ -194,6 +238,7 @@
 			children = (
 				A516BC9F2910A2F0008802FC /* RegistrationViewController.swift */,
 				A516BC3329104307008802FC /* LogInViewController.swift */,
+				A507CFF2291AE50A00076C3A /* LoadingDotsView.swift */,
 			);
 			path = LogIn;
 			sourceTree = "<group>";
@@ -203,6 +248,7 @@
 			children = (
 				A5B22130291339EF005363EE /* First */,
 				A5B2213129133A03005363EE /* Second */,
+				A50F154F2919A36D0029C985 /* Thrird */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
@@ -370,7 +416,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftformat >/dev/null; then\n  swiftformat .\nelse\n  echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftformat >/dev/null; then\n  swiftformat .\nelse\n  echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -386,18 +432,28 @@
 				A5B2212D29130874005363EE /* PhotosCollectionViewCell.swift in Sources */,
 				A5B2213B291475B2005363EE /* LikesControl.swift in Sources */,
 				A5B221272912C0B8005363EE /* FriendTableViewCell.swift in Sources */,
+				A50F15522919A3F10029C985 /* MainTableViewController.swift in Sources */,
 				A516BCA02910A2F0008802FC /* RegistrationViewController.swift in Sources */,
 				A5B2212F291339D0005363EE /* GroupTableViewCell.swift in Sources */,
+				A50F155C2919B0270029C985 /* StorieCollectionViewCell.swift in Sources */,
+				A507CFED291A897A00076C3A /* SortFriendTableViewCell.swift in Sources */,
+				A50F15542919A5460029C985 /* PostsTableViewCell.swift in Sources */,
 				A5B2213D2915AA74005363EE /* Group.swift in Sources */,
+				A50F155A2919B0160029C985 /* StoriesCollectionViewController.swift in Sources */,
 				A5B221292912CB50005363EE /* RecomendationsTableViewCell.swift in Sources */,
 				A5B221252912BED9005363EE /* User.swift in Sources */,
 				A5056EA629129E4E0073D407 /* UIViewController+Extension.swift in Sources */,
+				A57B1DF72919E64E004A5A9A /* SortFriendsTableViewController.swift in Sources */,
 				A5F3D6712911C961004EB22A /* UserGroupsTableViewController.swift in Sources */,
 				A5B2213F29185896005363EE /* UITableViewController+Extension.swift in Sources */,
+				A50F15562919A5810029C985 /* Posts.swift in Sources */,
+				A507CFF3291AE50A00076C3A /* LoadingDotsView.swift in Sources */,
 				A5B221332913407D005363EE /* GlobalGroupsTableViewCell.swift in Sources */,
 				A5F3D6732911C97B004EB22A /* GlobalSearchTableViewController.swift in Sources */,
 				A516BC3229104307008802FC /* SceneDelegate.swift in Sources */,
 				A5B2213929146CC5005363EE /* PhotoView.swift in Sources */,
+				A50F15582919A7410029C985 /* StoriesTableViewCell.swift in Sources */,
+				A50F155E2919B1A30029C985 /* Storie.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
