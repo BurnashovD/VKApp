@@ -251,25 +251,41 @@
                     <view key="view" contentMode="scaleToFill" id="jll-ii-kN2">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2Gz-6b-sHZ">
+                                <rect key="frame" x="16" y="303.66666666666669" width="358" height="250.00000000000006"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="kQ7-xr-BSV"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="SEi-wu-FtK"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.1647058874" green="0.1647058874" blue="0.1764705926" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="SEi-wu-FtK" firstAttribute="trailing" secondItem="2Gz-6b-sHZ" secondAttribute="trailing" constant="16" id="5B9-Iu-qP8"/>
+                            <constraint firstItem="2Gz-6b-sHZ" firstAttribute="leading" secondItem="SEi-wu-FtK" secondAttribute="leading" constant="16" id="71C-ex-ed0"/>
+                            <constraint firstItem="2Gz-6b-sHZ" firstAttribute="centerY" secondItem="SEi-wu-FtK" secondAttribute="centerY" id="nVd-mQ-CEO"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="friendsPhotoImageview" destination="2Gz-6b-sHZ" id="nod-10-yfG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="znS-l5-JsR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="863" y="-1044"/>
+            <point key="canvasLocation" x="670.76923076923072" y="-1044.3127962085307"/>
         </scene>
         <!--Sort Friends Table View Controller-->
         <scene sceneID="L41-Vu-elJ">
             <objects>
                 <tableViewController id="9pY-9x-VgG" customClass="SortFriendsTableViewController" customModule="VKApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="1Tn-36-fks">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="1Tn-36-fks">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.1647058874" green="0.1647058874" blue="0.1764705926" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <color key="separatorColor" red="0.1647058874" green="0.1647058874" blue="0.1764705926" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="sort" rowHeight="60" id="wK1-sZ-V6C" customClass="SortFriendTableViewCell" customModule="VKApp" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="sort" rowHeight="60" id="wK1-sZ-V6C" customClass="SortFriendTableViewCell" customModule="VKApp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="50" width="390" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wK1-sZ-V6C" id="V9u-bY-nDg">
@@ -353,7 +369,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="LEt-EW-7s3"/>
                     <connections>
-                        <segue destination="d9P-3Q-1UT" kind="presentation" modalPresentationStyle="fullScreen" id="eYI-M5-lhe"/>
+                        <segue destination="d9P-3Q-1UT" kind="presentation" identifier="sortAnimate" modalPresentationStyle="fullScreen" id="eYI-M5-lhe"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3NN-Sb-KNs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

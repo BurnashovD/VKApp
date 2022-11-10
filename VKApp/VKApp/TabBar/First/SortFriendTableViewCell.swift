@@ -10,6 +10,8 @@ final class SortFriendTableViewCell: UITableViewCell {
     @IBOutlet private var profileImageView: UIImageView!
     @IBOutlet private var nameLabel: UILabel!
 
+    var usersPhotoNames: [String] = []
+
     // MARK: - Private properties
 
     private lazy var tapImageGestureRecognizer = UITapGestureRecognizer()
@@ -21,9 +23,10 @@ final class SortFriendTableViewCell: UITableViewCell {
         configCell()
     }
 
-    func configure(name: String, image: UIImage) {
+    func configure(name: String, image: UIImage, _ user: [String]) {
         nameLabel.text = name
         profileImageView.image = image
+        usersPhotoNames = user
     }
 
     // MARK: - Private methods

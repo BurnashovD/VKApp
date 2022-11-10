@@ -11,6 +11,7 @@ final class SortFriendsTableViewController: UITableViewController {
     private var sectionsDict = [Character: [String]]()
     private var imagesDict = [Character: [String]]()
     private var sectionTitles = [Character]()
+    private var friendsPhotosNames: [String] = []
 
     // MARK: - LifeCycle
 
@@ -18,6 +19,14 @@ final class SortFriendsTableViewController: UITableViewController {
         super.viewDidLoad()
         createUsers()
         createSections()
+        configUI()
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == Constants.sortAnimatedSegueIdentifier,
+              let sortPhotos = segue.destination as? SortedFriendsPhotosViewController,
+              let photos = sender as? [String] else { return }
+        sortPhotos.getUserPhotos(photos: photos)
     }
 
     // MARK: - Private methods
@@ -89,6 +98,12 @@ final class SortFriendsTableViewController: UITableViewController {
         users.sort(by: { $0.name < $1.name })
     }
 
+    private func configUI() {
+        view.isUserInteractionEnabled = true
+        friendsPhotosNames.append(Constants.elonImageName)
+        friendsPhotosNames.append(Constants.dogImageName)
+    }
+
     private func createSections() {
         for user in users {
             guard let firstLetter = user.surname.first, let image = user.profileImageName.first else { return }
@@ -101,6 +116,16 @@ final class SortFriendsTableViewController: UITableViewController {
             }
         }
         sectionTitles = Array(sectionsDict.keys)
+    }
+
+    private func selectedRowAction() {
+        let selectedRow = tableView.indexPathForSelectedRow
+        guard let selectedRow = selectedRow,
+              let currentCell = tableView.cellForRow(at: selectedRow) as? SortFriendTableViewCell,
+              let image = currentCell.usersPhotoNames.first
+        else { return }
+        friendsPhotosNames.insert(image, at: 0)
+        performSegue(withIdentifier: Constants.sortAnimatedSegueIdentifier, sender: friendsPhotosNames)
     }
 }
 
@@ -123,6 +148,7 @@ extension SortFriendsTableViewController {
         static let steveSurname = "Steve Jobs"
         static let danilSurname = "Danil Zebrov"
         static let pizzaImageName = "pizza"
+        static let sortAnimatedSegueIdentifier = "sortAnimate"
     }
 }
 
@@ -147,8 +173,12 @@ extension SortFriendsTableViewController {
             let image = imagesDict[sectionTitles[indexPath.section]]?[indexPath.row],
             let friendImage = UIImage(named: image)
         else { return UITableViewCell() }
-        cell.configure(name: user, image: friendImage)
+        cell.configure(name: user, image: friendImage, [image])
         return cell
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedRowAction()
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

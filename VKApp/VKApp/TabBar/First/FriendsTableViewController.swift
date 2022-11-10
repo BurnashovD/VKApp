@@ -24,7 +24,8 @@ final class FriendsTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard segue.identifier == Constants.phototSegueIdentifier,
               let photoCollection = segue.destination as? PhotosCollectionViewController,
-              let image = sender as? UIImage else { return }
+              let image = sender as? UIImage
+        else { return }
         photoCollection.getUserPhotoNames(usersImagesNames, profilePhoto: image)
     }
 
