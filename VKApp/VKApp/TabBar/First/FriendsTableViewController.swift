@@ -10,6 +10,7 @@ final class FriendsTableViewController: UITableViewController {
     private let cellTypes: [CellTypes] = [.friends, .recomendations, .nextFriends]
 
     private var users: [User] = []
+    private var usersImagesNames: [String] = []
 
     // MARK: - LifeCycle
 
@@ -24,7 +25,7 @@ final class FriendsTableViewController: UITableViewController {
         guard segue.identifier == Constants.phototSegueIdentifier,
               let photoCollection = segue.destination as? PhotosCollectionViewController,
               let image = sender as? UIImage else { return }
-        photoCollection.image = image
+        photoCollection.getUserPhotoNames(usersImagesNames, profilePhoto: image)
     }
 
     // MARK: - Private methods
@@ -33,52 +34,52 @@ final class FriendsTableViewController: UITableViewController {
         let firstUser = User(
             name: Constants.elonName,
             surname: Constants.elonSurname,
-            profileImageName: Constants.elonImageName
+            profileImageName: [Constants.elonImageName, Constants.secondElonImageName, Constants.pizzaImageName]
         )
         let secondUser = User(
             name: Constants.elonName,
             surname: Constants.elonSurname,
-            profileImageName: Constants.secondElonImageName
+            profileImageName: [Constants.secondElonImageName, Constants.elonImageName, Constants.pizzaImageName]
         )
         let thirdUser = User(
             name: Constants.steveName,
             surname: Constants.steveSurname,
-            profileImageName: Constants.steveImageName
+            profileImageName: [Constants.steveImageName, Constants.pizzaImageName, Constants.dogImageName]
         )
         let fourUser = User(
             name: Constants.elonName,
             surname: Constants.elonSurname,
-            profileImageName: Constants.elonImageName
+            profileImageName: [Constants.elonImageName, Constants.secondElonImageName, Constants.dogImageName]
         )
         let fiveUser = User(
             name: Constants.daniilName,
             surname: Constants.danilSurname,
-            profileImageName: Constants.pizzaImageName
+            profileImageName: [Constants.pizzaImageName, Constants.dogImageName, Constants.secondElonImageName]
         )
         let sixUser = User(
             name: Constants.elonName,
             surname: Constants.elonSurname,
-            profileImageName: Constants.elonImageName
+            profileImageName: [Constants.elonImageName, Constants.secondElonImageName, Constants.pizzaImageName]
         )
         let sevenUser = User(
             name: Constants.steveName,
             surname: Constants.steveSurname,
-            profileImageName: Constants.steveImageName
+            profileImageName: [Constants.steveImageName, Constants.pizzaImageName, Constants.dogImageName]
         )
         let eightUser = User(
             name: Constants.daniilName,
             surname: Constants.danilSurname,
-            profileImageName: Constants.pizzaImageName
+            profileImageName: [Constants.pizzaImageName, Constants.dogImageName, Constants.dogImageName]
         )
         let nineUser = User(
             name: Constants.aleksandrName,
             surname: Constants.aleksandrSurname,
-            profileImageName: Constants.dogImageName
+            profileImageName: [Constants.dogImageName, Constants.pizzaImageName, Constants.pizzaImageName]
         )
         let tenUser = User(
             name: Constants.steveName,
             surname: Constants.steveSurname,
-            profileImageName: Constants.steveImageName
+            profileImageName: [Constants.steveImageName, Constants.pizzaImageName, Constants.dogImageName]
         )
 
         for _ in 0 ... 1 {
@@ -100,6 +101,7 @@ final class FriendsTableViewController: UITableViewController {
         guard let selectedRow = selectedRow,
               let user = tableView.cellForRow(at: selectedRow) as? FriendTableViewCell,
               let image = user.profileImageView.image else { return }
+        usersImagesNames = user.usersImagesNames
         performSegue(withIdentifier: Constants.phototSegueIdentifier, sender: image)
     }
 }

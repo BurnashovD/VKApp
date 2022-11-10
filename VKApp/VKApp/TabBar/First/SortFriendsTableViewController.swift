@@ -26,52 +26,52 @@ final class SortFriendsTableViewController: UITableViewController {
         let firstUser = User(
             name: Constants.elonName,
             surname: Constants.elonSurname,
-            profileImageName: Constants.elonImageName
+            profileImageName: [Constants.elonImageName, Constants.secondElonImageName, Constants.pizzaImageName]
         )
         let secondUser = User(
             name: Constants.elonName,
             surname: Constants.elonSurname,
-            profileImageName: Constants.secondElonImageName
+            profileImageName: [Constants.secondElonImageName, Constants.elonImageName, Constants.pizzaImageName]
         )
         let thirdUser = User(
             name: Constants.steveName,
             surname: Constants.steveSurname,
-            profileImageName: Constants.steveImageName
+            profileImageName: [Constants.steveImageName, Constants.pizzaImageName, Constants.dogImageName]
         )
         let fourUser = User(
             name: Constants.elonName,
             surname: Constants.elonSurname,
-            profileImageName: Constants.elonImageName
+            profileImageName: [Constants.elonImageName, Constants.secondElonImageName, Constants.dogImageName]
         )
         let fiveUser = User(
             name: Constants.daniilName,
             surname: Constants.danilSurname,
-            profileImageName: Constants.pizzaImageName
+            profileImageName: [Constants.pizzaImageName, Constants.dogImageName]
         )
         let sixUser = User(
             name: Constants.elonName,
             surname: Constants.elonSurname,
-            profileImageName: Constants.elonImageName
+            profileImageName: [Constants.elonImageName, Constants.secondElonImageName]
         )
         let sevenUser = User(
             name: Constants.steveName,
             surname: Constants.steveSurname,
-            profileImageName: Constants.steveImageName
+            profileImageName: [Constants.steveImageName, Constants.pizzaImageName, Constants.dogImageName]
         )
         let eightUser = User(
             name: Constants.daniilName,
             surname: Constants.danilSurname,
-            profileImageName: Constants.pizzaImageName
+            profileImageName: [Constants.pizzaImageName, Constants.dogImageName, Constants.dogImageName]
         )
         let nineUser = User(
             name: Constants.aleksandrName,
             surname: Constants.aleksandrSurname,
-            profileImageName: Constants.dogImageName
+            profileImageName: [Constants.dogImageName, Constants.pizzaImageName, Constants.pizzaImageName]
         )
         let tenUser = User(
             name: Constants.steveName,
             surname: Constants.steveSurname,
-            profileImageName: Constants.steveImageName
+            profileImageName: [Constants.steveImageName, Constants.pizzaImageName, Constants.dogImageName]
         )
 
         for _ in 0 ... 1 {
@@ -91,13 +91,13 @@ final class SortFriendsTableViewController: UITableViewController {
 
     private func createSections() {
         for user in users {
-            guard let firstLetter = user.surname.first else { return }
+            guard let firstLetter = user.surname.first, let image = user.profileImageName.first else { return }
             if sectionsDict[firstLetter] != nil {
                 sectionsDict[firstLetter]?.append(user.surname)
-                imagesDict[firstLetter]?.append(user.profileImageName)
+                imagesDict[firstLetter]?.append(image)
             } else {
                 sectionsDict[firstLetter] = [user.surname]
-                imagesDict[firstLetter] = [user.profileImageName]
+                imagesDict[firstLetter] = [image]
             }
         }
         sectionTitles = Array(sectionsDict.keys)

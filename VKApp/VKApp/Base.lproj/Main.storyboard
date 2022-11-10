@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NWn-8C-MxA">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
@@ -244,6 +244,21 @@
             </objects>
             <point key="canvasLocation" x="968" y="-1"/>
         </scene>
+        <!--Sorted Friends Photos View Controller-->
+        <scene sceneID="ZMx-Nh-cYf">
+            <objects>
+                <viewController id="d9P-3Q-1UT" customClass="SortedFriendsPhotosViewController" customModule="VKApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jll-ii-kN2">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="SEi-wu-FtK"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="znS-l5-JsR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="863" y="-1044"/>
+        </scene>
         <!--Sort Friends Table View Controller-->
         <scene sceneID="L41-Vu-elJ">
             <objects>
@@ -337,10 +352,85 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="LEt-EW-7s3"/>
+                    <connections>
+                        <segue destination="d9P-3Q-1UT" kind="presentation" modalPresentationStyle="fullScreen" id="eYI-M5-lhe"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3NN-Sb-KNs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2583" y="-1043"/>
+        </scene>
+        <!--Friends Photos View Controller-->
+        <scene sceneID="aML-V8-AAW">
+            <objects>
+                <viewController id="ek4-p7-cs2" customClass="FriendsPhotosViewController" customModule="VKApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Aa0-kP-Eo4">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p6x-x9-yxb">
+                                <rect key="frame" x="0.0" y="271" width="390" height="302"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BBG-Lk-q0c">
+                                        <rect key="frame" x="8" y="8" width="374" height="284"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="284" id="3bY-g4-pJW"/>
+                                            <constraint firstAttribute="width" constant="374" id="LYt-Vg-Ejs"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WPN-u7-1Ye">
+                                        <rect key="frame" x="788" y="8" width="374" height="284"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="374" id="Vmz-9K-dgB"/>
+                                            <constraint firstAttribute="height" constant="284" id="sVt-xv-UJd"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6CC-Yt-IJC">
+                                        <rect key="frame" x="399" y="9" width="374" height="284"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="374" id="KXL-1t-V6d"/>
+                                            <constraint firstAttribute="height" constant="284" id="n2j-Jf-Pa2"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="6CC-Yt-IJC" firstAttribute="centerY" secondItem="WPN-u7-1Ye" secondAttribute="centerY" constant="1" id="1C9-1c-VY3"/>
+                                    <constraint firstItem="WPN-u7-1Ye" firstAttribute="leading" secondItem="6CC-Yt-IJC" secondAttribute="trailing" constant="15" id="5ZB-Ad-8bD"/>
+                                    <constraint firstAttribute="trailing" secondItem="WPN-u7-1Ye" secondAttribute="trailing" constant="8" id="EYf-Ha-E0B"/>
+                                    <constraint firstItem="BBG-Lk-q0c" firstAttribute="leading" secondItem="p6x-x9-yxb" secondAttribute="leading" constant="8" id="e0g-yv-tKI"/>
+                                    <constraint firstItem="WPN-u7-1Ye" firstAttribute="top" secondItem="p6x-x9-yxb" secondAttribute="top" constant="8" id="e1H-Py-n2k"/>
+                                    <constraint firstAttribute="bottom" secondItem="BBG-Lk-q0c" secondAttribute="bottom" constant="10" id="eM8-AV-4l9"/>
+                                    <constraint firstAttribute="bottom" secondItem="6CC-Yt-IJC" secondAttribute="bottom" constant="9" id="eV2-mR-04R"/>
+                                    <constraint firstItem="6CC-Yt-IJC" firstAttribute="leading" secondItem="BBG-Lk-q0c" secondAttribute="trailing" constant="17" id="f8z-wj-pba"/>
+                                    <constraint firstItem="BBG-Lk-q0c" firstAttribute="top" secondItem="p6x-x9-yxb" secondAttribute="top" constant="8" id="hCt-fZ-eZe"/>
+                                    <constraint firstAttribute="bottom" secondItem="WPN-u7-1Ye" secondAttribute="bottom" constant="10" id="iYJ-rM-zDN"/>
+                                    <constraint firstItem="BBG-Lk-q0c" firstAttribute="centerY" secondItem="6CC-Yt-IJC" secondAttribute="centerY" constant="-1" id="lXA-Gh-EBV"/>
+                                    <constraint firstItem="6CC-Yt-IJC" firstAttribute="top" secondItem="p6x-x9-yxb" secondAttribute="top" constant="9" id="nfD-8Z-lhV"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="ek4-p7-cs2" id="kao-gR-od7"/>
+                                </connections>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="937-lS-ew5"/>
+                        <color key="backgroundColor" red="0.1647058874" green="0.1647058874" blue="0.1764705926" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="p6x-x9-yxb" firstAttribute="leading" secondItem="937-lS-ew5" secondAttribute="leading" id="3bF-eA-bEu"/>
+                            <constraint firstItem="p6x-x9-yxb" firstAttribute="trailing" secondItem="937-lS-ew5" secondAttribute="trailing" id="Vex-0i-iyv"/>
+                            <constraint firstItem="937-lS-ew5" firstAttribute="bottom" secondItem="p6x-x9-yxb" secondAttribute="bottom" constant="237" id="aEi-uy-7nO"/>
+                            <constraint firstItem="p6x-x9-yxb" firstAttribute="top" secondItem="937-lS-ew5" secondAttribute="top" constant="224" id="t3x-Fa-gth"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="firstImageView" destination="BBG-Lk-q0c" id="vgG-DJ-xqm"/>
+                        <outlet property="photosScrollView" destination="p6x-x9-yxb" id="Fby-e6-3vm"/>
+                        <outlet property="secondImageView" destination="WPN-u7-1Ye" id="klq-DK-zc1"/>
+                        <outlet property="thirdImageView" destination="6CC-Yt-IJC" id="bu1-LH-fGz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="K2x-G8-BuS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3904.6153846153843" y="-1044.3127962085307"/>
         </scene>
         <!--Друзья-->
         <scene sceneID="DeJ-IE-Zyw">
@@ -1063,6 +1153,9 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="Photos" id="2MA-Kb-HbV"/>
+                    <connections>
+                        <segue destination="ek4-p7-cs2" kind="presentation" identifier="photoAnimation" modalPresentationStyle="fullScreen" id="h3U-Kj-xfu"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xeK-9b-11k" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

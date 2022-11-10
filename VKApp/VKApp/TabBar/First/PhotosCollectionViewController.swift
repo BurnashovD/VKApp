@@ -5,15 +5,31 @@ import UIKit
 
 /// Экран фотографий пользователя
 final class PhotosCollectionViewController: UICollectionViewController {
-    // MARK: - Public properties
+    // MARK: - Private properties
 
-    var image = UIImage()
+    private var image = UIImage()
+    private var userPhotosNames: [String] = []
+
+    // MARK: - Public methods
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == Constants.phototAnimationSegueIdentifier,
+              let photoCollection = segue.destination as? FriendsPhotosViewController,
+              let images = sender as? [String] else { return }
+        photoCollection.getUsersPhotoNames(images)
+    }
+
+    func getUserPhotoNames(_ photosNames: [String], profilePhoto: UIImage) {
+        image = profilePhoto
+        userPhotosNames = photosNames
+    }
 }
 
 /// Constants
 extension PhotosCollectionViewController {
     enum Constants {
         static let photosCellIdentifier = "photos"
+        static let phototAnimationSegueIdentifier = "photoAnimation"
     }
 }
 
@@ -39,5 +55,9 @@ extension PhotosCollectionViewController {
         cell.configure(image)
         cell.animatePhotosCellsAction()
         return cell
+    }
+
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: Constants.phototAnimationSegueIdentifier, sender: userPhotosNames)
     }
 }

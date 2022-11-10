@@ -18,7 +18,8 @@ final class RecomendationsTableViewCell: UITableViewCell {
     }
 
     func configure(_ user: User?) {
-        guard let image = user?.profileImageName, let name = user?.name, let surname = user?.surname else { return }
+        guard let image = user?.profileImageName.first, let name = user?.name,
+              let surname = user?.surname else { return }
         profileImageView.image = UIImage(named: image)
         nameLabel.text = "\(name) \(surname)"
     }
