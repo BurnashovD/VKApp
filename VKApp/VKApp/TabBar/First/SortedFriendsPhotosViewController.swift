@@ -6,7 +6,7 @@ import UIKit
 final class SortedFriendsPhotosViewController: UIViewController {
     // MARK: - IBOutlets
 
-    @IBOutlet var friendsPhotoImageview: UIImageView!
+    @IBOutlet private var friendsPhotoImageview: UIImageView!
 
     // MARK: - Private properties
 
