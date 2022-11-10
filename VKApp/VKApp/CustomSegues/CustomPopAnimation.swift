@@ -1,14 +1,14 @@
-// CustomPushAnimation.swift
+// CustomPopAnimation.swift
 // Copyright © RoadMap. All rights reserved.
 
 import UIKit
 
-/// Кастомный push
-final class CustomPushAnimation: NSObject {}
+/// Кастомный pop
+final class CustomPopAnimation: NSObject {}
 
 // MARK: - UIViewControllerAnimatedTransitioning
 
-extension CustomPushAnimation: UIViewControllerAnimatedTransitioning {
+extension CustomPopAnimation: UIViewControllerAnimatedTransitioning {
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         0.7
     }
@@ -17,14 +17,14 @@ extension CustomPushAnimation: UIViewControllerAnimatedTransitioning {
         guard let source = transitionContext.viewController(forKey: .from),
               let destination = transitionContext.viewController(forKey: .to) else { return }
 
-        transitionContext.containerView.addSubview(destination.view)
+        transitionContext.containerView.insertSubview(destination.view, at: 0)
         destination.view.frame = source.view.frame
 
         let translate = CGAffineTransform(
-            translationX: 200,
-            y: source.view.frame.width * 1.5
+            translationX: source.view.frame.width / 50,
+            y: 0
         )
-        let rotate = CGAffineTransform(rotationAngle: .pi / -2)
+        let rotate = CGAffineTransform(scaleX: 0.8, y: 0.8)
         destination.view.transform = translate.concatenating(rotate)
 
         UIView.animateKeyframes(
@@ -37,7 +37,7 @@ extension CustomPushAnimation: UIViewControllerAnimatedTransitioning {
                     relativeDuration: 0.75
                 ) {
                     let translation = CGAffineTransform(translationX: 0, y: 0)
-                    let scale = CGAffineTransform(scaleX: 0.8, y: 0.8)
+                    let scale = CGAffineTransform(scaleX: 1, y: 1)
                     source.view.transform = translation.concatenating(scale)
                 }
 
@@ -45,9 +45,9 @@ extension CustomPushAnimation: UIViewControllerAnimatedTransitioning {
                     withRelativeStartTime: 0.2,
                     relativeDuration: 0.4
                 ) {
-                    let translation = CGAffineTransform(translationX: source.view.frame.width / 50, y: 0)
-                    let scale = CGAffineTransform(scaleX: 1, y: 1)
-                    destination.view.transform = translation.concatenating(scale)
+                    let translation = CGAffineTransform(translationX: 200, y: source.view.frame.width * 1.5)
+                    let scale = CGAffineTransform(rotationAngle: .pi / -2)
+                    source.view.transform = translation.concatenating(scale)
                 }
 
                 UIView.addKeyframe(
@@ -58,7 +58,9 @@ extension CustomPushAnimation: UIViewControllerAnimatedTransitioning {
                 }
             }, completion: { finished in
                 if finished, !transitionContext.transitionWasCancelled {
-                    source.view.transform = .identity
+                    source.removeFromParent()
+                    destination.view.transform = .identity
+                    transitionContext.completeTransition(true)
                 }
                 transitionContext.completeTransition(finished && !transitionContext.transitionWasCancelled)
             }

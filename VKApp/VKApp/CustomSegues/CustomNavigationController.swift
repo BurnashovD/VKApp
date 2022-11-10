@@ -25,8 +25,8 @@ extension CustomNavigationController: UINavigationControllerDelegate {
         switch operation {
         case .push:
             return CustomPushAnimation()
-//        case .pop:
-//            return nil
+        case .pop:
+            return CustomPopAnimation()
         default:
             return nil
         }
