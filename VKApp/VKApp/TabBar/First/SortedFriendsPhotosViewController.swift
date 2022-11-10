@@ -3,6 +3,7 @@
 
 import UIKit
 
+/// Показ фото
 final class SortedFriendsPhotosViewController: UIViewController {
     // MARK: - IBOutlets
 
@@ -45,7 +46,7 @@ final class SortedFriendsPhotosViewController: UIViewController {
         view.addGestureRecognizer(dismissGesture)
     }
 
-    private func swipeRight(gesture: UIPanGestureRecognizer) {
+    private func swipeRightAction(gesture: UIPanGestureRecognizer) {
         guard index != 2 else { return }
         switch gesture.state {
         case .began:
@@ -53,7 +54,7 @@ final class SortedFriendsPhotosViewController: UIViewController {
                 self.friendsPhotoImageview.transform = CGAffineTransform(
                     translationX: -300,
                     y: 0
-                )
+                ).concatenating(CGAffineTransform(scaleX: 0.8, y: 0.8))
             }
         case .changed:
             let translation = gesture.translation(in: view)
@@ -64,10 +65,10 @@ final class SortedFriendsPhotosViewController: UIViewController {
         case .ended:
             index += 1
             UIView.animateKeyframes(withDuration: 2, delay: 0) {
-                UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 1) {
+                UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.5) {
                     self.friendsPhotoImageview.transform = .init(translationX: 300, y: 0)
                 }
-                UIView.addKeyframe(withRelativeStartTime: 0.12, relativeDuration: 0.3) {
+                UIView.addKeyframe(withRelativeStartTime: 0.1, relativeDuration: 0.3) {
                     self.friendsPhotoImageview.alpha = 1
                     self.friendsPhotoImageview.transform = .init(translationX: 0, y: 0)
                 }
@@ -77,7 +78,7 @@ final class SortedFriendsPhotosViewController: UIViewController {
         }
     }
 
-    private func swipeLeft(gesture: UIPanGestureRecognizer) {
+    private func swipeLeftAction(gesture: UIPanGestureRecognizer) {
         guard index != 0 else { return }
         switch gesture.state {
         case .began:
@@ -85,7 +86,7 @@ final class SortedFriendsPhotosViewController: UIViewController {
                 self.friendsPhotoImageview.transform = CGAffineTransform(
                     translationX: 300,
                     y: 0
-                )
+                ).concatenating(CGAffineTransform(scaleX: 0.8, y: 0.8))
             }
         case .changed:
             let translation = gesture.translation(in: view)
@@ -96,10 +97,10 @@ final class SortedFriendsPhotosViewController: UIViewController {
         case .ended:
             index -= 1
             UIView.animateKeyframes(withDuration: 2, delay: 0) {
-                UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 1) {
+                UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.5) {
                     self.friendsPhotoImageview.transform = .init(translationX: -300, y: 0)
                 }
-                UIView.addKeyframe(withRelativeStartTime: 0.12, relativeDuration: 0.3) {
+                UIView.addKeyframe(withRelativeStartTime: 0.1, relativeDuration: 0.3) {
                     self.friendsPhotoImageview.alpha = 1
                     self.friendsPhotoImageview.transform = .init(translationX: 0, y: 0)
                 }
@@ -111,9 +112,9 @@ final class SortedFriendsPhotosViewController: UIViewController {
 
     @objc func swipeAction(gesture: UIPanGestureRecognizer) {
         if gesture.translation(in: view).x < 0 {
-            swipeRight(gesture: gesture)
+            swipeRightAction(gesture: gesture)
         } else {
-            swipeLeft(gesture: gesture)
+            swipeLeftAction(gesture: gesture)
         }
         friendsPhotoImageview.image = UIImage(named: usersPhotosNames[index])
     }

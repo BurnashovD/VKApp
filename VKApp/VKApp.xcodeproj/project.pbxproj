@@ -44,6 +44,8 @@
 		A5F3D6712911C961004EB22A /* UserGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F3D6702911C961004EB22A /* UserGroupsTableViewController.swift */; };
 		A5F3D6732911C97B004EB22A /* GlobalSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F3D6722911C97B004EB22A /* GlobalSearchTableViewController.swift */; };
 		A5FA31AB291C7C53008CE86C /* SortedFriendsPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FA31AA291C7C53008CE86C /* SortedFriendsPhotosViewController.swift */; };
+		A5FA31B3291D83D6008CE86C /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FA31B2291D83D6008CE86C /* CustomNavigationController.swift */; };
+		A5FA31B5291D8566008CE86C /* CustomPushAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FA31B4291D8566008CE86C /* CustomPushAnimation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +107,8 @@
 		A5F3D6702911C961004EB22A /* UserGroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupsTableViewController.swift; sourceTree = "<group>"; };
 		A5F3D6722911C97B004EB22A /* GlobalSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalSearchTableViewController.swift; sourceTree = "<group>"; };
 		A5FA31AA291C7C53008CE86C /* SortedFriendsPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortedFriendsPhotosViewController.swift; sourceTree = "<group>"; };
+		A5FA31B2291D83D6008CE86C /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomNavigationController.swift; path = VKApp/CustomSegues/CustomNavigationController.swift; sourceTree = SOURCE_ROOT; };
+		A5FA31B4291D8566008CE86C /* CustomPushAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPushAnimation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,8 +187,8 @@
 				A5F3D66D2911C8F0004EB22A /* TabBar */,
 				A5F3D66C2911C8DC004EB22A /* LogIn */,
 				A50F15502919A3B60029C985 /* Models */,
-				A5056EA529129E4E0073D407 /* UIViewController+Extension.swift */,
-				A5B2213E29185896005363EE /* UITableViewController+Extension.swift */,
+				A5FA31B0291D8269008CE86C /* CustomSegues */,
+				A5FA31B1291D82BE008CE86C /* Extensions */,
 				A516BC3529104307008802FC /* Main.storyboard */,
 				A516BC3A29104308008802FC /* LaunchScreen.storyboard */,
 				A516BC9D29108929008802FC /* Assets.xcassets */,
@@ -257,6 +261,24 @@
 				A50F154F2919A36D0029C985 /* Thrird */,
 			);
 			path = TabBar;
+			sourceTree = "<group>";
+		};
+		A5FA31B0291D8269008CE86C /* CustomSegues */ = {
+			isa = PBXGroup;
+			children = (
+				A5FA31B2291D83D6008CE86C /* CustomNavigationController.swift */,
+				A5FA31B4291D8566008CE86C /* CustomPushAnimation.swift */,
+			);
+			path = CustomSegues;
+			sourceTree = "<group>";
+		};
+		A5FA31B1291D82BE008CE86C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A5B2213E29185896005363EE /* UITableViewController+Extension.swift */,
+				A5056EA529129E4E0073D407 /* UIViewController+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -434,6 +456,7 @@
 				A516BC3429104307008802FC /* LogInViewController.swift in Sources */,
 				A5F3D66B2911C8C6004EB22A /* FriendsTableViewController.swift in Sources */,
 				A516BC3029104307008802FC /* AppDelegate.swift in Sources */,
+				A5FA31B5291D8566008CE86C /* CustomPushAnimation.swift in Sources */,
 				A5F3D66F2911C926004EB22A /* PhotosCollectionViewController.swift in Sources */,
 				A5B2212D29130874005363EE /* PhotosCollectionViewCell.swift in Sources */,
 				A5B2213B291475B2005363EE /* LikesControl.swift in Sources */,
@@ -451,6 +474,7 @@
 				A5056EA629129E4E0073D407 /* UIViewController+Extension.swift in Sources */,
 				A57B1DF72919E64E004A5A9A /* SortFriendsTableViewController.swift in Sources */,
 				A5F3D6712911C961004EB22A /* UserGroupsTableViewController.swift in Sources */,
+				A5FA31B3291D83D6008CE86C /* CustomNavigationController.swift in Sources */,
 				A5B2213F29185896005363EE /* UITableViewController+Extension.swift in Sources */,
 				A50F15562919A5810029C985 /* Posts.swift in Sources */,
 				A507CFF3291AE50A00076C3A /* LoadingDotsView.swift in Sources */,

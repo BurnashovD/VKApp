@@ -3,7 +3,7 @@
 
 import UIKit
 
-/// Просмотр фото
+/// Показ фото
 final class FriendsPhotosViewController: UIViewController {
     // MARK: - IBOutlets
 

@@ -783,7 +783,7 @@
         <!--Main-->
         <scene sceneID="oN3-U4-U4N">
             <objects>
-                <navigationController id="qqt-Io-QQw" sceneMemberID="viewController">
+                <navigationController id="qqt-Io-QQw" customClass="CustomNavigationController" customModule="VKApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Main" id="pAF-1r-6ht">
                         <imageReference key="image" image="house" catalog="system" renderingMode="hierarchical-single">
                             <hierarchicalColors>
@@ -1087,7 +1087,7 @@
         <!--My Groups-->
         <scene sceneID="g4w-nw-K8y">
             <objects>
-                <navigationController id="HnT-IB-eyT" sceneMemberID="viewController">
+                <navigationController id="HnT-IB-eyT" customClass="CustomNavigationController" customModule="VKApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="My Groups" id="5x8-Yt-NOY">
                         <imageReference key="image" image="person.2.wave.2" catalog="system" renderingMode="hierarchical-single">
                             <hierarchicalColors>
@@ -1180,7 +1180,7 @@
         <!--My friends-->
         <scene sceneID="aHm-dm-v1M">
             <objects>
-                <navigationController id="Pwp-Ii-VBw" sceneMemberID="viewController">
+                <navigationController id="Pwp-Ii-VBw" customClass="CustomNavigationController" customModule="VKApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="My friends" id="SuZ-vq-cOE">
                         <imageReference key="image" image="person.fill" catalog="system" renderingMode="hierarchical-single">
                             <hierarchicalColors>
