@@ -44,6 +44,7 @@
 		A5F3D6712911C961004EB22A /* UserGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F3D6702911C961004EB22A /* UserGroupsTableViewController.swift */; };
 		A5F3D6732911C97B004EB22A /* GlobalSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F3D6722911C97B004EB22A /* GlobalSearchTableViewController.swift */; };
 		A5F7D37E291D9A1C00FD3A10 /* CustomPopAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F7D37D291D9A1C00FD3A10 /* CustomPopAnimation.swift */; };
+		A5F7D380291DA29000FD3A10 /* CustomInteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F7D37F291DA29000FD3A10 /* CustomInteractiveTransition.swift */; };
 		A5FA31AB291C7C53008CE86C /* SortedFriendsPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FA31AA291C7C53008CE86C /* SortedFriendsPhotosViewController.swift */; };
 		A5FA31B3291D83D6008CE86C /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FA31B2291D83D6008CE86C /* CustomNavigationController.swift */; };
 		A5FA31B5291D8566008CE86C /* CustomPushAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FA31B4291D8566008CE86C /* CustomPushAnimation.swift */; };
@@ -108,6 +109,7 @@
 		A5F3D6702911C961004EB22A /* UserGroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupsTableViewController.swift; sourceTree = "<group>"; };
 		A5F3D6722911C97B004EB22A /* GlobalSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalSearchTableViewController.swift; sourceTree = "<group>"; };
 		A5F7D37D291D9A1C00FD3A10 /* CustomPopAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopAnimation.swift; sourceTree = "<group>"; };
+		A5F7D37F291DA29000FD3A10 /* CustomInteractiveTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInteractiveTransition.swift; sourceTree = "<group>"; };
 		A5FA31AA291C7C53008CE86C /* SortedFriendsPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortedFriendsPhotosViewController.swift; sourceTree = "<group>"; };
 		A5FA31B2291D83D6008CE86C /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomNavigationController.swift; path = VKApp/CustomSegues/CustomNavigationController.swift; sourceTree = SOURCE_ROOT; };
 		A5FA31B4291D8566008CE86C /* CustomPushAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPushAnimation.swift; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 				A5FA31B2291D83D6008CE86C /* CustomNavigationController.swift */,
 				A5FA31B4291D8566008CE86C /* CustomPushAnimation.swift */,
 				A5F7D37D291D9A1C00FD3A10 /* CustomPopAnimation.swift */,
+				A5F7D37F291DA29000FD3A10 /* CustomInteractiveTransition.swift */,
 			);
 			path = CustomSegues;
 			sourceTree = "<group>";
@@ -479,6 +482,7 @@
 				A5F3D6712911C961004EB22A /* UserGroupsTableViewController.swift in Sources */,
 				A5F7D37E291D9A1C00FD3A10 /* CustomPopAnimation.swift in Sources */,
 				A5FA31B3291D83D6008CE86C /* CustomNavigationController.swift in Sources */,
+				A5F7D380291DA29000FD3A10 /* CustomInteractiveTransition.swift in Sources */,
 				A5B2213F29185896005363EE /* UITableViewController+Extension.swift in Sources */,
 				A50F15562919A5810029C985 /* Posts.swift in Sources */,
 				A507CFF3291AE50A00076C3A /* LoadingDotsView.swift in Sources */,
