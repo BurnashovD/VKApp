@@ -10,6 +10,8 @@ final class FriendTableViewCell: UITableViewCell {
     @IBOutlet var profileImageView: UIImageView!
     @IBOutlet private var nameLabel: UILabel!
 
+    var usersImagesNames: [String] = []
+
     // MARK: - Public methods
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -18,7 +20,10 @@ final class FriendTableViewCell: UITableViewCell {
     }
 
     func configure(_ user: User?) {
-        guard let name = user?.name, let surname = user?.surname, let image = user?.profileImageName else { return }
+        guard let name = user?.name, let surname = user?.surname,
+              let image = user?.profileImageName.first,
+              let photos = user?.profileImageName else { return }
+        usersImagesNames = photos
         profileImageView.image = UIImage(named: image)
         nameLabel.text = "\(name) \(surname)"
     }

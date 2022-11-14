@@ -11,6 +11,7 @@ final class SortFriendsTableViewController: UITableViewController {
     private var sectionsDict = [Character: [String]]()
     private var imagesDict = [Character: [String]]()
     private var sectionTitles = [Character]()
+    private var friendsPhotosNames: [String] = []
 
     // MARK: - LifeCycle
 
@@ -18,6 +19,14 @@ final class SortFriendsTableViewController: UITableViewController {
         super.viewDidLoad()
         createUsers()
         createSections()
+        configUI()
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == Constants.sortAnimatedSegueIdentifier,
+              let sortPhotos = segue.destination as? SortedFriendsPhotosViewController,
+              let photos = sender as? [String] else { return }
+        sortPhotos.getUserPhotos(photos: photos)
     }
 
     // MARK: - Private methods
@@ -26,52 +35,52 @@ final class SortFriendsTableViewController: UITableViewController {
         let firstUser = User(
             name: Constants.elonName,
             surname: Constants.elonSurname,
-            profileImageName: Constants.elonImageName
+            profileImageName: [Constants.elonImageName, Constants.secondElonImageName, Constants.pizzaImageName]
         )
         let secondUser = User(
             name: Constants.elonName,
             surname: Constants.elonSurname,
-            profileImageName: Constants.secondElonImageName
+            profileImageName: [Constants.secondElonImageName, Constants.elonImageName, Constants.pizzaImageName]
         )
         let thirdUser = User(
             name: Constants.steveName,
             surname: Constants.steveSurname,
-            profileImageName: Constants.steveImageName
+            profileImageName: [Constants.steveImageName, Constants.pizzaImageName, Constants.dogImageName]
         )
         let fourUser = User(
             name: Constants.elonName,
             surname: Constants.elonSurname,
-            profileImageName: Constants.elonImageName
+            profileImageName: [Constants.elonImageName, Constants.secondElonImageName, Constants.dogImageName]
         )
         let fiveUser = User(
             name: Constants.daniilName,
             surname: Constants.danilSurname,
-            profileImageName: Constants.pizzaImageName
+            profileImageName: [Constants.pizzaImageName, Constants.dogImageName]
         )
         let sixUser = User(
             name: Constants.elonName,
             surname: Constants.elonSurname,
-            profileImageName: Constants.elonImageName
+            profileImageName: [Constants.elonImageName, Constants.secondElonImageName]
         )
         let sevenUser = User(
             name: Constants.steveName,
             surname: Constants.steveSurname,
-            profileImageName: Constants.steveImageName
+            profileImageName: [Constants.steveImageName, Constants.pizzaImageName, Constants.dogImageName]
         )
         let eightUser = User(
             name: Constants.daniilName,
             surname: Constants.danilSurname,
-            profileImageName: Constants.pizzaImageName
+            profileImageName: [Constants.pizzaImageName, Constants.dogImageName, Constants.dogImageName]
         )
         let nineUser = User(
             name: Constants.aleksandrName,
             surname: Constants.aleksandrSurname,
-            profileImageName: Constants.dogImageName
+            profileImageName: [Constants.dogImageName, Constants.pizzaImageName, Constants.pizzaImageName]
         )
         let tenUser = User(
             name: Constants.steveName,
             surname: Constants.steveSurname,
-            profileImageName: Constants.steveImageName
+            profileImageName: [Constants.steveImageName, Constants.pizzaImageName, Constants.dogImageName]
         )
 
         for _ in 0 ... 1 {
@@ -89,18 +98,34 @@ final class SortFriendsTableViewController: UITableViewController {
         users.sort(by: { $0.name < $1.name })
     }
 
+    private func configUI() {
+        view.isUserInteractionEnabled = true
+        friendsPhotosNames.append(Constants.elonImageName)
+        friendsPhotosNames.append(Constants.dogImageName)
+    }
+
     private func createSections() {
         for user in users {
-            guard let firstLetter = user.surname.first else { return }
+            guard let firstLetter = user.surname.first, let image = user.profileImageName.first else { return }
             if sectionsDict[firstLetter] != nil {
                 sectionsDict[firstLetter]?.append(user.surname)
-                imagesDict[firstLetter]?.append(user.profileImageName)
+                imagesDict[firstLetter]?.append(image)
             } else {
                 sectionsDict[firstLetter] = [user.surname]
-                imagesDict[firstLetter] = [user.profileImageName]
+                imagesDict[firstLetter] = [image]
             }
         }
         sectionTitles = Array(sectionsDict.keys)
+    }
+
+    private func selectedRowAction() {
+        let selectedRow = tableView.indexPathForSelectedRow
+        guard let selectedRow = selectedRow,
+              let currentCell = tableView.cellForRow(at: selectedRow) as? SortFriendTableViewCell,
+              let image = currentCell.usersPhotoNames.first
+        else { return }
+        friendsPhotosNames.insert(image, at: 0)
+        performSegue(withIdentifier: Constants.sortAnimatedSegueIdentifier, sender: friendsPhotosNames)
     }
 }
 
@@ -123,6 +148,7 @@ extension SortFriendsTableViewController {
         static let steveSurname = "Steve Jobs"
         static let danilSurname = "Danil Zebrov"
         static let pizzaImageName = "pizza"
+        static let sortAnimatedSegueIdentifier = "sortAnimate"
     }
 }
 
@@ -147,8 +173,12 @@ extension SortFriendsTableViewController {
             let image = imagesDict[sectionTitles[indexPath.section]]?[indexPath.row],
             let friendImage = UIImage(named: image)
         else { return UITableViewCell() }
-        cell.configure(name: user, image: friendImage)
+        cell.configure(name: user, image: friendImage, [image])
         return cell
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedRowAction()
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
