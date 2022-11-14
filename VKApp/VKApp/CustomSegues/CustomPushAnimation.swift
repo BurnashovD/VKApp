@@ -4,29 +4,14 @@
 import UIKit
 
 /// Кастомный push
-final class CustomPushAnimation: NSObject {}
+final class CustomPushAnimation: NSObject {
+    // MARK: - Private methods
 
-// MARK: - UIViewControllerAnimatedTransitioning
-
-extension CustomPushAnimation: UIViewControllerAnimatedTransitioning {
-    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        0.7
-    }
-
-    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        guard let source = transitionContext.viewController(forKey: .from),
-              let destination = transitionContext.viewController(forKey: .to) else { return }
-
-        transitionContext.containerView.addSubview(destination.view)
-        destination.view.frame = source.view.frame
-
-        let translate = CGAffineTransform(
-            translationX: 200,
-            y: source.view.frame.width * 1.5
-        )
-        let rotate = CGAffineTransform(rotationAngle: .pi / -2)
-        destination.view.transform = translate.concatenating(rotate)
-
+    private func pushAnimation(
+        transitionContext: UIViewControllerContextTransitioning,
+        source: UIViewController,
+        destination: UIViewController
+    ) {
         UIView.animateKeyframes(
             withDuration: transitionDuration(using: transitionContext),
             delay: 0,
@@ -45,7 +30,10 @@ extension CustomPushAnimation: UIViewControllerAnimatedTransitioning {
                     withRelativeStartTime: 0.2,
                     relativeDuration: 0.4
                 ) {
-                    let translation = CGAffineTransform(translationX: source.view.frame.width / 50, y: 0)
+                    let translation = CGAffineTransform(
+                        translationX: source.view.frame.width / Constants.moveViewInXNumber,
+                        y: 0
+                    )
                     let scale = CGAffineTransform(scaleX: 1, y: 1)
                     destination.view.transform = translation.concatenating(scale)
                 }
@@ -63,5 +51,37 @@ extension CustomPushAnimation: UIViewControllerAnimatedTransitioning {
                 transitionContext.completeTransition(finished && !transitionContext.transitionWasCancelled)
             }
         )
+    }
+}
+
+extension CustomPushAnimation {
+    enum Constants {
+        static let moveViewInXNumber: CGFloat = 50
+        static let viewBaseTranslationNumber: CGFloat = 200
+        static let rightAngleNumber: CGFloat = -2
+    }
+}
+
+// MARK: - UIViewControllerAnimatedTransitioning
+
+extension CustomPushAnimation: UIViewControllerAnimatedTransitioning {
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+        0.7
+    }
+
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        guard let source = transitionContext.viewController(forKey: .from),
+              let destination = transitionContext.viewController(forKey: .to) else { return }
+
+        transitionContext.containerView.addSubview(destination.view)
+        destination.view.frame = source.view.frame
+
+        let translate = CGAffineTransform(
+            translationX: Constants.viewBaseTranslationNumber,
+            y: source.view.frame.width * 1.5
+        )
+        let rotate = CGAffineTransform(rotationAngle: .pi / Constants.rightAngleNumber)
+        destination.view.transform = translate.concatenating(rotate)
+        pushAnimation(transitionContext: transitionContext, source: source, destination: destination)
     }
 }

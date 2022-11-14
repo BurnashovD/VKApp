@@ -3,7 +3,7 @@
 
 import UIKit
 
-/// Показ фото
+/// Показ фото на Скролл вью
 final class FriendsPhotosViewController: UIViewController {
     // MARK: - IBOutlets
 
@@ -14,7 +14,7 @@ final class FriendsPhotosViewController: UIViewController {
 
     // MARK: - Private properties
 
-    private var userPhotosNames: [String?] = []
+    private var userPhotosNames: [String]? = []
 
     // MARK: - LifeCycle
 
@@ -33,8 +33,9 @@ final class FriendsPhotosViewController: UIViewController {
     // MARK: - Private methods
 
     private func setImages() {
-        guard let firstImage = userPhotosNames[0], let secondImage = userPhotosNames[1],
-              let thirdImage = userPhotosNames[2] else { return }
+        guard let firstImage = userPhotosNames?[0],
+              let secondImage = userPhotosNames?[1],
+              let thirdImage = userPhotosNames?[2] else { return }
         firstImageView.image = UIImage(named: firstImage)
         secondImageView.image = UIImage(named: secondImage)
         thirdImageView.image = UIImage(named: thirdImage)
@@ -48,9 +49,16 @@ final class FriendsPhotosViewController: UIViewController {
 
     @objc private func dismissAction(gesture: UIPanGestureRecognizer) {
         let velocity = gesture.velocity(in: view)
-        let swipe = velocity.y > 500
+        let swipe = velocity.y > Constants.swipeVelocityNymber
         guard swipe else { return }
         dismiss(animated: true)
+    }
+}
+
+/// Constants
+extension FriendsPhotosViewController {
+    enum Constants {
+        static let swipeVelocityNymber: CGFloat = 500
     }
 }
 

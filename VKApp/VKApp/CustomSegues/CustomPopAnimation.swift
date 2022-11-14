@@ -4,7 +4,66 @@
 import UIKit
 
 /// Кастомный pop
-final class CustomPopAnimation: NSObject {}
+final class CustomPopAnimation: NSObject {
+    // MARK: - Private methods
+
+    private func popAnimation(
+        transitionContext: UIViewControllerContextTransitioning,
+        source: UIViewController,
+        destination: UIViewController
+    ) {
+        UIView.animateKeyframes(
+            withDuration: transitionDuration(using: transitionContext),
+            delay: 0,
+            options: .calculationModePaced,
+            animations: {
+                UIView.addKeyframe(
+                    withRelativeStartTime: 0,
+                    relativeDuration: 0.75
+                ) {
+                    let translation = CGAffineTransform(translationX: 0, y: 0)
+                    let scale = CGAffineTransform(scaleX: 1, y: 1)
+                    source.view.transform = translation.concatenating(scale)
+                }
+
+                UIView.addKeyframe(
+                    withRelativeStartTime: 0.2,
+                    relativeDuration: 0.4
+                ) {
+                    let translation = CGAffineTransform(
+                        translationX: Constants.moveViewInXNumber,
+                        y: source.view.frame.width * Constants.moveViewInYNumber
+                    )
+                    let scale = CGAffineTransform(rotationAngle: .pi / Constants.rightAngleNumber)
+                    source.view.transform = translation.concatenating(scale)
+                }
+
+                UIView.addKeyframe(
+                    withRelativeStartTime: 0.6,
+                    relativeDuration: 0.4
+                ) {
+                    destination.view.transform = .identity
+                }
+            }, completion: { finished in
+                if finished, !(transitionContext.transitionWasCancelled) {
+                    source.removeFromParent()
+                    destination.view.transform = .identity
+                    transitionContext.completeTransition(true)
+                }
+                transitionContext.completeTransition(finished && !(transitionContext.transitionWasCancelled))
+            }
+        )
+    }
+}
+
+/// Constants
+extension CustomPopAnimation {
+    enum Constants {
+        static let rightAngleNumber: CGFloat = -2
+        static let moveViewInXNumber: CGFloat = 200
+        static let moveViewInYNumber: CGFloat = 1.5
+    }
+}
 
 // MARK: - UIViewControllerAnimatedTransitioning
 
@@ -26,44 +85,6 @@ extension CustomPopAnimation: UIViewControllerAnimatedTransitioning {
         )
         let rotate = CGAffineTransform(scaleX: 0.8, y: 0.8)
         destination.view.transform = translate.concatenating(rotate)
-
-        UIView.animateKeyframes(
-            withDuration: transitionDuration(using: transitionContext),
-            delay: 0,
-            options: .calculationModePaced,
-            animations: {
-                UIView.addKeyframe(
-                    withRelativeStartTime: 0,
-                    relativeDuration: 0.75
-                ) {
-                    let translation = CGAffineTransform(translationX: 0, y: 0)
-                    let scale = CGAffineTransform(scaleX: 1, y: 1)
-                    source.view.transform = translation.concatenating(scale)
-                }
-
-                UIView.addKeyframe(
-                    withRelativeStartTime: 0.2,
-                    relativeDuration: 0.4
-                ) {
-                    let translation = CGAffineTransform(translationX: 200, y: source.view.frame.width * 1.5)
-                    let scale = CGAffineTransform(rotationAngle: .pi / -2)
-                    source.view.transform = translation.concatenating(scale)
-                }
-
-                UIView.addKeyframe(
-                    withRelativeStartTime: 0.6,
-                    relativeDuration: 0.4
-                ) {
-                    destination.view.transform = .identity
-                }
-            }, completion: { finished in
-                if finished, !transitionContext.transitionWasCancelled {
-                    source.removeFromParent()
-                    destination.view.transform = .identity
-                    transitionContext.completeTransition(true)
-                }
-                transitionContext.completeTransition(finished && !transitionContext.transitionWasCancelled)
-            }
-        )
+        popAnimation(transitionContext: transitionContext, source: source, destination: destination)
     }
 }

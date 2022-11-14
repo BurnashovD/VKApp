@@ -35,7 +35,7 @@ final class FriendsTableViewController: UITableViewController {
         let firstUser = User(
             name: Constants.elonName,
             surname: Constants.elonSurname,
-            profileImageName: [Constants.elonImageName, Constants.secondElonImageName, Constants.pizzaImageName]
+            profileImageName: [Constants.elonImageName, Constants.secondElonImageName]
         )
         let secondUser = User(
             name: Constants.elonName,

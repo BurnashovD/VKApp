@@ -35,7 +35,7 @@ final class CustomInteractiveTransition: UIPercentDrivenInteractiveTransition {
             let translation = recogniser.translation(in: recogniser.view)
             let relativeTranslation = translation.y / recWidth
             let progress = max(0, min(1, relativeTranslation))
-            shouldFinish = progress > 0.33
+            shouldFinish = progress > Constants.finishProgressNumber
             update(progress)
         case .ended:
             isStarted = false
@@ -46,5 +46,12 @@ final class CustomInteractiveTransition: UIPercentDrivenInteractiveTransition {
         default:
             break
         }
+    }
+}
+
+/// Constants
+extension CustomInteractiveTransition {
+    enum Constants {
+        static let finishProgressNumber = 0.33
     }
 }
