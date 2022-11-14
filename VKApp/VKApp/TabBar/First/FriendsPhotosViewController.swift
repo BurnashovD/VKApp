@@ -33,12 +33,28 @@ final class FriendsPhotosViewController: UIViewController {
     // MARK: - Private methods
 
     private func setImages() {
-        guard let firstImage = userPhotosNames?[0],
-              let secondImage = userPhotosNames?[1],
-              let thirdImage = userPhotosNames?[2] else { return }
-        firstImageView.image = UIImage(named: firstImage)
-        secondImageView.image = UIImage(named: secondImage)
-        thirdImageView.image = UIImage(named: thirdImage)
+        let imageCount = userPhotosNames?.count
+        switch imageCount {
+        case 0:
+            firstImageView.image = UIImage()
+            secondImageView.image = UIImage()
+            thirdImageView.image = UIImage()
+        case 1:
+            guard let firstImage = userPhotosNames?[0] else { return }
+            firstImageView.image = UIImage(named: firstImage)
+        case 2:
+            guard let firstImage = userPhotosNames?[0],
+                  let secondImage = userPhotosNames?[1] else { return }
+            firstImageView.image = UIImage(named: firstImage)
+            thirdImageView.image = UIImage(named: secondImage)
+        default:
+            guard let firstImage = userPhotosNames?[0],
+                  let secondImage = userPhotosNames?[1],
+                  let thirdImage = userPhotosNames?[2] else { return }
+            firstImageView.image = UIImage(named: firstImage)
+            secondImageView.image = UIImage(named: secondImage)
+            thirdImageView.image = UIImage(named: thirdImage)
+        }
     }
 
     private func addSwipeGesture() {
