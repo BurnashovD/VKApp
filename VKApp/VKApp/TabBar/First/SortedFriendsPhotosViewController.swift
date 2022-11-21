@@ -52,7 +52,7 @@ final class SortedFriendsPhotosViewController: UIViewController {
         case .began:
             UIView.animate(withDuration: 0.5, delay: 0) {
                 self.friendsPhotoImageview.transform = CGAffineTransform(
-                    translationX: Constants.moveViewInXNumber,
+                    translationX: -Constants.moveViewInXNumber,
                     y: 0
                 ).concatenating(CGAffineTransform(scaleX: 0.8, y: 0.8))
             }
