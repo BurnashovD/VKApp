@@ -20,6 +20,8 @@ final class UserGroupsTableViewController: UITableViewController {
 
     // MARK: - Private properties
 
+    private let vkAPI = VKAPIService()
+
     private var groups: [Group] = []
     private var searchResult: [Group] = []
 
@@ -29,6 +31,7 @@ final class UserGroupsTableViewController: UITableViewController {
         super.viewDidLoad()
         createGroups()
         configController()
+        getUsersGroups()
     }
 
     // MARK: - Private methods
@@ -61,6 +64,16 @@ final class UserGroupsTableViewController: UITableViewController {
         searchResult = groups
         searchBar.delegate = self
     }
+
+    private func getUsersGroups() {
+        vkAPI.getData(
+            Constants.methodName,
+            parametrName: Constants.userIdParametrName,
+            parametr: String(Session.shared.userId),
+            secondParametrName: Constants.extendedParametrName,
+            secondParametr: Constants.extendedParametrValue
+        )
+    }
 }
 
 /// Constants
@@ -87,6 +100,10 @@ extension UserGroupsTableViewController {
         static let profileImageName = "profile"
         static let pizzaImageName = "pizza"
         static let searchBarPlaceholderText = " Поиск..."
+        static let methodName = "groups.get"
+        static let userIdParametrName = "user_id"
+        static let extendedParametrName = "extended"
+        static let extendedParametrValue = "1"
     }
 }
 

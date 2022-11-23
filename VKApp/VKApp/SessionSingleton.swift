@@ -10,8 +10,6 @@ final class Session {
     var token = ""
     var userId = 0
 
-    // MARK: - Private properties
-
     static let shared = Session()
 
     // MARK: - init

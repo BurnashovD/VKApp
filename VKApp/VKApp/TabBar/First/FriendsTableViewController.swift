@@ -8,6 +8,7 @@ final class FriendsTableViewController: UITableViewController {
     // MARK: - Private properties
 
     private let cellTypes: [CellTypes] = [.friends, .recomendations, .nextFriends]
+    private let vkAPI = VKAPIService()
 
     private var users: [User] = []
     private var usersImagesNames: [String] = []
@@ -17,6 +18,8 @@ final class FriendsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         createUsers()
+        getFriendsList()
+        getUsersPhotos()
     }
 
     // MARK: - Public methods
@@ -105,6 +108,26 @@ final class FriendsTableViewController: UITableViewController {
         usersImagesNames = user.usersImagesNames
         performSegue(withIdentifier: Constants.phototSegueIdentifier, sender: image)
     }
+
+    private func getFriendsList() {
+        vkAPI.getData(
+            Constants.friendsMethodName,
+            parametrName: Constants.fieldsParametrName,
+            parametr: Constants.idParametrName,
+            secondParametrName: Constants.orderParametrName,
+            secondParametr: Constants.nameParametrName
+        )
+    }
+
+    private func getUsersPhotos() {
+        vkAPI.getData(
+            Constants.photosMethodName,
+            parametrName: Constants.ownerIdParametr,
+            parametr: String(Session.shared.userId),
+            secondParametrName: Constants.albumIdParametrName,
+            secondParametr: Constants.profileParametrName
+        )
+    }
 }
 
 /// Constants
@@ -126,6 +149,15 @@ extension FriendsTableViewController {
         static let steveSurname = "Jobs"
         static let danilSurname = "Zebrov"
         static let pizzaImageName = "pizza"
+        static let friendsMethodName = "friends.get"
+        static let fieldsParametrName = "fields"
+        static let idParametrName = "id"
+        static let orderParametrName = "order"
+        static let nameParametrName = "name"
+        static let photosMethodName = "photos.get"
+        static let ownerIdParametr = "owner_id"
+        static let albumIdParametrName = "album_id"
+        static let profileParametrName = "profile"
     }
 
     enum CellTypes {

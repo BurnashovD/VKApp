@@ -7,6 +7,8 @@ import UIKit
 final class SortFriendsTableViewController: UITableViewController {
     // MARK: - Private properties
 
+    private let vkAPI = VKAPIService()
+
     private var users: [User] = []
     private var sectionsDict = [Character: [String]]()
     private var imagesDict = [Character: [String]]()
@@ -127,6 +129,16 @@ final class SortFriendsTableViewController: UITableViewController {
         friendsPhotosNames.insert(image, at: 0)
         performSegue(withIdentifier: Constants.sortAnimatedSegueIdentifier, sender: friendsPhotosNames)
     }
+
+    private func getFriendsList() {
+        vkAPI.getData(
+            Constants.friendsMethodName,
+            parametrName: Constants.fieldsParametrName,
+            parametr: Constants.idParametrName,
+            secondParametrName: Constants.orderParametrName,
+            secondParametr: Constants.nameParametrName
+        )
+    }
 }
 
 /// Constants
@@ -149,6 +161,11 @@ extension SortFriendsTableViewController {
         static let danilSurname = "Danil Zebrov"
         static let pizzaImageName = "pizza"
         static let sortAnimatedSegueIdentifier = "sortAnimate"
+        static let friendsMethodName = "friends.get"
+        static let fieldsParametrName = "fields"
+        static let idParametrName = "id"
+        static let orderParametrName = "order"
+        static let nameParametrName = "name"
     }
 }
 
