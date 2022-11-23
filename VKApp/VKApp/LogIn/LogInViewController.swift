@@ -99,7 +99,6 @@ final class LogInViewController: UIViewController {
         passwordTextField.clipsToBounds = true
         passwordTextField.layer.cornerRadius = 15
         passwordTextField.autocorrectionType = .no
-        emailTextField.isUserInteractionEnabled = true
     }
 
     @objc private func keyboardWillShowAction(notification: Notification) {
