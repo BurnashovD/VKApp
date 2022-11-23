@@ -8,9 +8,9 @@ final class GlobalSearchTableViewController: UITableViewController {
     // MARK: - Public properties
 
     var globalGroups: [Group] = []
-    
+
     // MARK: - Private properties
-    
+
     private let vkAPI = VKAPIService()
 
     // MARK: - LifeCycle
@@ -61,13 +61,15 @@ final class GlobalSearchTableViewController: UITableViewController {
         globalGroups.append(nineGroup)
         globalGroups.append(tenGroup)
     }
-    
+
     private func getGlobalGroups() {
-        vkAPI.getData(Constants.methodName,
-                      parametrName: Constants.qParametrName,
-                      parametr: Constants.searchedText,
-                      secondParametrName: Constants.typeparametrName,
-                      secondParametr: Constants.groupTypeName)
+        vkAPI.getData(
+            Constants.methodName,
+            parametrName: Constants.qParametrName,
+            parametr: Constants.searchedText,
+            secondParametrName: Constants.typeparametrName,
+            secondParametr: Constants.groupTypeName
+        )
     }
 }
 

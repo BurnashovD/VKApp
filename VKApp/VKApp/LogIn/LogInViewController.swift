@@ -67,7 +67,7 @@ final class LogInViewController: UIViewController {
         configTextFields()
         loadingView.isHidden = true
         loadingView.tag = 2
-        emailTextField.addTarget(self, action: #selector(openVKWebView), for: .touchDown)
+        emailTextField.addTarget(self, action: #selector(openVKWebViewAction), for: .touchDown)
     }
 
     private func addNotifications() {
@@ -126,7 +126,7 @@ final class LogInViewController: UIViewController {
         view.endEditing(true)
     }
 
-    @objc private func openVKWebView() {
+    @objc private func openVKWebViewAction() {
         emailTextField.text = Constants.emailAndPasswordText
         passwordTextField.text = Constants.emailAndPasswordText
         performSegue(withIdentifier: Constants.vkWebSegueIdentifier, sender: self)
