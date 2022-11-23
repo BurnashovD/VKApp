@@ -86,7 +86,7 @@ import UIKit
 
 // Constants
 extension LikesControl {
-    enum Constants {
+    private enum Constants {
         static let hearthImageName = "heart"
         static let heardtFillImageName = "heart.fill"
         static let zeroText = "0"

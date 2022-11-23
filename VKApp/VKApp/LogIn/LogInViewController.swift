@@ -51,7 +51,7 @@ final class LogInViewController: UIViewController {
             return
         }
         loadingView.isHidden = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             guard let loadingViewTag = self.view.viewWithTag(2) else { return }
             loadingViewTag.removeFromSuperview()
             self.performSegue(withIdentifier: Constants.loginSegueIdentifier, sender: self)
@@ -67,6 +67,7 @@ final class LogInViewController: UIViewController {
         configTextFields()
         loadingView.isHidden = true
         loadingView.tag = 2
+        emailTextField.addTarget(self, action: #selector(openVKWebViewAction), for: .touchDown)
     }
 
     private func addNotifications() {
@@ -124,16 +125,24 @@ final class LogInViewController: UIViewController {
     @objc private func hideKeyboardAction() {
         view.endEditing(true)
     }
+
+    @objc private func openVKWebViewAction() {
+        emailTextField.text = Constants.emailAndPasswordText
+        passwordTextField.text = Constants.emailAndPasswordText
+        performSegue(withIdentifier: Constants.vkWebSegueIdentifier, sender: self)
+    }
 }
 
 /// Constants
 extension LogInViewController {
-    enum Constants {
+    private enum Constants {
         static let incorrectPasswordText = "Неверный логин или пароль"
         static let okText = "Ок"
         static let userDefaultsLoginKey = "login"
         static let userDefaultsPasswordKey = "password"
         static let loginSegueIdentifier = "login"
+        static let vkWebSegueIdentifier = "vkWeb"
+        static let emailAndPasswordText = "1"
     }
 }
 

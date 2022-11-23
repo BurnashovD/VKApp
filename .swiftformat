@@ -12,4 +12,6 @@
 # Отключаем отступ
 --ifdef no-indent
 
+--exclude Pods
+
 --swiftversion 5.3

@@ -21,7 +21,7 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 
-# Pods
+Pods
 Pods/
 
 # SwiftGen
@@ -30,3 +30,6 @@ Generated
 #xcodegen
 Darium.xcodeproj
 Darium.xcworkspace
+
+excluded:
+ - Pods

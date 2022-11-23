@@ -5,15 +5,20 @@ import UIKit
 
 /// Глобальный поиск
 final class GlobalSearchTableViewController: UITableViewController {
-    // MARK: - Private properties
+    // MARK: - Public properties
 
     var globalGroups: [Group] = []
+
+    // MARK: - Private properties
+
+    private let vkApiService = VKAPIService()
 
     // MARK: - LifeCycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         createGroups()
+        fetchGroups()
     }
 
     // MARK: - IBActions
@@ -56,11 +61,21 @@ final class GlobalSearchTableViewController: UITableViewController {
         globalGroups.append(nineGroup)
         globalGroups.append(tenGroup)
     }
+
+    private func fetchGroups() {
+        vkApiService.fetchData(
+            Constants.methodName,
+            parametrMap: [
+                Constants.qParametrName: Constants.searchedText,
+                Constants.typeparametrName: Constants.groupTypeName
+            ]
+        )
+    }
 }
 
 /// Constants
 extension GlobalSearchTableViewController {
-    enum Constants {
+    private enum Constants {
         static let globalGroupsCellIdentifier = "globalGroup"
         static let tsdGroupName = "The Swift Developers"
         static let omankoGroupName = "OMANKO"
@@ -83,6 +98,11 @@ extension GlobalSearchTableViewController {
         static let pizzaImageName = "pizza"
         static let chooseGroupNameText = "Введите название группы"
         static let okText = "Ок"
+        static let methodName = "groups.search"
+        static let qParametrName = "q"
+        static let searchedText = "Swift"
+        static let typeparametrName = "type"
+        static let groupTypeName = "group"
     }
 }
 

@@ -27,7 +27,7 @@ final class PhotosCollectionViewController: UICollectionViewController {
 
 /// Constants
 extension PhotosCollectionViewController {
-    enum Constants {
+    private enum Constants {
         static let photosCellIdentifier = "photos"
         static let phototAnimationSegueIdentifier = "photoAnimation"
     }

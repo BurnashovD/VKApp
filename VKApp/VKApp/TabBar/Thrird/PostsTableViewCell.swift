@@ -94,7 +94,7 @@ final class PostsTableViewCell: UITableViewCell {
 
 /// Constants
 extension PostsTableViewCell {
-    enum Constants {
+    private enum Constants {
         static let heardtFillImageName = "heart.fill"
         static let hearthImageName = "heart"
     }

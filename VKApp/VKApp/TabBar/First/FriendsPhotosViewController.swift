@@ -73,7 +73,7 @@ final class FriendsPhotosViewController: UIViewController {
 
 /// Constants
 extension FriendsPhotosViewController {
-    enum Constants {
+    private enum Constants {
         static let swipeVelocityNymber: CGFloat = 500
     }
 }
