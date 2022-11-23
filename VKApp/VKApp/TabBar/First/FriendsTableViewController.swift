@@ -155,7 +155,7 @@ extension FriendsTableViewController {
         static let orderParametrName = "order"
         static let nameParametrName = "name"
         static let photosMethodName = "photos.get"
-        static let ownerIdParametr = "owner_id"
+        static let ownerIdParametrName = "owner_id"
         static let albumIdParametrName = "album_id"
         static let profileParametrName = "profile"
     }
