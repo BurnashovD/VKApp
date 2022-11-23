@@ -8,7 +8,7 @@ final class FriendsTableViewController: UITableViewController {
     // MARK: - Private properties
 
     private let cellTypes: [CellTypes] = [.friends, .recomendations, .nextFriends]
-    private let vkAPI = VKAPIService()
+    private let vkApiService = VKAPIService()
 
     private var users: [User] = []
     private var usersImagesNames: [String] = []
@@ -18,8 +18,8 @@ final class FriendsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         createUsers()
-        getFriendsList()
-        getUsersPhotos()
+        fetchFriends()
+        fetchUsersPhotos()
     }
 
     // MARK: - Public methods
@@ -109,23 +109,23 @@ final class FriendsTableViewController: UITableViewController {
         performSegue(withIdentifier: Constants.phototSegueIdentifier, sender: image)
     }
 
-    private func getFriendsList() {
-        vkAPI.getData(
+    private func fetchFriends() {
+        vkApiService.fetchData(
             Constants.friendsMethodName,
-            parametrName: Constants.fieldsParametrName,
-            parametr: Constants.idParametrName,
-            secondParametrName: Constants.orderParametrName,
-            secondParametr: Constants.nameParametrName
+            parametrMap: [
+                Constants.fieldsParametrName: Constants.idParametrName,
+                Constants.orderParametrName: Constants.nameParametrName
+            ]
         )
     }
 
-    private func getUsersPhotos() {
-        vkAPI.getData(
+    private func fetchUsersPhotos() {
+        vkApiService.fetchData(
             Constants.photosMethodName,
-            parametrName: Constants.ownerIdParametrName,
-            parametr: String(Session.shared.userId),
-            secondParametrName: Constants.albumIdParametrName,
-            secondParametr: Constants.profileParametrName
+            parametrMap: [
+                Constants.ownerIdParametrName: String(Session.shared.userId),
+                Constants.albumIdParametrName: Constants.profileParametrName
+            ]
         )
     }
 }

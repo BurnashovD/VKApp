@@ -8,19 +8,17 @@ import Foundation
 final class VKAPIService {
     // MARK: - Public methods
 
-    func getData(
+    func fetchData(
         _ method: String,
-        parametrName: String,
-        parametr: String,
-        secondParametrName: String,
-        secondParametr: String
+        parametrMap: [String: String]
     ) {
-        let parametrs: Parameters = [
-            parametrName: parametr,
+        var parametrs: Parameters = [
             Constants.accessTokenText: Session.shared.token,
-            Constants.vText: Constants.apiVersionText,
-            secondParametrName: secondParametr
+            Constants.vText: Constants.apiVersionText
         ]
+        for param in parametrMap {
+            parametrs[param.key] = param.value
+        }
         let url = Constants.baseURLText + Constants.methodText + method
         AF.request(url, parameters: parametrs).responseJSON { response in
             print(response.value)

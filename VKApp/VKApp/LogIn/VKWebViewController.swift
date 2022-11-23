@@ -18,12 +18,12 @@ final class VKWebViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadWebViewAction()
+        loadWebView()
     }
 
     // MARK: - Private methods
 
-    private func loadWebViewAction() {
+    private func loadWebView() {
         var urlComponents = URLComponents()
         urlComponents.scheme = Constants.schemeComponent
         urlComponents.host = Constants.hostComponent

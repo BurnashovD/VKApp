@@ -20,7 +20,7 @@ final class UserGroupsTableViewController: UITableViewController {
 
     // MARK: - Private properties
 
-    private let vkAPI = VKAPIService()
+    private let vkApiService = VKAPIService()
 
     private var groups: [Group] = []
     private var searchResult: [Group] = []
@@ -31,7 +31,7 @@ final class UserGroupsTableViewController: UITableViewController {
         super.viewDidLoad()
         createGroups()
         configController()
-        getUsersGroups()
+        fetchUsersGroups()
     }
 
     // MARK: - Private methods
@@ -65,13 +65,13 @@ final class UserGroupsTableViewController: UITableViewController {
         searchBar.delegate = self
     }
 
-    private func getUsersGroups() {
-        vkAPI.getData(
+    private func fetchUsersGroups() {
+        vkApiService.fetchData(
             Constants.methodName,
-            parametrName: Constants.userIdParametrName,
-            parametr: String(Session.shared.userId),
-            secondParametrName: Constants.extendedParametrName,
-            secondParametr: Constants.extendedParametrValue
+            parametrMap: [
+                Constants.userIdParametrName: String(Session.shared.userId),
+                Constants.extendedParametrName: Constants.extendedParametrValue
+            ]
         )
     }
 }

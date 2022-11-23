@@ -11,14 +11,14 @@ final class GlobalSearchTableViewController: UITableViewController {
 
     // MARK: - Private properties
 
-    private let vkAPI = VKAPIService()
+    private let vkApiService = VKAPIService()
 
     // MARK: - LifeCycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         createGroups()
-        getGlobalGroups()
+        fetchGroups()
     }
 
     // MARK: - IBActions
@@ -62,13 +62,13 @@ final class GlobalSearchTableViewController: UITableViewController {
         globalGroups.append(tenGroup)
     }
 
-    private func getGlobalGroups() {
-        vkAPI.getData(
+    private func fetchGroups() {
+        vkApiService.fetchData(
             Constants.methodName,
-            parametrName: Constants.qParametrName,
-            parametr: Constants.searchedText,
-            secondParametrName: Constants.typeparametrName,
-            secondParametr: Constants.groupTypeName
+            parametrMap: [
+                Constants.qParametrName: Constants.searchedText,
+                Constants.typeparametrName: Constants.groupTypeName
+            ]
         )
     }
 }

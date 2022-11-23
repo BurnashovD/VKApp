@@ -7,7 +7,7 @@ import UIKit
 final class SortFriendsTableViewController: UITableViewController {
     // MARK: - Private properties
 
-    private let vkAPI = VKAPIService()
+    private let vkApiService = VKAPIService()
 
     private var users: [User] = []
     private var sectionsDict = [Character: [String]]()
@@ -130,13 +130,13 @@ final class SortFriendsTableViewController: UITableViewController {
         performSegue(withIdentifier: Constants.sortAnimatedSegueIdentifier, sender: friendsPhotosNames)
     }
 
-    private func getFriendsList() {
-        vkAPI.getData(
+    private func fetchFriends() {
+        vkApiService.fetchData(
             Constants.friendsMethodName,
-            parametrName: Constants.fieldsParametrName,
-            parametr: Constants.idParametrName,
-            secondParametrName: Constants.orderParametrName,
-            secondParametr: Constants.nameParametrName
+            parametrMap: [
+                Constants.fieldsParametrName: Constants.idParametrName,
+                Constants.orderParametrName: Constants.nameParametrName
+            ]
         )
     }
 }
