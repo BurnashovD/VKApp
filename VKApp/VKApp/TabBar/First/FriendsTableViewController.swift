@@ -122,7 +122,7 @@ final class FriendsTableViewController: UITableViewController {
     private func getUsersPhotos() {
         vkAPI.getData(
             Constants.photosMethodName,
-            parametrName: Constants.ownerIdParametr,
+            parametrName: Constants.ownerIdParametrName,
             parametr: String(Session.shared.userId),
             secondParametrName: Constants.albumIdParametrName,
             secondParametr: Constants.profileParametrName
