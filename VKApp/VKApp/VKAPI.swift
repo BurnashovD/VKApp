@@ -8,13 +8,9 @@ import Foundation
 final class VKAPIService {
     // MARK: - Public methods
 
-    func getData(
-        _ method: String,
-        parametrName: String,
-        parametr: String,
-        secondParametrName: String,
-        secondParametr: String
-    ) {
+    func getData(_ method: String, parametrName: String,
+                 parametr: String, secondParametrName: String,
+                 secondParametr: String) {
         let parametrs: Parameters = [
             parametrName: parametr,
             Constants.accessTokenText: Session.shared.token,
@@ -30,7 +26,7 @@ final class VKAPIService {
 
 /// Constants
 extension VKAPIService {
-    enum Constants {
+    private enum Constants {
         static let baseURLText = "https://api.vk.com/"
         static let methodText = "method/"
         static let fieldsText = "fields"

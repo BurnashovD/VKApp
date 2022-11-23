@@ -19,7 +19,7 @@ final class UserGroupsTableViewController: UITableViewController {
     }()
 
     // MARK: - Private properties
-
+    
     private let vkAPI = VKAPIService()
 
     private var groups: [Group] = []
@@ -64,21 +64,19 @@ final class UserGroupsTableViewController: UITableViewController {
         searchResult = groups
         searchBar.delegate = self
     }
-
+    
     private func getUsersGroups() {
-        vkAPI.getData(
-            Constants.methodName,
-            parametrName: Constants.userIdParametrName,
-            parametr: String(Session.shared.userId),
-            secondParametrName: Constants.extendedParametrName,
-            secondParametr: Constants.extendedParametrValue
-        )
+        vkAPI.getData(Constants.methodName,
+                      parametrName: Constants.userIdParametrName,
+                      parametr: String(Session.shared.userId),
+                      secondParametrName: Constants.extendedParametrName,
+                      secondParametr: Constants.extendedParametrValue)
     }
 }
 
 /// Constants
 extension UserGroupsTableViewController {
-    enum Constants {
+    private enum Constants {
         static let groupsCellIdentifier = "groups"
         static let tsdGroupName = "The Swift Developers"
         static let omankoGroupName = "OMANKO"

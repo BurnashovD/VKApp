@@ -7,22 +7,22 @@ import WebKit
 /// WebView с входом в ВК
 final class VKWebViewController: UIViewController {
     // MARK: - IBOutlets
-
-    @IBOutlet private var vkWebView: WKWebView! {
+    
+    @IBOutlet weak private var vkWebView: WKWebView! {
         didSet {
             vkWebView.navigationDelegate = self
         }
     }
-
+        
     // MARK: - LifeCycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadWebViewAction()
     }
-
+    
     // MARK: - Private methods
-
+    
     private func loadWebViewAction() {
         var urlComponents = URLComponents()
         urlComponents.scheme = Constants.schemeComponent
@@ -44,7 +44,7 @@ final class VKWebViewController: UIViewController {
 
 /// Constants
 extension VKWebViewController {
-    enum Constants {
+    private enum Constants {
         static let schemeComponent = "https"
         static let hostComponent = "oauth.vk.com"
         static let pathComponent = "/authorize"
@@ -71,16 +71,9 @@ extension VKWebViewController {
 // MARK: - WKNavigationDelegate
 
 extension VKWebViewController: WKNavigationDelegate {
-    func webView(
-        _ webView: WKWebView,
-        decidePolicyFor navigationResponse: WKNavigationResponse,
-        decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void
-    ) {
-        guard let url = navigationResponse.response.url, url.path == Constants.urlPath,
-              let fragment = url.fragment
-        else { decisionHandler(.allow)
-            return
-        }
+    func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
+        guard let url = navigationResponse.response.url, url.path == Constants.urlPath, let fragment = url.fragment else { decisionHandler(.allow)
+            return }
         let params = fragment
             .components(separatedBy: Constants.separatorCharacter)
             .map { $0.components(separatedBy: Constants.equalCharacter) }
@@ -91,8 +84,7 @@ extension VKWebViewController: WKNavigationDelegate {
                 dict[key] = value
                 return dict
             }
-        guard let token = params[Constants.accessTokenName], let userId = params[Constants.userIdText],
-              let intUserId = Int(userId) else { return }
+        guard let token = params[Constants.accessTokenName], let userId = params[Constants.userIdText], let intUserId = Int(userId) else { return }
         Session.shared.token = token
         Session.shared.userId = intUserId
         decisionHandler(.cancel)
