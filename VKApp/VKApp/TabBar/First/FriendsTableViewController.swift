@@ -132,7 +132,7 @@ final class FriendsTableViewController: UITableViewController {
 
 /// Constants
 extension FriendsTableViewController {
-    enum Constants {
+    private enum Constants {
         static let friendsCellIdentifier = "friends"
         static let phototSegueIdentifier = "photosSegue"
         static let elonImageName = "em3"

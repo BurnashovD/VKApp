@@ -129,7 +129,7 @@ final class SortedFriendsPhotosViewController: UIViewController {
 
 /// Constants
 extension SortedFriendsPhotosViewController {
-    enum Constants {
+    private enum Constants {
         static let moveViewInXNumber: CGFloat = 300
         static let swipeVelocityNumber: CGFloat = 500
         static let maxImagesNumber = 2

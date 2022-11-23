@@ -50,7 +50,7 @@ final class MainTableViewController: UITableViewController {
 
 /// Constants and CellTypes
 extension MainTableViewController {
-    enum Constants {
+    private enum Constants {
         static let storiesCellIdentifier = "stories"
         static let postsCellIdentifier = "post"
         static let secondElonImageName = "secondElon"

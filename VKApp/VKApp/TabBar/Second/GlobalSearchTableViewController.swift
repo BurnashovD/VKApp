@@ -75,7 +75,7 @@ final class GlobalSearchTableViewController: UITableViewController {
 
 /// Constants
 extension GlobalSearchTableViewController {
-    enum Constants {
+    private enum Constants {
         static let globalGroupsCellIdentifier = "globalGroup"
         static let tsdGroupName = "The Swift Developers"
         static let omankoGroupName = "OMANKO"

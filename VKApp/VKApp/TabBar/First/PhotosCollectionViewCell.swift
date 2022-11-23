@@ -33,7 +33,7 @@ final class PhotosCollectionViewCell: UICollectionViewCell {
 
 /// Constants
 extension PhotosCollectionViewCell {
-    enum Constants {
+    private enum Constants {
         static let opacityAnimationKeyPath = "opacity"
         static let cornerRadiusAnimationKeyPath = "cornerRadius"
     }

@@ -135,7 +135,7 @@ final class LogInViewController: UIViewController {
 
 /// Constants
 extension LogInViewController {
-    enum Constants {
+    private enum Constants {
         static let incorrectPasswordText = "Неверный логин или пароль"
         static let okText = "Ок"
         static let userDefaultsLoginKey = "login"
