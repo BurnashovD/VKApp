@@ -1,6 +1,7 @@
 // PhotosCollectionViewCell.swift
 // Copyright © RoadMap. All rights reserved.
 
+import Alamofire
 import UIKit
 
 /// Ячейка фотографии с коллекции
@@ -8,6 +9,10 @@ final class PhotosCollectionViewCell: UICollectionViewCell {
     // MARK: - IBOutlets
 
     @IBOutlet private var userPhotoImageView: UIImageView!
+
+    // MARK: - Private properties
+
+    private var photos: [UIImage] = []
 
     // MARK: - Public methods
 
@@ -26,8 +31,8 @@ final class PhotosCollectionViewCell: UICollectionViewCell {
         userPhotoImageView.layer.add(sizeAnimate, forKey: nil)
     }
 
-    func configure(_ image: UIImage) {
-        userPhotoImageView.image = image
+    func configure(_ images: UIImage) {
+        userPhotoImageView.image = images
     }
 }
 

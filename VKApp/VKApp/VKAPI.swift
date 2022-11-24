@@ -8,9 +8,10 @@ import Foundation
 final class VKAPIService {
     // MARK: - Public methods
 
-    func fetchData(
+    func fetchUsers(
         _ method: String,
-        parametrMap: [String: String]
+        parametrMap: [String: String],
+        _ complition: @escaping ([Item]) -> Void
     ) {
         var parametrs: Parameters = [
             Constants.accessTokenText: Session.shared.token,
@@ -21,7 +22,69 @@ final class VKAPIService {
         }
         let url = Constants.baseURLText + Constants.methodText + method
         AF.request(url, parameters: parametrs).responseJSON { response in
-            print(response.value)
+            guard let data = response.data else { return }
+            do {
+                let usersResults = try? JSONDecoder().decode(UsersResult.self, from: data)
+                guard let items = usersResults?.response.items else { return }
+                complition(items)
+            } catch {
+                print(response.error)
+            }
+        }
+    }
+
+    func fetchPhotos(
+        _ method: String,
+        parametrMap: [String: String],
+        _ complition: @escaping ([String]) -> Void
+    ) {
+        var parametrs: Parameters = [
+            Constants.accessTokenText: Session.shared.token,
+            Constants.vText: Constants.apiVersionText
+        ]
+        for param in parametrMap {
+            parametrs[param.key] = param.value
+        }
+        let url = Constants.baseURLText + Constants.methodText + method
+        AF.request(url, parameters: parametrs).responseJSON { response in
+            guard let data = response.data else { return }
+            do {
+                guard let usersResults = try? JSONDecoder().decode(PhotoResult.self, from: data).response.items
+                else { return }
+                let items = usersResults
+                var photosURLs = [String]()
+                items.forEach { item in
+                    photosURLs.append(item.url)
+                }
+                complition(photosURLs)
+            } catch {
+                print(response.error)
+            }
+        }
+    }
+
+    func fetchGroup(
+        _ method: String,
+        parametrMap: [String: String],
+        _ complition: @escaping ([Groups]) -> Void
+    ) {
+        var parametrs: Parameters = [
+            Constants.accessTokenText: Session.shared.token,
+            Constants.vText: Constants.apiVersionText
+        ]
+        for param in parametrMap {
+            parametrs[param.key] = param.value
+        }
+        let url = Constants.baseURLText + Constants.methodText + method
+        AF.request(url, parameters: parametrs).responseJSON { response in
+            guard let data = response.data else { return }
+            do {
+                guard let usersResults = try? JSONDecoder().decode(GroupsResult.self, from: data) else { return }
+                let items = usersResults.response.items
+                complition(items)
+            } catch {
+                print(response.error)
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 // SortFriendTableViewCell.swift
 // Copyright © RoadMap. All rights reserved.
 
+import Alamofire
 import UIKit
 
 /// Ячейка друга пользователя
@@ -9,8 +10,6 @@ final class SortFriendTableViewCell: UITableViewCell {
 
     @IBOutlet private var profileImageView: UIImageView!
     @IBOutlet private var nameLabel: UILabel!
-
-    var usersPhotoNames: [String] = []
 
     // MARK: - Private properties
 
@@ -23,10 +22,9 @@ final class SortFriendTableViewCell: UITableViewCell {
         configCell()
     }
 
-    func configure(name: String, image: UIImage, _ user: [String]) {
-        nameLabel.text = name
-        profileImageView.image = image
-        usersPhotoNames = user
+    func configure(name: String, surname: String, photo: UIImage) {
+        nameLabel.text = "\(surname) \(name)"
+        profileImageView.image = photo
     }
 
     // MARK: - Private methods

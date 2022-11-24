@@ -1,6 +1,7 @@
 // GlobalGroupsTableViewCell.swift
 // Copyright © RoadMap. All rights reserved.
 
+import Alamofire
 import UIKit
 
 /// Ячейка с глобальной группой
@@ -21,9 +22,12 @@ final class GlobalGroupsTableViewCell: UITableViewCell {
         configCell()
     }
 
-    func configure(_ group: Group) {
-        groupImageView.image = UIImage(named: group.groupImageName)
+    func configure(_ group: Groups) {
         groupNameLabel.text = group.name
+        AF.request(group.photo).response { response in
+            guard let image = response.data else { return }
+            self.groupImageView.image = UIImage(data: image)
+        }
     }
 
     // MARK: - Private methods

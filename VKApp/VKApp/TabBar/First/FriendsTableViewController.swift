@@ -7,19 +7,17 @@ import UIKit
 final class FriendsTableViewController: UITableViewController {
     // MARK: - Private properties
 
-    private let cellTypes: [CellTypes] = [.friends, .recomendations, .nextFriends]
+    private let cellTypes: [CellTypes] = [.friends, .recomendations]
     private let vkApiService = VKAPIService()
 
-    private var users: [User] = []
-    private var usersImagesNames: [String] = []
+    private var friends: [Item] = []
+    private var userId = 0
 
     // MARK: - LifeCycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        createUsers()
         fetchFriends()
-        fetchUsersPhotos()
     }
 
     // MARK: - Public methods
@@ -27,106 +25,32 @@ final class FriendsTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard segue.identifier == Constants.phototSegueIdentifier,
               let photoCollection = segue.destination as? PhotosCollectionViewController,
-              let image = sender as? UIImage
+              let id = sender as? Int
         else { return }
-        photoCollection.getUserPhotoNames(usersImagesNames, profilePhoto: image)
+        photoCollection.getUserId(id: id)
     }
 
     // MARK: - Private methods
 
-    private func createUsers() {
-        let firstUser = User(
-            name: Constants.elonName,
-            surname: Constants.elonSurname,
-            profileImageName: [Constants.elonImageName, Constants.secondElonImageName]
-        )
-        let secondUser = User(
-            name: Constants.elonName,
-            surname: Constants.elonSurname,
-            profileImageName: [Constants.secondElonImageName, Constants.elonImageName, Constants.pizzaImageName]
-        )
-        let thirdUser = User(
-            name: Constants.steveName,
-            surname: Constants.steveSurname,
-            profileImageName: [Constants.steveImageName, Constants.pizzaImageName, Constants.dogImageName]
-        )
-        let fourUser = User(
-            name: Constants.elonName,
-            surname: Constants.elonSurname,
-            profileImageName: [Constants.elonImageName, Constants.secondElonImageName, Constants.dogImageName]
-        )
-        let fiveUser = User(
-            name: Constants.daniilName,
-            surname: Constants.danilSurname,
-            profileImageName: [Constants.pizzaImageName, Constants.dogImageName, Constants.secondElonImageName]
-        )
-        let sixUser = User(
-            name: Constants.elonName,
-            surname: Constants.elonSurname,
-            profileImageName: [Constants.elonImageName, Constants.secondElonImageName, Constants.pizzaImageName]
-        )
-        let sevenUser = User(
-            name: Constants.steveName,
-            surname: Constants.steveSurname,
-            profileImageName: [Constants.steveImageName, Constants.pizzaImageName, Constants.dogImageName]
-        )
-        let eightUser = User(
-            name: Constants.daniilName,
-            surname: Constants.danilSurname,
-            profileImageName: [Constants.pizzaImageName, Constants.dogImageName, Constants.dogImageName]
-        )
-        let nineUser = User(
-            name: Constants.aleksandrName,
-            surname: Constants.aleksandrSurname,
-            profileImageName: [Constants.dogImageName, Constants.pizzaImageName, Constants.pizzaImageName]
-        )
-        let tenUser = User(
-            name: Constants.steveName,
-            surname: Constants.steveSurname,
-            profileImageName: [Constants.steveImageName, Constants.pizzaImageName, Constants.dogImageName]
-        )
-
-        for _ in 0 ... 1 {
-            users.append(firstUser)
-            users.append(secondUser)
-            users.append(thirdUser)
-            users.append(fourUser)
-            users.append(fiveUser)
-            users.append(sixUser)
-            users.append(sevenUser)
-            users.append(eightUser)
-            users.append(nineUser)
-            users.append(tenUser)
-        }
-    }
-
     private func selectedRowAction() {
         let selectedRow = tableView.indexPathForSelectedRow
         guard let selectedRow = selectedRow,
-              let user = tableView.cellForRow(at: selectedRow) as? FriendTableViewCell,
-              let image = user.profileImageView.image else { return }
-        usersImagesNames = user.usersImagesNames
-        performSegue(withIdentifier: Constants.phototSegueIdentifier, sender: image)
+              let user = tableView.cellForRow(at: selectedRow) as? FriendTableViewCell else { return }
+        userId = user.userId
+        performSegue(withIdentifier: Constants.phototSegueIdentifier, sender: userId)
     }
 
     private func fetchFriends() {
-        vkApiService.fetchData(
+        vkApiService.fetchUsers(
             Constants.friendsMethodName,
             parametrMap: [
-                Constants.fieldsParametrName: Constants.idParametrName,
-                Constants.orderParametrName: Constants.nameParametrName
+                Constants.fieldsParametrName: Constants.getPhotoParametrName,
+                Constants.orderParametrName: Constants.nameParametrName,
             ]
-        )
-    }
-
-    private func fetchUsersPhotos() {
-        vkApiService.fetchData(
-            Constants.photosMethodName,
-            parametrMap: [
-                Constants.ownerIdParametrName: String(Session.shared.userId),
-                Constants.albumIdParametrName: Constants.profileParametrName
-            ]
-        )
+        ) { item in
+            self.friends = item
+            self.tableView.reloadData()
+        }
     }
 }
 
@@ -135,20 +59,7 @@ extension FriendsTableViewController {
     private enum Constants {
         static let friendsCellIdentifier = "friends"
         static let phototSegueIdentifier = "photosSegue"
-        static let elonImageName = "em3"
-        static let secondElonImageName = "secondElon"
-        static let steveImageName = "steve"
-        static let dogImageName = "dogg"
         static let recomendationsCellIdentifier = "recomendations"
-        static let aleksandrName = "Aleksandr"
-        static let daniilName = "Daniil"
-        static let elonName = "Elon"
-        static let steveName = "Steve"
-        static let aleksandrSurname = "Nikolaevich"
-        static let elonSurname = "Musk"
-        static let steveSurname = "Jobs"
-        static let danilSurname = "Zebrov"
-        static let pizzaImageName = "pizza"
         static let friendsMethodName = "friends.get"
         static let fieldsParametrName = "fields"
         static let idParametrName = "id"
@@ -158,12 +69,12 @@ extension FriendsTableViewController {
         static let ownerIdParametrName = "owner_id"
         static let albumIdParametrName = "album_id"
         static let profileParametrName = "profile"
+        static let getPhotoParametrName = "photo_100"
     }
 
     enum CellTypes {
         case friends
         case recomendations
-        case nextFriends
     }
 }
 
@@ -171,18 +82,16 @@ extension FriendsTableViewController {
 
 extension FriendsTableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
-        cellTypes.count
+        2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let type = cellTypes[section]
         switch type {
         case .friends:
-            return users.count
+            return friends.count
         case .recomendations:
             return 1
-        case .nextFriends:
-            return users.count
         }
     }
 
@@ -195,7 +104,7 @@ extension FriendsTableViewController {
                 for: indexPath
             ) as? FriendTableViewCell else { return UITableViewCell() }
 
-            cell.configure(users[indexPath.row])
+            cell.configure(friends[indexPath.row])
 
             return cell
 
@@ -204,17 +113,6 @@ extension FriendsTableViewController {
                 withIdentifier: Constants.recomendationsCellIdentifier,
                 for: indexPath
             ) as? RecomendationsTableViewCell else { return UITableViewCell() }
-
-            cell.configure(users[Int.random(in: 0 ... (users.count - 1))])
-
-            return cell
-        case .nextFriends:
-            guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: Constants.friendsCellIdentifier,
-                for: indexPath
-            ) as? FriendTableViewCell else { return UITableViewCell() }
-
-            cell.configure(users[indexPath.row])
 
             return cell
         }

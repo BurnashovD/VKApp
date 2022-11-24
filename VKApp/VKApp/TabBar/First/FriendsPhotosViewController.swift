@@ -14,7 +14,7 @@ final class FriendsPhotosViewController: UIViewController {
 
     // MARK: - Private properties
 
-    private var userPhotosNames: [String]? = []
+    private var userPhotos: [UIImage]? = []
 
     // MARK: - LifeCycle
 
@@ -26,34 +26,34 @@ final class FriendsPhotosViewController: UIViewController {
 
     // MARK: - Public methods
 
-    func getUsersPhotoNames(_ photos: [String]) {
-        userPhotosNames = photos
+    func getUsersPhotoNames(_ photos: [UIImage]) {
+        userPhotos = photos
     }
 
     // MARK: - Private methods
 
     private func setImages() {
-        let imageCount = userPhotosNames?.count
+        let imageCount = userPhotos?.count
         switch imageCount {
         case 0:
             firstImageView.image = UIImage()
             secondImageView.image = UIImage()
             thirdImageView.image = UIImage()
         case 1:
-            guard let firstImage = userPhotosNames?[0] else { return }
-            firstImageView.image = UIImage(named: firstImage)
+            guard let firstImage = userPhotos?[0] else { return }
+            firstImageView.image = firstImage
         case 2:
-            guard let firstImage = userPhotosNames?[0],
-                  let secondImage = userPhotosNames?[1] else { return }
-            firstImageView.image = UIImage(named: firstImage)
-            thirdImageView.image = UIImage(named: secondImage)
+            guard let firstImage = userPhotos?[0],
+                  let secondImage = userPhotos?[1] else { return }
+            firstImageView.image = firstImage
+            thirdImageView.image = secondImage
         default:
-            guard let firstImage = userPhotosNames?[0],
-                  let secondImage = userPhotosNames?[1],
-                  let thirdImage = userPhotosNames?[2] else { return }
-            firstImageView.image = UIImage(named: firstImage)
-            secondImageView.image = UIImage(named: secondImage)
-            thirdImageView.image = UIImage(named: thirdImage)
+            guard let firstImage = userPhotos?[0],
+                  let secondImage = userPhotos?[1],
+                  let thirdImage = userPhotos?[2] else { return }
+            firstImageView.image = firstImage
+            secondImageView.image = secondImage
+            thirdImageView.image = thirdImage
         }
     }
 

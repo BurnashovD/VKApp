@@ -6,7 +6,7 @@ target 'VKApp' do
   use_frameworks!
 
 pod 'Alamofire', '~> 5.3'
-
+pod 'SwiftyJSON', '~> 4.0'
 pod 'SwiftLint'
 
   # Pods for VKApp
