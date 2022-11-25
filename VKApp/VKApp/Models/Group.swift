@@ -2,6 +2,7 @@
 // Copyright © RoadMap. All rights reserved.
 
 import Foundation
+import RealmSwift
 
 /// Group
 struct Group {
@@ -9,24 +10,25 @@ struct Group {
     let groupImageName: String
 }
 
-struct GroupsResult: Codable {
+final class GroupsResult: Codable {
     var response: GroupResponse
 }
 
-struct GroupResponse: Codable {
+final class GroupResponse: Codable {
     var items: [Groups]
 }
 
-struct Groups: Codable {
-    var name: String
-    var photo: String
+final class Groups: Object, Codable {
+    @objc dynamic var name = ""
+    @objc dynamic var photo = ""
 
     enum CodingKeys: String, CodingKey {
         case name
         case photo = "photo_100"
     }
 
-    init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
+        self.init()
         let container = try decoder.container(keyedBy: CodingKeys.self)
         name = try container.decode(String.self, forKey: .name)
         photo = try container.decode(String.self, forKey: .photo)

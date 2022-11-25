@@ -2,20 +2,23 @@
 // Copyright © RoadMap. All rights reserved.
 
 import Foundation
+import RealmSwift
 
 /// User
-struct UsersResult: Decodable {
+final class UsersResult: Decodable {
     var response: Response
 }
 
-struct Response: Decodable {
+final class Response: Decodable {
     var count: Int
     var items: [Item]
 }
 
-struct Item: Decodable {
-    var firstName, lastName, photo: String
-    var userId: Int
+final class Item: Object, Decodable {
+    @objc dynamic var firstName = ""
+    @objc dynamic var lastName = ""
+    @objc dynamic var photo = ""
+    @objc dynamic var userId = 0
 
     enum CodingKeys: String, CodingKey {
         case firstName = "first_name"
@@ -24,7 +27,8 @@ struct Item: Decodable {
         case photo = "photo_100"
     }
 
-    init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
+        self.init()
         let container = try decoder.container(keyedBy: CodingKeys.self)
         firstName = try container.decode(String.self, forKey: .firstName)
         lastName = try container.decode(String.self, forKey: .lastName)

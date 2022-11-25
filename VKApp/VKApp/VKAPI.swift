@@ -3,6 +3,7 @@
 
 import Alamofire
 import Foundation
+import RealmSwift
 
 /// Получение данных с ВК
 final class VKAPIService {
@@ -27,6 +28,7 @@ final class VKAPIService {
                 let usersResults = try? JSONDecoder().decode(UsersResult.self, from: data)
                 guard let items = usersResults?.response.items else { return }
                 complition(items)
+                self.saveUsersData(items)
             } catch {
                 print(response.error)
             }
@@ -57,6 +59,7 @@ final class VKAPIService {
                     photosURLs.append(item.url)
                 }
                 complition(photosURLs)
+                self.savePhotosData(items)
             } catch {
                 print(response.error)
             }
@@ -82,9 +85,43 @@ final class VKAPIService {
                 guard let usersResults = try? JSONDecoder().decode(GroupsResult.self, from: data) else { return }
                 let items = usersResults.response.items
                 complition(items)
+                self.saveGroupsData(items)
             } catch {
                 print(response.error)
             }
+        }
+    }
+
+    private func saveUsersData(_ user: [Item]) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.add(user)
+            }
+        } catch {
+            print(error)
+        }
+    }
+
+    private func savePhotosData(_ photo: [Size]) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.add(photo)
+            }
+        } catch {
+            print(error)
+        }
+    }
+
+    private func saveGroupsData(_ group: [Groups]) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.add(group)
+            }
+        } catch {
+            print(error)
         }
     }
 }

@@ -78,7 +78,9 @@ final class SortFriendsTableViewController: UITableViewController {
             guard let keys = self?.sectionsDict.keys else { return }
             self?.sectionTitles = Array(keys)
             self?.sectionTitles.sort(by: { $1 > $0 })
-            self?.tableView.reloadData()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                self?.tableView.reloadData()
+            }
         }
     }
 

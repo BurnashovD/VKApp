@@ -8,6 +8,7 @@ target 'VKApp' do
 pod 'Alamofire', '~> 5.3'
 pod 'SwiftyJSON', '~> 4.0'
 pod 'SwiftLint'
+pod 'RealmSwift'
 
   # Pods for VKApp
 
