@@ -1,7 +1,6 @@
 // SortFriendTableViewCell.swift
 // Copyright © RoadMap. All rights reserved.
 
-import Alamofire
 import UIKit
 
 /// Ячейка друга пользователя
