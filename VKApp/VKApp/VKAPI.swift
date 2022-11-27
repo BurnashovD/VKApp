@@ -6,7 +6,18 @@ import Foundation
 import RealmSwift
 
 /// Получение данных с ВК
-final class VKAPIService {
+final class NetworkService {
+    // MARK: - Public properties
+
+    let userGroupParametrsNames = [
+        Constants.userIdParametrName: String(Session.shared.userId),
+        Constants.extendedParametrName: Constants.extendedParametrValue
+    ]
+    let fetchFriendsParametrName = [
+        Constants.fieldsParametrName: Constants.getPhotoParametrName,
+        Constants.orderParametrName: Constants.nameParametrName
+    ]
+
     // MARK: - Public methods
 
     func fetchUsers(
@@ -21,7 +32,7 @@ final class VKAPIService {
         for param in parametrMap {
             parametrs[param.key] = param.value
         }
-        let url = Constants.baseURLText + Constants.methodText + method
+        let url = "\(Constants.baseURLText)\(Constants.methodText)\(method)"
         AF.request(url, parameters: parametrs).responseJSON { response in
             guard let data = response.data else { return }
             do {
@@ -37,17 +48,16 @@ final class VKAPIService {
 
     func fetchPhotos(
         _ method: String,
-        parametrMap: [String: String],
+        _ userId: String,
         _ complition: @escaping ([String]) -> Void
     ) {
         var parametrs: Parameters = [
             Constants.accessTokenText: Session.shared.token,
-            Constants.vText: Constants.apiVersionText
+            Constants.vText: Constants.apiVersionText,
+            Constants.ownerIdParametrName: userId,
+            Constants.albumIdParametrName: Constants.profileParametrName
         ]
-        for param in parametrMap {
-            parametrs[param.key] = param.value
-        }
-        let url = Constants.baseURLText + Constants.methodText + method
+        let url = "\(Constants.baseURLText)\(Constants.methodText)\(method)"
         AF.request(url, parameters: parametrs).responseJSON { response in
             guard let data = response.data else { return }
             do {
@@ -78,7 +88,7 @@ final class VKAPIService {
         for param in parametrMap {
             parametrs[param.key] = param.value
         }
-        let url = Constants.baseURLText + Constants.methodText + method
+        let url = "\(Constants.baseURLText)\(Constants.methodText)\(method)"
         AF.request(url, parameters: parametrs).responseJSON { response in
             guard let data = response.data else { return }
             do {
@@ -89,6 +99,20 @@ final class VKAPIService {
             } catch {
                 print(response.error)
             }
+        }
+    }
+
+    func fetchProfilePhotos(_ url: String, _ complition: @escaping (UIImage) -> Void) {
+        AF.request(url).response { response in
+            guard let image = response.data, let safeImage = UIImage(data: image) else { return }
+            complition(safeImage)
+        }
+    }
+
+    func fetchSortedUsersPhotos(_ url: String, _ complition: @escaping (UIImage) -> Void) {
+        AF.request(url).response { response in
+            guard let result = response.data, let userPhoto = UIImage(data: result) else { return }
+            complition(userPhoto)
         }
     }
 
@@ -127,7 +151,7 @@ final class VKAPIService {
 }
 
 /// Constants
-extension VKAPIService {
+extension NetworkService {
     private enum Constants {
         static let baseURLText = "https://api.vk.com/"
         static let methodText = "method/"
@@ -135,5 +159,16 @@ extension VKAPIService {
         static let accessTokenText = "access_token"
         static let vText = "v"
         static let apiVersionText = "5.131"
+        static let userIdParametrName = "user_id"
+        static let extendedParametrName = "extended"
+        static let extendedParametrValue = "1"
+        static let fieldsParametrName = "fields"
+        static let idParametrName = "id"
+        static let orderParametrName = "order"
+        static let nameParametrName = "name"
+        static let getPhotoParametrName = "photo_100"
+        static let ownerIdParametrName = "owner_id"
+        static let albumIdParametrName = "album_id"
+        static let profileParametrName = "profile"
     }
 }

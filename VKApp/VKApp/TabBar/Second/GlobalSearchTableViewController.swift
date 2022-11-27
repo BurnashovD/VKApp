@@ -25,7 +25,7 @@ final class GlobalSearchTableViewController: UITableViewController {
 
     // MARK: - Private properties
 
-    private let vkApiService = VKAPIService()
+    private let networkService = NetworkService()
 
     private var searchedGroups: [Groups] = []
     private var groups: [Groups] = []
@@ -108,15 +108,16 @@ extension GlobalSearchTableViewController: UISearchBarDelegate {
         searchedGroups = searchText.isEmpty ? [] : groups.filter { group -> Bool in
             group.name.range(of: searchText, options: .caseInsensitive) != nil
         }
-        vkApiService.fetchGroup(
+        networkService.fetchGroup(
             Constants.methodName,
             parametrMap: [
                 Constants.qParametrName: searchText,
                 Constants.typeparametrName: Constants.groupTypeName
             ]
         ) { [weak self] items in
-            self?.groups = items
-            self?.tableView.reloadData()
+            guard let self = self else { return }
+            self.groups = items
+            self.tableView.reloadData()
         }
         tableView.reloadData()
     }

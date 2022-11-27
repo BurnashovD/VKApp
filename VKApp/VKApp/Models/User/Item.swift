@@ -1,19 +1,10 @@
-// User.swift
+// Item.swift
 // Copyright © RoadMap. All rights reserved.
 
 import Foundation
 import RealmSwift
 
-/// User
-final class UsersResult: Decodable {
-    var response: Response
-}
-
-final class Response: Decodable {
-    var count: Int
-    var items: [Item]
-}
-
+/// User items
 final class Item: Object, Decodable {
     @objc dynamic var firstName = ""
     @objc dynamic var lastName = ""

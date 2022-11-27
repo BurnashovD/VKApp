@@ -11,7 +11,7 @@ final class PhotosCollectionViewCell: UICollectionViewCell {
 
     // MARK: - Private properties
 
-    private var photos: [UIImage] = []
+    private var photosImages: [UIImage] = []
 
     // MARK: - Public methods
 
@@ -30,8 +30,8 @@ final class PhotosCollectionViewCell: UICollectionViewCell {
         userPhotoImageView.layer.add(sizeAnimate, forKey: nil)
     }
 
-    func configure(_ images: UIImage) {
-        userPhotoImageView.image = images
+    func configure(_ image: UIImage) {
+        userPhotoImageView.image = image
     }
 }
 

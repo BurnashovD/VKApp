@@ -30,6 +30,14 @@
 		A516BC9E29108929008802FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A516BC9D29108929008802FC /* Assets.xcassets */; };
 		A516BCA02910A2F0008802FC /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516BC9F2910A2F0008802FC /* RegistrationViewController.swift */; };
 		A5463A82292EFF0F00BBC5E0 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5463A81292EFF0F00BBC5E0 /* Photo.swift */; };
+		A5463A892933ABC500BBC5E0 /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5463A882933ABC500BBC5E0 /* UserResponse.swift */; };
+		A5463A8B2933ABEB00BBC5E0 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5463A8A2933ABEB00BBC5E0 /* Item.swift */; };
+		A5463A8D2933AC5700BBC5E0 /* PhotoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5463A8C2933AC5700BBC5E0 /* PhotoResponse.swift */; };
+		A5463A8F2933AC6C00BBC5E0 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5463A8E2933AC6C00BBC5E0 /* Size.swift */; };
+		A5463A912933ACA400BBC5E0 /* GroupResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5463A902933ACA400BBC5E0 /* GroupResponse.swift */; };
+		A5463A932933ACBC00BBC5E0 /* Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5463A922933ACBC00BBC5E0 /* Items.swift */; };
+		A5463A952933B36C00BBC5E0 /* UICollectionViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5463A942933B36C00BBC5E0 /* UICollectionViewController+Extension.swift */; };
+		A5463A972933C1FB00BBC5E0 /* UITableViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5463A962933C1FB00BBC5E0 /* UITableViewCell+Extension.swift */; };
 		A57B1DF72919E64E004A5A9A /* SortFriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57B1DF62919E64E004A5A9A /* SortFriendsTableViewController.swift */; };
 		A59F0499292BF32900D57EFA /* SessionSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59F0498292BF32900D57EFA /* SessionSingleton.swift */; };
 		A5A35F5A291C5E29007704ED /* FriendsPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A35F59291C5E29007704ED /* FriendsPhotosViewController.swift */; };
@@ -104,6 +112,14 @@
 		A516BC9D29108929008802FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A516BC9F2910A2F0008802FC /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		A5463A81292EFF0F00BBC5E0 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		A5463A882933ABC500BBC5E0 /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
+		A5463A8A2933ABEB00BBC5E0 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		A5463A8C2933AC5700BBC5E0 /* PhotoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoResponse.swift; sourceTree = "<group>"; };
+		A5463A8E2933AC6C00BBC5E0 /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
+		A5463A902933ACA400BBC5E0 /* GroupResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupResponse.swift; sourceTree = "<group>"; };
+		A5463A922933ACBC00BBC5E0 /* Items.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Items.swift; sourceTree = "<group>"; };
+		A5463A942933B36C00BBC5E0 /* UICollectionViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewController+Extension.swift"; sourceTree = "<group>"; };
+		A5463A962933C1FB00BBC5E0 /* UITableViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extension.swift"; sourceTree = "<group>"; };
 		A57B1DF62919E64E004A5A9A /* SortFriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortFriendsTableViewController.swift; sourceTree = "<group>"; };
 		A59F0498292BF32900D57EFA /* SessionSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionSingleton.swift; sourceTree = "<group>"; };
 		A5A35F59291C5E29007704ED /* FriendsPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsPhotosViewController.swift; sourceTree = "<group>"; };
@@ -191,11 +207,11 @@
 		A50F15502919A3B60029C985 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				A5B221242912BED9005363EE /* User.swift */,
-				A5B2213C2915AA74005363EE /* Group.swift */,
+				A5463A872933AB8300BBC5E0 /* Group */,
+				A5463A862933AB7D00BBC5E0 /* Photo */,
+				A5463A852933AB7700BBC5E0 /* User */,
 				A50F15552919A5810029C985 /* Posts.swift */,
 				A50F155D2919B1A30029C985 /* Storie.swift */,
-				A5463A81292EFF0F00BBC5E0 /* Photo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -257,6 +273,36 @@
 				A516BC5229104308008802FC /* VKAppUITestsLaunchTests.swift */,
 			);
 			path = VKAppUITests;
+			sourceTree = "<group>";
+		};
+		A5463A852933AB7700BBC5E0 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				A5B221242912BED9005363EE /* User.swift */,
+				A5463A882933ABC500BBC5E0 /* UserResponse.swift */,
+				A5463A8A2933ABEB00BBC5E0 /* Item.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		A5463A862933AB7D00BBC5E0 /* Photo */ = {
+			isa = PBXGroup;
+			children = (
+				A5463A81292EFF0F00BBC5E0 /* Photo.swift */,
+				A5463A8C2933AC5700BBC5E0 /* PhotoResponse.swift */,
+				A5463A8E2933AC6C00BBC5E0 /* Size.swift */,
+			);
+			path = Photo;
+			sourceTree = "<group>";
+		};
+		A5463A872933AB8300BBC5E0 /* Group */ = {
+			isa = PBXGroup;
+			children = (
+				A5B2213C2915AA74005363EE /* Group.swift */,
+				A5463A902933ACA400BBC5E0 /* GroupResponse.swift */,
+				A5463A922933ACBC00BBC5E0 /* Items.swift */,
+			);
+			path = Group;
 			sourceTree = "<group>";
 		};
 		A5B22130291339EF005363EE /* First */ = {
@@ -325,6 +371,8 @@
 			children = (
 				A5B2213E29185896005363EE /* UITableViewController+Extension.swift */,
 				A5056EA529129E4E0073D407 /* UIViewController+Extension.swift */,
+				A5463A942933B36C00BBC5E0 /* UICollectionViewController+Extension.swift */,
+				A5463A962933C1FB00BBC5E0 /* UITableViewCell+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -619,8 +667,10 @@
 				A516BC3429104307008802FC /* LogInViewController.swift in Sources */,
 				A5F3D66B2911C8C6004EB22A /* FriendsTableViewController.swift in Sources */,
 				A516BC3029104307008802FC /* AppDelegate.swift in Sources */,
+				A5463A8B2933ABEB00BBC5E0 /* Item.swift in Sources */,
 				A5FA31B5291D8566008CE86C /* CustomPushAnimation.swift in Sources */,
 				A5F3D66F2911C926004EB22A /* PhotosCollectionViewController.swift in Sources */,
+				A5463A8F2933AC6C00BBC5E0 /* Size.swift in Sources */,
 				A5B2212D29130874005363EE /* PhotosCollectionViewCell.swift in Sources */,
 				A5463A82292EFF0F00BBC5E0 /* Photo.swift in Sources */,
 				A5B2213B291475B2005363EE /* LikesControl.swift in Sources */,
@@ -640,18 +690,24 @@
 				A5056EA629129E4E0073D407 /* UIViewController+Extension.swift in Sources */,
 				A57B1DF72919E64E004A5A9A /* SortFriendsTableViewController.swift in Sources */,
 				A5F3D6712911C961004EB22A /* UserGroupsTableViewController.swift in Sources */,
+				A5463A892933ABC500BBC5E0 /* UserResponse.swift in Sources */,
 				A5D98731292D79F700327582 /* VKAPI.swift in Sources */,
 				A5F7D37E291D9A1C00FD3A10 /* CustomPopAnimation.swift in Sources */,
 				A5FA31B3291D83D6008CE86C /* CustomNavigationController.swift in Sources */,
+				A5463A952933B36C00BBC5E0 /* UICollectionViewController+Extension.swift in Sources */,
 				A5F7D380291DA29000FD3A10 /* CustomInteractiveTransition.swift in Sources */,
+				A5463A972933C1FB00BBC5E0 /* UITableViewCell+Extension.swift in Sources */,
+				A5463A932933ACBC00BBC5E0 /* Items.swift in Sources */,
 				A5B2213F29185896005363EE /* UITableViewController+Extension.swift in Sources */,
 				A50F15562919A5810029C985 /* Posts.swift in Sources */,
 				A507CFF3291AE50A00076C3A /* LoadingDotsView.swift in Sources */,
 				A5B221332913407D005363EE /* GlobalGroupsTableViewCell.swift in Sources */,
+				A5463A8D2933AC5700BBC5E0 /* PhotoResponse.swift in Sources */,
 				A5F3D6732911C97B004EB22A /* GlobalSearchTableViewController.swift in Sources */,
 				A516BC3229104307008802FC /* SceneDelegate.swift in Sources */,
 				A5FA31AB291C7C53008CE86C /* SortedFriendsPhotosViewController.swift in Sources */,
 				A5B2213929146CC5005363EE /* PhotoView.swift in Sources */,
+				A5463A912933ACA400BBC5E0 /* GroupResponse.swift in Sources */,
 				A50F15582919A7410029C985 /* StoriesTableViewCell.swift in Sources */,
 				A5A35F5A291C5E29007704ED /* FriendsPhotosViewController.swift in Sources */,
 				A50F155E2919B1A30029C985 /* Storie.swift in Sources */,

@@ -8,15 +8,20 @@ import UIKit
 final class SortFriendsTableViewController: UITableViewController {
     // MARK: - Private properties
 
-    private let vkApiService = VKAPIService()
+    private let networkService = NetworkService()
 
-    private var friends: [Item] = []
-    private var sectionsDict = [Character: [String]]()
-    private var namesDict = [Character: [String]]()
-    private var imagesDict = [Character: [String]]()
+    private var items: [Item] = []
+    private var sectionsMap = [Character: [String]]()
+    private var namesMap = [Character: [String]]()
+    private var imagesMap = [Character: [String]]()
     private var sectionTitles = [Character]()
-    private var decodePhotos = [Character: [UIImage]]()
-    private var userPhotos: [UIImage] = []
+    private var decodePhotosMap = [Character: [UIImage]]() {
+        willSet {
+            tableView.reloadData()
+        }
+    }
+
+    private var userPhotoImages: [UIImage] = []
 
     // MARK: - LifeCycle
 
@@ -32,7 +37,7 @@ final class SortFriendsTableViewController: UITableViewController {
         guard segue.identifier == Constants.sortAnimatedSegueIdentifier,
               let sortPhotos = segue.destination as? SortedFriendsPhotosViewController,
               let photos = sender as? [UIImage] else { return }
-        sortPhotos.usersPhotosNames = photos
+        sortPhotos.usersPhotoImages = photos
     }
 
     // MARK: - Private methods
@@ -42,16 +47,16 @@ final class SortFriendsTableViewController: UITableViewController {
     }
 
     private func createSections() {
-        for user in friends {
+        for user in items {
             guard let firstLetter = user.lastName.first else { return }
-            if sectionsDict[firstLetter] != nil {
-                sectionsDict[firstLetter]?.append(user.lastName)
-                namesDict[firstLetter]?.append(user.firstName)
-                imagesDict[firstLetter]?.append(user.photo)
+            if sectionsMap[firstLetter] != nil {
+                sectionsMap[firstLetter]?.append(user.lastName)
+                namesMap[firstLetter]?.append(user.firstName)
+                imagesMap[firstLetter]?.append(user.photo)
             } else {
-                sectionsDict[firstLetter] = [user.lastName]
-                namesDict[firstLetter] = [user.firstName]
-                imagesDict[firstLetter] = [user.photo]
+                sectionsMap[firstLetter] = [user.lastName]
+                namesMap[firstLetter] = [user.firstName]
+                imagesMap[firstLetter] = [user.photo]
             }
         }
     }
@@ -61,38 +66,31 @@ final class SortFriendsTableViewController: UITableViewController {
         guard let selectedRow = selectedRow,
               let currentCell = tableView.cellForRow(at: selectedRow) as? SortFriendTableViewCell
         else { return }
-        performSegue(withIdentifier: Constants.sortAnimatedSegueIdentifier, sender: userPhotos)
+        performSegue(withIdentifier: Constants.sortAnimatedSegueIdentifier, sender: userPhotoImages)
     }
 
     private func fetchFriends() {
-        vkApiService.fetchUsers(
+        networkService.fetchUsers(
             Constants.friendsMethodName,
-            parametrMap: [
-                Constants.fieldsParametrName: Constants.getPhotoParametrName,
-                Constants.orderParametrName: Constants.nameParametrName
-            ]
+            parametrMap: networkService.fetchFriendsParametrName
         ) { [weak self] item in
-            self?.friends = item
-            self?.createSections()
-            self?.fetchPhoto()
-            guard let keys = self?.sectionsDict.keys else { return }
-            self?.sectionTitles = Array(keys)
-            self?.sectionTitles.sort(by: { $1 > $0 })
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                self?.tableView.reloadData()
-            }
+            guard let self = self else { return }
+            self.items = item
+            self.createSections()
+            self.sectionTitles = Array(self.sectionsMap.keys)
+            self.sectionTitles.sort(by: { $1 > $0 })
+            self.fetchPhoto()
         }
     }
 
     private func fetchPhoto() {
-        for photo in imagesDict {
+        for photo in imagesMap {
             let imagesArray = photo.value
             var images = [UIImage]()
             for url in imagesArray {
-                AF.request(url).response { response in
-                    guard let result = response.data, let userPhoto = UIImage(data: result) else { return }
-                    images.append(userPhoto)
-                    self.decodePhotos[photo.key] = images
+                networkService.fetchSortedUsersPhotos(url) { items in
+                    images.append(items)
+                    self.decodePhotosMap[photo.key] = images
                 }
             }
         }
@@ -118,11 +116,11 @@ extension SortFriendsTableViewController {
 
 extension SortFriendsTableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
-        sectionsDict.count
+        sectionsMap.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let sectionNumbers = sectionsDict[sectionTitles[section]]?.count else { return Int() }
+        guard let sectionNumbers = sectionsMap[sectionTitles[section]]?.count else { return Int() }
         return sectionNumbers
     }
 
@@ -131,9 +129,9 @@ extension SortFriendsTableViewController {
             withIdentifier: Constants.friendsCellIdentifier,
             for: indexPath
         ) as? SortFriendTableViewCell,
-            let name = sectionsDict[sectionTitles[indexPath.section]]?[indexPath.row],
-            let surname = namesDict[sectionTitles[indexPath.section]]?[indexPath.row],
-            let image = decodePhotos[sectionTitles[indexPath.section]]?[indexPath.row]
+            let name = sectionsMap[sectionTitles[indexPath.section]]?[indexPath.row],
+            let surname = namesMap[sectionTitles[indexPath.section]]?[indexPath.row],
+            let image = decodePhotosMap[sectionTitles[indexPath.section]]?[indexPath.row]
         else { return UITableViewCell() }
         cell.configure(name: name, surname: surname, photo: image)
         return cell

@@ -8,9 +8,9 @@ import UIKit
 final class PhotosCollectionViewController: UICollectionViewController {
     // MARK: - Private properties
 
-    private let vkService = VKAPIService()
+    private let networkService = NetworkService()
 
-    private var photosURLs: [String] = []
+    private var photosUrlPath: [String] = []
     private var userId = 0
     private var images: [UIImage] = [] {
         willSet {
@@ -41,23 +41,20 @@ final class PhotosCollectionViewController: UICollectionViewController {
     // MARK: - Private methods
 
     private func fetchPhotos() {
-        vkService.fetchPhotos(
+        networkService.fetchPhotos(
             Constants.getPhotosMethodName,
-            parametrMap: [
-                Constants.ownerIdParametrName: String(userId),
-                Constants.albumIdParametrName: Constants.profileParametrName
-            ]
+            String(userId)
         ) { [weak self] item in
-            self?.photosURLs = item
-            self?.fetchImages()
+            guard let self = self else { return }
+            self.photosUrlPath = item
+            self.fetchImages()
         }
     }
 
     private func fetchImages() {
-        photosURLs.forEach { url in
-            AF.request(url).response { response in
-                guard let data = response.data, let image = UIImage(data: data) else { return }
-                self.images.append(image)
+        photosUrlPath.forEach { url in
+            fetchUserPhotos(url) { item in
+                self.images.append(item)
             }
         }
     }

@@ -1,23 +1,10 @@
-// Group.swift
+// Items.swift
 // Copyright © RoadMap. All rights reserved.
 
 import Foundation
 import RealmSwift
 
-/// Group
-struct Group {
-    let name: String
-    let groupImageName: String
-}
-
-final class GroupsResult: Codable {
-    var response: GroupResponse
-}
-
-final class GroupResponse: Codable {
-    var items: [Groups]
-}
-
+/// Groups items
 final class Groups: Object, Codable {
     @objc dynamic var name = ""
     @objc dynamic var photo = ""

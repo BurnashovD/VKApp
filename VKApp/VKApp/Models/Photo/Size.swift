@@ -1,18 +1,10 @@
-// Photo.swift
+// Size.swift
 // Copyright © RoadMap. All rights reserved.
 
 import Foundation
 import RealmSwift
 
-/// Photo
-final class PhotoResult: Decodable {
-    var response: Photos
-}
-
-final class Photos: Decodable {
-    var items: [Size]
-}
-
+/// Photos items
 final class Size: Object, Decodable {
     @objc dynamic var url = ""
 

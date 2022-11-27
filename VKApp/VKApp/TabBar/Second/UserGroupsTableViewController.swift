@@ -20,10 +20,10 @@ final class UserGroupsTableViewController: UITableViewController {
 
     // MARK: - Private properties
 
-    private let vkApiService = VKAPIService()
+    private let networkService = NetworkService()
 
     private var searchResult: [Groups] = []
-    private var groupss: [Groups] = []
+    private var groups: [Groups] = []
 
     // MARK: - LifeCycle
 
@@ -40,15 +40,13 @@ final class UserGroupsTableViewController: UITableViewController {
     }
 
     private func fetchUsersGroups() {
-        vkApiService.fetchGroup(
+        networkService.fetchGroup(
             Constants.methodName,
-            parametrMap: [
-                Constants.userIdParametrName: String(Session.shared.userId),
-                Constants.extendedParametrName: Constants.extendedParametrValue
-            ]
-        ) { items in
-            self.groupss = items
-            self.searchResult = self.groupss
+            parametrMap: networkService.userGroupParametrsNames
+        ) { [weak self] items in
+            guard let self = self else { return }
+            self.groups = items
+            self.searchResult = self.groups
             self.tableView.reloadData()
         }
     }
@@ -110,7 +108,7 @@ extension UserGroupsTableViewController {
 
 extension UserGroupsTableViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchResult = groupss
+        searchResult = groups
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -118,7 +116,7 @@ extension UserGroupsTableViewController: UISearchBarDelegate {
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        searchResult = searchText.isEmpty ? groupss : groupss.filter { group -> Bool in
+        searchResult = searchText.isEmpty ? groups : groups.filter { group -> Bool in
             group.name.range(of: searchText, options: .caseInsensitive) != nil
         }
         tableView.reloadData()

@@ -8,9 +8,9 @@ final class FriendsTableViewController: UITableViewController {
     // MARK: - Private properties
 
     private let cellTypes: [CellTypes] = [.friends, .recomendations]
-    private let vkApiService = VKAPIService()
+    private let networkService = NetworkService()
 
-    private var friends: [Item] = []
+    private var items: [Item] = []
     private var userId = 0
 
     // MARK: - LifeCycle
@@ -41,14 +41,12 @@ final class FriendsTableViewController: UITableViewController {
     }
 
     private func fetchFriends() {
-        vkApiService.fetchUsers(
+        networkService.fetchUsers(
             Constants.friendsMethodName,
-            parametrMap: [
-                Constants.fieldsParametrName: Constants.getPhotoParametrName,
-                Constants.orderParametrName: Constants.nameParametrName,
-            ]
-        ) { item in
-            self.friends = item
+            parametrMap: networkService.fetchFriendsParametrName
+        ) { [weak self] item in
+            guard let self = self else { return }
+            self.items = item
             self.tableView.reloadData()
         }
     }
@@ -89,7 +87,7 @@ extension FriendsTableViewController {
         let type = cellTypes[section]
         switch type {
         case .friends:
-            return friends.count
+            return items.count
         case .recomendations:
             return 1
         }
@@ -104,7 +102,7 @@ extension FriendsTableViewController {
                 for: indexPath
             ) as? FriendTableViewCell else { return UITableViewCell() }
 
-            cell.configure(friends[indexPath.row])
+            cell.configure(items[indexPath.row])
 
             return cell
 

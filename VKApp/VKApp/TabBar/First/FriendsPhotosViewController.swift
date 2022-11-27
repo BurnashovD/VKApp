@@ -14,7 +14,7 @@ final class FriendsPhotosViewController: UIViewController {
 
     // MARK: - Private properties
 
-    private var userPhotos: [UIImage]? = []
+    private var userPhotoImages: [UIImage]? = []
 
     // MARK: - LifeCycle
 
@@ -27,30 +27,30 @@ final class FriendsPhotosViewController: UIViewController {
     // MARK: - Public methods
 
     func getUsersPhotoNames(_ photos: [UIImage]) {
-        userPhotos = photos
+        userPhotoImages = photos
     }
 
     // MARK: - Private methods
 
     private func setImages() {
-        let imageCount = userPhotos?.count
+        let imageCount = userPhotoImages?.count
         switch imageCount {
         case 0:
             firstImageView.image = UIImage()
             secondImageView.image = UIImage()
             thirdImageView.image = UIImage()
         case 1:
-            guard let firstImage = userPhotos?[0] else { return }
+            guard let firstImage = userPhotoImages?[0] else { return }
             firstImageView.image = firstImage
         case 2:
-            guard let firstImage = userPhotos?[0],
-                  let secondImage = userPhotos?[1] else { return }
+            guard let firstImage = userPhotoImages?[0],
+                  let secondImage = userPhotoImages?[1] else { return }
             firstImageView.image = firstImage
             thirdImageView.image = secondImage
         default:
-            guard let firstImage = userPhotos?[0],
-                  let secondImage = userPhotos?[1],
-                  let thirdImage = userPhotos?[2] else { return }
+            guard let firstImage = userPhotoImages?[0],
+                  let secondImage = userPhotoImages?[1],
+                  let thirdImage = userPhotoImages?[2] else { return }
             firstImageView.image = firstImage
             secondImageView.image = secondImage
             thirdImageView.image = thirdImage

@@ -17,7 +17,7 @@ final class SortedFriendsPhotosViewController: UIViewController {
 
     // MARK: - Public properties
 
-    var usersPhotosNames: [UIImage] = []
+    var usersPhotoImages: [UIImage] = []
 
     // MARK: - LifeCycle
 
@@ -30,13 +30,13 @@ final class SortedFriendsPhotosViewController: UIViewController {
     // MARK: - Public methods
 
     func getUserPhotos(photos: [UIImage]) {
-        usersPhotosNames = photos
+        usersPhotoImages = photos
     }
 
     // MARK: - Private methods
 
     private func setImage() {
-        guard let photo = usersPhotosNames.first else { return }
+        guard let photo = usersPhotoImages.first else { return }
         friendsPhotoImageview.image = photo
         friendsPhotoImageview.isUserInteractionEnabled = true
     }
@@ -50,7 +50,7 @@ final class SortedFriendsPhotosViewController: UIViewController {
     }
 
     private func swipeRightAction(gesture: UIPanGestureRecognizer) {
-        guard index != usersPhotosNames.count else { return }
+        guard index != usersPhotoImages.count else { return }
         switch gesture.state {
         case .began:
             UIView.animate(withDuration: 0.5, delay: 0) {
@@ -119,7 +119,7 @@ final class SortedFriendsPhotosViewController: UIViewController {
         } else {
             swipeLeftAction(gesture: gesture)
         }
-        friendsPhotoImageview.image = usersPhotosNames[index]
+        friendsPhotoImageview.image = usersPhotoImages[index]
     }
 
     @objc private func dismissAction(gesture: UIPanGestureRecognizer) {
