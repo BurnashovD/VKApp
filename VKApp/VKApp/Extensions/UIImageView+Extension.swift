@@ -7,11 +7,9 @@ import UIKit
 /// UIImageView Extension
 extension UIImageView {
     func fetchUserPhotos(_ url: String) {
-        AF.request(url).response { response in
-            guard let data = response.data, let image = UIImage(data: data) else { return }
-            DispatchQueue.main.async {
-                self.image = image
-            }
+        let networkService = NetworkService()
+        networkService.fetchUserPhotos(url) { image in
+            self.image = image
         }
     }
 }

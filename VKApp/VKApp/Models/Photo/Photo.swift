@@ -2,7 +2,6 @@
 // Copyright © RoadMap. All rights reserved.
 
 import Foundation
-import RealmSwift
 
 /// Photo
 final class PhotoResult: Decodable {

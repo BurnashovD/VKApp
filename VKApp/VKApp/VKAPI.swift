@@ -131,6 +131,15 @@ final class NetworkService {
         }
     }
 
+    func fetchUserPhotos(_ url: String, _ complition: @escaping (UIImage) -> Void) {
+        AF.request(url).response { response in
+            guard let data = response.data, let image = UIImage(data: data) else { return }
+            DispatchQueue.main.async {
+                complition(image)
+            }
+        }
+    }
+
     func fetchProfilePhotos(_ url: String, _ complition: @escaping (UIImage) -> Void) {
         AF.request(url).response { response in
             guard let image = response.data, let safeImage = UIImage(data: image) else { return }

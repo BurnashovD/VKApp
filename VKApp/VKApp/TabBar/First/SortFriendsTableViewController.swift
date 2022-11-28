@@ -67,9 +67,6 @@ final class SortFriendsTableViewController: UITableViewController {
             self.sectionTitles = Array(self.sectionsMap.keys)
             self.sectionTitles.sort(by: { $1 > $0 })
             self.fetchPhoto()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
-                self.tableView.reloadData()
-            }
         }
     }
 
@@ -78,9 +75,12 @@ final class SortFriendsTableViewController: UITableViewController {
             let imagesArray = photo.value
             var images = [UIImage]()
             for url in imagesArray {
-                networkService.fetchSortedUsersPhotos(url) { items in
+                networkService.fetchSortedUsersPhotos(url) { [weak self] items in
                     images.append(items)
-                    self.decodePhotosMap[photo.key] = images
+                    self?.decodePhotosMap[photo.key] = images
+                    if self?.decodePhotosMap.count == self?.imagesMap.count {
+                        self?.tableView.reloadData()
+                    }
                 }
             }
         }

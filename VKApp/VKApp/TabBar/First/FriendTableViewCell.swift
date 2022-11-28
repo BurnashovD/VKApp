@@ -28,8 +28,8 @@ final class FriendTableViewCell: UITableViewCell {
 
     func configure(_ user: Item) {
         let url = user.photo
-        networkService.fetchProfilePhotos(url) { item in
-            self.profileImageView.image = item
+        networkService.fetchProfilePhotos(url) { [weak self] item in
+            self?.profileImageView.image = item
         }
         nameLabel.text = "\(user.firstName) \(user.lastName)"
         userId = user.userId

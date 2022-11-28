@@ -4,7 +4,7 @@
 import Alamofire
 import UIKit
 
-/// CallAlert extension
+/// UIViewController extension
 extension UIViewController {
     func callAlertAction(controllerTitle: String, actionTitle: String, textField: Bool) {
         let alertController = UIAlertController(
@@ -21,9 +21,9 @@ extension UIViewController {
     }
 
     func fetchUsersPhotos(_ url: String, _ complition: @escaping (UIImage) -> Void) {
-        AF.request(url).response { response in
-            guard let data = response.data, let image = UIImage(data: data) else { return }
-            complition(image)
+        let networkService = NetworkService()
+        networkService.fetchUserPhotos(url) { item in
+            complition(item)
         }
     }
 }
