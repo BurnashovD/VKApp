@@ -12,11 +12,6 @@ final class PhotosCollectionViewController: UICollectionViewController {
 
     private var photosUrlPath: [String] = []
     private var userId = 0
-    private var images: [UIImage] = [] {
-        willSet {
-            collectionView.reloadData()
-        }
-    }
 
     // MARK: - LifeCycle
 
@@ -30,8 +25,8 @@ final class PhotosCollectionViewController: UICollectionViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard segue.identifier == Constants.phototAnimationSegueIdentifier,
               let photoCollection = segue.destination as? FriendsPhotosViewController,
-              let images = sender as? [UIImage] else { return }
-        photoCollection.getUsersPhotoNames(images)
+              let images = sender as? [String] else { return }
+        photoCollection.userPhotoPaths = images
     }
 
     func getUserId(id: Int) {
@@ -47,15 +42,7 @@ final class PhotosCollectionViewController: UICollectionViewController {
         ) { [weak self] item in
             guard let self = self else { return }
             self.photosUrlPath = item
-            self.fetchImages()
-        }
-    }
-
-    private func fetchImages() {
-        photosUrlPath.forEach { url in
-            fetchUserPhotos(url) { [weak self] item in
-                self?.images.append(item)
-            }
+            self.collectionView.reloadData()
         }
     }
 }
@@ -80,7 +67,7 @@ extension PhotosCollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        images.count
+        photosUrlPath.count
     }
 
     override func collectionView(
@@ -91,12 +78,12 @@ extension PhotosCollectionViewController {
             withReuseIdentifier: Constants.photosCellIdentifier,
             for: indexPath
         ) as? PhotosCollectionViewCell else { return UICollectionViewCell() }
-        cell.configure(images[indexPath.row])
+        cell.configure(photosUrlPath[indexPath.row])
         cell.animatePhotosCellsAction()
         return cell
     }
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: Constants.phototAnimationSegueIdentifier, sender: images)
+        performSegue(withIdentifier: Constants.phototAnimationSegueIdentifier, sender: photosUrlPath)
     }
 }

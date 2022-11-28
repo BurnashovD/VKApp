@@ -8,8 +8,8 @@ import UIKit
 extension UIImageView {
     func fetchUserPhotos(_ url: String) {
         let networkService = NetworkService()
-        networkService.fetchUserPhotos(url) { image in
-            self.image = image
+        networkService.fetchUserPhotos(url) { [weak self] image in
+            self?.image = image
         }
     }
 }

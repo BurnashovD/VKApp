@@ -30,8 +30,8 @@ final class PhotosCollectionViewCell: UICollectionViewCell {
         userPhotoImageView.layer.add(sizeAnimate, forKey: nil)
     }
 
-    func configure(_ image: UIImage) {
-        userPhotoImageView.image = image
+    func configure(_ imageURL: String) {
+        userPhotoImageView.fetchUserPhotos(imageURL)
     }
 }
 

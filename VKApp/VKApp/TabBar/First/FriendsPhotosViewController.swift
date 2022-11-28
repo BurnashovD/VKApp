@@ -15,32 +15,32 @@ final class FriendsPhotosViewController: UIViewController {
     // MARK: - Private properties
 
     private lazy var imageViews = [firstImageView, secondImageView, thirdImageView]
-    private var userPhotoImages: [UIImage]? = []
+    var userPhotoPaths: [String] = []
 
     // MARK: - LifeCycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         addSwipeGesture()
-        setImages()
     }
 
     // MARK: - Public methods
 
-    func getUsersPhotoNames(_ photos: [UIImage]) {
-        userPhotoImages = photos
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setImages()
     }
 
     // MARK: - Private methods
 
     private func setImages() {
         let maxValue = imageViews.count
-        guard let count = userPhotoImages?.count else { return }
+        let count = userPhotoPaths.count
         for index in 0 ... count - 1 {
             if index >= maxValue {
                 return
             } else {
-                imageViews[index]?.image = userPhotoImages?[index]
+                imageViews[index]?.fetchUserPhotos(userPhotoPaths[index])
             }
         }
     }

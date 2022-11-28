@@ -38,7 +38,6 @@
 		A5463A932933ACBC00BBC5E0 /* Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5463A922933ACBC00BBC5E0 /* Items.swift */; };
 		A566188729342EBE00B9A28F /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = A566188629342EBE00B9A28F /* Realm.swift */; };
 		A56618892934376900B9A28F /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56618882934376900B9A28F /* UIImageView+Extension.swift */; };
-		A566188B293438FF00B9A28F /* UICollectionViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A566188A293438FF00B9A28F /* UICollectionViewController+Extension.swift */; };
 		A57B1DF72919E64E004A5A9A /* SortFriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57B1DF62919E64E004A5A9A /* SortFriendsTableViewController.swift */; };
 		A59F0499292BF32900D57EFA /* SessionSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59F0498292BF32900D57EFA /* SessionSingleton.swift */; };
 		A5A35F5A291C5E29007704ED /* FriendsPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A35F59291C5E29007704ED /* FriendsPhotosViewController.swift */; };
@@ -121,7 +120,6 @@
 		A5463A922933ACBC00BBC5E0 /* Items.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Items.swift; sourceTree = "<group>"; };
 		A566188629342EBE00B9A28F /* Realm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
 		A56618882934376900B9A28F /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
-		A566188A293438FF00B9A28F /* UICollectionViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewController+Extension.swift"; sourceTree = "<group>"; };
 		A57B1DF62919E64E004A5A9A /* SortFriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortFriendsTableViewController.swift; sourceTree = "<group>"; };
 		A59F0498292BF32900D57EFA /* SessionSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionSingleton.swift; sourceTree = "<group>"; };
 		A5A35F59291C5E29007704ED /* FriendsPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsPhotosViewController.swift; sourceTree = "<group>"; };
@@ -375,7 +373,6 @@
 				A5B2213E29185896005363EE /* UITableViewController+Extension.swift */,
 				A5056EA529129E4E0073D407 /* UIViewController+Extension.swift */,
 				A56618882934376900B9A28F /* UIImageView+Extension.swift */,
-				A566188A293438FF00B9A28F /* UICollectionViewController+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -689,7 +686,6 @@
 				A50F15542919A5460029C985 /* PostsTableViewCell.swift in Sources */,
 				A5B2213D2915AA74005363EE /* Group.swift in Sources */,
 				A50F155A2919B0160029C985 /* StoriesCollectionViewController.swift in Sources */,
-				A566188B293438FF00B9A28F /* UICollectionViewController+Extension.swift in Sources */,
 				A5B221292912CB50005363EE /* RecomendationsTableViewCell.swift in Sources */,
 				A5B221252912BED9005363EE /* User.swift in Sources */,
 				A566188729342EBE00B9A28F /* Realm.swift in Sources */,

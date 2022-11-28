@@ -19,11 +19,4 @@ extension UIViewController {
         }
         present(alertController, animated: true)
     }
-
-    func fetchUsersPhotos(_ url: String, _ complition: @escaping (UIImage) -> Void) {
-        let networkService = NetworkService()
-        networkService.fetchUserPhotos(url) { item in
-            complition(item)
-        }
-    }
 }
