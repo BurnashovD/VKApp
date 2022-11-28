@@ -26,7 +26,7 @@ final class GlobalGroupsTableViewCell: UITableViewCell {
 
     func configure(_ group: Groups) {
         groupNameLabel.text = group.name
-        groupImageView.fetchUserPhotos(group.photo)
+        groupImageView.fetchUserPhotos(group.photo, networkService: networkService)
     }
 
     // MARK: - Private methods

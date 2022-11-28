@@ -11,6 +11,8 @@ final class PhotosCollectionViewCell: UICollectionViewCell {
 
     // MARK: - Private properties
 
+    private let networkService = NetworkService()
+
     private var photosImages: [UIImage] = []
 
     // MARK: - Public methods
@@ -31,7 +33,7 @@ final class PhotosCollectionViewCell: UICollectionViewCell {
     }
 
     func configure(_ imageURL: String) {
-        userPhotoImageView.fetchUserPhotos(imageURL)
+        userPhotoImageView.fetchUserPhotos(imageURL, networkService: networkService)
     }
 }
 

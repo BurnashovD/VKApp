@@ -131,26 +131,26 @@ final class NetworkService {
         }
     }
 
-    func fetchUserPhotos(_ url: String, _ complition: @escaping (UIImage) -> Void) {
+    func fetchUserPhotos(_ url: String, _ complition: @escaping (Data?) -> Void) {
         AF.request(url).response { response in
-            guard let data = response.data, let image = UIImage(data: data) else { return }
+            guard let data = response.data else { return }
             DispatchQueue.main.async {
-                complition(image)
+                complition(response.data)
             }
         }
     }
 
-    func fetchProfilePhotos(_ url: String, _ complition: @escaping (UIImage) -> Void) {
+    func fetchProfilePhotos(_ url: String, _ complition: @escaping (Data?) -> Void) {
         AF.request(url).response { response in
-            guard let image = response.data, let safeImage = UIImage(data: image) else { return }
-            complition(safeImage)
+            guard let image = response.data else { return }
+            complition(image)
         }
     }
 
-    func fetchSortedUsersPhotos(_ url: String, _ complition: @escaping (UIImage) -> Void) {
+    func fetchSortedUsersPhotos(_ url: String, _ complition: @escaping (Data?) -> Void) {
         AF.request(url).response { response in
-            guard let result = response.data, let userPhoto = UIImage(data: result) else { return }
-            complition(userPhoto)
+            guard let result = response.data else { return }
+            complition(result)
         }
     }
 }

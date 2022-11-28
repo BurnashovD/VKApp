@@ -50,9 +50,9 @@ final class SortedFriendsPhotosViewController: UIViewController {
 
     private func fetchImages() {
         usersPhotoURLPath.forEach { [weak self] url in
-            let networkService = NetworkService()
-            networkService.fetchUserPhotos(url) { [weak self] item in
-                self?.usersPhotoImages.append(item)
+            networkService.fetchUserPhotos(url) { [weak self] data in
+                guard let self = self, let data = data, let safeImage = UIImage(data: data) else { return }
+                self.usersPhotoImages.append(safeImage)
             }
         }
     }

@@ -14,6 +14,8 @@ final class FriendsPhotosViewController: UIViewController {
 
     // MARK: - Private properties
 
+    private let networkService = NetworkService()
+
     private lazy var imageViews = [firstImageView, secondImageView, thirdImageView]
     var userPhotoPaths: [String] = []
 
@@ -40,7 +42,7 @@ final class FriendsPhotosViewController: UIViewController {
             if index >= maxValue {
                 return
             } else {
-                imageViews[index]?.fetchUserPhotos(userPhotoPaths[index])
+                imageViews[index]?.fetchUserPhotos(userPhotoPaths[index], networkService: networkService)
             }
         }
     }
