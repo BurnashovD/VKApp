@@ -11,9 +11,9 @@ struct RealmService {
     func saveData<T>(_ model: [T]) where T: Object {
         do {
             let realm = try Realm()
-            try realm.write {
-                realm.add(model)
-            }
+            realm.beginWrite()
+            realm.add(model)
+            try realm.commitWrite()
         } catch {
             print(error)
         }

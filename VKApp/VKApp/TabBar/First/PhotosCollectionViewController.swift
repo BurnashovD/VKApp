@@ -53,8 +53,8 @@ final class PhotosCollectionViewController: UICollectionViewController {
 
     private func fetchImages() {
         photosUrlPath.forEach { url in
-            fetchUserPhotos(url) { item in
-                self.images.append(item)
+            fetchUserPhotos(url) { [weak self] item in
+                self?.images.append(item)
             }
         }
     }

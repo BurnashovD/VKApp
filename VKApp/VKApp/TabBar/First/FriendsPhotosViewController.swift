@@ -21,8 +21,8 @@ final class FriendsPhotosViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setImages()
         addSwipeGesture()
+        setImages()
     }
 
     // MARK: - Public methods
@@ -34,8 +34,9 @@ final class FriendsPhotosViewController: UIViewController {
     // MARK: - Private methods
 
     private func setImages() {
-        let maxValue = imageViews.count - 1
-        for index in 0 ... ((userPhotoImages?.count ?? 0) - 1) {
+        let maxValue = imageViews.count
+        guard let count = userPhotoImages?.count else { return }
+        for index in 0 ... count - 1 {
             if index >= maxValue {
                 return
             } else {

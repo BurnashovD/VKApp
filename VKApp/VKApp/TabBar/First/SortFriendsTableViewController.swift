@@ -27,15 +27,6 @@ final class SortFriendsTableViewController: UITableViewController {
         configUI()
     }
 
-    // MARK: - Public methods
-
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        guard segue.identifier == Constants.sortAnimatedSegueIdentifier,
-//              let sortPhotos = segue.destination as? SortedFriendsPhotosViewController,
-//              let photos = sender as? [UIImage] else { return }
-    ////        sortPhotos.usersPhotoImages = photos
-//    }
-
     // MARK: - Private methods
 
     private func configUI() {

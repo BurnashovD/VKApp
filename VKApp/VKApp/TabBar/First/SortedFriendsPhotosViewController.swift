@@ -49,9 +49,9 @@ final class SortedFriendsPhotosViewController: UIViewController {
     }
 
     private func fetchImages() {
-        usersPhotoURLPath.forEach { url in
+        usersPhotoURLPath.forEach { [weak self] url in
             fetchUsersPhotos(url) { item in
-                self.usersPhotoImages.append(item)
+                self?.usersPhotoImages.append(item)
             }
         }
     }
