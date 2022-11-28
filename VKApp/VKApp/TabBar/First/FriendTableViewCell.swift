@@ -1,6 +1,7 @@
 // FriendTableViewCell.swift
 // Copyright © RoadMap. All rights reserved.
 
+import Alamofire
 import UIKit
 
 /// Ячейка профиля друга пользователя
@@ -10,7 +11,9 @@ final class FriendTableViewCell: UITableViewCell {
     @IBOutlet var profileImageView: UIImageView!
     @IBOutlet private var nameLabel: UILabel!
 
-    var usersImagesNames: [String] = []
+    // MARK: - Public properties
+
+    var userId = 0
 
     // MARK: - Public methods
 
@@ -19,13 +22,14 @@ final class FriendTableViewCell: UITableViewCell {
         configCell()
     }
 
-    func configure(_ user: User?) {
-        guard let name = user?.name, let surname = user?.surname,
-              let image = user?.profileImageName.first,
-              let photos = user?.profileImageName else { return }
-        usersImagesNames = photos
-        profileImageView.image = UIImage(named: image)
-        nameLabel.text = "\(name) \(surname)"
+    func configure(_ user: Item, networkService: NetworkService) {
+        let url = user.photo
+        networkService.fetchUserPhotos(url) { [weak self] data in
+            guard let self = self, let data = data, let safeImage = UIImage(data: data) else { return }
+            self.profileImageView.image = safeImage
+        }
+        nameLabel.text = "\(user.firstName) \(user.lastName)"
+        userId = user.userId
     }
 
     // MARK: - Private methods

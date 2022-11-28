@@ -17,11 +17,9 @@ final class RecomendationsTableViewCell: UITableViewCell {
         configCell()
     }
 
-    func configure(_ user: User?) {
-        guard let image = user?.profileImageName.first, let name = user?.name,
-              let surname = user?.surname else { return }
-        profileImageView.image = UIImage(named: image)
-        nameLabel.text = "\(name) \(surname)"
+    func configure(_ user: Item) {
+        profileImageView.image = UIImage(named: user.photo)
+        nameLabel.text = "\(user.firstName) \(user.lastName)"
     }
 
     // MARK: - Private methods

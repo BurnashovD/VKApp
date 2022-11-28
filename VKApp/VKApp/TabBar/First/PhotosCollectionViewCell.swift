@@ -9,6 +9,10 @@ final class PhotosCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet private var userPhotoImageView: UIImageView!
 
+    // MARK: - Private properties
+
+    private var photosImages: [UIImage] = []
+
     // MARK: - Public methods
 
     func animatePhotosCellsAction() {
@@ -26,8 +30,8 @@ final class PhotosCollectionViewCell: UICollectionViewCell {
         userPhotoImageView.layer.add(sizeAnimate, forKey: nil)
     }
 
-    func configure(_ image: UIImage) {
-        userPhotoImageView.image = image
+    func configure(_ imageURL: String, networkService: NetworkService) {
+        userPhotoImageView.fetchUserPhotos(imageURL, networkService: networkService)
     }
 }
 

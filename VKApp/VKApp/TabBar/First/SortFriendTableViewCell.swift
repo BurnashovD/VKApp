@@ -10,7 +10,9 @@ final class SortFriendTableViewCell: UITableViewCell {
     @IBOutlet private var profileImageView: UIImageView!
     @IBOutlet private var nameLabel: UILabel!
 
-    var usersPhotoNames: [String] = []
+    // MARK: - Public properties
+
+    var userId = 0
 
     // MARK: - Private properties
 
@@ -23,10 +25,10 @@ final class SortFriendTableViewCell: UITableViewCell {
         configCell()
     }
 
-    func configure(name: String, image: UIImage, _ user: [String]) {
-        nameLabel.text = name
-        profileImageView.image = image
-        usersPhotoNames = user
+    func configure(name: String, surname: String, photo: UIImage, item: Item) {
+        nameLabel.text = "\(surname) \(name)"
+        profileImageView.image = photo
+        userId = item.userId
     }
 
     // MARK: - Private methods

@@ -1,6 +1,7 @@
 // GroupTableViewCell.swift
 // Copyright © RoadMap. All rights reserved.
 
+import Alamofire
 import UIKit
 
 /// Ячейка с группой
@@ -21,9 +22,9 @@ final class GroupTableViewCell: UITableViewCell {
         configCell()
     }
 
-    func configure(_ group: Group) {
-        groupImageView.image = UIImage(named: group.groupImageName)
+    func configure(_ group: Groups, networkService: NetworkService) {
         groupNameLabel.text = group.name
+        groupImageView.fetchUserPhotos(group.photo, networkService: networkService)
     }
 
     // MARK: - Private methods

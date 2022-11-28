@@ -14,46 +14,36 @@ final class FriendsPhotosViewController: UIViewController {
 
     // MARK: - Private properties
 
-    private var userPhotosNames: [String]? = []
+    private let networkService = NetworkService()
+
+    private lazy var imageViews = [firstImageView, secondImageView, thirdImageView]
+    var userPhotoPaths: [String] = []
 
     // MARK: - LifeCycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setImages()
         addSwipeGesture()
     }
 
     // MARK: - Public methods
 
-    func getUsersPhotoNames(_ photos: [String]) {
-        userPhotosNames = photos
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setImages()
     }
 
     // MARK: - Private methods
 
     private func setImages() {
-        let imageCount = userPhotosNames?.count
-        switch imageCount {
-        case 0:
-            firstImageView.image = UIImage()
-            secondImageView.image = UIImage()
-            thirdImageView.image = UIImage()
-        case 1:
-            guard let firstImage = userPhotosNames?[0] else { return }
-            firstImageView.image = UIImage(named: firstImage)
-        case 2:
-            guard let firstImage = userPhotosNames?[0],
-                  let secondImage = userPhotosNames?[1] else { return }
-            firstImageView.image = UIImage(named: firstImage)
-            thirdImageView.image = UIImage(named: secondImage)
-        default:
-            guard let firstImage = userPhotosNames?[0],
-                  let secondImage = userPhotosNames?[1],
-                  let thirdImage = userPhotosNames?[2] else { return }
-            firstImageView.image = UIImage(named: firstImage)
-            secondImageView.image = UIImage(named: secondImage)
-            thirdImageView.image = UIImage(named: thirdImage)
+        let maxValue = imageViews.count
+        let count = userPhotoPaths.count
+        for index in 0 ... count - 1 {
+            if index >= maxValue {
+                return
+            } else {
+                imageViews[index]?.fetchUserPhotos(userPhotoPaths[index], networkService: networkService)
+            }
         }
     }
 

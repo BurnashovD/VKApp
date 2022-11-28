@@ -12,30 +12,49 @@ final class SortedFriendsPhotosViewController: UIViewController {
     // MARK: - Private properties
 
     private let swipePropertyAnimator = UIViewPropertyAnimator()
+    private let networkService = NetworkService()
 
-    private var usersPhotosNames: [String] = []
     private var index = 0
+
+    // MARK: - Public properties
+
+    private var usersPhotoImages: [UIImage] = []
+    private var usersPhotoURLPath: [String] = []
 
     // MARK: - LifeCycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setImage()
+        fetchPhotos()
         createGestures()
-    }
-
-    // MARK: - Public methods
-
-    func getUserPhotos(photos: [String]) {
-        usersPhotosNames = photos
     }
 
     // MARK: - Private methods
 
-    private func setImage() {
-        guard let photo = usersPhotosNames.first, let image = UIImage(named: photo) else { return }
-        friendsPhotoImageview.image = image
-        friendsPhotoImageview.isUserInteractionEnabled = true
+    private func fetchPhotos() {
+        networkService.fetchPhotos(
+            Constants.getPhotosMethodName,
+            String(Session.shared.userId)
+        ) { [weak self] items in
+            guard let self = self else { return }
+            self.usersPhotoURLPath = items
+            self.fetchImages()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+                guard let photo = self.usersPhotoImages.first else { return }
+                self.friendsPhotoImageview.image = photo
+                self.friendsPhotoImageview.isUserInteractionEnabled = true
+                self.friendsPhotoImageview.setNeedsDisplay()
+            }
+        }
+    }
+
+    private func fetchImages() {
+        usersPhotoURLPath.forEach { [weak self] url in
+            networkService.fetchUserPhotos(url) { [weak self] data in
+                guard let self = self, let data = data, let safeImage = UIImage(data: data) else { return }
+                self.usersPhotoImages.append(safeImage)
+            }
+        }
     }
 
     private func createGestures() {
@@ -47,7 +66,7 @@ final class SortedFriendsPhotosViewController: UIViewController {
     }
 
     private func swipeRightAction(gesture: UIPanGestureRecognizer) {
-        guard index != Constants.maxImagesNumber else { return }
+        guard index != usersPhotoImages.count - 1 else { return }
         switch gesture.state {
         case .began:
             UIView.animate(withDuration: 0.5, delay: 0) {
@@ -116,7 +135,7 @@ final class SortedFriendsPhotosViewController: UIViewController {
         } else {
             swipeLeftAction(gesture: gesture)
         }
-        friendsPhotoImageview.image = UIImage(named: usersPhotosNames[index])
+        friendsPhotoImageview.image = usersPhotoImages[index]
     }
 
     @objc private func dismissAction(gesture: UIPanGestureRecognizer) {
@@ -134,5 +153,6 @@ extension SortedFriendsPhotosViewController {
         static let swipeVelocityNumber: CGFloat = 500
         static let maxImagesNumber = 2
         static let minImagesNumber = 0
+        static let getPhotosMethodName = "photos.get"
     }
 }

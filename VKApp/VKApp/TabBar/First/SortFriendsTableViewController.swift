@@ -1,143 +1,90 @@
 // SortFriendsTableViewController.swift
 // Copyright © RoadMap. All rights reserved.
 
+import Alamofire
 import UIKit
 
 ///  Сортированный список друзей
 final class SortFriendsTableViewController: UITableViewController {
     // MARK: - Private properties
 
-    private let vkApiService = VKAPIService()
+    private let networkService = NetworkService()
 
-    private var users: [User] = []
-    private var sectionsDict = [Character: [String]]()
-    private var imagesDict = [Character: [String]]()
+    private var items: [Item] = []
+    private var sectionsMap = [Character: [String]]()
+    private var namesMap = [Character: [String]]()
+    private var imagesMap = [Character: [String]]()
     private var sectionTitles = [Character]()
-    private var friendsPhotosNames: [String] = []
+    private var decodePhotosMap = [Character: [UIImage]]()
+    private var userPhotoImages: [UIImage] = []
+    private var userId = 0
 
     // MARK: - LifeCycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        createUsers()
-        createSections()
+        fetchFriends()
         configUI()
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == Constants.sortAnimatedSegueIdentifier,
-              let sortPhotos = segue.destination as? SortedFriendsPhotosViewController,
-              let photos = sender as? [String] else { return }
-        sortPhotos.getUserPhotos(photos: photos)
     }
 
     // MARK: - Private methods
 
-    private func createUsers() {
-        let firstUser = User(
-            name: Constants.elonName,
-            surname: Constants.elonSurname,
-            profileImageName: [Constants.elonImageName, Constants.secondElonImageName, Constants.pizzaImageName]
-        )
-        let secondUser = User(
-            name: Constants.elonName,
-            surname: Constants.elonSurname,
-            profileImageName: [Constants.secondElonImageName, Constants.elonImageName, Constants.pizzaImageName]
-        )
-        let thirdUser = User(
-            name: Constants.steveName,
-            surname: Constants.steveSurname,
-            profileImageName: [Constants.steveImageName, Constants.pizzaImageName, Constants.dogImageName]
-        )
-        let fourUser = User(
-            name: Constants.elonName,
-            surname: Constants.elonSurname,
-            profileImageName: [Constants.elonImageName, Constants.secondElonImageName, Constants.dogImageName]
-        )
-        let fiveUser = User(
-            name: Constants.daniilName,
-            surname: Constants.danilSurname,
-            profileImageName: [Constants.pizzaImageName, Constants.dogImageName]
-        )
-        let sixUser = User(
-            name: Constants.elonName,
-            surname: Constants.elonSurname,
-            profileImageName: [Constants.elonImageName, Constants.secondElonImageName]
-        )
-        let sevenUser = User(
-            name: Constants.steveName,
-            surname: Constants.steveSurname,
-            profileImageName: [Constants.steveImageName, Constants.pizzaImageName, Constants.dogImageName]
-        )
-        let eightUser = User(
-            name: Constants.daniilName,
-            surname: Constants.danilSurname,
-            profileImageName: [Constants.pizzaImageName, Constants.dogImageName, Constants.dogImageName]
-        )
-        let nineUser = User(
-            name: Constants.aleksandrName,
-            surname: Constants.aleksandrSurname,
-            profileImageName: [Constants.dogImageName, Constants.pizzaImageName, Constants.pizzaImageName]
-        )
-        let tenUser = User(
-            name: Constants.steveName,
-            surname: Constants.steveSurname,
-            profileImageName: [Constants.steveImageName, Constants.pizzaImageName, Constants.dogImageName]
-        )
-
-        for _ in 0 ... 1 {
-            users.append(firstUser)
-            users.append(secondUser)
-            users.append(thirdUser)
-            users.append(fourUser)
-            users.append(fiveUser)
-            users.append(sixUser)
-            users.append(sevenUser)
-            users.append(eightUser)
-            users.append(nineUser)
-            users.append(tenUser)
-        }
-        users.sort(by: { $0.name < $1.name })
-    }
-
     private func configUI() {
-        view.isUserInteractionEnabled = true
-        friendsPhotosNames.append(Constants.elonImageName)
-        friendsPhotosNames.append(Constants.dogImageName)
+        tableView.isUserInteractionEnabled = true
     }
 
     private func createSections() {
-        for user in users {
-            guard let firstLetter = user.surname.first, let image = user.profileImageName.first else { return }
-            if sectionsDict[firstLetter] != nil {
-                sectionsDict[firstLetter]?.append(user.surname)
-                imagesDict[firstLetter]?.append(image)
+        for user in items {
+            guard let firstLetter = user.lastName.first else { return }
+            if sectionsMap[firstLetter] != nil {
+                sectionsMap[firstLetter]?.append(user.lastName)
+                namesMap[firstLetter]?.append(user.firstName)
+                imagesMap[firstLetter]?.append(user.photo)
             } else {
-                sectionsDict[firstLetter] = [user.surname]
-                imagesDict[firstLetter] = [image]
+                sectionsMap[firstLetter] = [user.lastName]
+                namesMap[firstLetter] = [user.firstName]
+                imagesMap[firstLetter] = [user.photo]
             }
         }
-        sectionTitles = Array(sectionsDict.keys)
     }
 
     private func selectedRowAction() {
         let selectedRow = tableView.indexPathForSelectedRow
         guard let selectedRow = selectedRow,
-              let currentCell = tableView.cellForRow(at: selectedRow) as? SortFriendTableViewCell,
-              let image = currentCell.usersPhotoNames.first
-        else { return }
-        friendsPhotosNames.insert(image, at: 0)
-        performSegue(withIdentifier: Constants.sortAnimatedSegueIdentifier, sender: friendsPhotosNames)
+              let user = tableView.cellForRow(at: selectedRow) as? SortFriendTableViewCell else { return }
+        Session.shared.userId = user.userId
+        performSegue(withIdentifier: Constants.sortAnimatedSegueIdentifier, sender: userPhotoImages)
     }
 
     private func fetchFriends() {
-        vkApiService.fetchData(
+        networkService.fetchUsers(
             Constants.friendsMethodName,
-            parametrMap: [
-                Constants.fieldsParametrName: Constants.idParametrName,
-                Constants.orderParametrName: Constants.nameParametrName
-            ]
-        )
+            parametrMap: networkService.fetchFriendsParametrName
+        ) { [weak self] item in
+            guard let self = self else { return }
+            self.items = item
+            self.createSections()
+            self.sectionTitles = Array(self.sectionsMap.keys)
+            self.sectionTitles.sort(by: { $1 > $0 })
+            self.fetchPhoto()
+        }
+    }
+
+    private func fetchPhoto() {
+        for photo in imagesMap {
+            let imagesArray = photo.value
+            var images = [UIImage]()
+            for url in imagesArray {
+                networkService.fetchUserPhotos(url) { [weak self] data in
+                    guard let self = self, let data = data, let safeImage = UIImage(data: data) else { return }
+                    images.append(safeImage)
+                    self.decodePhotosMap[photo.key] = images
+                    if self.decodePhotosMap.count == self.imagesMap.count {
+                        self.tableView.reloadData()
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -146,26 +93,13 @@ extension SortFriendsTableViewController {
     private enum Constants {
         static let friendsCellIdentifier = "sort"
         static let phototSegueIdentifier = "photosSegue"
-        static let elonImageName = "em3"
-        static let secondElonImageName = "secondElon"
-        static let steveImageName = "steve"
-        static let dogImageName = "dogg"
-        static let recomendationsCellIdentifier = "recomendations"
-        static let aleksandrName = "Aleksandr"
-        static let daniilName = "Daniil"
-        static let elonName = "Elon"
-        static let steveName = "Steve"
-        static let aleksandrSurname = "Aleksandr Nikolaevich"
-        static let elonSurname = "Elon Musk"
-        static let steveSurname = "Steve Jobs"
-        static let danilSurname = "Danil Zebrov"
-        static let pizzaImageName = "pizza"
         static let sortAnimatedSegueIdentifier = "sortAnimate"
         static let friendsMethodName = "friends.get"
         static let fieldsParametrName = "fields"
         static let idParametrName = "id"
         static let orderParametrName = "order"
         static let nameParametrName = "name"
+        static let getPhotoParametrName = "photo_100"
     }
 }
 
@@ -173,11 +107,11 @@ extension SortFriendsTableViewController {
 
 extension SortFriendsTableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
-        sectionsDict.count
+        sectionsMap.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let sectionNumbers = sectionsDict[sectionTitles[section]]?.count else { return Int() }
+        guard let sectionNumbers = sectionsMap[sectionTitles[section]]?.count else { return Int() }
         return sectionNumbers
     }
 
@@ -186,11 +120,11 @@ extension SortFriendsTableViewController {
             withIdentifier: Constants.friendsCellIdentifier,
             for: indexPath
         ) as? SortFriendTableViewCell,
-            let user = sectionsDict[sectionTitles[indexPath.section]]?[indexPath.row],
-            let image = imagesDict[sectionTitles[indexPath.section]]?[indexPath.row],
-            let friendImage = UIImage(named: image)
+            let name = sectionsMap[sectionTitles[indexPath.section]]?[indexPath.row],
+            let surname = namesMap[sectionTitles[indexPath.section]]?[indexPath.row],
+            let image = decodePhotosMap[sectionTitles[indexPath.section]]?[indexPath.row]
         else { return UITableViewCell() }
-        cell.configure(name: user, image: friendImage, [image])
+        cell.configure(name: name, surname: surname, photo: image, item: items[indexPath.item])
         return cell
     }
 

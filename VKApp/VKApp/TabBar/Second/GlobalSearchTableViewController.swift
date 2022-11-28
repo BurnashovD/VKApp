@@ -5,21 +5,30 @@ import UIKit
 
 /// Глобальный поиск
 final class GlobalSearchTableViewController: UITableViewController {
+    // MARK: - Visual components
+
+    private lazy var searchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.searchBarStyle = UISearchBar.Style.minimal
+        searchBar.searchTextField.textColor = .white
+        searchBar.searchTextField.attributedPlaceholder = NSAttributedString(
+            string: Constants.searchBarPlaceholderText,
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
+        )
+        searchBar.delegate = self
+        return searchBar
+    }()
+
     // MARK: - Public properties
 
     var globalGroups: [Group] = []
 
     // MARK: - Private properties
 
-    private let vkApiService = VKAPIService()
+    private let networkService = NetworkService()
 
-    // MARK: - LifeCycle
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        createGroups()
-        fetchGroups()
-    }
+    private var searchedGroups: [Groups] = []
+    private var groups: [Groups] = []
 
     // MARK: - IBActions
 
@@ -35,72 +44,18 @@ final class GlobalSearchTableViewController: UITableViewController {
     @IBAction private func backToGroupsAction(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
-
-    // MARK: - Private methods
-
-    private func createGroups() {
-        let firstGroup = Group(name: Constants.tsdGroupName, groupImageName: Constants.tsdImageName)
-        let secondGroup = Group(name: Constants.omankoGroupName, groupImageName: Constants.omankoImageName)
-        let thirdGroup = Group(name: Constants.redditGroupName, groupImageName: Constants.redditImageName)
-        let fourGroup = Group(name: Constants.ffmGroupName, groupImageName: Constants.ffmImagename)
-        let fiveGroup = Group(name: Constants.rusEconomicGroupName, groupImageName: Constants.economicImageName)
-        let sixGroup = Group(name: Constants.adidasGroupName, groupImageName: Constants.adidasImageName)
-        let sevenGroup = Group(name: Constants.mathGroupName, groupImageName: Constants.profileImageName)
-        let eightGroup = Group(name: Constants.pizzaGroupName, groupImageName: Constants.pizzaImageName)
-        let nineGroup = Group(name: Constants.mintGroupName, groupImageName: Constants.mintImagename)
-        let tenGroup = Group(name: Constants.iosDevsGroupName, groupImageName: Constants.tsdImageName)
-
-        globalGroups.append(firstGroup)
-        globalGroups.append(secondGroup)
-        globalGroups.append(thirdGroup)
-        globalGroups.append(fourGroup)
-        globalGroups.append(fiveGroup)
-        globalGroups.append(sixGroup)
-        globalGroups.append(sevenGroup)
-        globalGroups.append(eightGroup)
-        globalGroups.append(nineGroup)
-        globalGroups.append(tenGroup)
-    }
-
-    private func fetchGroups() {
-        vkApiService.fetchData(
-            Constants.methodName,
-            parametrMap: [
-                Constants.qParametrName: Constants.searchedText,
-                Constants.typeparametrName: Constants.groupTypeName
-            ]
-        )
-    }
 }
 
 /// Constants
 extension GlobalSearchTableViewController {
     private enum Constants {
         static let globalGroupsCellIdentifier = "globalGroup"
-        static let tsdGroupName = "The Swift Developers"
-        static let omankoGroupName = "OMANKO"
-        static let redditGroupName = "Reddit"
-        static let ffmGroupName = "Fast Food Music"
-        static let rusEconomicGroupName = "Экономика РФ"
-        static let adidasGroupName = "adidas Originals"
-        static let mathGroupName = "Математика 5 класс"
-        static let pizzaGroupName = "Pizza group"
-        static let mintGroupName = "MINT"
-        static let iosDevsGroupName = "IOS Devs"
-        static let tsdImageName = "swift"
-        static let omankoImageName = "omanko"
-        static let redditImageName = "reddit"
-        static let ffmImagename = "ffm"
-        static let mintImagename = "mint"
-        static let economicImageName = "rf"
-        static let adidasImageName = "adidas"
         static let profileImageName = "profile"
-        static let pizzaImageName = "pizza"
         static let chooseGroupNameText = "Введите название группы"
         static let okText = "Ок"
         static let methodName = "groups.search"
+        static let searchBarPlaceholderText = " Поиск..."
         static let qParametrName = "q"
-        static let searchedText = "Swift"
         static let typeparametrName = "type"
         static let groupTypeName = "group"
     }
@@ -114,7 +69,7 @@ extension GlobalSearchTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        globalGroups.count
+        groups.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -122,7 +77,7 @@ extension GlobalSearchTableViewController {
             withIdentifier: Constants.globalGroupsCellIdentifier,
             for: indexPath
         ) as? GlobalGroupsTableViewCell else { return UITableViewCell() }
-        cell.configure(globalGroups[indexPath.row])
+        cell.configure(groups[indexPath.row], networkService: networkService)
 
         return cell
     }
@@ -135,5 +90,32 @@ extension GlobalSearchTableViewController {
         guard editingStyle == .delete else { return }
         globalGroups.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .automatic)
+    }
+
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        searchBar
+    }
+}
+
+// MARK: - UISearchBarDelegate
+
+extension GlobalSearchTableViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.endEditing(true)
+    }
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchedGroups = searchText.isEmpty ? [] : groups.filter { group -> Bool in
+            group.name.range(of: searchText, options: .caseInsensitive) != nil
+        }
+        networkService.fetchSearchGroup(
+            Constants.methodName,
+            searchText
+        ) { [weak self] items in
+            guard let self = self else { return }
+            self.groups = items
+            self.tableView.reloadData()
+        }
+        tableView.reloadData()
     }
 }

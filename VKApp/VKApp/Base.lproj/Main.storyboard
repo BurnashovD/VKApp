@@ -286,8 +286,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.1647058874" green="0.1647058874" blue="0.1764705926" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <color key="separatorColor" red="0.1647058874" green="0.1647058874" blue="0.1764705926" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="sectionIndexBackgroundColor" red="0.1647058874" green="0.1647058874" blue="0.1764705926" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="sort" rowHeight="60" id="wK1-sZ-V6C" customClass="SortFriendTableViewCell" customModule="VKApp" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="sort" rowHeight="60" id="wK1-sZ-V6C" customClass="SortFriendTableViewCell" customModule="VKApp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="50" width="390" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wK1-sZ-V6C" id="V9u-bY-nDg">

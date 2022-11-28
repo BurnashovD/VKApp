@@ -8,3 +8,7 @@ struct Group {
     let name: String
     let groupImageName: String
 }
+
+final class GroupsResult: Codable {
+    var response: GroupResponse
+}
