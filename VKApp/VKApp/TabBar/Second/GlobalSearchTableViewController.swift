@@ -77,7 +77,7 @@ extension GlobalSearchTableViewController {
             withIdentifier: Constants.globalGroupsCellIdentifier,
             for: indexPath
         ) as? GlobalGroupsTableViewCell else { return UITableViewCell() }
-        cell.configure(groups[indexPath.row])
+        cell.configure(groups[indexPath.row], networkService: networkService)
 
         return cell
     }

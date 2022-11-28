@@ -80,7 +80,7 @@ extension UserGroupsTableViewController {
             withIdentifier: Constants.groupsCellIdentifier,
             for: indexPath
         ) as? GroupTableViewCell else { return UITableViewCell() }
-        cell.configure(searchResult[indexPath.row])
+        cell.configure(searchResult[indexPath.row], networkService: networkService)
 
         return cell
     }

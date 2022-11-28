@@ -131,11 +131,11 @@ final class NetworkService {
         }
     }
 
-    func fetchUserPhotos(_ url: String, _ complition: @escaping (Data?) -> Void) {
+    func fetchUserPhotos(_ url: String, _ completion: @escaping (Data?) -> Void) {
         AF.request(url).response { response in
             guard let data = response.data else { return }
             DispatchQueue.main.async {
-                complition(response.data)
+                completion(response.data)
             }
         }
     }

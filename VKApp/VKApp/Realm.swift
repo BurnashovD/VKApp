@@ -14,6 +14,7 @@ struct RealmService {
             realm.beginWrite()
             realm.add(model)
             try realm.commitWrite()
+            print(realm.configuration.fileURL)
         } catch {
             print(error)
         }

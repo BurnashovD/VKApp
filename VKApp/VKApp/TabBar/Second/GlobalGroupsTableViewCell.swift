@@ -13,8 +13,6 @@ final class GlobalGroupsTableViewCell: UITableViewCell {
 
     // MARK: - Private properties
 
-    private let networkService = NetworkService()
-
     private lazy var tapImageGestureRecognizer = UITapGestureRecognizer()
 
     // MARK: - Public methods
@@ -24,7 +22,7 @@ final class GlobalGroupsTableViewCell: UITableViewCell {
         configCell()
     }
 
-    func configure(_ group: Groups) {
+    func configure(_ group: Groups, networkService: NetworkService) {
         groupNameLabel.text = group.name
         groupImageView.fetchUserPhotos(group.photo, networkService: networkService)
     }
