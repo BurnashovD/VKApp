@@ -102,7 +102,7 @@ extension FriendsTableViewController {
                 for: indexPath
             ) as? FriendTableViewCell else { return UITableViewCell() }
 
-            cell.configure(items[indexPath.row])
+            cell.configure(items[indexPath.row], networkService: networkService)
 
             return cell
 

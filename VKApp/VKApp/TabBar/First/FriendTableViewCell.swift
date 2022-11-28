@@ -15,10 +15,6 @@ final class FriendTableViewCell: UITableViewCell {
 
     var userId = 0
 
-    // MARK: - Private properties
-
-    private let networkService = NetworkService()
-
     // MARK: - Public methods
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -26,9 +22,9 @@ final class FriendTableViewCell: UITableViewCell {
         configCell()
     }
 
-    func configure(_ user: Item) {
+    func configure(_ user: Item, networkService: NetworkService) {
         let url = user.photo
-        networkService.fetchProfilePhotos(url) { [weak self] data in
+        networkService.fetchUserPhotos(url) { [weak self] data in
             guard let self = self, let data = data, let safeImage = UIImage(data: data) else { return }
             self.profileImageView.image = safeImage
         }

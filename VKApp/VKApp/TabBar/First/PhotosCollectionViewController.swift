@@ -78,7 +78,7 @@ extension PhotosCollectionViewController {
             withReuseIdentifier: Constants.photosCellIdentifier,
             for: indexPath
         ) as? PhotosCollectionViewCell else { return UICollectionViewCell() }
-        cell.configure(photosUrlPath[indexPath.row])
+        cell.configure(photosUrlPath[indexPath.row], networkService: networkService)
         cell.animatePhotosCellsAction()
         return cell
     }

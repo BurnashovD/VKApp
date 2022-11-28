@@ -139,20 +139,6 @@ final class NetworkService {
             }
         }
     }
-
-    func fetchProfilePhotos(_ url: String, _ complition: @escaping (Data?) -> Void) {
-        AF.request(url).response { response in
-            guard let image = response.data else { return }
-            complition(image)
-        }
-    }
-
-    func fetchSortedUsersPhotos(_ url: String, _ complition: @escaping (Data?) -> Void) {
-        AF.request(url).response { response in
-            guard let result = response.data else { return }
-            complition(result)
-        }
-    }
 }
 
 /// Constants

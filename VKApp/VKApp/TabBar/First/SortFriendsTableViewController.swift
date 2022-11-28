@@ -75,7 +75,7 @@ final class SortFriendsTableViewController: UITableViewController {
             let imagesArray = photo.value
             var images = [UIImage]()
             for url in imagesArray {
-                networkService.fetchSortedUsersPhotos(url) { [weak self] data in
+                networkService.fetchUserPhotos(url) { [weak self] data in
                     guard let self = self, let data = data, let safeImage = UIImage(data: data) else { return }
                     images.append(safeImage)
                     self.decodePhotosMap[photo.key] = images
