@@ -14,6 +14,7 @@ final class FriendsPhotosViewController: UIViewController {
 
     // MARK: - Private properties
 
+    private lazy var imageViews = [firstImageView, secondImageView, thirdImageView]
     private var userPhotoImages: [UIImage]? = []
 
     // MARK: - LifeCycle
@@ -33,27 +34,13 @@ final class FriendsPhotosViewController: UIViewController {
     // MARK: - Private methods
 
     private func setImages() {
-        let imageCount = userPhotoImages?.count
-        switch imageCount {
-        case 0:
-            firstImageView.image = UIImage()
-            secondImageView.image = UIImage()
-            thirdImageView.image = UIImage()
-        case 1:
-            guard let firstImage = userPhotoImages?[0] else { return }
-            firstImageView.image = firstImage
-        case 2:
-            guard let firstImage = userPhotoImages?[0],
-                  let secondImage = userPhotoImages?[1] else { return }
-            firstImageView.image = firstImage
-            thirdImageView.image = secondImage
-        default:
-            guard let firstImage = userPhotoImages?[0],
-                  let secondImage = userPhotoImages?[1],
-                  let thirdImage = userPhotoImages?[2] else { return }
-            firstImageView.image = firstImage
-            secondImageView.image = secondImage
-            thirdImageView.image = thirdImage
+        let maxValue = imageViews.count - 1
+        for index in 0 ... ((userPhotoImages?.count ?? 0) - 1) {
+            if index >= maxValue {
+                return
+            } else {
+                imageViews[index]?.image = userPhotoImages?[index]
+            }
         }
     }
 

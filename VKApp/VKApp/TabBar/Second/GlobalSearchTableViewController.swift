@@ -108,12 +108,9 @@ extension GlobalSearchTableViewController: UISearchBarDelegate {
         searchedGroups = searchText.isEmpty ? [] : groups.filter { group -> Bool in
             group.name.range(of: searchText, options: .caseInsensitive) != nil
         }
-        networkService.fetchGroup(
+        networkService.fetchSearchGroup(
             Constants.methodName,
-            parametrMap: [
-                Constants.qParametrName: searchText,
-                Constants.typeparametrName: Constants.groupTypeName
-            ]
+            searchText
         ) { [weak self] items in
             guard let self = self else { return }
             self.groups = items

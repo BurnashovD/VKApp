@@ -7,6 +7,10 @@ import RealmSwift
 
 /// Получение данных с ВК
 final class NetworkService {
+    // MARK: - Private properties
+
+    private let realmService = RealmService()
+
     // MARK: - Public properties
 
     let userGroupParametrsNames = [
@@ -39,7 +43,7 @@ final class NetworkService {
                 let usersResults = try? JSONDecoder().decode(UsersResult.self, from: data)
                 guard let items = usersResults?.response.items else { return }
                 complition(items)
-                self.saveUsersData(items)
+                self.realmService.saveData(items)
             } catch {
                 print(response.error)
             }
@@ -69,7 +73,7 @@ final class NetworkService {
                     photosURLs.append(item.url)
                 }
                 complition(photosURLs)
-                self.savePhotosData(items)
+                self.realmService.saveData(items)
             } catch {
                 print(response.error)
             }
@@ -95,7 +99,32 @@ final class NetworkService {
                 guard let usersResults = try? JSONDecoder().decode(GroupsResult.self, from: data) else { return }
                 let items = usersResults.response.items
                 complition(items)
-                self.saveGroupsData(items)
+                self.realmService.saveData(items)
+            } catch {
+                print(response.error)
+            }
+        }
+    }
+
+    func fetchSearchGroup(
+        _ method: String,
+        _ searchText: String,
+        _ complition: @escaping ([Groups]) -> Void
+    ) {
+        var parametrs: Parameters = [
+            Constants.accessTokenText: Session.shared.token,
+            Constants.vText: Constants.apiVersionText,
+            Constants.qParametrName: searchText,
+            Constants.typeparametrName: Constants.groupTypeName
+        ]
+        let url = "\(Constants.baseURLText)\(Constants.methodText)\(method)"
+        AF.request(url, parameters: parametrs).responseJSON { response in
+            guard let data = response.data else { return }
+            do {
+                guard let usersResults = try? JSONDecoder().decode(GroupsResult.self, from: data) else { return }
+                let items = usersResults.response.items
+                complition(items)
+                self.realmService.saveData(items)
             } catch {
                 print(response.error)
             }
@@ -115,39 +144,6 @@ final class NetworkService {
             complition(userPhoto)
         }
     }
-
-    private func saveUsersData(_ user: [Item]) {
-        do {
-            let realm = try Realm()
-            try realm.write {
-                realm.add(user)
-            }
-        } catch {
-            print(error)
-        }
-    }
-
-    private func savePhotosData(_ photo: [Size]) {
-        do {
-            let realm = try Realm()
-            try realm.write {
-                realm.add(photo)
-            }
-        } catch {
-            print(error)
-        }
-    }
-
-    private func saveGroupsData(_ group: [Groups]) {
-        do {
-            let realm = try Realm()
-            try realm.write {
-                realm.add(group)
-            }
-        } catch {
-            print(error)
-        }
-    }
 }
 
 /// Constants
@@ -159,6 +155,9 @@ extension NetworkService {
         static let accessTokenText = "access_token"
         static let vText = "v"
         static let apiVersionText = "5.131"
+        static let qParametrName = "q"
+        static let typeparametrName = "type"
+        static let groupTypeName = "group"
         static let userIdParametrName = "user_id"
         static let extendedParametrName = "extended"
         static let extendedParametrValue = "1"

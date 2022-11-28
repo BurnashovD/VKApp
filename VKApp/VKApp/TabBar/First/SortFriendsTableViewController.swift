@@ -15,13 +15,9 @@ final class SortFriendsTableViewController: UITableViewController {
     private var namesMap = [Character: [String]]()
     private var imagesMap = [Character: [String]]()
     private var sectionTitles = [Character]()
-    private var decodePhotosMap = [Character: [UIImage]]() {
-        willSet {
-            tableView.reloadData()
-        }
-    }
-
+    private var decodePhotosMap = [Character: [UIImage]]()
     private var userPhotoImages: [UIImage] = []
+    private var userId = 0
 
     // MARK: - LifeCycle
 
@@ -33,12 +29,12 @@ final class SortFriendsTableViewController: UITableViewController {
 
     // MARK: - Public methods
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == Constants.sortAnimatedSegueIdentifier,
-              let sortPhotos = segue.destination as? SortedFriendsPhotosViewController,
-              let photos = sender as? [UIImage] else { return }
-        sortPhotos.usersPhotoImages = photos
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        guard segue.identifier == Constants.sortAnimatedSegueIdentifier,
+//              let sortPhotos = segue.destination as? SortedFriendsPhotosViewController,
+//              let photos = sender as? [UIImage] else { return }
+    ////        sortPhotos.usersPhotoImages = photos
+//    }
 
     // MARK: - Private methods
 
@@ -64,8 +60,8 @@ final class SortFriendsTableViewController: UITableViewController {
     private func selectedRowAction() {
         let selectedRow = tableView.indexPathForSelectedRow
         guard let selectedRow = selectedRow,
-              let currentCell = tableView.cellForRow(at: selectedRow) as? SortFriendTableViewCell
-        else { return }
+              let user = tableView.cellForRow(at: selectedRow) as? SortFriendTableViewCell else { return }
+        Session.shared.userId = user.userId
         performSegue(withIdentifier: Constants.sortAnimatedSegueIdentifier, sender: userPhotoImages)
     }
 
@@ -80,6 +76,9 @@ final class SortFriendsTableViewController: UITableViewController {
             self.sectionTitles = Array(self.sectionsMap.keys)
             self.sectionTitles.sort(by: { $1 > $0 })
             self.fetchPhoto()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+                self.tableView.reloadData()
+            }
         }
     }
 
@@ -133,7 +132,7 @@ extension SortFriendsTableViewController {
             let surname = namesMap[sectionTitles[indexPath.section]]?[indexPath.row],
             let image = decodePhotosMap[sectionTitles[indexPath.section]]?[indexPath.row]
         else { return UITableViewCell() }
-        cell.configure(name: name, surname: surname, photo: image)
+        cell.configure(name: name, surname: surname, photo: image, item: items[indexPath.item])
         return cell
     }
 
