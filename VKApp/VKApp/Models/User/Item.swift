@@ -11,6 +11,10 @@ final class Item: Object, Decodable {
     @objc dynamic var photo = ""
     @objc dynamic var userId = 0
 
+    override static func primaryKey() -> String? {
+        "userId"
+    }
+
     enum CodingKeys: String, CodingKey {
         case firstName = "first_name"
         case lastName = "last_name"

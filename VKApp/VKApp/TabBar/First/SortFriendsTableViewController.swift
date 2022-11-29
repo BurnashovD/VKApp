@@ -80,7 +80,9 @@ final class SortFriendsTableViewController: UITableViewController {
                     images.append(safeImage)
                     self.decodePhotosMap[photo.key] = images
                     if self.decodePhotosMap.count == self.imagesMap.count {
-                        self.tableView.reloadData()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+                            self.tableView.reloadData()
+                        }
                     }
                 }
             }

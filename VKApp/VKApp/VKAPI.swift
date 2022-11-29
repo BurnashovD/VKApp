@@ -3,7 +3,7 @@
 
 import Alamofire
 import Foundation
-import RealmSwift
+import Realm
 
 /// Получение данных с ВК
 final class NetworkService {
