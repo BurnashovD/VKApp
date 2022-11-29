@@ -5,19 +5,34 @@ import Foundation
 import RealmSwift
 
 /// Groups items
+@objcMembers
 final class Groups: Object, Codable {
-    @objc dynamic var name = ""
-    @objc dynamic var photo = ""
+    // MARK: - Public properties
+
+    dynamic var id = 0
+    dynamic var name = ""
+    dynamic var photo = ""
+
+    // MARK: - enum
 
     enum CodingKeys: String, CodingKey {
-        case name
+        case id, name
         case photo = "photo_100"
     }
+
+    // MARK: - init
 
     convenience init(from decoder: Decoder) throws {
         self.init()
         let container = try decoder.container(keyedBy: CodingKeys.self)
         name = try container.decode(String.self, forKey: .name)
         photo = try container.decode(String.self, forKey: .photo)
+        id = try container.decode(Int.self, forKey: .id)
+    }
+
+    // MARK: - Public methods
+
+    override static func primaryKey() -> String? {
+        "id"
     }
 }

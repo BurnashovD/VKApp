@@ -9,8 +9,10 @@ final class PhotosCollectionViewController: UICollectionViewController {
     // MARK: - Private properties
 
     private let networkService = NetworkService()
+    private let realmService = RealmService()
 
     private var photosUrlPath: [String] = []
+    private var photos: [Size] = []
     private var userId = 0
 
     // MARK: - LifeCycle
@@ -41,7 +43,15 @@ final class PhotosCollectionViewController: UICollectionViewController {
             String(userId)
         ) { [weak self] item in
             guard let self = self else { return }
+            self.getPhotosData()
             self.photosUrlPath = item
+        }
+    }
+
+    private func getPhotosData() {
+        realmService.getData(Size.self) { [weak self] photo in
+            guard let self = self else { return }
+            self.photos = photo
             self.collectionView.reloadData()
         }
     }
@@ -67,7 +77,7 @@ extension PhotosCollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        photosUrlPath.count
+        photos.count
     }
 
     override func collectionView(
@@ -78,7 +88,7 @@ extension PhotosCollectionViewController {
             withReuseIdentifier: Constants.photosCellIdentifier,
             for: indexPath
         ) as? PhotosCollectionViewCell else { return UICollectionViewCell() }
-        cell.configure(photosUrlPath[indexPath.row], networkService: networkService)
+        cell.configure(photos[indexPath.row], networkService: networkService)
         cell.animatePhotosCellsAction()
         return cell
     }

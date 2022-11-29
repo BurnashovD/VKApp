@@ -5,15 +5,16 @@ import Foundation
 import RealmSwift
 
 /// User items
+@objcMembers
 final class Item: Object, Decodable {
-    @objc dynamic var firstName = ""
-    @objc dynamic var lastName = ""
-    @objc dynamic var photo = ""
-    @objc dynamic var userId = 0
+    // MARK: - Public properties
 
-    override static func primaryKey() -> String? {
-        "userId"
-    }
+    dynamic var firstName = ""
+    dynamic var lastName = ""
+    dynamic var photo = ""
+    dynamic var userId = 0
+
+    // MARK: - enum
 
     enum CodingKeys: String, CodingKey {
         case firstName = "first_name"
@@ -22,6 +23,8 @@ final class Item: Object, Decodable {
         case photo = "photo_100"
     }
 
+    // MARK: - init
+
     convenience init(from decoder: Decoder) throws {
         self.init()
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -29,5 +32,11 @@ final class Item: Object, Decodable {
         lastName = try container.decode(String.self, forKey: .lastName)
         userId = try container.decode(Int.self, forKey: .userId)
         photo = try container.decode(String.self, forKey: .photo)
+    }
+
+    // MARK: - Public methods
+
+    override static func primaryKey() -> String? {
+        "userId"
     }
 }

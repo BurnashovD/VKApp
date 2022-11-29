@@ -9,6 +9,7 @@ final class SortFriendsTableViewController: UITableViewController {
     // MARK: - Private properties
 
     private let networkService = NetworkService()
+    private let realmService = RealmService()
 
     private var items: [Item] = []
     private var sectionsMap = [Character: [String]]()
@@ -62,7 +63,14 @@ final class SortFriendsTableViewController: UITableViewController {
             parametrMap: networkService.fetchFriendsParametrName
         ) { [weak self] item in
             guard let self = self else { return }
-            self.items = item
+            self.getFriendsData()
+        }
+    }
+
+    private func getFriendsData() {
+        realmService.getData(Item.self) { [weak self] friend in
+            guard let self = self else { return }
+            self.items = friend
             self.createSections()
             self.sectionTitles = Array(self.sectionsMap.keys)
             self.sectionTitles.sort(by: { $1 > $0 })

@@ -1,6 +1,7 @@
 // FriendsTableViewController.swift
 // Copyright © RoadMap. All rights reserved.
 
+import RealmSwift
 import UIKit
 
 /// Экран с друзьями пользователя
@@ -9,8 +10,10 @@ final class FriendsTableViewController: UITableViewController {
 
     private let cellTypes: [CellTypes] = [.friends, .recomendations]
     private let networkService = NetworkService()
+    private let realmService = RealmService()
 
     private var items: [Item] = []
+    private var itemsResult: Results<Item>?
     private var userId = 0
 
     // MARK: - LifeCycle
@@ -44,7 +47,14 @@ final class FriendsTableViewController: UITableViewController {
         networkService.fetchUsers(
             Constants.friendsMethodName,
             parametrMap: networkService.fetchFriendsParametrName
-        ) { [weak self] item in
+        ) { [weak self] _ in
+            guard let self = self else { return }
+            self.getFriendsData()
+        }
+    }
+
+    private func getFriendsData() {
+        realmService.getData(Item.self) { [weak self] item in
             guard let self = self else { return }
             self.items = item
             self.tableView.reloadData()

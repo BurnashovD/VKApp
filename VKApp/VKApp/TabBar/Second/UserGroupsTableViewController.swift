@@ -21,6 +21,7 @@ final class UserGroupsTableViewController: UITableViewController {
     // MARK: - Private properties
 
     private let networkService = NetworkService()
+    private let realmService = RealmService()
 
     private var searchResult: [Groups] = []
     private var groups: [Groups] = []
@@ -43,9 +44,16 @@ final class UserGroupsTableViewController: UITableViewController {
         networkService.fetchGroup(
             Constants.methodName,
             parametrMap: networkService.userGroupParametrsNames
-        ) { [weak self] items in
+        ) { [weak self] _ in
             guard let self = self else { return }
-            self.groups = items
+            self.getGroupsData()
+        }
+    }
+
+    private func getGroupsData() {
+        realmService.getData(Groups.self) { [weak self] group in
+            guard let self = self else { return }
+            self.groups = group
             self.searchResult = self.groups
             self.tableView.reloadData()
         }
