@@ -1,6 +1,7 @@
 // UserGroupsTableViewController.swift
 // Copyright © RoadMap. All rights reserved.
 
+import RealmSwift
 import UIKit
 
 /// Группы пользователей
@@ -23,6 +24,8 @@ final class UserGroupsTableViewController: UITableViewController {
     private let networkService = NetworkService()
     private let realmService = RealmService()
 
+    private var notificationToken: NotificationToken?
+    private var groupsResults: Results<Groups>?
     private var searchResult: [Groups] = []
     private var groups: [Groups] = []
 
@@ -32,6 +35,7 @@ final class UserGroupsTableViewController: UITableViewController {
         super.viewDidLoad()
         configController()
         fetchUsersGroups()
+        addNotificationToken()
     }
 
     // MARK: - Private methods
@@ -53,9 +57,29 @@ final class UserGroupsTableViewController: UITableViewController {
     private func getGroupsData() {
         realmService.getData(Groups.self) { [weak self] group in
             guard let self = self else { return }
-            self.groups = group
+            self.groupsResults = group
+            self.groups = Array(self.groupsResults ?? group)
             self.searchResult = self.groups
             self.tableView.reloadData()
+        }
+    }
+
+    private func addNotificationToken() {
+        getGroupsData()
+        notificationToken = groupsResults?.observe { [weak self] (changes: RealmCollectionChange) in
+            guard let self = self else { return }
+            switch changes {
+            case .initial:
+                self.tableView.reloadData()
+            case let .update(_, deletions, insertions, modifications):
+                self.tableView.beginUpdates()
+                self.tableView.insertRows(at: insertions.map { IndexPath(row: $0, section: 0) }, with: .automatic)
+                self.tableView.deleteRows(at: deletions.map { IndexPath(row: $0, section: 0) }, with: .automatic)
+                self.tableView.reloadRows(at: modifications.map { IndexPath(row: $0, section: 0) }, with: .automatic)
+                self.tableView.endUpdates()
+            case let .error(error):
+                print(error)
+            }
         }
     }
 }
@@ -80,7 +104,7 @@ extension UserGroupsTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        searchResult.count
+        groupsResults?.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -88,7 +112,8 @@ extension UserGroupsTableViewController {
             withIdentifier: Constants.groupsCellIdentifier,
             for: indexPath
         ) as? GroupTableViewCell else { return UITableViewCell() }
-        cell.configure(searchResult[indexPath.row], networkService: networkService)
+        guard let result = groupsResults else { return UITableViewCell() }
+        cell.configure(result[indexPath.row], networkService: networkService)
 
         return cell
     }
@@ -98,9 +123,8 @@ extension UserGroupsTableViewController {
         commit editingStyle: UITableViewCell.EditingStyle,
         forRowAt indexPath: IndexPath
     ) {
-        guard editingStyle == .delete else { return }
-        searchResult.remove(at: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: .automatic)
+        guard editingStyle == .delete, let result = groupsResults else { return }
+        realmService.deleteRowAction(result[indexPath.row])
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

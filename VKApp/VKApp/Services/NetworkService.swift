@@ -1,4 +1,4 @@
-// VKAPI.swift
+// NetworkService.swift
 // Copyright © RoadMap. All rights reserved.
 
 import Alamofire
@@ -63,7 +63,6 @@ final class NetworkService {
         ]
         let url = "\(Constants.baseURLText)\(Constants.methodText)\(method)"
         AF.request(url, parameters: parametrs).responseJSON { response in
-            print("haha \(response.response?.url)")
             guard let data = response.data else { return }
             do {
                 guard let usersResults = try? JSONDecoder().decode(PhotoResult.self, from: data).response.items

@@ -2,6 +2,7 @@
 // Copyright © RoadMap. All rights reserved.
 
 import Alamofire
+import RealmSwift
 import UIKit
 
 ///  Сортированный список друзей
@@ -12,6 +13,8 @@ final class SortFriendsTableViewController: UITableViewController {
     private let realmService = RealmService()
 
     private var items: [Item] = []
+    private var notificationToken: NotificationToken?
+    private var itemsResult: Results<Item>?
     private var sectionsMap = [Character: [String]]()
     private var namesMap = [Character: [String]]()
     private var imagesMap = [Character: [String]]()
@@ -26,6 +29,7 @@ final class SortFriendsTableViewController: UITableViewController {
         super.viewDidLoad()
         fetchFriends()
         configUI()
+        addNotificationToken()
     }
 
     // MARK: - Private methods
@@ -61,7 +65,7 @@ final class SortFriendsTableViewController: UITableViewController {
         networkService.fetchUsers(
             Constants.friendsMethodName,
             parametrMap: networkService.fetchFriendsParametrName
-        ) { [weak self] item in
+        ) { [weak self] _ in
             guard let self = self else { return }
             self.getFriendsData()
         }
@@ -70,11 +74,30 @@ final class SortFriendsTableViewController: UITableViewController {
     private func getFriendsData() {
         realmService.getData(Item.self) { [weak self] friend in
             guard let self = self else { return }
-            self.items = friend
+            self.itemsResult = friend
+            self.items = Array(self.itemsResult ?? friend)
             self.createSections()
             self.sectionTitles = Array(self.sectionsMap.keys)
             self.sectionTitles.sort(by: { $1 > $0 })
             self.fetchPhoto()
+        }
+    }
+
+    private func addNotificationToken() {
+        notificationToken = itemsResult?.observe { [weak self] (changes: RealmCollectionChange) in
+            guard let self = self else { return }
+            switch changes {
+            case .initial:
+                self.tableView.reloadData()
+            case let .update(_, deletions, insertions, modifications):
+                self.tableView.beginUpdates()
+                self.tableView.insertRows(at: insertions.map { IndexPath(row: $0, section: 0) }, with: .automatic)
+                self.tableView.deleteRows(at: deletions.map { IndexPath(row: $0, section: 0) }, with: .automatic)
+                self.tableView.reloadRows(at: modifications.map { IndexPath(row: $0, section: 0) }, with: .automatic)
+                self.tableView.endUpdates()
+            case let .error(error):
+                print(error)
+            }
         }
     }
 
@@ -88,7 +111,7 @@ final class SortFriendsTableViewController: UITableViewController {
                     images.append(safeImage)
                     self.decodePhotosMap[photo.key] = images
                     if self.decodePhotosMap.count == self.imagesMap.count {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                             self.tableView.reloadData()
                         }
                     }

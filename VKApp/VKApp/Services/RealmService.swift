@@ -1,4 +1,4 @@
-// Realm.swift
+// RealmService.swift
 // Copyright © RoadMap. All rights reserved.
 
 import Foundation
@@ -6,6 +6,8 @@ import RealmSwift
 
 /// Сохранение данных Realm
 struct RealmService {
+    private var notificationToken: NotificationToken?
+
     // MARK: - Public methods
 
     func saveData<T>(_ model: [T]) where T: Object {
@@ -14,18 +16,30 @@ struct RealmService {
             let realm = try Realm(configuration: config)
             realm.beginWrite()
             realm.add(model, update: .all)
+            print(realm.configuration.fileURL)
             try realm.commitWrite()
         } catch {
             print(error)
         }
     }
 
-    func getData<T>(_ model: T.Type, _ completion: @escaping ([T]) -> Void) where T: Object {
+    func getData<T>(_ model: T.Type, _ completion: @escaping (Results<T>) -> Void) where T: Object {
         do {
             let realm = try Realm()
             let objects = realm.objects(model)
-            let result = Array(objects)
-            completion(result)
+            completion(objects)
+        } catch {
+            print(error)
+        }
+    }
+
+    func deleteRowAction<T>(_ model: T) where T: Object {
+        do {
+            let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
+            let realm = try Realm(configuration: config)
+            realm.beginWrite()
+            realm.delete(model)
+            try realm.commitWrite()
         } catch {
             print(error)
         }

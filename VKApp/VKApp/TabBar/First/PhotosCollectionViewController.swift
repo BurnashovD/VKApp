@@ -2,6 +2,7 @@
 // Copyright © RoadMap. All rights reserved.
 
 import Alamofire
+import RealmSwift
 import UIKit
 
 /// Экран фотографий пользователя
@@ -10,7 +11,9 @@ final class PhotosCollectionViewController: UICollectionViewController {
 
     private let networkService = NetworkService()
     private let realmService = RealmService()
+    private let photoResult = Size()
 
+    private var notificationToken: NotificationToken?
     private var photosUrlPath: [String] = []
     private var photos: [Size] = []
     private var userId = 0
@@ -20,6 +23,7 @@ final class PhotosCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchPhotos()
+        addNotificationToken()
     }
 
     // MARK: - Public methods
@@ -51,8 +55,36 @@ final class PhotosCollectionViewController: UICollectionViewController {
     private func getPhotosData() {
         realmService.getData(Size.self) { [weak self] photo in
             guard let self = self else { return }
-            self.photos = photo
+            self.photos = Array(photo)
+            self.notifySubscript()
             self.collectionView.reloadData()
+        }
+    }
+
+    private func notifySubscript() {
+        do {
+            let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
+            let realm = try Realm(configuration: config)
+            realm.beginWrite()
+            realm.add(photoResult, update: .all)
+            try realm.commitWrite()
+        } catch {
+            print(error)
+        }
+    }
+
+    private func addNotificationToken() {
+        getPhotosData()
+        notificationToken = photoResult.observe { [weak self] changes in
+            guard let self = self else { return }
+            switch changes {
+            case .change:
+                self.fetchPhotos()
+            case .deleted:
+                self.fetchPhotos()
+            case let .error(error):
+                print(error)
+            }
         }
     }
 }

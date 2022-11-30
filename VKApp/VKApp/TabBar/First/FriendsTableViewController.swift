@@ -10,8 +10,9 @@ final class FriendsTableViewController: UITableViewController {
 
     private let cellTypes: [CellTypes] = [.friends, .recomendations]
     private let networkService = NetworkService()
-    private let realmService = RealmService()
+    private var realmService = RealmService()
 
+    private var notificationToken: NotificationToken?
     private var items: [Item] = []
     private var itemsResult: Results<Item>?
     private var userId = 0
@@ -21,6 +22,7 @@ final class FriendsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchFriends()
+        addNotificationToken()
     }
 
     // MARK: - Public methods
@@ -56,8 +58,29 @@ final class FriendsTableViewController: UITableViewController {
     private func getFriendsData() {
         realmService.getData(Item.self) { [weak self] item in
             guard let self = self else { return }
-            self.items = item
+            self.itemsResult = item
+            self.items = Array(item)
             self.tableView.reloadData()
+        }
+    }
+
+    private func addNotificationToken() {
+        guard let result = itemsResult else { return }
+        notificationToken = result.observe { [weak self] (changes: RealmCollectionChange) in
+            guard let self = self else { return }
+            self.tableView.beginUpdates()
+            switch changes {
+            case .initial:
+                self.tableView.reloadData()
+            case let .update(_, deletions, insertions, modifications):
+                self.tableView.insertRows(at: insertions.map { IndexPath(row: $0, section: 0) }, with: .automatic)
+                self.tableView.deleteRows(at: deletions.map { IndexPath(row: $0, section: 0) }, with: .automatic)
+                self.tableView.reloadRows(at: modifications.map { IndexPath(row: $0, section: 0) }, with: .automatic)
+                self.tableView.reloadData()
+            case let .error(error):
+                print(error)
+            }
+            self.tableView.endUpdates()
         }
     }
 }
@@ -95,11 +118,12 @@ extension FriendsTableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let type = cellTypes[section]
+        guard let resultsCount = itemsResult?.count else { return 0 }
         switch type {
         case .friends:
-            return items.count
+            return resultsCount
         case .recomendations:
-            return 1
+            return 0
         }
     }
 
@@ -110,9 +134,8 @@ extension FriendsTableViewController {
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: Constants.friendsCellIdentifier,
                 for: indexPath
-            ) as? FriendTableViewCell else { return UITableViewCell() }
-
-            cell.configure(items[indexPath.row], networkService: networkService)
+            ) as? FriendTableViewCell, let results = itemsResult else { return UITableViewCell() }
+            cell.configure(results[indexPath.row], networkService: networkService)
 
             return cell
 
