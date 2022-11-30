@@ -6,6 +6,8 @@ import RealmSwift
 
 /// Сохранение данных Realm
 struct RealmService {
+    // MARK: - Private properties
+
     private var notificationToken: NotificationToken?
 
     // MARK: - Public methods

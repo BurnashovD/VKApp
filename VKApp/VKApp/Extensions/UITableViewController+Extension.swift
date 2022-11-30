@@ -31,7 +31,3 @@ extension UITableViewController {
         present(activity, animated: true)
     }
 }
-
-extension Item {
-    func blabla() {}
-}

@@ -10,7 +10,7 @@ final class FriendsTableViewController: UITableViewController {
 
     private let cellTypes: [CellTypes] = [.friends, .recomendations]
     private let networkService = NetworkService()
-    private var realmService = RealmService()
+    private let realmService = RealmService()
 
     private var notificationToken: NotificationToken?
     private var items: [Item] = []
