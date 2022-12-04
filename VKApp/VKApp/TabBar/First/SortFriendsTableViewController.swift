@@ -67,12 +67,12 @@ final class SortFriendsTableViewController: UITableViewController {
             parametrMap: networkService.fetchFriendsParametrName
         ) { [weak self] _ in
             guard let self = self else { return }
-            self.getFriendsData()
+            self.loadData()
         }
     }
 
-    private func getFriendsData() {
-        realmService.getData(Item.self) { [weak self] friend in
+    private func loadData() {
+        realmService.loadData(Item.self) { [weak self] friend in
             guard let self = self else { return }
             self.itemsResult = friend
             self.items = Array(self.itemsResult ?? friend)

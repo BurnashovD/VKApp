@@ -50,12 +50,12 @@ final class UserGroupsTableViewController: UITableViewController {
             parametrMap: networkService.userGroupParametrsNames
         ) { [weak self] _ in
             guard let self = self else { return }
-            self.getGroupsData()
+            self.loadData()
         }
     }
 
-    private func getGroupsData() {
-        realmService.getData(Groups.self) { [weak self] group in
+    private func loadData() {
+        realmService.loadData(Groups.self) { [weak self] group in
             guard let self = self else { return }
             self.groupsResults = group
             self.groups = Array(self.groupsResults ?? group)
@@ -65,7 +65,7 @@ final class UserGroupsTableViewController: UITableViewController {
     }
 
     private func addNotificationToken() {
-        getGroupsData()
+        loadData()
         notificationToken = groupsResults?.observe { [weak self] (changes: RealmCollectionChange) in
             guard let self = self else { return }
             switch changes {
@@ -78,7 +78,7 @@ final class UserGroupsTableViewController: UITableViewController {
                 self.tableView.reloadRows(at: modifications.map { IndexPath(row: $0, section: 0) }, with: .automatic)
                 self.tableView.endUpdates()
             case let .error(error):
-                print(error)
+                print(error.localizedDescription)
             }
         }
     }
@@ -111,8 +111,7 @@ extension UserGroupsTableViewController {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: Constants.groupsCellIdentifier,
             for: indexPath
-        ) as? GroupTableViewCell else { return UITableViewCell() }
-        guard let result = groupsResults else { return UITableViewCell() }
+        ) as? GroupTableViewCell, let result = groupsResults else { return UITableViewCell() }
         cell.configure(result[indexPath.row], networkService: networkService)
 
         return cell

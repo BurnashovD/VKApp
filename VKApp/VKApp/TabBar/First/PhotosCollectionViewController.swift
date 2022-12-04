@@ -11,11 +11,11 @@ final class PhotosCollectionViewController: UICollectionViewController {
 
     private let networkService = NetworkService()
     private let realmService = RealmService()
-    private let photoResult = Size()
+    private let sizeResult = Size()
 
     private var notificationToken: NotificationToken?
     private var photosUrlPath: [String] = []
-    private var photos: [Size] = []
+    private var sizes: [Size] = []
     private var userId = 0
 
     // MARK: - LifeCycle
@@ -47,35 +47,27 @@ final class PhotosCollectionViewController: UICollectionViewController {
             String(userId)
         ) { [weak self] item in
             guard let self = self else { return }
-            self.getPhotosData()
+            self.loadData()
             self.photosUrlPath = item
         }
     }
 
-    private func getPhotosData() {
-        realmService.getData(Size.self) { [weak self] photo in
+    private func loadData() {
+        realmService.loadData(Size.self) { [weak self] photo in
             guard let self = self else { return }
-            self.photos = Array(photo)
+            self.sizes = Array(photo)
             self.notifySubscript()
             self.collectionView.reloadData()
         }
     }
 
     private func notifySubscript() {
-        do {
-            let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
-            let realm = try Realm(configuration: config)
-            realm.beginWrite()
-            realm.add(photoResult, update: .all)
-            try realm.commitWrite()
-        } catch {
-            print(error)
-        }
+        realmService.saveData([sizeResult])
     }
 
     private func addNotificationToken() {
-        getPhotosData()
-        notificationToken = photoResult.observe { [weak self] changes in
+        loadData()
+        notificationToken = sizeResult.observe { [weak self] changes in
             guard let self = self else { return }
             switch changes {
             case .change:
@@ -83,7 +75,7 @@ final class PhotosCollectionViewController: UICollectionViewController {
             case .deleted:
                 self.fetchPhotos()
             case let .error(error):
-                print(error)
+                print(error.localizedDescription)
             }
         }
     }
@@ -109,7 +101,7 @@ extension PhotosCollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        photos.count
+        sizes.count
     }
 
     override func collectionView(
@@ -120,7 +112,7 @@ extension PhotosCollectionViewController {
             withReuseIdentifier: Constants.photosCellIdentifier,
             for: indexPath
         ) as? PhotosCollectionViewCell else { return UICollectionViewCell() }
-        cell.configure(photos[indexPath.row], networkService: networkService)
+        cell.configure(sizes[indexPath.row], networkService: networkService)
         cell.animatePhotosCellsAction()
         return cell
     }

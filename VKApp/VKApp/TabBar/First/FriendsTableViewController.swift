@@ -51,12 +51,12 @@ final class FriendsTableViewController: UITableViewController {
             parametrMap: networkService.fetchFriendsParametrName
         ) { [weak self] _ in
             guard let self = self else { return }
-            self.getFriendsData()
+            self.loadData()
         }
     }
 
-    private func getFriendsData() {
-        realmService.getData(Item.self) { [weak self] item in
+    private func loadData() {
+        realmService.loadData(Item.self) { [weak self] item in
             guard let self = self else { return }
             self.itemsResult = item
             self.items = Array(item)
@@ -78,7 +78,7 @@ final class FriendsTableViewController: UITableViewController {
                 self.tableView.reloadRows(at: modifications.map { IndexPath(row: $0, section: 0) }, with: .automatic)
                 self.tableView.reloadData()
             case let .error(error):
-                print(error)
+                print(error.localizedDescription)
             }
             self.tableView.endUpdates()
         }

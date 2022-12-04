@@ -18,20 +18,19 @@ struct RealmService {
             let realm = try Realm(configuration: config)
             realm.beginWrite()
             realm.add(model, update: .all)
-            print(realm.configuration.fileURL)
             try realm.commitWrite()
         } catch {
-            print(error)
+            print(error.localizedDescription)
         }
     }
 
-    func getData<T>(_ model: T.Type, _ completion: @escaping (Results<T>) -> Void) where T: Object {
+    func loadData<T>(_ model: T.Type, _ completion: @escaping (Results<T>) -> Void) where T: Object {
         do {
             let realm = try Realm()
             let objects = realm.objects(model)
             completion(objects)
         } catch {
-            print(error)
+            print(error.localizedDescription)
         }
     }
 
@@ -43,7 +42,7 @@ struct RealmService {
             realm.delete(model)
             try realm.commitWrite()
         } catch {
-            print(error)
+            print(error.localizedDescription)
         }
     }
 }
