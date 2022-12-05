@@ -15,10 +15,6 @@
 		A50F15522919A3F10029C985 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F15512919A3F10029C985 /* MainTableViewController.swift */; };
 		A50F15542919A5460029C985 /* PostsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F15532919A5460029C985 /* PostsTableViewCell.swift */; };
 		A50F15562919A5810029C985 /* Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F15552919A5810029C985 /* Posts.swift */; };
-		A50F15582919A7410029C985 /* StoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F15572919A7410029C985 /* StoriesTableViewCell.swift */; };
-		A50F155A2919B0160029C985 /* StoriesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F15592919B0160029C985 /* StoriesCollectionViewController.swift */; };
-		A50F155C2919B0270029C985 /* StorieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F155B2919B0270029C985 /* StorieCollectionViewCell.swift */; };
-		A50F155E2919B1A30029C985 /* Storie.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F155D2919B1A30029C985 /* Storie.swift */; };
 		A516BC3029104307008802FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516BC2F29104307008802FC /* AppDelegate.swift */; };
 		A516BC3229104307008802FC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516BC3129104307008802FC /* SceneDelegate.swift */; };
 		A516BC3429104307008802FC /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516BC3329104307008802FC /* LogInViewController.swift */; };
@@ -29,6 +25,9 @@
 		A516BC5329104308008802FC /* VKAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516BC5229104308008802FC /* VKAppUITestsLaunchTests.swift */; };
 		A516BC9E29108929008802FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A516BC9D29108929008802FC /* Assets.xcassets */; };
 		A516BCA02910A2F0008802FC /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516BC9F2910A2F0008802FC /* RegistrationViewController.swift */; };
+		A5424094293E8F9E00E3EFF3 /* AuthorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5424093293E8F9E00E3EFF3 /* AuthorTableViewCell.swift */; };
+		A5424096293E8FD500E3EFF3 /* PostTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5424095293E8FD500E3EFF3 /* PostTextTableViewCell.swift */; };
+		A5424098293E8FED00E3EFF3 /* PostPhotoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5424097293E8FED00E3EFF3 /* PostPhotoTableViewCell.swift */; };
 		A5463A82292EFF0F00BBC5E0 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5463A81292EFF0F00BBC5E0 /* Photo.swift */; };
 		A5463A892933ABC500BBC5E0 /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5463A882933ABC500BBC5E0 /* UserResponse.swift */; };
 		A5463A8B2933ABEB00BBC5E0 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5463A8A2933ABEB00BBC5E0 /* Item.swift */; };
@@ -93,10 +92,6 @@
 		A50F15512919A3F10029C985 /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
 		A50F15532919A5460029C985 /* PostsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsTableViewCell.swift; sourceTree = "<group>"; };
 		A50F15552919A5810029C985 /* Posts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Posts.swift; sourceTree = "<group>"; };
-		A50F15572919A7410029C985 /* StoriesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesTableViewCell.swift; sourceTree = "<group>"; };
-		A50F15592919B0160029C985 /* StoriesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesCollectionViewController.swift; sourceTree = "<group>"; };
-		A50F155B2919B0270029C985 /* StorieCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorieCollectionViewCell.swift; sourceTree = "<group>"; };
-		A50F155D2919B1A30029C985 /* Storie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storie.swift; sourceTree = "<group>"; };
 		A516BC2C29104307008802FC /* VKApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A516BC2F29104307008802FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A516BC3129104307008802FC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -111,6 +106,9 @@
 		A516BC5229104308008802FC /* VKAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		A516BC9D29108929008802FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A516BC9F2910A2F0008802FC /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		A5424093293E8F9E00E3EFF3 /* AuthorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorTableViewCell.swift; sourceTree = "<group>"; };
+		A5424095293E8FD500E3EFF3 /* PostTextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTextTableViewCell.swift; sourceTree = "<group>"; };
+		A5424097293E8FED00E3EFF3 /* PostPhotoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPhotoTableViewCell.swift; sourceTree = "<group>"; };
 		A5463A81292EFF0F00BBC5E0 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		A5463A882933ABC500BBC5E0 /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
 		A5463A8A2933ABEB00BBC5E0 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
@@ -196,10 +194,10 @@
 			isa = PBXGroup;
 			children = (
 				A50F15512919A3F10029C985 /* MainTableViewController.swift */,
-				A50F15572919A7410029C985 /* StoriesTableViewCell.swift */,
+				A5424093293E8F9E00E3EFF3 /* AuthorTableViewCell.swift */,
+				A5424095293E8FD500E3EFF3 /* PostTextTableViewCell.swift */,
+				A5424097293E8FED00E3EFF3 /* PostPhotoTableViewCell.swift */,
 				A50F15532919A5460029C985 /* PostsTableViewCell.swift */,
-				A50F15592919B0160029C985 /* StoriesCollectionViewController.swift */,
-				A50F155B2919B0270029C985 /* StorieCollectionViewCell.swift */,
 			);
 			path = Thrird;
 			sourceTree = "<group>";
@@ -211,7 +209,6 @@
 				A5463A862933AB7D00BBC5E0 /* Photo */,
 				A5463A852933AB7700BBC5E0 /* User */,
 				A50F15552919A5810029C985 /* Posts.swift */,
-				A50F155D2919B1A30029C985 /* Storie.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -678,6 +675,7 @@
 				A5463A8B2933ABEB00BBC5E0 /* Item.swift in Sources */,
 				A5FA31B5291D8566008CE86C /* CustomPushAnimation.swift in Sources */,
 				A5F3D66F2911C926004EB22A /* PhotosCollectionViewController.swift in Sources */,
+				A5424098293E8FED00E3EFF3 /* PostPhotoTableViewCell.swift in Sources */,
 				A5463A8F2933AC6C00BBC5E0 /* Size.swift in Sources */,
 				A5B2212D29130874005363EE /* PhotosCollectionViewCell.swift in Sources */,
 				A5463A82292EFF0F00BBC5E0 /* Photo.swift in Sources */,
@@ -687,16 +685,16 @@
 				A50F15522919A3F10029C985 /* MainTableViewController.swift in Sources */,
 				A516BCA02910A2F0008802FC /* RegistrationViewController.swift in Sources */,
 				A5B2212F291339D0005363EE /* GroupTableViewCell.swift in Sources */,
-				A50F155C2919B0270029C985 /* StorieCollectionViewCell.swift in Sources */,
 				A56618892934376900B9A28F /* UIImageView+Extension.swift in Sources */,
 				A59F0499292BF32900D57EFA /* SessionSingleton.swift in Sources */,
 				A507CFED291A897A00076C3A /* SortFriendTableViewCell.swift in Sources */,
 				A50F15542919A5460029C985 /* PostsTableViewCell.swift in Sources */,
 				A5B2213D2915AA74005363EE /* Group.swift in Sources */,
-				A50F155A2919B0160029C985 /* StoriesCollectionViewController.swift in Sources */,
 				A5B221292912CB50005363EE /* RecomendationsTableViewCell.swift in Sources */,
 				A5B221252912BED9005363EE /* User.swift in Sources */,
 				A566188729342EBE00B9A28F /* RealmService.swift in Sources */,
+				A5424094293E8F9E00E3EFF3 /* AuthorTableViewCell.swift in Sources */,
+				A5424096293E8FD500E3EFF3 /* PostTextTableViewCell.swift in Sources */,
 				A5056EA629129E4E0073D407 /* UIViewController+Extension.swift in Sources */,
 				A57B1DF72919E64E004A5A9A /* SortFriendsTableViewController.swift in Sources */,
 				A5F3D6712911C961004EB22A /* UserGroupsTableViewController.swift in Sources */,
@@ -716,9 +714,7 @@
 				A5FA31AB291C7C53008CE86C /* SortedFriendsPhotosViewController.swift in Sources */,
 				A5B2213929146CC5005363EE /* PhotoView.swift in Sources */,
 				A5463A912933ACA400BBC5E0 /* GroupResponse.swift in Sources */,
-				A50F15582919A7410029C985 /* StoriesTableViewCell.swift in Sources */,
 				A5A35F5A291C5E29007704ED /* FriendsPhotosViewController.swift in Sources */,
-				A50F155E2919B1A30029C985 /* Storie.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -910,7 +906,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "-.VKApp";
+				PRODUCT_BUNDLE_IDENTIFIER = "-.VKAp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -940,7 +936,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "-.VKApp";
+				PRODUCT_BUNDLE_IDENTIFIER = "-.VKAp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

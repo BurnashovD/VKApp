@@ -71,12 +71,12 @@ final class FriendsTableViewController: UITableViewController {
             self.tableView.beginUpdates()
             switch changes {
             case .initial:
-                self.tableView.reloadData()
+                self.tableView.beginUpdates()
             case let .update(_, deletions, insertions, modifications):
                 self.tableView.insertRows(at: insertions.map { IndexPath(row: $0, section: 0) }, with: .automatic)
                 self.tableView.deleteRows(at: deletions.map { IndexPath(row: $0, section: 0) }, with: .automatic)
                 self.tableView.reloadRows(at: modifications.map { IndexPath(row: $0, section: 0) }, with: .automatic)
-                self.tableView.reloadData()
+                self.tableView.endUpdates()
             case let .error(error):
                 print(error.localizedDescription)
             }

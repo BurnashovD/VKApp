@@ -7,8 +7,6 @@ import UIKit
 final class MainTableViewController: UITableViewController {
     // MARK: - Private properties
 
-    private let cellTypes: [CellTypes] = [.stories, .posts]
-
     private var posts: [Post] = []
 
     // MARK: - LifeCycle
@@ -65,7 +63,6 @@ extension MainTableViewController {
     }
 
     enum CellTypes {
-        case stories
         case posts
     }
 }
@@ -78,40 +75,21 @@ extension MainTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let type = cellTypes[section]
-        switch type {
-        case .stories:
-            return 1
-        case .posts:
-            return posts.count
-        }
+        posts.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let type = cellTypes[indexPath.section]
-        switch type {
-        case .stories:
-            guard let cell = tableView
-                .dequeueReusableCell(
-                    withIdentifier: Constants.storiesCellIdentifier,
-                    for: indexPath
-                ) as? StoriesTableViewCell
-            else { return UITableViewCell() }
-
-            return cell
-        case .posts:
-            guard let cell = tableView
-                .dequeueReusableCell(
-                    withIdentifier: Constants.postsCellIdentifier,
-                    for: indexPath
-                ) as? PostsTableViewCell
-            else { return UITableViewCell() }
-            cell.configure(posts[indexPath.row])
-            cell.callActivityHandler = { items in
-                self.callActivityAction(items: items)
-            }
-            return cell
+        guard let cell = tableView
+            .dequeueReusableCell(
+                withIdentifier: Constants.postsCellIdentifier,
+                for: indexPath
+            ) as? PostsTableViewCell
+        else { return UITableViewCell() }
+        cell.configure(posts[indexPath.row])
+        cell.callActivityHandler = { items in
+            self.callActivityAction(items: items)
         }
+        return cell
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
