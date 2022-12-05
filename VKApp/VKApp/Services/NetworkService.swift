@@ -1,9 +1,8 @@
-// VKAPI.swift
+// NetworkService.swift
 // Copyright © RoadMap. All rights reserved.
 
 import Alamofire
 import Foundation
-import RealmSwift
 
 /// Получение данных с ВК
 final class NetworkService {

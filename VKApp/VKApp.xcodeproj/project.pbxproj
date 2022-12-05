@@ -36,7 +36,7 @@
 		A5463A8F2933AC6C00BBC5E0 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5463A8E2933AC6C00BBC5E0 /* Size.swift */; };
 		A5463A912933ACA400BBC5E0 /* GroupResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5463A902933ACA400BBC5E0 /* GroupResponse.swift */; };
 		A5463A932933ACBC00BBC5E0 /* Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5463A922933ACBC00BBC5E0 /* Items.swift */; };
-		A566188729342EBE00B9A28F /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = A566188629342EBE00B9A28F /* Realm.swift */; };
+		A566188729342EBE00B9A28F /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A566188629342EBE00B9A28F /* RealmService.swift */; };
 		A56618892934376900B9A28F /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56618882934376900B9A28F /* UIImageView+Extension.swift */; };
 		A57B1DF72919E64E004A5A9A /* SortFriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57B1DF62919E64E004A5A9A /* SortFriendsTableViewController.swift */; };
 		A59F0499292BF32900D57EFA /* SessionSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59F0498292BF32900D57EFA /* SessionSingleton.swift */; };
@@ -52,7 +52,7 @@
 		A5B2213D2915AA74005363EE /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B2213C2915AA74005363EE /* Group.swift */; };
 		A5B2213F29185896005363EE /* UITableViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B2213E29185896005363EE /* UITableViewController+Extension.swift */; };
 		A5D9872F292D6A3800327582 /* VKWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D9872E292D6A3800327582 /* VKWebViewController.swift */; };
-		A5D98731292D79F700327582 /* VKAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D98730292D79F700327582 /* VKAPI.swift */; };
+		A5D98731292D79F700327582 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D98730292D79F700327582 /* NetworkService.swift */; };
 		A5F3D66B2911C8C6004EB22A /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F3D66A2911C8C6004EB22A /* FriendsTableViewController.swift */; };
 		A5F3D66F2911C926004EB22A /* PhotosCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F3D66E2911C926004EB22A /* PhotosCollectionViewController.swift */; };
 		A5F3D6712911C961004EB22A /* UserGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F3D6702911C961004EB22A /* UserGroupsTableViewController.swift */; };
@@ -118,7 +118,7 @@
 		A5463A8E2933AC6C00BBC5E0 /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
 		A5463A902933ACA400BBC5E0 /* GroupResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupResponse.swift; sourceTree = "<group>"; };
 		A5463A922933ACBC00BBC5E0 /* Items.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Items.swift; sourceTree = "<group>"; };
-		A566188629342EBE00B9A28F /* Realm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
+		A566188629342EBE00B9A28F /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		A56618882934376900B9A28F /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		A57B1DF62919E64E004A5A9A /* SortFriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortFriendsTableViewController.swift; sourceTree = "<group>"; };
 		A59F0498292BF32900D57EFA /* SessionSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionSingleton.swift; sourceTree = "<group>"; };
@@ -134,7 +134,7 @@
 		A5B2213C2915AA74005363EE /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		A5B2213E29185896005363EE /* UITableViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewController+Extension.swift"; sourceTree = "<group>"; };
 		A5D9872E292D6A3800327582 /* VKWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKWebViewController.swift; sourceTree = "<group>"; };
-		A5D98730292D79F700327582 /* VKAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKAPI.swift; sourceTree = "<group>"; };
+		A5D98730292D79F700327582 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		A5F3D66A2911C8C6004EB22A /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		A5F3D66E2911C926004EB22A /* PhotosCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewController.swift; sourceTree = "<group>"; };
 		A5F3D6702911C961004EB22A /* UserGroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupsTableViewController.swift; sourceTree = "<group>"; };
@@ -248,9 +248,8 @@
 				A50F15502919A3B60029C985 /* Models */,
 				A5FA31B0291D8269008CE86C /* CustomSegues */,
 				A5FA31B1291D82BE008CE86C /* Extensions */,
+				A592368F2936B8E600B49785 /* Services */,
 				A59F0498292BF32900D57EFA /* SessionSingleton.swift */,
-				A5D98730292D79F700327582 /* VKAPI.swift */,
-				A566188629342EBE00B9A28F /* Realm.swift */,
 				A516BC3529104307008802FC /* Main.storyboard */,
 				A516BC3A29104308008802FC /* LaunchScreen.storyboard */,
 				A516BC9D29108929008802FC /* Assets.xcassets */,
@@ -304,6 +303,15 @@
 				A5463A922933ACBC00BBC5E0 /* Items.swift */,
 			);
 			path = Group;
+			sourceTree = "<group>";
+		};
+		A592368F2936B8E600B49785 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A5D98730292D79F700327582 /* NetworkService.swift */,
+				A566188629342EBE00B9A28F /* RealmService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		A5B22130291339EF005363EE /* First */ = {
@@ -688,12 +696,12 @@
 				A50F155A2919B0160029C985 /* StoriesCollectionViewController.swift in Sources */,
 				A5B221292912CB50005363EE /* RecomendationsTableViewCell.swift in Sources */,
 				A5B221252912BED9005363EE /* User.swift in Sources */,
-				A566188729342EBE00B9A28F /* Realm.swift in Sources */,
+				A566188729342EBE00B9A28F /* RealmService.swift in Sources */,
 				A5056EA629129E4E0073D407 /* UIViewController+Extension.swift in Sources */,
 				A57B1DF72919E64E004A5A9A /* SortFriendsTableViewController.swift in Sources */,
 				A5F3D6712911C961004EB22A /* UserGroupsTableViewController.swift in Sources */,
 				A5463A892933ABC500BBC5E0 /* UserResponse.swift in Sources */,
-				A5D98731292D79F700327582 /* VKAPI.swift in Sources */,
+				A5D98731292D79F700327582 /* NetworkService.swift in Sources */,
 				A5F7D37E291D9A1C00FD3A10 /* CustomPopAnimation.swift in Sources */,
 				A5FA31B3291D83D6008CE86C /* CustomNavigationController.swift in Sources */,
 				A5F7D380291DA29000FD3A10 /* CustomInteractiveTransition.swift in Sources */,

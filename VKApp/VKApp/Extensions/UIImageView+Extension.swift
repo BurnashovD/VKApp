@@ -4,7 +4,7 @@
 import Alamofire
 import UIKit
 
-/// UIImageView Extension
+/// Fetch photo UIImageView Extension
 extension UIImageView {
     func fetchUserPhotos(_ url: String, networkService: NetworkService) {
         networkService.fetchUserPhotos(url) { [weak self] data in

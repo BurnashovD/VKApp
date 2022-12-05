@@ -30,8 +30,8 @@ final class PhotosCollectionViewCell: UICollectionViewCell {
         userPhotoImageView.layer.add(sizeAnimate, forKey: nil)
     }
 
-    func configure(_ imageURL: String, networkService: NetworkService) {
-        userPhotoImageView.fetchUserPhotos(imageURL, networkService: networkService)
+    func configure(_ imageURL: Size, networkService: NetworkService) {
+        userPhotoImageView.fetchUserPhotos(imageURL.url, networkService: networkService)
     }
 }
 

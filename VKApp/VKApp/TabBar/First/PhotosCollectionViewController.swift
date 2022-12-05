@@ -2,6 +2,7 @@
 // Copyright © RoadMap. All rights reserved.
 
 import Alamofire
+import RealmSwift
 import UIKit
 
 /// Экран фотографий пользователя
@@ -9,8 +10,12 @@ final class PhotosCollectionViewController: UICollectionViewController {
     // MARK: - Private properties
 
     private let networkService = NetworkService()
+    private let realmService = RealmService()
+    private let sizeResult = Size()
 
+    private var notificationToken: NotificationToken?
     private var photosUrlPath: [String] = []
+    private var sizes: [Size] = []
     private var userId = 0
 
     // MARK: - LifeCycle
@@ -18,6 +23,7 @@ final class PhotosCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchPhotos()
+        addNotificationToken()
     }
 
     // MARK: - Public methods
@@ -41,8 +47,36 @@ final class PhotosCollectionViewController: UICollectionViewController {
             String(userId)
         ) { [weak self] item in
             guard let self = self else { return }
+            self.loadData()
             self.photosUrlPath = item
+        }
+    }
+
+    private func loadData() {
+        realmService.loadData(Size.self) { [weak self] photo in
+            guard let self = self else { return }
+            self.sizes = Array(photo)
+            self.notifySubscript()
             self.collectionView.reloadData()
+        }
+    }
+
+    private func notifySubscript() {
+        realmService.saveData([sizeResult])
+    }
+
+    private func addNotificationToken() {
+        loadData()
+        notificationToken = sizeResult.observe { [weak self] changes in
+            guard let self = self else { return }
+            switch changes {
+            case .change:
+                self.fetchPhotos()
+            case .deleted:
+                self.fetchPhotos()
+            case let .error(error):
+                print(error.localizedDescription)
+            }
         }
     }
 }
@@ -67,7 +101,7 @@ extension PhotosCollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        photosUrlPath.count
+        sizes.count
     }
 
     override func collectionView(
@@ -78,7 +112,7 @@ extension PhotosCollectionViewController {
             withReuseIdentifier: Constants.photosCellIdentifier,
             for: indexPath
         ) as? PhotosCollectionViewCell else { return UICollectionViewCell() }
-        cell.configure(photosUrlPath[indexPath.row], networkService: networkService)
+        cell.configure(sizes[indexPath.row], networkService: networkService)
         cell.animatePhotosCellsAction()
         return cell
     }
