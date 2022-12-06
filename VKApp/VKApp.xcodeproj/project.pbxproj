@@ -37,6 +37,8 @@
 		A5463A932933ACBC00BBC5E0 /* Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5463A922933ACBC00BBC5E0 /* Items.swift */; };
 		A566188729342EBE00B9A28F /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A566188629342EBE00B9A28F /* RealmService.swift */; };
 		A56618892934376900B9A28F /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56618882934376900B9A28F /* UIImageView+Extension.swift */; };
+		A56C0751293ECAAF00183AA9 /* LikesAndCommentsControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56C0750293ECAAF00183AA9 /* LikesAndCommentsControl.swift */; };
+		A56C0753293ECF0600183AA9 /* LikesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56C0752293ECF0600183AA9 /* LikesTableViewCell.swift */; };
 		A57B1DF72919E64E004A5A9A /* SortFriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57B1DF62919E64E004A5A9A /* SortFriendsTableViewController.swift */; };
 		A59F0499292BF32900D57EFA /* SessionSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59F0498292BF32900D57EFA /* SessionSingleton.swift */; };
 		A5A35F5A291C5E29007704ED /* FriendsPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A35F59291C5E29007704ED /* FriendsPhotosViewController.swift */; };
@@ -118,6 +120,8 @@
 		A5463A922933ACBC00BBC5E0 /* Items.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Items.swift; sourceTree = "<group>"; };
 		A566188629342EBE00B9A28F /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		A56618882934376900B9A28F /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
+		A56C0750293ECAAF00183AA9 /* LikesAndCommentsControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesAndCommentsControl.swift; sourceTree = "<group>"; };
+		A56C0752293ECF0600183AA9 /* LikesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesTableViewCell.swift; sourceTree = "<group>"; };
 		A57B1DF62919E64E004A5A9A /* SortFriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortFriendsTableViewController.swift; sourceTree = "<group>"; };
 		A59F0498292BF32900D57EFA /* SessionSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionSingleton.swift; sourceTree = "<group>"; };
 		A5A35F59291C5E29007704ED /* FriendsPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsPhotosViewController.swift; sourceTree = "<group>"; };
@@ -197,7 +201,9 @@
 				A5424093293E8F9E00E3EFF3 /* AuthorTableViewCell.swift */,
 				A5424095293E8FD500E3EFF3 /* PostTextTableViewCell.swift */,
 				A5424097293E8FED00E3EFF3 /* PostPhotoTableViewCell.swift */,
+				A56C0752293ECF0600183AA9 /* LikesTableViewCell.swift */,
 				A50F15532919A5460029C985 /* PostsTableViewCell.swift */,
+				A56C0750293ECAAF00183AA9 /* LikesAndCommentsControl.swift */,
 			);
 			path = Thrird;
 			sourceTree = "<group>";
@@ -683,11 +689,13 @@
 				A5B221272912C0B8005363EE /* FriendTableViewCell.swift in Sources */,
 				A5D9872F292D6A3800327582 /* VKWebViewController.swift in Sources */,
 				A50F15522919A3F10029C985 /* MainTableViewController.swift in Sources */,
+				A56C0753293ECF0600183AA9 /* LikesTableViewCell.swift in Sources */,
 				A516BCA02910A2F0008802FC /* RegistrationViewController.swift in Sources */,
 				A5B2212F291339D0005363EE /* GroupTableViewCell.swift in Sources */,
 				A56618892934376900B9A28F /* UIImageView+Extension.swift in Sources */,
 				A59F0499292BF32900D57EFA /* SessionSingleton.swift in Sources */,
 				A507CFED291A897A00076C3A /* SortFriendTableViewCell.swift in Sources */,
+				A56C0751293ECAAF00183AA9 /* LikesAndCommentsControl.swift in Sources */,
 				A50F15542919A5460029C985 /* PostsTableViewCell.swift in Sources */,
 				A5B2213D2915AA74005363EE /* Group.swift in Sources */,
 				A5B221292912CB50005363EE /* RecomendationsTableViewCell.swift in Sources */,
