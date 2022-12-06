@@ -50,7 +50,7 @@ extension VKWebViewController {
         static let hostComponent = "oauth.vk.com"
         static let pathComponent = "/authorize"
         static let clientIdName = "client_id"
-        static let clientIdValue = "51489649"
+        static let clientIdValue = "51496459"
         static let displayItemName = "display"
         static let displayItemValue = "mobile"
         static let redirectItemName = "redirect_uri"

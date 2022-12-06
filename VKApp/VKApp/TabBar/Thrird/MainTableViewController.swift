@@ -25,19 +25,22 @@ final class MainTableViewController: UITableViewController {
             profileImageName: Constants.secondElonImageName,
             userName: Constants.firstProfileName,
             overview: Constants.overviewText,
-            postImageName: Constants.dogImageName
+            postImageName: Constants.dogImageName,
+            postType: true
         )
         let secondPost = Post(
             profileImageName: Constants.dogImageName,
             userName: Constants.secondProfileName,
             overview: Constants.overviewText,
-            postImageName: Constants.secondElonImageName
+            postImageName: Constants.secondElonImageName,
+            postType: true
         )
         let thirdPost = Post(
             profileImageName: Constants.steveImageName,
             userName: Constants.thirdProfileName,
             overview: Constants.overviewText,
-            postImageName: Constants.steveImageName
+            postImageName: Constants.steveImageName,
+            postType: false
         )
 
         for _ in 0 ... 3 {
@@ -62,6 +65,11 @@ extension MainTableViewController {
         static let overviewText = """
         Создать экран новостей. Добавить туда таблицу и сделать ячейку для новости. Ячейка должна содержать то же самое, что и в оригинальном приложении «ВКонтакте»: надпись, фотографии, кнопки.
         """
+        static let authorCellIdentifier = "author"
+        static let postTextCellIdentifier = "postText"
+        static let postPhotoCellIdentifier = "postPhoto"
+        static let emptyCellIdentifier = "empty"
+        static let likesCellIdentifier = "likes"
     }
 
     enum CellTypes {
@@ -76,7 +84,7 @@ extension MainTableViewController {
 
 extension MainTableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
-        16
+        posts.count * cellTypes.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -84,55 +92,54 @@ extension MainTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        guard let cell = tableView
-//            .dequeueReusableCell(
-//                withIdentifier: Constants.postsCellIdentifier,
-//                for: indexPath
-//            ) as? PostsTableViewCell
-//        else { return UITableViewCell() }
-//        cell.configure(posts[indexPath.row])
-//        cell.callActivityHandler = { items in
-//            self.callActivityAction(items: items)
-//        }
-//        return cell
         let type = cellTypes[indexPath.row]
         switch type {
         case .author:
             guard let cell = tableView
                 .dequeueReusableCell(
-                    withIdentifier: "author",
+                    withIdentifier: Constants.authorCellIdentifier,
                     for: indexPath
                 ) as? AuthorTableViewCell
             else { return UITableViewCell() }
-            cell.configure(posts[indexPath.row])
+            cell.configure(posts[indexPath.section])
             return cell
 
         case .overview:
             guard let cell = tableView
                 .dequeueReusableCell(
-                    withIdentifier: "postText",
+                    withIdentifier: Constants.postTextCellIdentifier,
                     for: indexPath
                 ) as? PostTextTableViewCell
             else { return UITableViewCell() }
-            cell.configure(posts[indexPath.row])
+            cell.configure(posts[indexPath.section])
             return cell
         case .postImage:
-            guard let cell = tableView
-                .dequeueReusableCell(
-                    withIdentifier: "postPhoto",
-                    for: indexPath
-                ) as? PostPhotoTableViewCell
-            else { return UITableViewCell() }
-            cell.configure(posts[indexPath.row])
-            return cell
+            if posts[indexPath.section].postType == true {
+                guard let cell = tableView
+                    .dequeueReusableCell(
+                        withIdentifier: Constants.postPhotoCellIdentifier,
+                        for: indexPath
+                    ) as? PostPhotoTableViewCell
+                else { return UITableViewCell() }
+                cell.configure(posts[indexPath.section])
+                return cell
+            } else {
+                guard let cell = tableView
+                    .dequeueReusableCell(
+                        withIdentifier: Constants.emptyCellIdentifier,
+                        for: indexPath
+                    ) as? EmptyTableViewCell
+                else { return UITableViewCell() }
+                return cell
+            }
+
         case .likes:
             guard let cell = tableView
                 .dequeueReusableCell(
-                    withIdentifier: "likes",
+                    withIdentifier: Constants.likesCellIdentifier,
                     for: indexPath
                 ) as? LikesTableViewCell
             else { return UITableViewCell() }
-            print("hihi")
             return cell
         }
     }

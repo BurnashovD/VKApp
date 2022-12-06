@@ -3,14 +3,14 @@
 
 import UIKit
 
+/// Изображение поста
 final class PostPhotoTableViewCell: UITableViewCell {
     // MARK: - IBOutlets
 
     @IBOutlet private var postPhotoImageView: UIImageView!
+    @IBOutlet private var postView: UIView!
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
+    // MARK: - Public methods
 
     func configure(_ post: Post) {
         postPhotoImageView.image = UIImage(named: post.postImageName)

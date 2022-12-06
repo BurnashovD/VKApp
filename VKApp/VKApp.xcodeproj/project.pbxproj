@@ -13,7 +13,6 @@
 		A507CFED291A897A00076C3A /* SortFriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A507CFEC291A897A00076C3A /* SortFriendTableViewCell.swift */; };
 		A507CFF3291AE50A00076C3A /* LoadingDotsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A507CFF2291AE50A00076C3A /* LoadingDotsView.swift */; };
 		A50F15522919A3F10029C985 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F15512919A3F10029C985 /* MainTableViewController.swift */; };
-		A50F15542919A5460029C985 /* PostsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F15532919A5460029C985 /* PostsTableViewCell.swift */; };
 		A50F15562919A5810029C985 /* Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F15552919A5810029C985 /* Posts.swift */; };
 		A516BC3029104307008802FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516BC2F29104307008802FC /* AppDelegate.swift */; };
 		A516BC3229104307008802FC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516BC3129104307008802FC /* SceneDelegate.swift */; };
@@ -39,6 +38,7 @@
 		A56618892934376900B9A28F /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56618882934376900B9A28F /* UIImageView+Extension.swift */; };
 		A56C0751293ECAAF00183AA9 /* LikesAndCommentsControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56C0750293ECAAF00183AA9 /* LikesAndCommentsControl.swift */; };
 		A56C0753293ECF0600183AA9 /* LikesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56C0752293ECF0600183AA9 /* LikesTableViewCell.swift */; };
+		A577642E293F7C92000EB6F4 /* EmptyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A577642D293F7C92000EB6F4 /* EmptyTableViewCell.swift */; };
 		A57B1DF72919E64E004A5A9A /* SortFriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57B1DF62919E64E004A5A9A /* SortFriendsTableViewController.swift */; };
 		A59F0499292BF32900D57EFA /* SessionSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59F0498292BF32900D57EFA /* SessionSingleton.swift */; };
 		A5A35F5A291C5E29007704ED /* FriendsPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A35F59291C5E29007704ED /* FriendsPhotosViewController.swift */; };
@@ -92,7 +92,6 @@
 		A507CFEC291A897A00076C3A /* SortFriendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortFriendTableViewCell.swift; sourceTree = "<group>"; };
 		A507CFF2291AE50A00076C3A /* LoadingDotsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingDotsView.swift; sourceTree = "<group>"; };
 		A50F15512919A3F10029C985 /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
-		A50F15532919A5460029C985 /* PostsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsTableViewCell.swift; sourceTree = "<group>"; };
 		A50F15552919A5810029C985 /* Posts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Posts.swift; sourceTree = "<group>"; };
 		A516BC2C29104307008802FC /* VKApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A516BC2F29104307008802FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -122,6 +121,7 @@
 		A56618882934376900B9A28F /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		A56C0750293ECAAF00183AA9 /* LikesAndCommentsControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesAndCommentsControl.swift; sourceTree = "<group>"; };
 		A56C0752293ECF0600183AA9 /* LikesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesTableViewCell.swift; sourceTree = "<group>"; };
+		A577642D293F7C92000EB6F4 /* EmptyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTableViewCell.swift; sourceTree = "<group>"; };
 		A57B1DF62919E64E004A5A9A /* SortFriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortFriendsTableViewController.swift; sourceTree = "<group>"; };
 		A59F0498292BF32900D57EFA /* SessionSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionSingleton.swift; sourceTree = "<group>"; };
 		A5A35F59291C5E29007704ED /* FriendsPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsPhotosViewController.swift; sourceTree = "<group>"; };
@@ -202,7 +202,7 @@
 				A5424095293E8FD500E3EFF3 /* PostTextTableViewCell.swift */,
 				A5424097293E8FED00E3EFF3 /* PostPhotoTableViewCell.swift */,
 				A56C0752293ECF0600183AA9 /* LikesTableViewCell.swift */,
-				A50F15532919A5460029C985 /* PostsTableViewCell.swift */,
+				A577642D293F7C92000EB6F4 /* EmptyTableViewCell.swift */,
 				A56C0750293ECAAF00183AA9 /* LikesAndCommentsControl.swift */,
 			);
 			path = Thrird;
@@ -696,7 +696,6 @@
 				A59F0499292BF32900D57EFA /* SessionSingleton.swift in Sources */,
 				A507CFED291A897A00076C3A /* SortFriendTableViewCell.swift in Sources */,
 				A56C0751293ECAAF00183AA9 /* LikesAndCommentsControl.swift in Sources */,
-				A50F15542919A5460029C985 /* PostsTableViewCell.swift in Sources */,
 				A5B2213D2915AA74005363EE /* Group.swift in Sources */,
 				A5B221292912CB50005363EE /* RecomendationsTableViewCell.swift in Sources */,
 				A5B221252912BED9005363EE /* User.swift in Sources */,
@@ -722,6 +721,7 @@
 				A5FA31AB291C7C53008CE86C /* SortedFriendsPhotosViewController.swift in Sources */,
 				A5B2213929146CC5005363EE /* PhotoView.swift in Sources */,
 				A5463A912933ACA400BBC5E0 /* GroupResponse.swift in Sources */,
+				A577642E293F7C92000EB6F4 /* EmptyTableViewCell.swift in Sources */,
 				A5A35F5A291C5E29007704ED /* FriendsPhotosViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
