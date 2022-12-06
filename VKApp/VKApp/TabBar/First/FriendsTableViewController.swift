@@ -46,6 +46,9 @@ final class FriendsTableViewController: UITableViewController {
     }
 
     private func fetchFriends() {
+        networkService.fetchPosts("newsfeed.get") { item in
+            print("lolo\(item)")
+        }
         networkService.fetchUsers(
             Constants.friendsMethodName,
             parametrMap: networkService.fetchFriendsParametrName

@@ -9,7 +9,7 @@ final class PostTextTableViewCell: UITableViewCell {
 
     @IBOutlet private var postTextView: UITextView!
     @IBOutlet private var postView: UIView!
-    
+
     // MARK: - Public methods
 
     func configure(_ post: Post) {

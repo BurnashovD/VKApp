@@ -3,4 +3,5 @@
 
 import UIKit
 
+/// Пустая ячейка
 final class EmptyTableViewCell: UITableViewCell {}

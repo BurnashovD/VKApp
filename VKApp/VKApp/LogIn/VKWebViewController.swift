@@ -56,7 +56,7 @@ extension VKWebViewController {
         static let redirectItemName = "redirect_uri"
         static let redirectItemValue = "https://oauth.vk.com/blank.html"
         static let scopeItemName = "scope"
-        static let scopeItemValue = "wall"
+        static let scopeItemValue = "friends,groups,photos,wall"
         static let responseItemName = "response_type"
         static let responseItemValue = "token"
         static let vItemName = "v"

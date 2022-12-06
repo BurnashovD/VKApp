@@ -113,6 +113,7 @@ extension MainTableViewController {
             else { return UITableViewCell() }
             cell.configure(posts[indexPath.section])
             return cell
+
         case .postImage:
             if posts[indexPath.section].postType == true {
                 guard let cell = tableView

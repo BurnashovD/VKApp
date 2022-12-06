@@ -40,7 +40,7 @@ final class LikesAndCommentsControl: UIControl {
     }()
 
     // MARK: - Private properties
-    
+
     private var likesCount = 0
     private var isTapped = false
     private var likeColor: UIColor = .white

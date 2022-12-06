@@ -37,7 +37,7 @@ final class NetworkService {
         }
         let url = "\(Constants.baseURLText)\(Constants.methodText)\(method)"
         AF.request(url, parameters: parametrs).responseJSON { response in
-            print("hihi \(response.response?.url)")
+            print("lolo\(response.response?.url)")
             guard let data = response.data else { return }
             do {
                 let usersResults = try? JSONDecoder().decode(UsersResult.self, from: data)
@@ -106,6 +106,33 @@ final class NetworkService {
         }
     }
 
+    func fetchPosts(
+        _ method: String,
+        _ completion: @escaping (PostResponse) -> Void
+    ) {
+        var parametrs: Parameters = [
+            Constants.accessTokenText: Session.shared.token,
+            Constants.filtersParametrName: Constants.filtersParametrValue,
+            Constants.vText: Constants.apiVersionText
+        ]
+        let url = "\(Constants.baseURLText)\(Constants.methodText)\(method)"
+        AF.request(url, parameters: parametrs).responseJSON { response in
+            print("lolo\(response.value)")
+            guard let data = response.data else { return }
+            do {
+                guard let postsResults = try? JSONDecoder().decode(PostResponse.self, from: data)
+                else {
+                    print("lolonil")
+                    return
+                }
+//                let item = postsResults.response.items
+//                completion(postsResults)
+            } catch {
+                print("lolo\(error.localizedDescription)")
+            }
+        }
+    }
+
     func fetchSearchGroup(
         _ method: String,
         _ searchText: String,
@@ -164,5 +191,7 @@ extension NetworkService {
         static let ownerIdParametrName = "owner_id"
         static let albumIdParametrName = "album_id"
         static let profileParametrName = "profile"
+        static let filtersParametrName = "filters"
+        static let filtersParametrValue = "post"
     }
 }

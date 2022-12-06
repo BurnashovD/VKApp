@@ -39,6 +39,12 @@
 		A56C0751293ECAAF00183AA9 /* LikesAndCommentsControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56C0750293ECAAF00183AA9 /* LikesAndCommentsControl.swift */; };
 		A56C0753293ECF0600183AA9 /* LikesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56C0752293ECF0600183AA9 /* LikesTableViewCell.swift */; };
 		A577642E293F7C92000EB6F4 /* EmptyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A577642D293F7C92000EB6F4 /* EmptyTableViewCell.swift */; };
+		A5776431293FDDFD000EB6F4 /* PostResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5776430293FDDFD000EB6F4 /* PostResponse.swift */; };
+		A5776433293FDE3B000EB6F4 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5776432293FDE3B000EB6F4 /* Post.swift */; };
+		A5776435293FDEAF000EB6F4 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5776434293FDEAF000EB6F4 /* Attachment.swift */; };
+		A5776437293FDF15000EB6F4 /* AttachmentPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5776436293FDF15000EB6F4 /* AttachmentPhoto.swift */; };
+		A5776439293FDFA2000EB6F4 /* PostSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5776438293FDFA2000EB6F4 /* PostSize.swift */; };
+		A577643B293FE041000EB6F4 /* PostItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = A577643A293FE041000EB6F4 /* PostItems.swift */; };
 		A57B1DF72919E64E004A5A9A /* SortFriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57B1DF62919E64E004A5A9A /* SortFriendsTableViewController.swift */; };
 		A59F0499292BF32900D57EFA /* SessionSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59F0498292BF32900D57EFA /* SessionSingleton.swift */; };
 		A5A35F5A291C5E29007704ED /* FriendsPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A35F59291C5E29007704ED /* FriendsPhotosViewController.swift */; };
@@ -122,6 +128,12 @@
 		A56C0750293ECAAF00183AA9 /* LikesAndCommentsControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesAndCommentsControl.swift; sourceTree = "<group>"; };
 		A56C0752293ECF0600183AA9 /* LikesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesTableViewCell.swift; sourceTree = "<group>"; };
 		A577642D293F7C92000EB6F4 /* EmptyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTableViewCell.swift; sourceTree = "<group>"; };
+		A5776430293FDDFD000EB6F4 /* PostResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostResponse.swift; sourceTree = "<group>"; };
+		A5776432293FDE3B000EB6F4 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		A5776434293FDEAF000EB6F4 /* Attachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
+		A5776436293FDF15000EB6F4 /* AttachmentPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentPhoto.swift; sourceTree = "<group>"; };
+		A5776438293FDFA2000EB6F4 /* PostSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSize.swift; sourceTree = "<group>"; };
+		A577643A293FE041000EB6F4 /* PostItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostItems.swift; sourceTree = "<group>"; };
 		A57B1DF62919E64E004A5A9A /* SortFriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortFriendsTableViewController.swift; sourceTree = "<group>"; };
 		A59F0498292BF32900D57EFA /* SessionSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionSingleton.swift; sourceTree = "<group>"; };
 		A5A35F59291C5E29007704ED /* FriendsPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsPhotosViewController.swift; sourceTree = "<group>"; };
@@ -211,6 +223,7 @@
 		A50F15502919A3B60029C985 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A577642F293FDDEB000EB6F4 /* Posts */,
 				A5463A872933AB8300BBC5E0 /* Group */,
 				A5463A862933AB7D00BBC5E0 /* Photo */,
 				A5463A852933AB7700BBC5E0 /* User */,
@@ -306,6 +319,19 @@
 				A5463A922933ACBC00BBC5E0 /* Items.swift */,
 			);
 			path = Group;
+			sourceTree = "<group>";
+		};
+		A577642F293FDDEB000EB6F4 /* Posts */ = {
+			isa = PBXGroup;
+			children = (
+				A5776430293FDDFD000EB6F4 /* PostResponse.swift */,
+				A5776432293FDE3B000EB6F4 /* Post.swift */,
+				A577643A293FE041000EB6F4 /* PostItems.swift */,
+				A5776434293FDEAF000EB6F4 /* Attachment.swift */,
+				A5776436293FDF15000EB6F4 /* AttachmentPhoto.swift */,
+				A5776438293FDFA2000EB6F4 /* PostSize.swift */,
+			);
+			path = Posts;
 			sourceTree = "<group>";
 		};
 		A592368F2936B8E600B49785 /* Services */ = {
@@ -682,14 +708,18 @@
 				A5FA31B5291D8566008CE86C /* CustomPushAnimation.swift in Sources */,
 				A5F3D66F2911C926004EB22A /* PhotosCollectionViewController.swift in Sources */,
 				A5424098293E8FED00E3EFF3 /* PostPhotoTableViewCell.swift in Sources */,
+				A5776437293FDF15000EB6F4 /* AttachmentPhoto.swift in Sources */,
 				A5463A8F2933AC6C00BBC5E0 /* Size.swift in Sources */,
 				A5B2212D29130874005363EE /* PhotosCollectionViewCell.swift in Sources */,
+				A5776433293FDE3B000EB6F4 /* Post.swift in Sources */,
 				A5463A82292EFF0F00BBC5E0 /* Photo.swift in Sources */,
 				A5B2213B291475B2005363EE /* LikesControl.swift in Sources */,
+				A5776439293FDFA2000EB6F4 /* PostSize.swift in Sources */,
 				A5B221272912C0B8005363EE /* FriendTableViewCell.swift in Sources */,
 				A5D9872F292D6A3800327582 /* VKWebViewController.swift in Sources */,
 				A50F15522919A3F10029C985 /* MainTableViewController.swift in Sources */,
 				A56C0753293ECF0600183AA9 /* LikesTableViewCell.swift in Sources */,
+				A577643B293FE041000EB6F4 /* PostItems.swift in Sources */,
 				A516BCA02910A2F0008802FC /* RegistrationViewController.swift in Sources */,
 				A5B2212F291339D0005363EE /* GroupTableViewCell.swift in Sources */,
 				A56618892934376900B9A28F /* UIImageView+Extension.swift in Sources */,
@@ -704,6 +734,7 @@
 				A5424096293E8FD500E3EFF3 /* PostTextTableViewCell.swift in Sources */,
 				A5056EA629129E4E0073D407 /* UIViewController+Extension.swift in Sources */,
 				A57B1DF72919E64E004A5A9A /* SortFriendsTableViewController.swift in Sources */,
+				A5776431293FDDFD000EB6F4 /* PostResponse.swift in Sources */,
 				A5F3D6712911C961004EB22A /* UserGroupsTableViewController.swift in Sources */,
 				A5463A892933ABC500BBC5E0 /* UserResponse.swift in Sources */,
 				A5D98731292D79F700327582 /* NetworkService.swift in Sources */,
@@ -713,6 +744,7 @@
 				A5463A932933ACBC00BBC5E0 /* Items.swift in Sources */,
 				A5B2213F29185896005363EE /* UITableViewController+Extension.swift in Sources */,
 				A50F15562919A5810029C985 /* Posts.swift in Sources */,
+				A5776435293FDEAF000EB6F4 /* Attachment.swift in Sources */,
 				A507CFF3291AE50A00076C3A /* LoadingDotsView.swift in Sources */,
 				A5B221332913407D005363EE /* GlobalGroupsTableViewCell.swift in Sources */,
 				A5463A8D2933AC5700BBC5E0 /* PhotoResponse.swift in Sources */,
