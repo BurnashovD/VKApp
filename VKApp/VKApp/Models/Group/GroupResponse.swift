@@ -5,5 +5,5 @@ import Foundation
 
 /// Server response
 final class GroupResponse: Codable {
-    var items: [Groups]
+    var items: [GroupItem]
 }

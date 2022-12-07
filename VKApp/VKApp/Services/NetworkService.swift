@@ -26,7 +26,7 @@ final class NetworkService {
     func fetchUsers(
         _ method: String,
         parametrMap: [String: String],
-        _ complition: @escaping ([Item]) -> Void
+        _ complition: @escaping ([UserItem]) -> Void
     ) {
         var parametrs: Parameters = [
             Constants.accessTokenText: Session.shared.token,
@@ -37,7 +37,6 @@ final class NetworkService {
         }
         let url = "\(Constants.baseURLText)\(Constants.methodText)\(method)"
         AF.request(url, parameters: parametrs).responseJSON { response in
-            print("lolo\(response.response?.url)")
             guard let data = response.data else { return }
             do {
                 let usersResults = try? JSONDecoder().decode(UsersResult.self, from: data)
@@ -83,7 +82,7 @@ final class NetworkService {
     func fetchGroup(
         _ method: String,
         parametrMap: [String: String],
-        _ complition: @escaping ([Groups]) -> Void
+        _ complition: @escaping ([GroupItem]) -> Void
     ) {
         var parametrs: Parameters = [
             Constants.accessTokenText: Session.shared.token,
@@ -161,7 +160,7 @@ final class NetworkService {
 
     func fetchPostsGroups(
         _ method: String,
-        _ completion: @escaping ([Groups]) -> Void
+        _ completion: @escaping ([GroupItem]) -> Void
     ) {
         var parametrs: Parameters = [
             Constants.accessTokenText: Session.shared.token,
@@ -173,7 +172,7 @@ final class NetworkService {
             AF.request(url, parameters: parametrs).responseJSON { response in
                 guard let data = response.data else { return }
                 do {
-                    guard let postsResults = try? JSONDecoder().decode(PostResponse.self, from: data).response.group
+                    guard let postsResults = try? JSONDecoder().decode(PostResponse.self, from: data).response.groups
                     else { return }
 
                     DispatchQueue.main.async {
@@ -189,7 +188,7 @@ final class NetworkService {
     func fetchSearchGroup(
         _ method: String,
         _ searchText: String,
-        _ complition: @escaping ([Groups]) -> Void
+        _ complition: @escaping ([GroupItem]) -> Void
     ) {
         var parametrs: Parameters = [
             Constants.accessTokenText: Session.shared.token,

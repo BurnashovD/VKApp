@@ -22,7 +22,7 @@ final class FriendTableViewCell: UITableViewCell {
         configCell()
     }
 
-    func configure(_ user: Item, networkService: NetworkService) {
+    func configure(_ user: UserItem, networkService: NetworkService) {
         let url = user.photo
         networkService.fetchUserPhotos(url) { [weak self] data in
             guard let self = self, let data = data, let safeImage = UIImage(data: data) else { return }

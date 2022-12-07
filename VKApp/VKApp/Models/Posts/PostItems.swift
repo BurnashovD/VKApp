@@ -4,7 +4,7 @@
 import Foundation
 
 /// Post items
-final class PostItems: Decodable {
+final class PostItem: Decodable {
     /// Тип
     var type: String = ""
     /// Текст поста

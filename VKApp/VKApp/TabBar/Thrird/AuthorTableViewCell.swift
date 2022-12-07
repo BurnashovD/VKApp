@@ -19,13 +19,13 @@ final class AuthorTableViewCell: UITableViewCell {
         configPostView()
     }
 
-    func configureUser(_ post: PostItems, _ item: Item, networkService: NetworkService) {
+    func configureUser(_ post: PostItem, _ item: UserItem, networkService: NetworkService) {
         viewsCountLabel.text = String(post.count)
         userNameLabel.text = "\(item.firstName) \(item.lastName)"
         profilePhotoImageView.fetchUserPhotos(item.photo, networkService: networkService)
     }
 
-    func configureGroup(_ post: PostItems, _ group: Groups, networkService: NetworkService) {
+    func configureGroup(_ post: PostItem, _ group: GroupItem, networkService: NetworkService) {
         viewsCountLabel.text = String(post.count)
         userNameLabel.text = group.name
         profilePhotoImageView.fetchUserPhotos(group.photo, networkService: networkService)

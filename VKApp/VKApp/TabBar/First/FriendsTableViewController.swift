@@ -13,10 +13,10 @@ final class FriendsTableViewController: UITableViewController {
     private let realmService = RealmService()
 
     private var notificationToken: NotificationToken?
-    private var items: [Item] = []
-    private var itemsResult: Results<Item>?
+    private var items: [UserItem] = []
+    private var itemsResult: Results<UserItem>?
     private var userId = 0
-    private var postItems: [PostItems] = []
+    private var postItems: [PostItem] = []
 
     // MARK: - LifeCycle
 
@@ -57,7 +57,7 @@ final class FriendsTableViewController: UITableViewController {
     }
 
     private func loadData() {
-        realmService.loadData(Item.self) { [weak self] item in
+        realmService.loadData(UserItem.self) { [weak self] item in
             guard let self = self else { return }
             self.itemsResult = item
             self.items = Array(item)

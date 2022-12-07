@@ -11,9 +11,9 @@ final class MainTableViewController: UITableViewController {
     private let networkService = NetworkService()
 
     private var posts: [Post] = []
-    private var postsItems: [PostItems] = []
-    private var profiles: [Item] = []
-    private var groups: [Groups] = []
+    private var postsItems: [PostItem] = []
+    private var profiles: [UserItem] = []
+    private var groups: [GroupItem] = []
 
     // MARK: - LifeCycle
 
@@ -34,7 +34,7 @@ final class MainTableViewController: UITableViewController {
 
     private func fetchPostsProfiles() {
         networkService.fetchPostsProfiles(Constants.newsFeedMethodName) { [weak self] item in
-            guard let self = self, let profile = item.profile, let group = item.group else { return }
+            guard let self = self, let profile = item.profiles, let group = item.groups else { return }
             self.profiles = profile
             self.groups = group
             self.tableView.reloadData()
@@ -110,7 +110,7 @@ extension MainTableViewController {
             return cell
 
         case .overview:
-            if postsItems[indexPath.section].text.isEmpty {
+            if !postsItems[indexPath.section].text.isEmpty {
                 guard let cell = tableView
                     .dequeueReusableCell(
                         withIdentifier: Constants.postTextCellIdentifier,

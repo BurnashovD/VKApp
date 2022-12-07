@@ -12,7 +12,7 @@ final class PostTextTableViewCell: UITableViewCell {
 
     // MARK: - Public methods
 
-    func configure(_ post: PostItems) {
+    func configure(_ post: PostItem) {
         postTextView.text = post.text
     }
 }

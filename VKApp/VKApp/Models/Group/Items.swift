@@ -6,7 +6,7 @@ import RealmSwift
 
 /// Groups items
 @objcMembers
-final class Groups: Object, Codable {
+final class GroupItem: Object, Codable {
     // MARK: - Public properties
 
     dynamic var id = 0

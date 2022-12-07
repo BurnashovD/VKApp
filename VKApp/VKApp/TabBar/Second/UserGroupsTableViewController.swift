@@ -25,9 +25,9 @@ final class UserGroupsTableViewController: UITableViewController {
     private let realmService = RealmService()
 
     private var notificationToken: NotificationToken?
-    private var groupsResults: Results<Groups>?
-    private var searchResult: [Groups] = []
-    private var groups: [Groups] = []
+    private var groupsResults: Results<GroupItem>?
+    private var searchResult: [GroupItem] = []
+    private var groups: [GroupItem] = []
 
     // MARK: - LifeCycle
 
@@ -55,7 +55,7 @@ final class UserGroupsTableViewController: UITableViewController {
     }
 
     private func loadData() {
-        realmService.loadData(Groups.self) { [weak self] group in
+        realmService.loadData(GroupItem.self) { [weak self] group in
             guard let self = self else { return }
             self.groupsResults = group
             self.groups = Array(self.groupsResults ?? group)

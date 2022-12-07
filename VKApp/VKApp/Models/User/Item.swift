@@ -6,7 +6,7 @@ import RealmSwift
 
 /// User items
 @objcMembers
-final class Item: Object, Decodable {
+final class UserItem: Object, Decodable {
     // MARK: - Public properties
 
     dynamic var firstName = ""

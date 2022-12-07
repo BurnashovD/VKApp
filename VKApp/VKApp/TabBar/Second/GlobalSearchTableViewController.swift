@@ -27,8 +27,8 @@ final class GlobalSearchTableViewController: UITableViewController {
 
     private let networkService = NetworkService()
 
-    private var searchedGroups: [Groups] = []
-    private var groups: [Groups] = []
+    private var searchedGroups: [GroupItem] = []
+    private var groups: [GroupItem] = []
 
     // MARK: - IBActions
 
