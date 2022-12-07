@@ -5,5 +5,6 @@ import Foundation
 
 /// User
 final class UsersResult: Decodable {
+    /// Ответ сервера
     var response: Response
 }

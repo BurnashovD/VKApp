@@ -1,22 +1,29 @@
-// Items.swift
+// Item.swift
 // Copyright © RoadMap. All rights reserved.
 
 import Foundation
 import RealmSwift
 
-/// Groups items
+/// User items
 @objcMembers
-final class GroupItem: Object, Codable {
+final class UserItem: Object, Decodable {
     // MARK: - Public properties
 
-    dynamic var id = 0
-    dynamic var name = ""
+    /// Имя
+    dynamic var firstName = ""
+    /// Фамилия
+    dynamic var lastName = ""
+    /// Ссылка на фото
     dynamic var photo = ""
+    /// id
+    dynamic var userId = 0
 
     // MARK: - enum
 
     enum CodingKeys: String, CodingKey {
-        case id, name
+        case firstName = "first_name"
+        case lastName = "last_name"
+        case userId = "id"
         case photo = "photo_100"
     }
 
@@ -25,14 +32,15 @@ final class GroupItem: Object, Codable {
     convenience init(from decoder: Decoder) throws {
         self.init()
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        name = try container.decode(String.self, forKey: .name)
+        firstName = try container.decode(String.self, forKey: .firstName)
+        lastName = try container.decode(String.self, forKey: .lastName)
+        userId = try container.decode(Int.self, forKey: .userId)
         photo = try container.decode(String.self, forKey: .photo)
-        id = try container.decode(Int.self, forKey: .id)
     }
 
     // MARK: - Public methods
 
     override static func primaryKey() -> String? {
-        "id"
+        "userId"
     }
 }

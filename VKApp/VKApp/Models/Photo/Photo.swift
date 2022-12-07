@@ -5,5 +5,6 @@ import Foundation
 
 /// Photo
 final class PhotoResult: Decodable {
+    /// Ответ сервера
     var response: Photos
 }

@@ -96,7 +96,7 @@ final class NetworkService {
             guard let data = response.data else { return }
             do {
                 guard let usersResults = try? JSONDecoder().decode(GroupsResult.self, from: data) else { return }
-                let items = usersResults.response.items
+                let items = usersResults.response.groups
                 complition(items)
                 self.realmService.saveData(items)
             } catch {
@@ -201,7 +201,7 @@ final class NetworkService {
             guard let data = response.data else { return }
             do {
                 guard let usersResults = try? JSONDecoder().decode(GroupsResult.self, from: data) else { return }
-                let items = usersResults.response.items
+                let items = usersResults.response.groups
                 complition(items)
                 self.realmService.saveData(items)
             } catch {

@@ -5,8 +5,11 @@ import Foundation
 
 /// Posts
 final class Posts: Decodable {
+    /// Айтемы постов
     var items: [PostItem]?
+    /// Айтемы групп
     var groups: [GroupItem]?
+    /// Айтемы профилей
     var profiles: [UserItem]?
 
     enum CodingKeys: String, CodingKey {
