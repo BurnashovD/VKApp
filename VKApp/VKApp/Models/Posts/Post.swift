@@ -3,6 +3,7 @@
 
 import Foundation
 
+/// Posts
 final class Posts: Decodable {
     var items: [PostItems]
 }

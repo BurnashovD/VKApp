@@ -108,12 +108,13 @@ final class NetworkService {
 
     func fetchPosts(
         _ method: String,
-        _ completion: @escaping (PostResponse) -> Void
+        _ completion: @escaping ([PostItems]) -> Void
     ) {
         var parametrs: Parameters = [
             Constants.accessTokenText: Session.shared.token,
             Constants.filtersParametrName: Constants.filtersParametrValue,
-            Constants.vText: Constants.apiVersionText
+            Constants.vText: Constants.apiVersionText,
+            "count": "30"
         ]
         let url = "\(Constants.baseURLText)\(Constants.methodText)\(method)"
         AF.request(url, parameters: parametrs).responseJSON { response in
@@ -125,8 +126,10 @@ final class NetworkService {
                     print("lolonil")
                     return
                 }
-//                let item = postsResults.response.items
-//                completion(postsResults)
+                print("loloda")
+                let item = postsResults.response.items
+                print("lolo\(item)")
+                completion(item)
             } catch {
                 print("lolo\(error.localizedDescription)")
             }

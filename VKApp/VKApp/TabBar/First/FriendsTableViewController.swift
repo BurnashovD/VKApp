@@ -16,6 +16,7 @@ final class FriendsTableViewController: UITableViewController {
     private var items: [Item] = []
     private var itemsResult: Results<Item>?
     private var userId = 0
+    private var postItems: [PostItems] = []
 
     // MARK: - LifeCycle
 
@@ -47,7 +48,8 @@ final class FriendsTableViewController: UITableViewController {
 
     private func fetchFriends() {
         networkService.fetchPosts("newsfeed.get") { item in
-            print("lolo\(item)")
+            self.postItems = item
+            print("lolo \(self.postItems[0].url)")
         }
         networkService.fetchUsers(
             Constants.friendsMethodName,
