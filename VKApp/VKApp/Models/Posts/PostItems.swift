@@ -17,6 +17,10 @@ final class PostItem: Decodable {
     var ownerId: Int = 0
     /// Кол-во просмотров
     var count: Int = 0
+    /// Имя автора
+    var name: String = ""
+    /// Фото автора
+    var profileImage: String = ""
 
     // MARK: - CodingKeys
 

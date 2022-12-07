@@ -37,7 +37,28 @@ final class MainTableViewController: UITableViewController {
             guard let self = self, let profile = item.profiles, let group = item.groups else { return }
             self.profiles = profile
             self.groups = group
+            self.filterAuthorItems()
             self.tableView.reloadData()
+        }
+    }
+
+    private func filterAuthorItems() {
+        postsItems.forEach { post in
+            if post.ownerId < 0 {
+                let group = groups.filter { group in
+                    group.id == post.ownerId * -1
+                }.first
+                guard let name = group?.name, let photo = group?.photo else { return }
+                post.name = name
+                post.profileImage = photo
+            } else {
+                let user = profiles.filter { profile in
+                    profile.userId == post.ownerId
+                }.first
+                guard let name = user?.firstName, let surname = user?.lastName, let photo = user?.photo else { return }
+                post.name = "\(name) \(surname)"
+                post.profileImage = photo
+            }
         }
     }
 }
@@ -97,13 +118,11 @@ extension MainTableViewController {
             if postsItems[indexPath.section].ownerId >= 0 {
                 cell.configureUser(
                     postsItems[indexPath.section],
-                    profiles[indexPath.row],
                     networkService: networkService
                 )
             } else {
                 cell.configureGroup(
                     postsItems[indexPath.section],
-                    groups[indexPath.section],
                     networkService: networkService
                 )
             }
