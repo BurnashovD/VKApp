@@ -1,4 +1,4 @@
-// PostItems.swift
+// PostItem.swift
 // Copyright © RoadMap. All rights reserved.
 
 import Foundation

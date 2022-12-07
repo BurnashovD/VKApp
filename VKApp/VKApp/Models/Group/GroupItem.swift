@@ -1,4 +1,4 @@
-// Items.swift
+// GroupItem.swift
 // Copyright © RoadMap. All rights reserved.
 
 import Foundation
@@ -8,7 +8,7 @@ import RealmSwift
 @objcMembers
 final class GroupItem: Object, Codable {
     // MARK: - Public properties
-    
+
     /// id
     dynamic var id = 0
     /// Имя

@@ -13,7 +13,7 @@ final class FriendsTableViewController: UITableViewController {
     private let realmService = RealmService()
 
     private var notificationToken: NotificationToken?
-    private var items: [UserItem] = []
+    private var userItems: [UserItem] = []
     private var itemsResult: Results<UserItem>?
     private var userId = 0
     private var postItems: [PostItem] = []
@@ -60,7 +60,7 @@ final class FriendsTableViewController: UITableViewController {
         realmService.loadData(UserItem.self) { [weak self] item in
             guard let self = self else { return }
             self.itemsResult = item
-            self.items = Array(item)
+            self.userItems = Array(item)
             self.tableView.reloadData()
         }
     }
