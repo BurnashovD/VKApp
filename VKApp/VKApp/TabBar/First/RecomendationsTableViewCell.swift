@@ -17,7 +17,7 @@ final class RecomendationsTableViewCell: UITableViewCell {
         configCell()
     }
 
-    func configure(_ user: Item) {
+    func configure(_ user: UserItem) {
         profileImageView.image = UIImage(named: user.photo)
         nameLabel.text = "\(user.firstName) \(user.lastName)"
     }

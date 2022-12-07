@@ -12,9 +12,9 @@ final class SortFriendsTableViewController: UITableViewController {
     private let networkService = NetworkService()
     private let realmService = RealmService()
 
-    private var items: [Item] = []
+    private var items: [UserItem] = []
     private var notificationToken: NotificationToken?
-    private var itemsResult: Results<Item>?
+    private var itemsResult: Results<UserItem>?
     private var sectionsMap = [Character: [String]]()
     private var namesMap = [Character: [String]]()
     private var imagesMap = [Character: [String]]()
@@ -72,7 +72,7 @@ final class SortFriendsTableViewController: UITableViewController {
     }
 
     private func loadData() {
-        realmService.loadData(Item.self) { [weak self] friend in
+        realmService.loadData(UserItem.self) { [weak self] friend in
             guard let self = self else { return }
             self.itemsResult = friend
             self.items = Array(self.itemsResult ?? friend)

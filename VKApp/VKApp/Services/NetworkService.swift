@@ -26,7 +26,7 @@ final class NetworkService {
     func fetchUsers(
         _ method: String,
         parametrMap: [String: String],
-        _ complition: @escaping ([Item]) -> Void
+        _ complition: @escaping ([UserItem]) -> Void
     ) {
         var parametrs: Parameters = [
             Constants.accessTokenText: Session.shared.token,
@@ -40,7 +40,7 @@ final class NetworkService {
             guard let data = response.data else { return }
             do {
                 let usersResults = try? JSONDecoder().decode(UsersResult.self, from: data)
-                guard let items = usersResults?.response.items else { return }
+                guard let items = usersResults?.response.userItems else { return }
                 complition(items)
                 self.realmService.saveData(items)
             } catch {
@@ -82,7 +82,7 @@ final class NetworkService {
     func fetchGroup(
         _ method: String,
         parametrMap: [String: String],
-        _ complition: @escaping ([Groups]) -> Void
+        _ complition: @escaping ([GroupItem]) -> Void
     ) {
         var parametrs: Parameters = [
             Constants.accessTokenText: Session.shared.token,
@@ -96,7 +96,7 @@ final class NetworkService {
             guard let data = response.data else { return }
             do {
                 guard let usersResults = try? JSONDecoder().decode(GroupsResult.self, from: data) else { return }
-                let items = usersResults.response.items
+                let items = usersResults.response.groups
                 complition(items)
                 self.realmService.saveData(items)
             } catch {
@@ -105,10 +105,90 @@ final class NetworkService {
         }
     }
 
+    func fetchPosts(
+        _ method: String,
+        _ completion: @escaping (Posts) -> Void
+    ) {
+        var parametrs: Parameters = [
+            Constants.accessTokenText: Session.shared.token,
+            Constants.filtersParametrName: Constants.filtersParametrValue,
+            Constants.vText: Constants.apiVersionText
+        ]
+        let url = "\(Constants.baseURLText)\(Constants.methodText)\(method)"
+        DispatchQueue.global().async {
+            AF.request(url, parameters: parametrs).responseJSON { response in
+                guard let data = response.data else { return }
+                do {
+                    guard let postsResults = try? JSONDecoder().decode(PostResponse.self, from: data).response
+                    else { return }
+                    DispatchQueue.main.async {
+                        completion(postsResults)
+                    }
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
+
+    func fetchPostsProfiles(
+        _ method: String,
+        _ completion: @escaping (Posts) -> Void
+    ) {
+        var parametrs: Parameters = [
+            Constants.accessTokenText: Session.shared.token,
+            Constants.filtersParametrName: Constants.filtersParametrValue,
+            Constants.vText: Constants.apiVersionText
+        ]
+        let url = "\(Constants.baseURLText)\(Constants.methodText)\(method)"
+        DispatchQueue.global().async {
+            AF.request(url, parameters: parametrs).responseJSON { response in
+                guard let data = response.data else { return }
+                do {
+                    guard let postsResults = try? JSONDecoder().decode(PostResponse.self, from: data).response
+                    else { return }
+
+                    DispatchQueue.main.async {
+                        completion(postsResults)
+                    }
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
+
+    func fetchPostsGroups(
+        _ method: String,
+        _ completion: @escaping ([GroupItem]) -> Void
+    ) {
+        var parametrs: Parameters = [
+            Constants.accessTokenText: Session.shared.token,
+            Constants.filtersParametrName: Constants.filtersParametrValue,
+            Constants.vText: Constants.apiVersionText
+        ]
+        let url = "\(Constants.baseURLText)\(Constants.methodText)\(method)"
+        DispatchQueue.global().async {
+            AF.request(url, parameters: parametrs).responseJSON { response in
+                guard let data = response.data else { return }
+                do {
+                    guard let postsResults = try? JSONDecoder().decode(PostResponse.self, from: data).response.groups
+                    else { return }
+
+                    DispatchQueue.main.async {
+                        completion(postsResults)
+                    }
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
+
     func fetchSearchGroup(
         _ method: String,
         _ searchText: String,
-        _ complition: @escaping ([Groups]) -> Void
+        _ complition: @escaping ([GroupItem]) -> Void
     ) {
         var parametrs: Parameters = [
             Constants.accessTokenText: Session.shared.token,
@@ -121,7 +201,7 @@ final class NetworkService {
             guard let data = response.data else { return }
             do {
                 guard let usersResults = try? JSONDecoder().decode(GroupsResult.self, from: data) else { return }
-                let items = usersResults.response.items
+                let items = usersResults.response.groups
                 complition(items)
                 self.realmService.saveData(items)
             } catch {
@@ -163,5 +243,7 @@ extension NetworkService {
         static let ownerIdParametrName = "owner_id"
         static let albumIdParametrName = "album_id"
         static let profileParametrName = "profile"
+        static let filtersParametrName = "filters"
+        static let filtersParametrValue = "post"
     }
 }

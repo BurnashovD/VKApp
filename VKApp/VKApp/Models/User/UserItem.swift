@@ -1,4 +1,4 @@
-// Item.swift
+// UserItem.swift
 // Copyright © RoadMap. All rights reserved.
 
 import Foundation
@@ -6,12 +6,16 @@ import RealmSwift
 
 /// User items
 @objcMembers
-final class Item: Object, Decodable {
+final class UserItem: Object, Decodable {
     // MARK: - Public properties
 
+    /// Имя
     dynamic var firstName = ""
+    /// Фамилия
     dynamic var lastName = ""
+    /// Ссылка на фото
     dynamic var photo = ""
+    /// id
     dynamic var userId = 0
 
     // MARK: - enum

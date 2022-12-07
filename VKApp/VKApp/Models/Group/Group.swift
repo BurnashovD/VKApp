@@ -5,7 +5,9 @@ import Foundation
 
 /// Group
 struct Group {
+    /// Имя
     let name: String
+    /// Ссылка на фото
     let groupImageName: String
 }
 

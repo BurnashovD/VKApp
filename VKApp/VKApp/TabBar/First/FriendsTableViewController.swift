@@ -13,9 +13,10 @@ final class FriendsTableViewController: UITableViewController {
     private let realmService = RealmService()
 
     private var notificationToken: NotificationToken?
-    private var items: [Item] = []
-    private var itemsResult: Results<Item>?
+    private var userItems: [UserItem] = []
+    private var itemsResult: Results<UserItem>?
     private var userId = 0
+    private var postItems: [PostItem] = []
 
     // MARK: - LifeCycle
 
@@ -56,10 +57,10 @@ final class FriendsTableViewController: UITableViewController {
     }
 
     private func loadData() {
-        realmService.loadData(Item.self) { [weak self] item in
+        realmService.loadData(UserItem.self) { [weak self] item in
             guard let self = self else { return }
             self.itemsResult = item
-            self.items = Array(item)
+            self.userItems = Array(item)
             self.tableView.reloadData()
         }
     }
@@ -71,12 +72,12 @@ final class FriendsTableViewController: UITableViewController {
             self.tableView.beginUpdates()
             switch changes {
             case .initial:
-                self.tableView.reloadData()
+                self.tableView.beginUpdates()
             case let .update(_, deletions, insertions, modifications):
                 self.tableView.insertRows(at: insertions.map { IndexPath(row: $0, section: 0) }, with: .automatic)
                 self.tableView.deleteRows(at: deletions.map { IndexPath(row: $0, section: 0) }, with: .automatic)
                 self.tableView.reloadRows(at: modifications.map { IndexPath(row: $0, section: 0) }, with: .automatic)
-                self.tableView.reloadData()
+                self.tableView.endUpdates()
             case let .error(error):
                 print(error.localizedDescription)
             }
@@ -101,6 +102,7 @@ extension FriendsTableViewController {
         static let albumIdParametrName = "album_id"
         static let profileParametrName = "profile"
         static let getPhotoParametrName = "photo_100"
+        static let newsGetMethodName = "newsfeed.get"
     }
 
     enum CellTypes {

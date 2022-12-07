@@ -1,10 +1,10 @@
-// User.swift
+// PostResponse.swift
 // Copyright © RoadMap. All rights reserved.
 
 import Foundation
 
-/// User
-final class UsersResult: Decodable {
+/// Post Response
+final class PostResponse: Decodable {
     /// Ответ сервера
-    var response: UserResponse
+    var response: Posts
 }

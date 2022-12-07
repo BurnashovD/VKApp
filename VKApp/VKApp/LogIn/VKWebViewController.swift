@@ -34,7 +34,8 @@ final class VKWebViewController: UIViewController {
             URLQueryItem(name: Constants.redirectItemName, value: Constants.redirectItemValue),
             URLQueryItem(name: Constants.scopeItemName, value: Constants.scopeItemValue),
             URLQueryItem(name: Constants.responseItemName, value: Constants.responseItemValue),
-            URLQueryItem(name: Constants.vItemName, value: Constants.vItemValue)
+            URLQueryItem(name: Constants.vItemName, value: Constants.vItemValue),
+            URLQueryItem(name: Constants.revokeItemName, value: Constants.revokeValue)
         ]
         guard let url = urlComponents.url else { return }
         let request = URLRequest(url: url)
@@ -49,22 +50,24 @@ extension VKWebViewController {
         static let hostComponent = "oauth.vk.com"
         static let pathComponent = "/authorize"
         static let clientIdName = "client_id"
-        static let clientIdValue = "51489649"
+        static let clientIdValue = "51496459"
         static let displayItemName = "display"
         static let displayItemValue = "mobile"
         static let redirectItemName = "redirect_uri"
         static let redirectItemValue = "https://oauth.vk.com/blank.html"
         static let scopeItemName = "scope"
-        static let scopeItemValue = "262150"
+        static let scopeItemValue = "friends,groups,photos,wall"
         static let responseItemName = "response_type"
         static let responseItemValue = "token"
         static let vItemName = "v"
-        static let vItemValue = "5.68"
+        static let vItemValue = "5.131"
         static let accessTokenName = "access_token"
         static let userIdText = "user_id"
         static let urlPath = "/blank.html"
         static let separatorCharacter = "&"
         static let equalCharacter = "="
+        static let revokeItemName = "revoke"
+        static let revokeValue = "0"
     }
 }
 

@@ -22,7 +22,7 @@ final class GlobalGroupsTableViewCell: UITableViewCell {
         configCell()
     }
 
-    func configure(_ group: Groups, networkService: NetworkService) {
+    func configure(_ group: GroupItem, networkService: NetworkService) {
         groupNameLabel.text = group.name
         groupImageView.fetchUserPhotos(group.photo, networkService: networkService)
     }

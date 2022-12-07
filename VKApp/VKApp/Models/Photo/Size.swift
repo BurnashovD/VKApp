@@ -9,7 +9,9 @@ import RealmSwift
 final class Size: Object, Decodable {
     // MARK: - Public properties
 
+    /// id
     dynamic var id = 0
+    /// Ссылка на фото
     dynamic var url = ""
 
     // MARK: - enum

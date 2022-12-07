@@ -4,7 +4,14 @@
 import Foundation
 
 /// Server response
-final class Response: Decodable {
+final class UserResponse: Decodable {
+    /// Количество
     var count: Int
-    var items: [Item]
+    /// Айтемы юзера
+    var userItems: [UserItem]
+
+    enum CodingKeys: String, CodingKey {
+        case count
+        case userItems = "items"
+    }
 }

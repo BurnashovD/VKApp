@@ -9,4 +9,5 @@ struct Post {
     let userName: String
     let overview: String
     let postImageName: String
+    let postType: Bool
 }

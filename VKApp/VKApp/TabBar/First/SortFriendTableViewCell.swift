@@ -25,7 +25,7 @@ final class SortFriendTableViewCell: UITableViewCell {
         configCell()
     }
 
-    func configure(name: String, surname: String, photo: UIImage, item: Item) {
+    func configure(name: String, surname: String, photo: UIImage, item: UserItem) {
         nameLabel.text = "\(surname) \(name)"
         profileImageView.image = photo
         userId = item.userId

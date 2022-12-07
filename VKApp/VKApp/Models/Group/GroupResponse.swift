@@ -5,5 +5,10 @@ import Foundation
 
 /// Server response
 final class GroupResponse: Codable {
-    var items: [Groups]
+    /// Айтемы групп
+    var groups: [GroupItem]
+
+    enum CodingKeys: String, CodingKey {
+        case groups = "items"
+    }
 }
