@@ -37,7 +37,6 @@ final class NetworkService {
         }
         let url = "\(Constants.baseURLText)\(Constants.methodText)\(method)"
         AF.request(url, parameters: parametrs).responseJSON { response in
-            print("lolo\(response.response?.url)")
             guard let data = response.data else { return }
             do {
                 let usersResults = try? JSONDecoder().decode(UsersResult.self, from: data)
