@@ -108,30 +108,80 @@ final class NetworkService {
 
     func fetchPosts(
         _ method: String,
-        _ completion: @escaping ([PostItems]) -> Void
+        _ completion: @escaping (Posts) -> Void
     ) {
         var parametrs: Parameters = [
             Constants.accessTokenText: Session.shared.token,
             Constants.filtersParametrName: Constants.filtersParametrValue,
-            Constants.vText: Constants.apiVersionText,
-            "count": "30"
+            Constants.vText: Constants.apiVersionText
         ]
         let url = "\(Constants.baseURLText)\(Constants.methodText)\(method)"
-        AF.request(url, parameters: parametrs).responseJSON { response in
-            print("lolo\(response.value)")
-            guard let data = response.data else { return }
-            do {
-                guard let postsResults = try? JSONDecoder().decode(PostResponse.self, from: data)
-                else {
-                    print("lolonil")
-                    return
+        DispatchQueue.global().async {
+            AF.request(url, parameters: parametrs).responseJSON { response in
+                guard let data = response.data else { return }
+                do {
+                    guard let postsResults = try? JSONDecoder().decode(PostResponse.self, from: data).response
+                    else { return }
+                    DispatchQueue.main.async {
+                        completion(postsResults)
+                    }
+                } catch {
+                    print(error.localizedDescription)
                 }
-                print("loloda")
-                let item = postsResults.response.items
-                print("lolo\(item)")
-                completion(item)
-            } catch {
-                print("lolo\(error.localizedDescription)")
+            }
+        }
+    }
+
+    func fetchPostsProfiles(
+        _ method: String,
+        _ completion: @escaping (Posts) -> Void
+    ) {
+        var parametrs: Parameters = [
+            Constants.accessTokenText: Session.shared.token,
+            Constants.filtersParametrName: Constants.filtersParametrValue,
+            Constants.vText: Constants.apiVersionText
+        ]
+        let url = "\(Constants.baseURLText)\(Constants.methodText)\(method)"
+        DispatchQueue.global().async {
+            AF.request(url, parameters: parametrs).responseJSON { response in
+                guard let data = response.data else { return }
+                do {
+                    guard let postsResults = try? JSONDecoder().decode(PostResponse.self, from: data).response
+                    else { return }
+
+                    DispatchQueue.main.async {
+                        completion(postsResults)
+                    }
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
+
+    func fetchPostsGroups(
+        _ method: String,
+        _ completion: @escaping ([Groups]) -> Void
+    ) {
+        var parametrs: Parameters = [
+            Constants.accessTokenText: Session.shared.token,
+            Constants.filtersParametrName: Constants.filtersParametrValue,
+            Constants.vText: Constants.apiVersionText
+        ]
+        let url = "\(Constants.baseURLText)\(Constants.methodText)\(method)"
+        DispatchQueue.global().async {
+            AF.request(url, parameters: parametrs).responseJSON { response in
+                guard let data = response.data else { return }
+                do {
+                    guard let postsResults = try? JSONDecoder().decode(PostResponse.self, from: data).response.group
+                    else { return }
+
+                    DispatchQueue.main.async {
+                        completion(postsResults)
+                    }
+                } catch {
+                    print(error.localizedDescription)
+                }
             }
         }
     }

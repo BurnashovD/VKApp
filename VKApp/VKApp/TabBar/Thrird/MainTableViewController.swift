@@ -8,45 +8,36 @@ final class MainTableViewController: UITableViewController {
     // MARK: - Private properties
 
     private let cellTypes: [CellTypes] = [.author, .overview, .postImage, .likes]
+    private let networkService = NetworkService()
 
     private var posts: [Post] = []
+    private var postsItems: [PostItems] = []
+    private var profiles: [Item] = []
+    private var groups: [Groups] = []
 
     // MARK: - LifeCycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        createPosts()
+        fetchPosts()
     }
 
     // MARK: - Private methods
 
-    private func createPosts() {
-        let firstPost = Post(
-            profileImageName: Constants.secondElonImageName,
-            userName: Constants.firstProfileName,
-            overview: Constants.overviewText,
-            postImageName: Constants.dogImageName,
-            postType: true
-        )
-        let secondPost = Post(
-            profileImageName: Constants.dogImageName,
-            userName: Constants.secondProfileName,
-            overview: Constants.overviewText,
-            postImageName: Constants.secondElonImageName,
-            postType: true
-        )
-        let thirdPost = Post(
-            profileImageName: Constants.steveImageName,
-            userName: Constants.thirdProfileName,
-            overview: Constants.overviewText,
-            postImageName: Constants.steveImageName,
-            postType: false
-        )
+    private func fetchPosts() {
+        networkService.fetchPosts(Constants.newsFeedMethodName) { [weak self] items in
+            guard let item = items.items, let self = self else { return }
+            self.postsItems = item
+            self.fetchPostsProfiles()
+        }
+    }
 
-        for _ in 0 ... 3 {
-            posts.append(firstPost)
-            posts.append(secondPost)
-            posts.append(thirdPost)
+    private func fetchPostsProfiles() {
+        networkService.fetchPostsProfiles(Constants.newsFeedMethodName) { [weak self] item in
+            guard let self = self, let profile = item.profile, let group = item.group else { return }
+            self.profiles = profile
+            self.groups = group
+            self.tableView.reloadData()
         }
     }
 }
@@ -70,6 +61,8 @@ extension MainTableViewController {
         static let postPhotoCellIdentifier = "postPhoto"
         static let emptyCellIdentifier = "empty"
         static let likesCellIdentifier = "likes"
+        static let videoText = "video"
+        static let newsFeedMethodName = "newsfeed.get"
     }
 
     enum CellTypes {
@@ -84,7 +77,7 @@ extension MainTableViewController {
 
 extension MainTableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
-        posts.count * cellTypes.count
+        postsItems.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -101,28 +94,49 @@ extension MainTableViewController {
                     for: indexPath
                 ) as? AuthorTableViewCell
             else { return UITableViewCell() }
-            cell.configure(posts[indexPath.section])
+            if postsItems[indexPath.section].ownerId >= 0 {
+                cell.configureUser(
+                    postsItems[indexPath.section],
+                    profiles[indexPath.row],
+                    networkService: networkService
+                )
+            } else {
+                cell.configureGroup(
+                    postsItems[indexPath.section],
+                    groups[indexPath.section],
+                    networkService: networkService
+                )
+            }
             return cell
 
         case .overview:
-            guard let cell = tableView
-                .dequeueReusableCell(
-                    withIdentifier: Constants.postTextCellIdentifier,
-                    for: indexPath
-                ) as? PostTextTableViewCell
-            else { return UITableViewCell() }
-            cell.configure(posts[indexPath.section])
-            return cell
-
+            if postsItems[indexPath.section].text.isEmpty {
+                guard let cell = tableView
+                    .dequeueReusableCell(
+                        withIdentifier: Constants.postTextCellIdentifier,
+                        for: indexPath
+                    ) as? PostTextTableViewCell
+                else { return UITableViewCell() }
+                cell.configure(postsItems[indexPath.section])
+                return cell
+            } else {
+                guard let cell = tableView
+                    .dequeueReusableCell(
+                        withIdentifier: Constants.emptyCellIdentifier,
+                        for: indexPath
+                    ) as? EmptyTableViewCell
+                else { return UITableViewCell() }
+                return cell
+            }
         case .postImage:
-            if posts[indexPath.section].postType == true {
+            if postsItems[indexPath.section].url != "" {
                 guard let cell = tableView
                     .dequeueReusableCell(
                         withIdentifier: Constants.postPhotoCellIdentifier,
                         for: indexPath
                     ) as? PostPhotoTableViewCell
                 else { return UITableViewCell() }
-                cell.configure(posts[indexPath.section])
+                cell.configure(postsItems[indexPath.section], networkService: networkService)
                 return cell
             } else {
                 guard let cell = tableView

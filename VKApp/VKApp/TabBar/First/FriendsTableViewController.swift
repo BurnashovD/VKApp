@@ -47,10 +47,6 @@ final class FriendsTableViewController: UITableViewController {
     }
 
     private func fetchFriends() {
-        networkService.fetchPosts("newsfeed.get") { item in
-            self.postItems = item
-            print("lolo \(self.postItems[0].url)")
-        }
         networkService.fetchUsers(
             Constants.friendsMethodName,
             parametrMap: networkService.fetchFriendsParametrName
@@ -106,6 +102,7 @@ extension FriendsTableViewController {
         static let albumIdParametrName = "album_id"
         static let profileParametrName = "profile"
         static let getPhotoParametrName = "photo_100"
+        static let newsGetMethodName = "newsfeed.get"
     }
 
     enum CellTypes {

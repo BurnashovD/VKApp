@@ -10,6 +10,7 @@ final class AuthorTableViewCell: UITableViewCell {
     @IBOutlet private var profilePhotoImageView: UIImageView!
     @IBOutlet private var userNameLabel: UILabel!
     @IBOutlet private var authorView: UIView!
+    @IBOutlet private var viewsCountLabel: UILabel!
 
     // MARK: - Public methods
 
@@ -18,9 +19,16 @@ final class AuthorTableViewCell: UITableViewCell {
         configPostView()
     }
 
-    func configure(_ post: Post) {
-        profilePhotoImageView.image = UIImage(named: post.profileImageName)
-        userNameLabel.text = post.userName
+    func configureUser(_ post: PostItems, _ item: Item, networkService: NetworkService) {
+        viewsCountLabel.text = String(post.count)
+        userNameLabel.text = "\(item.firstName) \(item.lastName)"
+        profilePhotoImageView.fetchUserPhotos(item.photo, networkService: networkService)
+    }
+
+    func configureGroup(_ post: PostItems, _ group: Groups, networkService: NetworkService) {
+        viewsCountLabel.text = String(post.count)
+        userNameLabel.text = group.name
+        profilePhotoImageView.fetchUserPhotos(group.photo, networkService: networkService)
     }
 
     // MARK: - Private methods

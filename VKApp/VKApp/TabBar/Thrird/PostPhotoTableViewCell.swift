@@ -12,7 +12,7 @@ final class PostPhotoTableViewCell: UITableViewCell {
 
     // MARK: - Public methods
 
-    func configure(_ post: Post) {
-        postPhotoImageView.image = UIImage(named: post.postImageName)
+    func configure(_ post: PostItems, networkService: NetworkService) {
+        postPhotoImageView.fetchUserPhotos(post.url, networkService: networkService)
     }
 }
