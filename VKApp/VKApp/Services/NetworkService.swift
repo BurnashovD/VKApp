@@ -105,6 +105,30 @@ final class NetworkService {
         }
     }
 
+    func fetchGroupOperation(_ method: String, _ completion: @escaping (Data) -> Void) {
+        var parametrs: Parameters = [
+            Constants.accessTokenText: Session.shared.token,
+            Constants.vText: Constants.apiVersionText,
+            Constants.userIdParametrName: String(Session.shared.userId),
+            Constants.extendedParametrName: Constants.extendedParametrValue
+        ]
+        let url = "\(Constants.baseURLText)\(Constants.methodText)\(method)"
+        AF.request(url, parameters: parametrs).responseJSON { response in
+            guard let data = response.data else { return }
+            completion(data)
+        }
+    }
+
+    func parseGroupData(_ data: Data, _ completion: @escaping ([GroupItem]) -> Void) {
+        do {
+            guard let groupResult = try? JSONDecoder().decode(GroupsResult.self, from: data).response.groups
+            else { return }
+            completion(groupResult)
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+
     func fetchPosts(
         _ method: String,
         _ completion: @escaping (Posts) -> Void

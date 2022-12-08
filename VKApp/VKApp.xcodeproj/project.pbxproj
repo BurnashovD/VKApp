@@ -45,6 +45,10 @@
 		A57B1DF72919E64E004A5A9A /* SortFriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57B1DF62919E64E004A5A9A /* SortFriendsTableViewController.swift */; };
 		A59F0499292BF32900D57EFA /* SessionSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59F0498292BF32900D57EFA /* SessionSingleton.swift */; };
 		A5A35F5A291C5E29007704ED /* FriendsPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A35F59291C5E29007704ED /* FriendsPhotosViewController.swift */; };
+		A5A41D142942308000B53A41 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A41D132942308000B53A41 /* AsyncOperation.swift */; };
+		A5A41D162942312A00B53A41 /* FetchGroupOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A41D152942312A00B53A41 /* FetchGroupOperation.swift */; };
+		A5A41D18294232D200B53A41 /* ParseGroupsDataOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A41D17294232D200B53A41 /* ParseGroupsDataOperation.swift */; };
+		A5A41D1A2942347100B53A41 /* SaveGroupOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A41D192942347100B53A41 /* SaveGroupOperation.swift */; };
 		A5B221252912BED9005363EE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B221242912BED9005363EE /* User.swift */; };
 		A5B221272912C0B8005363EE /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B221262912C0B8005363EE /* FriendTableViewCell.swift */; };
 		A5B221292912CB50005363EE /* RecomendationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B221282912CB4F005363EE /* RecomendationsTableViewCell.swift */; };
@@ -131,6 +135,10 @@
 		A57B1DF62919E64E004A5A9A /* SortFriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortFriendsTableViewController.swift; sourceTree = "<group>"; };
 		A59F0498292BF32900D57EFA /* SessionSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionSingleton.swift; sourceTree = "<group>"; };
 		A5A35F59291C5E29007704ED /* FriendsPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsPhotosViewController.swift; sourceTree = "<group>"; };
+		A5A41D132942308000B53A41 /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
+		A5A41D152942312A00B53A41 /* FetchGroupOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchGroupOperation.swift; sourceTree = "<group>"; };
+		A5A41D17294232D200B53A41 /* ParseGroupsDataOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseGroupsDataOperation.swift; sourceTree = "<group>"; };
+		A5A41D192942347100B53A41 /* SaveGroupOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveGroupOperation.swift; sourceTree = "<group>"; };
 		A5B221242912BED9005363EE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A5B221262912C0B8005363EE /* FriendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
 		A5B221282912CB4F005363EE /* RecomendationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecomendationsTableViewCell.swift; sourceTree = "<group>"; };
@@ -334,6 +342,17 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		A5A41D122942305F00B53A41 /* Operations */ = {
+			isa = PBXGroup;
+			children = (
+				A5A41D132942308000B53A41 /* AsyncOperation.swift */,
+				A5A41D152942312A00B53A41 /* FetchGroupOperation.swift */,
+				A5A41D17294232D200B53A41 /* ParseGroupsDataOperation.swift */,
+				A5A41D192942347100B53A41 /* SaveGroupOperation.swift */,
+			);
+			path = Operations;
+			sourceTree = "<group>";
+		};
 		A5B22130291339EF005363EE /* First */ = {
 			isa = PBXGroup;
 			children = (
@@ -359,6 +378,7 @@
 				A5B221322913407D005363EE /* GlobalGroupsTableViewCell.swift */,
 				A5B2213829146CC5005363EE /* PhotoView.swift */,
 				A5B2213A291475B2005363EE /* LikesControl.swift */,
+				A5A41D122942305F00B53A41 /* Operations */,
 			);
 			path = Second;
 			sourceTree = "<group>";
@@ -693,9 +713,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				A516BC3429104307008802FC /* LogInViewController.swift in Sources */,
+				A5A41D1A2942347100B53A41 /* SaveGroupOperation.swift in Sources */,
 				A5F3D66B2911C8C6004EB22A /* FriendsTableViewController.swift in Sources */,
 				A516BC3029104307008802FC /* AppDelegate.swift in Sources */,
 				A5463A8B2933ABEB00BBC5E0 /* UserItem.swift in Sources */,
+				A5A41D162942312A00B53A41 /* FetchGroupOperation.swift in Sources */,
 				A5FA31B5291D8566008CE86C /* CustomPushAnimation.swift in Sources */,
 				A5F3D66F2911C926004EB22A /* PhotosCollectionViewController.swift in Sources */,
 				A5424098293E8FED00E3EFF3 /* PostPhotoTableViewCell.swift in Sources */,
@@ -706,6 +728,7 @@
 				A5B2213B291475B2005363EE /* LikesControl.swift in Sources */,
 				A5B221272912C0B8005363EE /* FriendTableViewCell.swift in Sources */,
 				A5D9872F292D6A3800327582 /* VKWebViewController.swift in Sources */,
+				A5A41D142942308000B53A41 /* AsyncOperation.swift in Sources */,
 				A50F15522919A3F10029C985 /* MainTableViewController.swift in Sources */,
 				A56C0753293ECF0600183AA9 /* LikesTableViewCell.swift in Sources */,
 				A577643B293FE041000EB6F4 /* PostItem.swift in Sources */,
@@ -715,6 +738,7 @@
 				A59F0499292BF32900D57EFA /* SessionSingleton.swift in Sources */,
 				A507CFED291A897A00076C3A /* SortFriendTableViewCell.swift in Sources */,
 				A56C0751293ECAAF00183AA9 /* LikesAndCommentsControl.swift in Sources */,
+				A5A41D18294232D200B53A41 /* ParseGroupsDataOperation.swift in Sources */,
 				A5B2213D2915AA74005363EE /* Group.swift in Sources */,
 				A5B221292912CB50005363EE /* RecomendationsTableViewCell.swift in Sources */,
 				A5B221252912BED9005363EE /* User.swift in Sources */,
