@@ -50,15 +50,17 @@ final class FriendsTableViewController: UITableViewController {
     private func fetchFriend() {
         firstly {
             networkService.fetchUsersPromise(Constants.friendsMethodName)
-        }.done { _ in
+        }.done { user in
+            self.realmService.saveData(user)
+        }.catch { error in
+            print(error.localizedDescription)
+        }.finally {
             self.realmService.loadData(UserItem.self) { [weak self] item in
                 guard let self = self else { return }
                 self.itemsResult = item
                 self.userItems = Array(item)
                 self.tableView.reloadData()
             }
-        }.catch { error in
-            print(error.localizedDescription)
         }
     }
 

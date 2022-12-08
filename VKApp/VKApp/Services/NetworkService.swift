@@ -64,7 +64,6 @@ final class NetworkService {
                 do {
                     guard let userResults = try? JSONDecoder().decode(UsersResult.self, from: data).response.userItems
                     else { return }
-                    self.realmService.saveData(userResults)
                     return item.fulfill(userResults)
                 }
             }

@@ -65,7 +65,11 @@ final class SortFriendsTableViewController: UITableViewController {
     private func fetchFriend() {
         firstly {
             networkService.fetchUsersPromise(Constants.friendsMethodName)
-        }.done { _ in
+        }.done { user in
+            self.realmService.saveData(user)
+        }.catch { error in
+            print(error.localizedDescription)
+        }.finally {
             self.realmService.loadData(UserItem.self) { [weak self] friend in
                 guard let self = self else { return }
                 self.itemsResult = friend
