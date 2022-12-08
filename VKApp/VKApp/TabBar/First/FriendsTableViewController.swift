@@ -57,6 +57,8 @@ final class FriendsTableViewController: UITableViewController {
                 self.userItems = Array(item)
                 self.tableView.reloadData()
             }
+        }.catch { error in
+            print(error.localizedDescription)
         }
     }
 
