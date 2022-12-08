@@ -2,6 +2,7 @@
 // Copyright © RoadMap. All rights reserved.
 
 import Alamofire
+import PromiseKit
 import RealmSwift
 import UIKit
 
@@ -27,7 +28,7 @@ final class SortFriendsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchFriends()
+        fetchFriend()
         configUI()
         addNotificationToken()
     }
@@ -61,25 +62,19 @@ final class SortFriendsTableViewController: UITableViewController {
         performSegue(withIdentifier: Constants.sortAnimatedSegueIdentifier, sender: userPhotoImages)
     }
 
-    private func fetchFriends() {
-        networkService.fetchUsers(
-            Constants.friendsMethodName,
-            parametrMap: networkService.fetchFriendsParametrName
-        ) { [weak self] _ in
-            guard let self = self else { return }
-            self.loadData()
-        }
-    }
-
-    private func loadData() {
-        realmService.loadData(UserItem.self) { [weak self] friend in
-            guard let self = self else { return }
-            self.itemsResult = friend
-            self.items = Array(self.itemsResult ?? friend)
-            self.createSections()
-            self.sectionTitles = Array(self.sectionsMap.keys)
-            self.sectionTitles.sort(by: { $1 > $0 })
-            self.fetchPhoto()
+    private func fetchFriend() {
+        firstly {
+            networkService.fetchUsersPromise(Constants.friendsMethodName)
+        }.done { _ in
+            self.realmService.loadData(UserItem.self) { [weak self] friend in
+                guard let self = self else { return }
+                self.itemsResult = friend
+                self.items = Array(self.itemsResult ?? friend)
+                self.createSections()
+                self.sectionTitles = Array(self.sectionsMap.keys)
+                self.sectionTitles.sort(by: { $1 > $0 })
+                self.fetchPhoto()
+            }
         }
     }
 

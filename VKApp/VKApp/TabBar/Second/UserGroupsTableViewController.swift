@@ -55,13 +55,14 @@ final class UserGroupsTableViewController: UITableViewController {
         operationQueue.addOperation(parseOperation)
 
         let saveOperation = SaveGroupOperation()
-        saveOperation.completionBlock = {
-            OperationQueue.main.addOperation {
-                self.loadGroupItem()
-            }
+        let loadGroup = BlockOperation {
+            OperationQueue.main.addOperation(self.loadGroupItem)
         }
+
         saveOperation.addDependency(parseOperation)
         operationQueue.addOperation(saveOperation)
+        loadGroup.addDependency(saveOperation)
+        operationQueue.addOperation(loadGroup)
     }
 
     private func loadGroupItem() {

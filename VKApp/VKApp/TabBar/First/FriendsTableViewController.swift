@@ -1,6 +1,7 @@
 // FriendsTableViewController.swift
 // Copyright © RoadMap. All rights reserved.
 
+import PromiseKit
 import RealmSwift
 import UIKit
 
@@ -22,7 +23,7 @@ final class FriendsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchFriends()
+        fetchFriend()
         addNotificationToken()
     }
 
@@ -46,13 +47,16 @@ final class FriendsTableViewController: UITableViewController {
         performSegue(withIdentifier: Constants.phototSegueIdentifier, sender: userId)
     }
 
-    private func fetchFriends() {
-        networkService.fetchUsers(
-            Constants.friendsMethodName,
-            parametrMap: networkService.fetchFriendsParametrName
-        ) { [weak self] _ in
-            guard let self = self else { return }
-            self.loadData()
+    private func fetchFriend() {
+        firstly {
+            networkService.fetchUsersPromise(Constants.friendsMethodName)
+        }.done { _ in
+            self.realmService.loadData(UserItem.self) { [weak self] item in
+                guard let self = self else { return }
+                self.itemsResult = item
+                self.userItems = Array(item)
+                self.tableView.reloadData()
+            }
         }
     }
 
@@ -66,6 +70,7 @@ final class FriendsTableViewController: UITableViewController {
     }
 
     private func addNotificationToken() {
+        loadData()
         guard let result = itemsResult else { return }
         notificationToken = result.observe { [weak self] (changes: RealmCollectionChange) in
             guard let self = self else { return }

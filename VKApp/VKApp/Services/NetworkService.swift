@@ -3,6 +3,7 @@
 
 import Alamofire
 import Foundation
+import PromiseKit
 
 /// Получение данных с ВК
 final class NetworkService {
@@ -45,6 +46,27 @@ final class NetworkService {
                 self.realmService.saveData(items)
             } catch {
                 print(response.error)
+            }
+        }
+    }
+
+    func fetchUsersPromise(_ method: String) -> Promise<[UserItem]> {
+        var parametrs: Parameters = [
+            Constants.accessTokenText: Session.shared.token,
+            Constants.vText: Constants.apiVersionText,
+            Constants.fieldsParametrName: Constants.getPhotoParametrName,
+            Constants.orderParametrName: Constants.nameParametrName
+        ]
+        let url = "\(Constants.baseURLText)\(Constants.methodText)\(method)"
+        return Promise<[UserItem]> { item in
+            AF.request(url, parameters: parametrs).responseJSON { response in
+                guard let data = response.data else { return }
+                do {
+                    guard let userResults = try? JSONDecoder().decode(UsersResult.self, from: data).response.userItems
+                    else { return }
+                    self.realmService.saveData(userResults)
+                    return item.fulfill(userResults)
+                }
             }
         }
     }
