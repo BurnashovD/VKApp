@@ -14,12 +14,12 @@ final class NetworkService {
     // MARK: - Public properties
 
     let userGroupParametrsNames = [
-        Constants.userIdParametrName: String(Session.shared.userId),
-        Constants.extendedParametrName: Constants.extendedParametrValue
+        Constants.userIdParameterName: String(Session.shared.userId),
+        Constants.extendedParameterName: Constants.extendedParameterValue
     ]
     let fetchFriendsParametrName = [
-        Constants.fieldsParametrName: Constants.getPhotoParametrName,
-        Constants.orderParametrName: Constants.nameParametrName
+        Constants.fieldsParameterName: Constants.getPhotoParameterName,
+        Constants.orderParameterName: Constants.nameParameterName
     ]
 
     // MARK: - Public methods
@@ -29,15 +29,15 @@ final class NetworkService {
         parametrMap: [String: String],
         _ complition: @escaping ([UserItem]) -> Void
     ) {
-        var parametrs: Parameters = [
+        var parameters: Parameters = [
             Constants.accessTokenText: Session.shared.token,
             Constants.vText: Constants.apiVersionText
         ]
         for param in parametrMap {
-            parametrs[param.key] = param.value
+            parameters[param.key] = param.value
         }
         let url = "\(Constants.baseURLText)\(Constants.methodText)\(method)"
-        AF.request(url, parameters: parametrs).responseJSON { response in
+        AF.request(url, parameters: parameters).responseJSON { response in
             guard let data = response.data else { return }
             do {
                 let usersResults = try? JSONDecoder().decode(UsersResult.self, from: data)
@@ -51,20 +51,20 @@ final class NetworkService {
     }
 
     func fetchUsersPromise(_ method: String) -> Promise<[UserItem]> {
-        var parametrs: Parameters = [
+        var parameters: Parameters = [
             Constants.accessTokenText: Session.shared.token,
             Constants.vText: Constants.apiVersionText,
-            Constants.fieldsParametrName: Constants.getPhotoParametrName,
-            Constants.orderParametrName: Constants.nameParametrName
+            Constants.fieldsParameterName: Constants.getPhotoParameterName,
+            Constants.orderParameterName: Constants.nameParameterName
         ]
         let url = "\(Constants.baseURLText)\(Constants.methodText)\(method)"
         return Promise<[UserItem]> { item in
-            AF.request(url, parameters: parametrs).responseJSON { response in
+            AF.request(url, parameters: parameters).responseJSON { response in
                 guard let data = response.data else { return }
                 do {
-                    guard let userResults = try? JSONDecoder().decode(UsersResult.self, from: data).response.userItems
+                    guard let userItems = try? JSONDecoder().decode(UsersResult.self, from: data).response.userItems
                     else { return }
-                    return item.fulfill(userResults)
+                    return item.fulfill(userItems)
                 }
             }
         }
@@ -75,14 +75,14 @@ final class NetworkService {
         _ userId: String,
         _ complition: @escaping ([String]) -> Void
     ) {
-        var parametrs: Parameters = [
+        var parameters: Parameters = [
             Constants.accessTokenText: Session.shared.token,
             Constants.vText: Constants.apiVersionText,
-            Constants.ownerIdParametrName: userId,
-            Constants.albumIdParametrName: Constants.profileParametrName
+            Constants.ownerIdParameterName: userId,
+            Constants.albumIdParameterName: Constants.profileParameterName
         ]
         let url = "\(Constants.baseURLText)\(Constants.methodText)\(method)"
-        AF.request(url, parameters: parametrs).responseJSON { response in
+        AF.request(url, parameters: parameters).responseJSON { response in
             guard let data = response.data else { return }
             do {
                 guard let usersResults = try? JSONDecoder().decode(PhotoResult.self, from: data).response.items
@@ -127,14 +127,14 @@ final class NetworkService {
     }
 
     func fetchGroupOperation(_ method: String, _ completion: @escaping (Data) -> Void) {
-        var parametrs: Parameters = [
+        var parameters: Parameters = [
             Constants.accessTokenText: Session.shared.token,
             Constants.vText: Constants.apiVersionText,
-            Constants.userIdParametrName: String(Session.shared.userId),
-            Constants.extendedParametrName: Constants.extendedParametrValue
+            Constants.userIdParameterName: String(Session.shared.userId),
+            Constants.extendedParameterName: Constants.extendedParameterValue
         ]
         let url = "\(Constants.baseURLText)\(Constants.methodText)\(method)"
-        AF.request(url, parameters: parametrs).responseJSON { response in
+        AF.request(url, parameters: parameters).responseJSON { response in
             guard let data = response.data else { return }
             completion(data)
         }
@@ -142,9 +142,9 @@ final class NetworkService {
 
     func parseGroupData(_ data: Data, _ completion: @escaping ([GroupItem]) -> Void) {
         do {
-            guard let groupResult = try? JSONDecoder().decode(GroupsResult.self, from: data).response.groups
+            guard let groups = try? JSONDecoder().decode(GroupsResult.self, from: data).response.groups
             else { return }
-            completion(groupResult)
+            completion(groups)
         } catch {
             print(error.localizedDescription)
         }
@@ -154,14 +154,14 @@ final class NetworkService {
         _ method: String,
         _ completion: @escaping (Posts) -> Void
     ) {
-        var parametrs: Parameters = [
+        var parameters: Parameters = [
             Constants.accessTokenText: Session.shared.token,
-            Constants.filtersParametrName: Constants.filtersParametrValue,
+            Constants.filtersParameterName: Constants.filtersParameterValue,
             Constants.vText: Constants.apiVersionText
         ]
         let url = "\(Constants.baseURLText)\(Constants.methodText)\(method)"
         DispatchQueue.global().async {
-            AF.request(url, parameters: parametrs).responseJSON { response in
+            AF.request(url, parameters: parameters).responseJSON { response in
                 guard let data = response.data else { return }
                 do {
                     guard let postsResults = try? JSONDecoder().decode(PostResponse.self, from: data).response
@@ -180,14 +180,14 @@ final class NetworkService {
         _ method: String,
         _ completion: @escaping (Posts) -> Void
     ) {
-        var parametrs: Parameters = [
+        var parameters: Parameters = [
             Constants.accessTokenText: Session.shared.token,
-            Constants.filtersParametrName: Constants.filtersParametrValue,
+            Constants.filtersParameterName: Constants.filtersParameterValue,
             Constants.vText: Constants.apiVersionText
         ]
         let url = "\(Constants.baseURLText)\(Constants.methodText)\(method)"
         DispatchQueue.global().async {
-            AF.request(url, parameters: parametrs).responseJSON { response in
+            AF.request(url, parameters: parameters).responseJSON { response in
                 guard let data = response.data else { return }
                 do {
                     guard let postsResults = try? JSONDecoder().decode(PostResponse.self, from: data).response
@@ -207,14 +207,14 @@ final class NetworkService {
         _ method: String,
         _ completion: @escaping ([GroupItem]) -> Void
     ) {
-        var parametrs: Parameters = [
+        var parameters: Parameters = [
             Constants.accessTokenText: Session.shared.token,
-            Constants.filtersParametrName: Constants.filtersParametrValue,
+            Constants.filtersParameterName: Constants.filtersParameterValue,
             Constants.vText: Constants.apiVersionText
         ]
         let url = "\(Constants.baseURLText)\(Constants.methodText)\(method)"
         DispatchQueue.global().async {
-            AF.request(url, parameters: parametrs).responseJSON { response in
+            AF.request(url, parameters: parameters).responseJSON { response in
                 guard let data = response.data else { return }
                 do {
                     guard let postsResults = try? JSONDecoder().decode(PostResponse.self, from: data).response.groups
@@ -235,14 +235,14 @@ final class NetworkService {
         _ searchText: String,
         _ complition: @escaping ([GroupItem]) -> Void
     ) {
-        var parametrs: Parameters = [
+        var parameters: Parameters = [
             Constants.accessTokenText: Session.shared.token,
             Constants.vText: Constants.apiVersionText,
-            Constants.qParametrName: searchText,
-            Constants.typeparametrName: Constants.groupTypeName
+            Constants.qParameterName: searchText,
+            Constants.typeparameterName: Constants.groupTypeName
         ]
         let url = "\(Constants.baseURLText)\(Constants.methodText)\(method)"
-        AF.request(url, parameters: parametrs).responseJSON { response in
+        AF.request(url, parameters: parameters).responseJSON { response in
             guard let data = response.data else { return }
             do {
                 guard let usersResults = try? JSONDecoder().decode(GroupsResult.self, from: data) else { return }
@@ -274,21 +274,21 @@ extension NetworkService {
         static let accessTokenText = "access_token"
         static let vText = "v"
         static let apiVersionText = "5.131"
-        static let qParametrName = "q"
-        static let typeparametrName = "type"
+        static let qParameterName = "q"
+        static let typeparameterName = "type"
         static let groupTypeName = "group"
-        static let userIdParametrName = "user_id"
-        static let extendedParametrName = "extended"
-        static let extendedParametrValue = "1"
-        static let fieldsParametrName = "fields"
+        static let userIdParameterName = "user_id"
+        static let extendedParameterName = "extended"
+        static let extendedParameterValue = "1"
+        static let fieldsParameterName = "fields"
         static let idParametrName = "id"
-        static let orderParametrName = "order"
-        static let nameParametrName = "name"
-        static let getPhotoParametrName = "photo_100"
-        static let ownerIdParametrName = "owner_id"
-        static let albumIdParametrName = "album_id"
-        static let profileParametrName = "profile"
-        static let filtersParametrName = "filters"
-        static let filtersParametrValue = "post"
+        static let orderParameterName = "order"
+        static let nameParameterName = "name"
+        static let getPhotoParameterName = "photo_100"
+        static let ownerIdParameterName = "owner_id"
+        static let albumIdParameterName = "album_id"
+        static let profileParameterName = "profile"
+        static let filtersParameterName = "filters"
+        static let filtersParameterValue = "post"
     }
 }

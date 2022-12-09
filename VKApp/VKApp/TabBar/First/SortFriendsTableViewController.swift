@@ -1,7 +1,7 @@
 // SortFriendsTableViewController.swift
 // Copyright © RoadMap. All rights reserved.
 
-import Alamofire
+// import Alamofire
 import PromiseKit
 import RealmSwift
 import UIKit
