@@ -50,26 +50,6 @@ final class NetworkService {
         }
     }
 
-    func fetchUsersPromise(_ method: String) -> Promise<[UserItem]> {
-        var parameters: Parameters = [
-            Constants.accessTokenText: Session.shared.token,
-            Constants.vText: Constants.apiVersionText,
-            Constants.fieldsParameterName: Constants.getPhotoParameterName,
-            Constants.orderParameterName: Constants.nameParameterName
-        ]
-        let url = "\(Constants.baseURLText)\(Constants.methodText)\(method)"
-        return Promise<[UserItem]> { item in
-            AF.request(url, parameters: parameters).responseJSON { response in
-                guard let data = response.data else { return }
-                do {
-                    guard let userItems = try? JSONDecoder().decode(UsersResult.self, from: data).response.userItems
-                    else { return }
-                    return item.fulfill(userItems)
-                }
-            }
-        }
-    }
-
     func fetchPhotos(
         _ method: String,
         _ userId: String,
@@ -137,16 +117,6 @@ final class NetworkService {
         AF.request(url, parameters: parameters).responseJSON { response in
             guard let data = response.data else { return }
             completion(data)
-        }
-    }
-
-    func parseGroupData(_ data: Data, _ completion: @escaping ([GroupItem]) -> Void) {
-        do {
-            guard let groups = try? JSONDecoder().decode(GroupsResult.self, from: data).response.groups
-            else { return }
-            completion(groups)
-        } catch {
-            print(error.localizedDescription)
         }
     }
 

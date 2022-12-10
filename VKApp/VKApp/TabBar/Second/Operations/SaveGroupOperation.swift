@@ -13,7 +13,7 @@ final class SaveGroupOperation: AsyncOperation {
 
     override func main() {
         guard let parseGroupOperation = dependencies.first as? ParseGroupsDataOperation else { return }
-        realmService.saveData(parseGroupOperation.outputGroupItems)
+        realmService.saveData(parseGroupOperation.groups)
         state = .finished
     }
 }

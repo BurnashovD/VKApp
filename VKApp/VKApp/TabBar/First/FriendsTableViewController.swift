@@ -12,6 +12,7 @@ final class FriendsTableViewController: UITableViewController {
     private let cellTypes: [CellTypes] = [.friends, .recomendations]
     private let networkService = NetworkService()
     private let realmService = RealmService()
+    private let networkPromiseService = NetworkPromiseService()
 
     private var notificationToken: NotificationToken?
     private var userItems: [UserItem] = []
@@ -49,7 +50,7 @@ final class FriendsTableViewController: UITableViewController {
 
     private func fetchFriend() {
         firstly {
-            networkService.fetchUsersPromise(Constants.friendsMethodName)
+            networkPromiseService.fetchUsersPromise(Constants.friendsMethodName)
         }.done { user in
             self.realmService.saveData(user)
         }.catch { error in

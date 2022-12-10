@@ -24,6 +24,7 @@
 		A516BC5329104308008802FC /* VKAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516BC5229104308008802FC /* VKAppUITestsLaunchTests.swift */; };
 		A516BC9E29108929008802FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A516BC9D29108929008802FC /* Assets.xcassets */; };
 		A516BCA02910A2F0008802FC /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516BC9F2910A2F0008802FC /* RegistrationViewController.swift */; };
+		A537D24229454EAC0075CD76 /* NetworkPromiseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A537D24129454EAC0075CD76 /* NetworkPromiseService.swift */; };
 		A5424094293E8F9E00E3EFF3 /* AuthorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5424093293E8F9E00E3EFF3 /* AuthorTableViewCell.swift */; };
 		A5424096293E8FD500E3EFF3 /* PostTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5424095293E8FD500E3EFF3 /* PostTextTableViewCell.swift */; };
 		A5424098293E8FED00E3EFF3 /* PostPhotoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5424097293E8FED00E3EFF3 /* PostPhotoTableViewCell.swift */; };
@@ -114,6 +115,7 @@
 		A516BC5229104308008802FC /* VKAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		A516BC9D29108929008802FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A516BC9F2910A2F0008802FC /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		A537D24129454EAC0075CD76 /* NetworkPromiseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkPromiseService.swift; sourceTree = "<group>"; };
 		A5424093293E8F9E00E3EFF3 /* AuthorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorTableViewCell.swift; sourceTree = "<group>"; };
 		A5424095293E8FD500E3EFF3 /* PostTextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTextTableViewCell.swift; sourceTree = "<group>"; };
 		A5424097293E8FED00E3EFF3 /* PostPhotoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPhotoTableViewCell.swift; sourceTree = "<group>"; };
@@ -338,6 +340,7 @@
 			children = (
 				A5D98730292D79F700327582 /* NetworkService.swift */,
 				A566188629342EBE00B9A28F /* RealmService.swift */,
+				A537D24129454EAC0075CD76 /* NetworkPromiseService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -744,6 +747,7 @@
 				A5B221252912BED9005363EE /* User.swift in Sources */,
 				A566188729342EBE00B9A28F /* RealmService.swift in Sources */,
 				A5424094293E8F9E00E3EFF3 /* AuthorTableViewCell.swift in Sources */,
+				A537D24229454EAC0075CD76 /* NetworkPromiseService.swift in Sources */,
 				A5424096293E8FD500E3EFF3 /* PostTextTableViewCell.swift in Sources */,
 				A5056EA629129E4E0073D407 /* UIViewController+Extension.swift in Sources */,
 				A57B1DF72919E64E004A5A9A /* SortFriendsTableViewController.swift in Sources */,
