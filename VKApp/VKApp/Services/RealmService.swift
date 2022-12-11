@@ -17,7 +17,7 @@ struct RealmService {
             let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
             let realm = try Realm(configuration: config)
             realm.beginWrite()
-            realm.add(model, update: .all)
+            realm.add(model, update: .modified)
             try realm.commitWrite()
         } catch {
             print(error.localizedDescription)

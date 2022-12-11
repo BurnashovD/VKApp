@@ -1,6 +1,7 @@
 // FriendsTableViewController.swift
 // Copyright © RoadMap. All rights reserved.
 
+import PromiseKit
 import RealmSwift
 import UIKit
 
@@ -11,6 +12,7 @@ final class FriendsTableViewController: UITableViewController {
     private let cellTypes: [CellTypes] = [.friends, .recomendations]
     private let networkService = NetworkService()
     private let realmService = RealmService()
+    private let networkPromiseService = NetworkPromiseService()
 
     private var notificationToken: NotificationToken?
     private var userItems: [UserItem] = []
@@ -22,7 +24,7 @@ final class FriendsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchFriends()
+        fetchFriend()
         addNotificationToken()
     }
 
@@ -46,13 +48,20 @@ final class FriendsTableViewController: UITableViewController {
         performSegue(withIdentifier: Constants.phototSegueIdentifier, sender: userId)
     }
 
-    private func fetchFriends() {
-        networkService.fetchUsers(
-            Constants.friendsMethodName,
-            parametrMap: networkService.fetchFriendsParametrName
-        ) { [weak self] _ in
-            guard let self = self else { return }
-            self.loadData()
+    private func fetchFriend() {
+        firstly {
+            networkPromiseService.fetchUsersPromise(Constants.friendsMethodName)
+        }.done { user in
+            self.realmService.saveData(user)
+        }.catch { error in
+            print(error.localizedDescription)
+        }.finally {
+            self.realmService.loadData(UserItem.self) { [weak self] item in
+                guard let self = self else { return }
+                self.itemsResult = item
+                self.userItems = Array(item)
+                self.tableView.reloadData()
+            }
         }
     }
 
@@ -66,6 +75,7 @@ final class FriendsTableViewController: UITableViewController {
     }
 
     private func addNotificationToken() {
+        loadData()
         guard let result = itemsResult else { return }
         notificationToken = result.observe { [weak self] (changes: RealmCollectionChange) in
             guard let self = self else { return }

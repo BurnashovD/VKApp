@@ -1,7 +1,7 @@
 // SortFriendsTableViewController.swift
 // Copyright © RoadMap. All rights reserved.
 
-import Alamofire
+import PromiseKit
 import RealmSwift
 import UIKit
 
@@ -11,6 +11,7 @@ final class SortFriendsTableViewController: UITableViewController {
 
     private let networkService = NetworkService()
     private let realmService = RealmService()
+    private let networkPromiseService = NetworkPromiseService()
 
     private var items: [UserItem] = []
     private var notificationToken: NotificationToken?
@@ -27,7 +28,7 @@ final class SortFriendsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchFriends()
+        fetchFriend()
         configUI()
         addNotificationToken()
     }
@@ -61,26 +62,28 @@ final class SortFriendsTableViewController: UITableViewController {
         performSegue(withIdentifier: Constants.sortAnimatedSegueIdentifier, sender: userPhotoImages)
     }
 
-    private func fetchFriends() {
-        networkService.fetchUsers(
-            Constants.friendsMethodName,
-            parametrMap: networkService.fetchFriendsParametrName
-        ) { [weak self] _ in
-            guard let self = self else { return }
-            self.loadData()
+    private func fetchFriend() {
+        firstly {
+            networkPromiseService.fetchUsersPromise(Constants.friendsMethodName)
+        }.done { user in
+            self.realmService.saveData(user)
+        }.catch { error in
+            print(error.localizedDescription)
+        }.finally {
+            self.realmService.loadData(UserItem.self) { [weak self] friend in
+                guard let self = self else { return }
+                self.loadData(friend)
+            }
         }
     }
 
-    private func loadData() {
-        realmService.loadData(UserItem.self) { [weak self] friend in
-            guard let self = self else { return }
-            self.itemsResult = friend
-            self.items = Array(self.itemsResult ?? friend)
-            self.createSections()
-            self.sectionTitles = Array(self.sectionsMap.keys)
-            self.sectionTitles.sort(by: { $1 > $0 })
-            self.fetchPhoto()
-        }
+    private func loadData(_ friend: Results<UserItem>) {
+        itemsResult = friend
+        items = Array(itemsResult ?? friend)
+        createSections()
+        sectionTitles = Array(sectionsMap.keys)
+        sectionTitles.sort(by: { $1 > $0 })
+        fetchPhoto()
     }
 
     private func addNotificationToken() {

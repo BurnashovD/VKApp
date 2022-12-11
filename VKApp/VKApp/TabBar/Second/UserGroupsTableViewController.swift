@@ -34,7 +34,7 @@ final class UserGroupsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configController()
-        fetchUsersGroups()
+        fetchGroups()
         addNotificationToken()
     }
 
@@ -44,14 +44,24 @@ final class UserGroupsTableViewController: UITableViewController {
         searchBar.delegate = self
     }
 
-    private func fetchUsersGroups() {
-        networkService.fetchGroup(
-            Constants.methodName,
-            parametrMap: networkService.userGroupParametrsNames
-        ) { [weak self] _ in
-            guard let self = self else { return }
-            self.loadGroupItem()
+    private func fetchGroups() {
+        let operationQueue = OperationQueue()
+
+        let fetchOperation = FetchGroupOperation()
+        operationQueue.addOperation(fetchOperation)
+
+        let parseOperation = ParseGroupsDataOperation()
+        parseOperation.addDependency(fetchOperation)
+        operationQueue.addOperation(parseOperation)
+
+        let saveOperation = SaveGroupOperation()
+        let loadGroup = BlockOperation {
+            OperationQueue.main.addOperation(self.loadGroupItem)
         }
+        saveOperation.addDependency(parseOperation)
+        operationQueue.addOperation(saveOperation)
+        loadGroup.addDependency(saveOperation)
+        operationQueue.addOperation(loadGroup)
     }
 
     private func loadGroupItem() {
