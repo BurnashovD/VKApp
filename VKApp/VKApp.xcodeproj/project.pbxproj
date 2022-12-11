@@ -71,6 +71,7 @@
 		A5FA31AB291C7C53008CE86C /* SortedFriendsPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FA31AA291C7C53008CE86C /* SortedFriendsPhotosViewController.swift */; };
 		A5FA31B3291D83D6008CE86C /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FA31B2291D83D6008CE86C /* CustomNavigationController.swift */; };
 		A5FA31B5291D8566008CE86C /* CustomPushAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FA31B4291D8566008CE86C /* CustomPushAnimation.swift */; };
+		A5FE7B0829461F6600D6379C /* PhotoCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FE7B0729461F6600D6379C /* PhotoCacheService.swift */; };
 		FC126BA84192DFBD3E677B02 /* Pods_VKApp_VKAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD607045ADD05095DFB8F2EC /* Pods_VKApp_VKAppUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -162,6 +163,7 @@
 		A5FA31AA291C7C53008CE86C /* SortedFriendsPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortedFriendsPhotosViewController.swift; sourceTree = "<group>"; };
 		A5FA31B2291D83D6008CE86C /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomNavigationController.swift; path = VKApp/CustomSegues/CustomNavigationController.swift; sourceTree = SOURCE_ROOT; };
 		A5FA31B4291D8566008CE86C /* CustomPushAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPushAnimation.swift; sourceTree = "<group>"; };
+		A5FE7B0729461F6600D6379C /* PhotoCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCacheService.swift; sourceTree = "<group>"; };
 		A9A6818FC7695A7895719177 /* Pods_VKApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VKApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB07223CFB5DA8AC1357A874 /* Pods-VKApp-VKAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKApp-VKAppUITests.release.xcconfig"; path = "Target Support Files/Pods-VKApp-VKAppUITests/Pods-VKApp-VKAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		CD607045ADD05095DFB8F2EC /* Pods_VKApp_VKAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VKApp_VKAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -341,6 +343,7 @@
 				A5D98730292D79F700327582 /* NetworkService.swift */,
 				A566188629342EBE00B9A28F /* RealmService.swift */,
 				A537D24129454EAC0075CD76 /* NetworkPromiseService.swift */,
+				A5FE7B0729461F6600D6379C /* PhotoCacheService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -719,6 +722,7 @@
 				A5A41D1A2942347100B53A41 /* SaveGroupOperation.swift in Sources */,
 				A5F3D66B2911C8C6004EB22A /* FriendsTableViewController.swift in Sources */,
 				A516BC3029104307008802FC /* AppDelegate.swift in Sources */,
+				A5FE7B0829461F6600D6379C /* PhotoCacheService.swift in Sources */,
 				A5463A8B2933ABEB00BBC5E0 /* UserItem.swift in Sources */,
 				A5A41D162942312A00B53A41 /* FetchGroupOperation.swift in Sources */,
 				A5FA31B5291D8566008CE86C /* CustomPushAnimation.swift in Sources */,

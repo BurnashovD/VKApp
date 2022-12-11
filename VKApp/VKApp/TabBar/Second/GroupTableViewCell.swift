@@ -22,9 +22,13 @@ final class GroupTableViewCell: UITableViewCell {
         configCell()
     }
 
-    func configure(_ group: GroupItem, networkService: NetworkService) {
+    func configure(
+        _ group: GroupItem,
+        photoService: PhotoCacheService,
+        at indexPath: IndexPath
+    ) {
         groupNameLabel.text = group.name
-        groupImageView.fetchUserPhotos(group.photo, networkService: networkService)
+        groupImageView.image = photoService.photo(atIndexpath: indexPath, byUrl: group.photo)
     }
 
     // MARK: - Private methods
