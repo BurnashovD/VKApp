@@ -8,6 +8,7 @@ private protocol DataReloadable {
     func reloadRow(atIndexpath indexPath: IndexPath)
 }
 
+/// Кеширование фото
 final class PhotoCacheService {
     // MARK: - Private properties
 
@@ -100,6 +101,7 @@ final class PhotoCacheService {
     }
 }
 
+/// Контейнеры таблиц/коллекций
 extension PhotoCacheService {
     private class Table: DataReloadable {
         let table: UITableView

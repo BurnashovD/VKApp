@@ -73,7 +73,7 @@ final class NetworkService {
                     photosURLs.append(item.url)
                 }
                 complition(photosURLs)
-                self.realmService.savePhotoData(items)
+                self.realmService.saveData(items)
             } catch {
                 print(response.error)
             }
