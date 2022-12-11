@@ -29,6 +29,7 @@ final class PhotoCacheService {
     }()
 
     private let container: DataReloadable
+    private let networkService = NetworkService()
 
     private var images = [String: UIImage]()
 
@@ -85,18 +86,11 @@ final class PhotoCacheService {
     }
 
     private func loadPhoto(atIndexpath indexPath: IndexPath, byUrl url: String) {
-        AF.request(url).responseData(queue: DispatchQueue.global()) {
-            [weak self] response in
-            guard
-                let data = response.data,
-                let image = UIImage(data: data) else { return }
-            DispatchQueue.main.async {
-                self?.images[url] = image
-            }
+        networkService.fetchUserPhotos(url) { [weak self] data in
+            guard let data = data, let image = UIImage(data: data) else { return }
+            self?.images[url] = image
             self?.saveImageToCache(url: url, image: image)
-            DispatchQueue.main.async {
-                self?.container.reloadRow(atIndexpath: indexPath)
-            }
+            self?.container.reloadRow(atIndexpath: indexPath)
         }
     }
 }
