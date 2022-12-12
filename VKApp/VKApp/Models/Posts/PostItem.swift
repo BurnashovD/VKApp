@@ -21,6 +21,8 @@ final class PostItem: Decodable {
     var name: String = ""
     /// Фото автора
     var profileImage: String = ""
+    /// Дата
+    var date: Int = 0
 
     // MARK: - CodingKeys
 
@@ -31,6 +33,7 @@ final class PostItem: Decodable {
         case ownerId = "owner_id"
         case views
         case groups
+        case date
         case profiles
     }
 
@@ -66,6 +69,7 @@ final class PostItem: Decodable {
         let sizesContainer = try? sizisValue?.nestedContainer(keyedBy: SizesKeys.self)
         ownerId = try container.decode(Int.self, forKey: .ownerId)
         text = try container.decode(String.self, forKey: .text)
+        date = try container.decode(Int.self, forKey: .date)
         count = try viewsContainer?.decodeIfPresent(Int.self, forKey: .count) ?? 0
         type = try attContainer?.decode(String.self, forKey: .type) ?? ""
         postId = try photoContainer?.decodeIfPresent(Int.self, forKey: .postId) ?? 0

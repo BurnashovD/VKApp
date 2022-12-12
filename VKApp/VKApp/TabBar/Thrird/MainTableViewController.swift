@@ -178,6 +178,7 @@ extension MainTableViewController {
                     for: indexPath
                 ) as? LikesTableViewCell
             else { return UITableViewCell() }
+            cell.configure(postsItems[indexPath.section], indexPath: indexPath)
             return cell
         }
     }

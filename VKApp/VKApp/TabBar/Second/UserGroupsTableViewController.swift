@@ -11,6 +11,7 @@ final class UserGroupsTableViewController: UITableViewController {
     private let searchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.searchBarStyle = UISearchBar.Style.minimal
+        searchBar.backgroundColor = UIColor(named: Constants.backgroundGrayColorName)
         searchBar.searchTextField.textColor = .white
         searchBar.searchTextField.attributedPlaceholder = NSAttributedString(
             string: Constants.searchBarPlaceholderText,
@@ -106,6 +107,7 @@ extension UserGroupsTableViewController {
         static let userIdParametrName = "user_id"
         static let extendedParametrName = "extended"
         static let extendedParametrValue = "1"
+        static let backgroundGrayColorName = "backgroundGray"
     }
 }
 
