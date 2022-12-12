@@ -10,10 +10,10 @@ final class FriendsTableViewController: UITableViewController {
     // MARK: - Private properties
 
     private let cellTypes: [CellTypes] = [.friends, .recomendations]
-    private let networkService = NetworkService()
     private let realmService = RealmService()
     private let networkPromiseService = NetworkPromiseService()
 
+    private lazy var photoCacheService = PhotoCacheService(container: tableView)
     private var notificationToken: NotificationToken?
     private var userItems: [UserItem] = []
     private var itemsResult: Results<UserItem>?
@@ -56,12 +56,8 @@ final class FriendsTableViewController: UITableViewController {
         }.catch { error in
             print(error.localizedDescription)
         }.finally {
-            self.realmService.loadData(UserItem.self) { [weak self] item in
-                guard let self = self else { return }
-                self.itemsResult = item
-                self.userItems = Array(item)
-                self.tableView.reloadData()
-            }
+            self.loadData()
+            self.tableView.reloadData()
         }
     }
 
@@ -70,12 +66,10 @@ final class FriendsTableViewController: UITableViewController {
             guard let self = self else { return }
             self.itemsResult = item
             self.userItems = Array(item)
-            self.tableView.reloadData()
         }
     }
 
     private func addNotificationToken() {
-        loadData()
         guard let result = itemsResult else { return }
         notificationToken = result.observe { [weak self] (changes: RealmCollectionChange) in
             guard let self = self else { return }
@@ -84,6 +78,7 @@ final class FriendsTableViewController: UITableViewController {
             case .initial:
                 self.tableView.beginUpdates()
             case let .update(_, deletions, insertions, modifications):
+                self.loadData()
                 self.tableView.insertRows(at: insertions.map { IndexPath(row: $0, section: 0) }, with: .automatic)
                 self.tableView.deleteRows(at: deletions.map { IndexPath(row: $0, section: 0) }, with: .automatic)
                 self.tableView.reloadRows(at: modifications.map { IndexPath(row: $0, section: 0) }, with: .automatic)
@@ -147,7 +142,10 @@ extension FriendsTableViewController {
                 withIdentifier: Constants.friendsCellIdentifier,
                 for: indexPath
             ) as? FriendTableViewCell, let results = itemsResult else { return UITableViewCell() }
-            cell.configure(results[indexPath.row], networkService: networkService)
+            cell.configure(
+                results[indexPath.row],
+                photoService: photoCacheService
+            )
 
             return cell
 

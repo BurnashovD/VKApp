@@ -16,8 +16,7 @@ final class ParseGroupsDataOperation: AsyncOperation {
               let data = fetchGroupOperation.data else { return }
 
         do {
-            guard let groupsItems = try? JSONDecoder().decode(PostResponse.self, from: data).response.groups
-            else { return }
+            let groupsItems = try JSONDecoder().decode(GroupsResult.self, from: data).response.groups
             groups = groupsItems
             state = .finished
         } catch {

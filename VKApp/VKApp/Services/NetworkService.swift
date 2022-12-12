@@ -229,7 +229,7 @@ final class NetworkService {
         AF.request(url).response { response in
             guard let data = response.data else { return }
             DispatchQueue.main.async {
-                completion(response.data)
+                completion(data)
             }
         }
     }

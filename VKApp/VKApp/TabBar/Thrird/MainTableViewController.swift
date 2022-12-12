@@ -10,6 +10,7 @@ final class MainTableViewController: UITableViewController {
     private let cellTypes: [CellTypes] = [.author, .overview, .postImage, .likes]
     private let networkService = NetworkService()
 
+    private lazy var photoCacheService = PhotoCacheService(container: tableView)
     private var posts: [Post] = []
     private var postsItems: [PostItem] = []
     private var profiles: [UserItem] = []
@@ -155,7 +156,10 @@ extension MainTableViewController {
                         for: indexPath
                     ) as? PostPhotoTableViewCell
                 else { return UITableViewCell() }
-                cell.configure(postsItems[indexPath.section], networkService: networkService)
+                cell.configure(
+                    postsItems[indexPath.section],
+                    photoService: photoCacheService
+                )
                 return cell
             } else {
                 guard let cell = tableView

@@ -22,12 +22,12 @@ final class FriendTableViewCell: UITableViewCell {
         configCell()
     }
 
-    func configure(_ user: UserItem, networkService: NetworkService) {
+    func configure(
+        _ user: UserItem,
+        photoService: PhotoCacheService
+    ) {
         let url = user.photo
-        networkService.fetchUserPhotos(url) { [weak self] data in
-            guard let self = self, let data = data, let safeImage = UIImage(data: data) else { return }
-            self.profileImageView.image = safeImage
-        }
+        profileImageView.image = photoService.photo(byUrl: url)
         nameLabel.text = "\(user.firstName) \(user.lastName)"
         userId = user.userId
     }

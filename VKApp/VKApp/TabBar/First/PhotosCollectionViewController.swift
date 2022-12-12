@@ -13,6 +13,7 @@ final class PhotosCollectionViewController: UICollectionViewController {
     private let realmService = RealmService()
     private let sizeResult = Size()
 
+    private lazy var photoCacheService = PhotoCacheService(container: collectionView)
     private var notificationToken: NotificationToken?
     private var photosUrlPath: [String] = []
     private var sizes: [Size] = []
@@ -66,7 +67,7 @@ final class PhotosCollectionViewController: UICollectionViewController {
     }
 
     private func addNotificationToken() {
-        loadData()
+        notifySubscript()
         notificationToken = sizeResult.observe { [weak self] changes in
             guard let self = self else { return }
             switch changes {
@@ -112,7 +113,10 @@ extension PhotosCollectionViewController {
             withReuseIdentifier: Constants.photosCellIdentifier,
             for: indexPath
         ) as? PhotosCollectionViewCell else { return UICollectionViewCell() }
-        cell.configure(sizes[indexPath.row], networkService: networkService)
+        cell.configure(
+            sizes[indexPath.row],
+            photoService: photoCacheService
+        )
         cell.animatePhotosCellsAction()
         return cell
     }

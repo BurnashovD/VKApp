@@ -24,6 +24,7 @@ final class UserGroupsTableViewController: UITableViewController {
     private let networkService = NetworkService()
     private let realmService = RealmService()
 
+    private lazy var photoCacheService = PhotoCacheService(container: tableView)
     private var notificationToken: NotificationToken?
     private var groupsResults: Results<GroupItem>?
     private var searchResult: [GroupItem] = []
@@ -56,7 +57,9 @@ final class UserGroupsTableViewController: UITableViewController {
 
         let saveOperation = SaveGroupOperation()
         let loadGroup = BlockOperation {
-            OperationQueue.main.addOperation(self.loadGroupItem)
+            OperationQueue.main.addOperation {
+                self.loadGroupItem()
+            }
         }
         saveOperation.addDependency(parseOperation)
         operationQueue.addOperation(saveOperation)
@@ -122,7 +125,10 @@ extension UserGroupsTableViewController {
             withIdentifier: Constants.groupsCellIdentifier,
             for: indexPath
         ) as? GroupTableViewCell, let result = groupsResults else { return UITableViewCell() }
-        cell.configure(result[indexPath.row], networkService: networkService)
+        cell.configure(
+            result[indexPath.row],
+            photoService: photoCacheService
+        )
 
         return cell
     }

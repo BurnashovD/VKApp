@@ -44,6 +44,7 @@
 		A5776433293FDE3B000EB6F4 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5776432293FDE3B000EB6F4 /* Post.swift */; };
 		A577643B293FE041000EB6F4 /* PostItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A577643A293FE041000EB6F4 /* PostItem.swift */; };
 		A57B1DF72919E64E004A5A9A /* SortFriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57B1DF62919E64E004A5A9A /* SortFriendsTableViewController.swift */; };
+		A57F64C929475D8A008CFC57 /* DataReloadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F64C829475D8A008CFC57 /* DataReloadable.swift */; };
 		A59F0499292BF32900D57EFA /* SessionSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59F0498292BF32900D57EFA /* SessionSingleton.swift */; };
 		A5A35F5A291C5E29007704ED /* FriendsPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A35F59291C5E29007704ED /* FriendsPhotosViewController.swift */; };
 		A5A41D142942308000B53A41 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A41D132942308000B53A41 /* AsyncOperation.swift */; };
@@ -71,6 +72,7 @@
 		A5FA31AB291C7C53008CE86C /* SortedFriendsPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FA31AA291C7C53008CE86C /* SortedFriendsPhotosViewController.swift */; };
 		A5FA31B3291D83D6008CE86C /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FA31B2291D83D6008CE86C /* CustomNavigationController.swift */; };
 		A5FA31B5291D8566008CE86C /* CustomPushAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FA31B4291D8566008CE86C /* CustomPushAnimation.swift */; };
+		A5FE7B0829461F6600D6379C /* PhotoCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FE7B0729461F6600D6379C /* PhotoCacheService.swift */; };
 		FC126BA84192DFBD3E677B02 /* Pods_VKApp_VKAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD607045ADD05095DFB8F2EC /* Pods_VKApp_VKAppUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -135,6 +137,7 @@
 		A5776432293FDE3B000EB6F4 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		A577643A293FE041000EB6F4 /* PostItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostItem.swift; sourceTree = "<group>"; };
 		A57B1DF62919E64E004A5A9A /* SortFriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortFriendsTableViewController.swift; sourceTree = "<group>"; };
+		A57F64C829475D8A008CFC57 /* DataReloadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataReloadable.swift; sourceTree = "<group>"; };
 		A59F0498292BF32900D57EFA /* SessionSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionSingleton.swift; sourceTree = "<group>"; };
 		A5A35F59291C5E29007704ED /* FriendsPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsPhotosViewController.swift; sourceTree = "<group>"; };
 		A5A41D132942308000B53A41 /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
@@ -162,6 +165,7 @@
 		A5FA31AA291C7C53008CE86C /* SortedFriendsPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortedFriendsPhotosViewController.swift; sourceTree = "<group>"; };
 		A5FA31B2291D83D6008CE86C /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomNavigationController.swift; path = VKApp/CustomSegues/CustomNavigationController.swift; sourceTree = SOURCE_ROOT; };
 		A5FA31B4291D8566008CE86C /* CustomPushAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPushAnimation.swift; sourceTree = "<group>"; };
+		A5FE7B0729461F6600D6379C /* PhotoCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCacheService.swift; sourceTree = "<group>"; };
 		A9A6818FC7695A7895719177 /* Pods_VKApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VKApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB07223CFB5DA8AC1357A874 /* Pods-VKApp-VKAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKApp-VKAppUITests.release.xcconfig"; path = "Target Support Files/Pods-VKApp-VKAppUITests/Pods-VKApp-VKAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		CD607045ADD05095DFB8F2EC /* Pods_VKApp_VKAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VKApp_VKAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -341,6 +345,8 @@
 				A5D98730292D79F700327582 /* NetworkService.swift */,
 				A566188629342EBE00B9A28F /* RealmService.swift */,
 				A537D24129454EAC0075CD76 /* NetworkPromiseService.swift */,
+				A5FE7B0729461F6600D6379C /* PhotoCacheService.swift */,
+				A57F64C829475D8A008CFC57 /* DataReloadable.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -719,7 +725,9 @@
 				A5A41D1A2942347100B53A41 /* SaveGroupOperation.swift in Sources */,
 				A5F3D66B2911C8C6004EB22A /* FriendsTableViewController.swift in Sources */,
 				A516BC3029104307008802FC /* AppDelegate.swift in Sources */,
+				A5FE7B0829461F6600D6379C /* PhotoCacheService.swift in Sources */,
 				A5463A8B2933ABEB00BBC5E0 /* UserItem.swift in Sources */,
+				A57F64C929475D8A008CFC57 /* DataReloadable.swift in Sources */,
 				A5A41D162942312A00B53A41 /* FetchGroupOperation.swift in Sources */,
 				A5FA31B5291D8566008CE86C /* CustomPushAnimation.swift in Sources */,
 				A5F3D66F2911C926004EB22A /* PhotosCollectionViewController.swift in Sources */,
