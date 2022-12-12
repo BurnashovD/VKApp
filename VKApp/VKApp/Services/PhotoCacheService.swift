@@ -31,7 +31,7 @@ final class PhotoCacheService {
     private let container: DataReloadable
     private let networkService = NetworkService()
 
-    private var images = [String: UIImage]()
+    private var imagesMap: [String: UIImage] = [:]
 
     // MARK: - init
 
@@ -47,7 +47,7 @@ final class PhotoCacheService {
 
     func photo(atIndexpath indexPath: IndexPath, byUrl url: String) -> UIImage? {
         var image: UIImage?
-        if let photo = images[url] {
+        if let photo = imagesMap[url] {
             image = photo
         } else if let photo = getImageFromCache(url: url) {
             image = photo
@@ -80,7 +80,7 @@ final class PhotoCacheService {
         let lifeTime = Date().timeIntervalSince(modificationDate)
         guard lifeTime <= cacheLifeTime, let image = UIImage(contentsOfFile: fileName) else { return nil }
         DispatchQueue.main.async {
-            self.images[url] = image
+            self.imagesMap[url] = image
         }
         return image
     }
@@ -88,7 +88,7 @@ final class PhotoCacheService {
     private func loadPhoto(atIndexpath indexPath: IndexPath, byUrl url: String) {
         networkService.fetchUserPhotos(url) { [weak self] data in
             guard let data = data, let image = UIImage(data: data) else { return }
-            self?.images[url] = image
+            self?.imagesMap[url] = image
             self?.saveImageToCache(url: url, image: image)
             self?.container.reloadRow(atIndexpath: indexPath)
         }
