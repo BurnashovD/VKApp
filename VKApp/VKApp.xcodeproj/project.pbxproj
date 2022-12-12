@@ -44,6 +44,7 @@
 		A5776433293FDE3B000EB6F4 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5776432293FDE3B000EB6F4 /* Post.swift */; };
 		A577643B293FE041000EB6F4 /* PostItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A577643A293FE041000EB6F4 /* PostItem.swift */; };
 		A57B1DF72919E64E004A5A9A /* SortFriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57B1DF62919E64E004A5A9A /* SortFriendsTableViewController.swift */; };
+		A57F64C929475D8A008CFC57 /* DataReloadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F64C829475D8A008CFC57 /* DataReloadable.swift */; };
 		A59F0499292BF32900D57EFA /* SessionSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59F0498292BF32900D57EFA /* SessionSingleton.swift */; };
 		A5A35F5A291C5E29007704ED /* FriendsPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A35F59291C5E29007704ED /* FriendsPhotosViewController.swift */; };
 		A5A41D142942308000B53A41 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A41D132942308000B53A41 /* AsyncOperation.swift */; };
@@ -136,6 +137,7 @@
 		A5776432293FDE3B000EB6F4 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		A577643A293FE041000EB6F4 /* PostItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostItem.swift; sourceTree = "<group>"; };
 		A57B1DF62919E64E004A5A9A /* SortFriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortFriendsTableViewController.swift; sourceTree = "<group>"; };
+		A57F64C829475D8A008CFC57 /* DataReloadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataReloadable.swift; sourceTree = "<group>"; };
 		A59F0498292BF32900D57EFA /* SessionSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionSingleton.swift; sourceTree = "<group>"; };
 		A5A35F59291C5E29007704ED /* FriendsPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsPhotosViewController.swift; sourceTree = "<group>"; };
 		A5A41D132942308000B53A41 /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
@@ -344,6 +346,7 @@
 				A566188629342EBE00B9A28F /* RealmService.swift */,
 				A537D24129454EAC0075CD76 /* NetworkPromiseService.swift */,
 				A5FE7B0729461F6600D6379C /* PhotoCacheService.swift */,
+				A57F64C829475D8A008CFC57 /* DataReloadable.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -724,6 +727,7 @@
 				A516BC3029104307008802FC /* AppDelegate.swift in Sources */,
 				A5FE7B0829461F6600D6379C /* PhotoCacheService.swift in Sources */,
 				A5463A8B2933ABEB00BBC5E0 /* UserItem.swift in Sources */,
+				A57F64C929475D8A008CFC57 /* DataReloadable.swift in Sources */,
 				A5A41D162942312A00B53A41 /* FetchGroupOperation.swift in Sources */,
 				A5FA31B5291D8566008CE86C /* CustomPushAnimation.swift in Sources */,
 				A5F3D66F2911C926004EB22A /* PhotosCollectionViewController.swift in Sources */,

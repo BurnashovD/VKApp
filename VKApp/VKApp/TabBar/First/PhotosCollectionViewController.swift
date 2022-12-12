@@ -115,8 +115,7 @@ extension PhotosCollectionViewController {
         ) as? PhotosCollectionViewCell else { return UICollectionViewCell() }
         cell.configure(
             sizes[indexPath.row],
-            photoService: photoCacheService,
-            at: indexPath
+            photoService: photoCacheService
         )
         cell.animatePhotosCellsAction()
         return cell

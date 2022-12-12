@@ -24,11 +24,10 @@ final class FriendTableViewCell: UITableViewCell {
 
     func configure(
         _ user: UserItem,
-        photoService: PhotoCacheService,
-        at indexPath: IndexPath
+        photoService: PhotoCacheService
     ) {
         let url = user.photo
-        profileImageView.image = photoService.photo(atIndexpath: indexPath, byUrl: url)
+        profileImageView.image = photoService.photo(byUrl: url)
         nameLabel.text = "\(user.firstName) \(user.lastName)"
         userId = user.userId
     }

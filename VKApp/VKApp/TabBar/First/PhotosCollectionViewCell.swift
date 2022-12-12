@@ -32,10 +32,9 @@ final class PhotosCollectionViewCell: UICollectionViewCell {
 
     func configure(
         _ imageURL: Size,
-        photoService: PhotoCacheService,
-        at indexPath: IndexPath
+        photoService: PhotoCacheService
     ) {
-        userPhotoImageView.image = photoService.photo(atIndexpath: indexPath, byUrl: imageURL.url)
+        userPhotoImageView.image = photoService.photo(byUrl: imageURL.url)
     }
 }
 

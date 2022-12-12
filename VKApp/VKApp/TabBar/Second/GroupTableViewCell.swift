@@ -24,11 +24,10 @@ final class GroupTableViewCell: UITableViewCell {
 
     func configure(
         _ group: GroupItem,
-        photoService: PhotoCacheService,
-        at indexPath: IndexPath
+        photoService: PhotoCacheService
     ) {
         groupNameLabel.text = group.name
-        groupImageView.image = photoService.photo(atIndexpath: indexPath, byUrl: group.photo)
+        groupImageView.image = photoService.photo(byUrl: group.photo)
     }
 
     // MARK: - Private methods

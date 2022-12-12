@@ -127,8 +127,7 @@ extension UserGroupsTableViewController {
         ) as? GroupTableViewCell, let result = groupsResults else { return UITableViewCell() }
         cell.configure(
             result[indexPath.row],
-            photoService: photoCacheService,
-            at: indexPath
+            photoService: photoCacheService
         )
 
         return cell

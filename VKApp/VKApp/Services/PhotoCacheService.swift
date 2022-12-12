@@ -4,10 +4,6 @@
 import Alamofire
 import Foundation
 
-private protocol DataReloadable {
-    func reloadRow(atIndexpath indexPath: IndexPath)
-}
-
 /// Кеширование фото
 final class PhotoCacheService {
     // MARK: - Private properties
@@ -45,14 +41,14 @@ final class PhotoCacheService {
 
     // MARK: - Public methods
 
-    func photo(atIndexpath indexPath: IndexPath, byUrl url: String) -> UIImage? {
+    func photo(byUrl url: String) -> UIImage? {
         var image: UIImage?
         if let photo = imagesMap[url] {
             image = photo
         } else if let photo = getImageFromCache(url: url) {
             image = photo
         } else {
-            loadPhoto(atIndexpath: indexPath, byUrl: url)
+            loadPhoto(byUrl: url)
         }
         return image
     }
@@ -85,12 +81,11 @@ final class PhotoCacheService {
         return image
     }
 
-    private func loadPhoto(atIndexpath indexPath: IndexPath, byUrl url: String) {
+    private func loadPhoto(byUrl url: String) {
         networkService.fetchUserPhotos(url) { [weak self] data in
-            guard let data = data, let image = UIImage(data: data) else { return }
-            self?.imagesMap[url] = image
-            self?.saveImageToCache(url: url, image: image)
-            self?.container.reloadRow(atIndexpath: indexPath)
+            guard let self = self, let data = data, let image = UIImage(data: data) else { return }
+            self.imagesMap[url] = image
+            self.saveImageToCache(url: url, image: image)
         }
     }
 }
@@ -103,7 +98,7 @@ extension PhotoCacheService {
             self.table = table
         }
 
-        func reloadRow(atIndexpath indexPath: IndexPath) {
+        func reloadRow(at indexPath: IndexPath) {
             table.reloadRows(at: [indexPath], with: .none)
         }
     }
@@ -114,7 +109,7 @@ extension PhotoCacheService {
             self.collection = collection
         }
 
-        func reloadRow(atIndexpath indexPath: IndexPath) {
+        func reloadRow(at indexPath: IndexPath) {
             collection.reloadItems(at: [indexPath])
         }
     }

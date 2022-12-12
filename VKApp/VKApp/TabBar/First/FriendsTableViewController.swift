@@ -144,8 +144,7 @@ extension FriendsTableViewController {
             ) as? FriendTableViewCell, let results = itemsResult else { return UITableViewCell() }
             cell.configure(
                 results[indexPath.row],
-                photoService: photoCacheService,
-                at: indexPath
+                photoService: photoCacheService
             )
 
             return cell

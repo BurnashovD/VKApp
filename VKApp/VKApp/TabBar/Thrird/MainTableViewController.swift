@@ -158,8 +158,7 @@ extension MainTableViewController {
                 else { return UITableViewCell() }
                 cell.configure(
                     postsItems[indexPath.section],
-                    photoService: photoCacheService,
-                    at: indexPath
+                    photoService: photoCacheService
                 )
                 return cell
             } else {
