@@ -22,6 +22,12 @@ final class NetworkService {
         Constants.orderParameterName: Constants.nameParameterName
     ]
 
+    let fetchPostsParametersNames: Parameters = [
+        Constants.accessTokenText: Session.shared.token,
+        Constants.filtersParameterName: Constants.filtersParameterValue,
+        Constants.vText: Constants.apiVersionText
+    ]
+
     // MARK: - Public methods
 
     func fetchUsers(
@@ -124,15 +130,9 @@ final class NetworkService {
         _ method: String,
         _ completion: @escaping (Posts) -> Void
     ) {
-        var parameters: Parameters = [
-            Constants.accessTokenText: Session.shared.token,
-            Constants.filtersParameterName: Constants.filtersParameterValue,
-            Constants.vText: Constants.apiVersionText
-        ]
-
         let url = "\(Constants.baseURLText)\(Constants.methodText)\(method)"
         DispatchQueue.global().async {
-            AF.request(url, parameters: parameters).responseJSON { response in
+            AF.request(url, parameters: self.fetchPostsParametersNames).responseJSON { response in
                 guard let data = response.data else { return }
                 do {
                     guard let postsResults = try? JSONDecoder().decode(PostResponse.self, from: data).response
@@ -150,14 +150,15 @@ final class NetworkService {
     func fetchRefreshedPosts(
         _ method: String,
         startTime: TimeInterval? = nil,
+        startFrom: String? = nil,
         _ completion: @escaping (Posts) -> Void
     ) {
-        var parameters: Parameters = [
-            Constants.accessTokenText: Session.shared.token,
-            Constants.filtersParameterName: Constants.filtersParameterValue,
-            Constants.vText: Constants.apiVersionText,
-            Constants.startTimeParameterName: startTime ?? 0
-        ]
+        var parameters = fetchPostsParametersNames
+        if startTime != nil {
+            parameters[Constants.startTimeParameterName] = startTime
+        } else if startFrom != nil {
+            parameters[Constants.startFromParameterName] = startFrom
+        }
 
         let url = "\(Constants.baseURLText)\(Constants.methodText)\(method)"
         DispatchQueue.global().async {
@@ -291,5 +292,6 @@ extension NetworkService {
         static let filtersParameterName = "filters"
         static let filtersParameterValue = "post"
         static let startTimeParameterName = "start_time"
+        static let startFromParameterName = "start_from"
     }
 }

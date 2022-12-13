@@ -851,7 +851,7 @@
         <scene sceneID="Pzm-Gs-Bow">
             <objects>
                 <tableViewController id="dcb-Zd-fw6" customClass="MainTableViewController" customModule="VKApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="qMN-i1-PbW">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="white" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="qMN-i1-PbW">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.1647058874" green="0.1647058874" blue="0.1764705926" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -1071,6 +1071,7 @@
                         <connections>
                             <outlet property="dataSource" destination="dcb-Zd-fw6" id="DPq-ZS-uaM"/>
                             <outlet property="delegate" destination="dcb-Zd-fw6" id="haH-Hp-ejg"/>
+                            <outlet property="prefetchDataSource" destination="dcb-Zd-fw6" id="JM4-H1-gP8"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Новости" id="waY-Tk-QCT"/>

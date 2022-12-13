@@ -23,6 +23,8 @@ final class MainTableViewController: UITableViewController {
     private var postsItems: [PostItem] = []
     private var profiles: [UserItem] = []
     private var groups: [GroupItem] = []
+    private var nextPost = ""
+    private var isLoading = false
 
     // MARK: - LifeCycle
 
@@ -41,8 +43,9 @@ final class MainTableViewController: UITableViewController {
 
     private func fetchPosts() {
         networkService.fetchPosts(Constants.newsFeedMethodName) { [weak self] items in
-            guard let item = items.items, let self = self else { return }
+            guard let item = items.items, let post = items.nextPost, let self = self else { return }
             self.postsItems = item
+            self.nextPost = post
             self.fetchPostsProfiles()
         }
     }
@@ -117,6 +120,8 @@ extension MainTableViewController {
         static let likesCellIdentifier = "likes"
         static let videoText = "video"
         static let newsFeedMethodName = "newsfeed.get"
+        static let photoText = "photo"
+        static let loadingText = "Loading..."
     }
 
     enum CellTypes {
@@ -127,11 +132,16 @@ extension MainTableViewController {
     }
 }
 
-// MARK: - UITableViewDelegate, UITableViewDataSource
+// MARK: - UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching
 
-extension MainTableViewController {
+extension MainTableViewController: UITableViewDataSourcePrefetching {
     override func numberOfSections(in tableView: UITableView) -> Int {
-        postsItems.count
+        guard !postsItems.isEmpty else {
+            tableView.showEmptyMessage(Constants.loadingText)
+            return 0
+        }
+        tableView.hideEmptyMessage()
+        return postsItems.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -181,7 +191,8 @@ extension MainTableViewController {
                 return cell
             }
         case .postImage:
-            if postsItems[indexPath.section].url != "" {
+            let post = postsItems[indexPath.section]
+            if post.url != "", post.type == Constants.photoText {
                 guard let cell = tableView
                     .dequeueReusableCell(
                         withIdentifier: Constants.postPhotoCellIdentifier,
@@ -190,7 +201,7 @@ extension MainTableViewController {
                 else { return UITableViewCell() }
                 cell.configure(
                     postsItems[indexPath.section],
-                    photoService: photoCacheService
+                    networkService: networkService
                 )
                 return cell
             } else {
@@ -216,6 +227,34 @@ extension MainTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        UITableView.automaticDimension
+        let type = cellTypes[indexPath.row]
+        let post = postsItems[indexPath.section]
+        switch type {
+        case .postImage:
+            guard post.type == Constants.photoText else { fallthrough }
+            let tableWidth = tableView.bounds.width
+            let cellHeight = tableWidth * post.aspectRatio
+            return cellHeight
+        default:
+            return UITableView.automaticDimension
+        }
+    }
+
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        let oldPostsCount = postsItems.count
+        guard
+            let maxRow = indexPaths.map(\.section).max(),
+            maxRow > postsItems.count - 5,
+            isLoading == false
+        else { return }
+        isLoading = true
+        networkService.fetchRefreshedPosts(Constants.newsFeedMethodName, startFrom: nextPost) { [weak self] item in
+            guard let self = self, let post = item.items else { return }
+            let newSections = (oldPostsCount ..< (oldPostsCount + post.count)).map { $0 }
+            self.postsItems.append(contentsOf: post)
+            self.filterAuthorItems()
+            self.tableView.insertSections(IndexSet(newSections), with: .automatic)
+            self.isLoading = false
+        }
     }
 }

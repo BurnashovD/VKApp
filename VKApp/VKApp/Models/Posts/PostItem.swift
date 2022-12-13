@@ -23,6 +23,14 @@ final class PostItem: Decodable {
     var profileImage: String = ""
     /// Дата
     var date: Int = 0
+    /// Длина фото
+    var width: Int = 0
+    /// Ширина фото
+    var height: Int = 0
+    /// Соотношение сторон
+    var aspectRatio: CGFloat {
+        CGFloat(height) / CGFloat(width)
+    }
 
     // MARK: - CodingKeys
 
@@ -49,6 +57,8 @@ final class PostItem: Decodable {
 
     enum SizesKeys: String, CodingKey {
         case url
+        case width
+        case height
     }
 
     enum ViewsKeys: String, CodingKey {
@@ -74,5 +84,7 @@ final class PostItem: Decodable {
         type = try attContainer?.decode(String.self, forKey: .type) ?? ""
         postId = try photoContainer?.decodeIfPresent(Int.self, forKey: .postId) ?? 0
         url = try sizesContainer?.decodeIfPresent(String.self, forKey: .url) ?? ""
+        width = try sizesContainer?.decodeIfPresent(Int.self, forKey: .width) ?? 0
+        height = try sizesContainer?.decodeIfPresent(Int.self, forKey: .height) ?? 0
     }
 }

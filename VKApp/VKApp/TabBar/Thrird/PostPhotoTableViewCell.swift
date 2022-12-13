@@ -14,8 +14,8 @@ final class PostPhotoTableViewCell: UITableViewCell {
 
     func configure(
         _ post: PostItem,
-        photoService: PhotoCacheService
+        networkService: NetworkService
     ) {
-        postPhotoImageView.image = photoService.photo(byUrl: post.url)
+        postPhotoImageView.fetchUserPhotos(post.url, networkService: networkService)
     }
 }
