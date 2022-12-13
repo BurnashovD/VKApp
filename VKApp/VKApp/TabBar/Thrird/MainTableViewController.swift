@@ -5,6 +5,14 @@ import UIKit
 
 /// Таблица новостей
 final class MainTableViewController: UITableViewController {
+    // MARK: - Visual components
+
+    private let postRefreshControl: UIRefreshControl = {
+        let refresh = UIRefreshControl()
+        refresh.tintColor = .white
+        return refresh
+    }()
+
     // MARK: - Private properties
 
     private let cellTypes: [CellTypes] = [.author, .overview, .postImage, .likes]
@@ -20,10 +28,16 @@ final class MainTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        configUI()
         fetchPosts()
     }
 
     // MARK: - Private methods
+
+    private func configUI() {
+        view.addSubview(postRefreshControl)
+        postRefreshControl.addTarget(self, action: #selector(refreshNewsfeedAction), for: .valueChanged)
+    }
 
     private func fetchPosts() {
         networkService.fetchPosts(Constants.newsFeedMethodName) { [weak self] items in
@@ -61,6 +75,24 @@ final class MainTableViewController: UITableViewController {
                 post.profileImage = photo
             }
         }
+    }
+
+    @objc private func refreshNewsfeedAction() {
+        var freshDate: TimeInterval?
+
+        guard let firstItem = postsItems.first?.date else { return }
+        freshDate = Double(firstItem) + 1
+        networkService
+            .fetchRefreshedPosts(Constants.newsFeedMethodName, startTime: freshDate) { [weak self] post in
+                guard
+                    let self = self,
+                    let items = post.items
+                else { return }
+                self.postRefreshControl.endRefreshing()
+                self.postsItems = items + self.postsItems
+                self.filterAuthorItems()
+                self.tableView.reloadData()
+            }
     }
 }
 

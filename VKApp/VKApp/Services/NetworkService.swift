@@ -129,6 +129,36 @@ final class NetworkService {
             Constants.filtersParameterName: Constants.filtersParameterValue,
             Constants.vText: Constants.apiVersionText
         ]
+
+        let url = "\(Constants.baseURLText)\(Constants.methodText)\(method)"
+        DispatchQueue.global().async {
+            AF.request(url, parameters: parameters).responseJSON { response in
+                guard let data = response.data else { return }
+                do {
+                    guard let postsResults = try? JSONDecoder().decode(PostResponse.self, from: data).response
+                    else { return }
+                    DispatchQueue.main.async {
+                        completion(postsResults)
+                    }
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
+
+    func fetchRefreshedPosts(
+        _ method: String,
+        startTime: TimeInterval? = nil,
+        _ completion: @escaping (Posts) -> Void
+    ) {
+        var parameters: Parameters = [
+            Constants.accessTokenText: Session.shared.token,
+            Constants.filtersParameterName: Constants.filtersParameterValue,
+            Constants.vText: Constants.apiVersionText,
+            Constants.startTimeParameterName: startTime ?? 0
+        ]
+
         let url = "\(Constants.baseURLText)\(Constants.methodText)\(method)"
         DispatchQueue.global().async {
             AF.request(url, parameters: parameters).responseJSON { response in
@@ -260,5 +290,6 @@ extension NetworkService {
         static let profileParameterName = "profile"
         static let filtersParameterName = "filters"
         static let filtersParameterValue = "post"
+        static let startTimeParameterName = "start_time"
     }
 }
