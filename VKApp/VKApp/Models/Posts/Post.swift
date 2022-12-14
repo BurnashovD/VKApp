@@ -11,11 +11,14 @@ final class Posts: Decodable {
     var groups: [GroupItem]?
     /// Айтемы профилей
     var profiles: [UserItem]?
+    /// Следующий пост
+    var nextPost: String? = ""
 
     enum CodingKeys: String, CodingKey {
         case items
         case groups
         case profiles
+        case nextPost = "next_from"
     }
 
     convenience init(from decoder: Decoder) throws {
@@ -24,5 +27,6 @@ final class Posts: Decodable {
         items = try container.decode([PostItem].self, forKey: .items)
         groups = try container.decode([GroupItem].self, forKey: .groups)
         profiles = try container.decode([UserItem].self, forKey: .profiles)
+        nextPost = try? container.decodeIfPresent(String.self, forKey: .nextPost)
     }
 }

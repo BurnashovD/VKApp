@@ -12,6 +12,7 @@ final class LikesAndCommentsControl: UIControl {
         button.setBackgroundImage(UIImage(systemName: Constants.heartImageName), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = .lightGray
+        button.backgroundColor = UIColor(named: Constants.backgroundGrayColorName)
         return button
     }()
 
@@ -20,6 +21,7 @@ final class LikesAndCommentsControl: UIControl {
         button.setBackgroundImage(UIImage(systemName: Constants.messageImageName), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = .lightGray
+        button.backgroundColor = UIColor(named: Constants.backgroundGrayColorName)
         return button
     }()
 
@@ -28,6 +30,7 @@ final class LikesAndCommentsControl: UIControl {
         button.setBackgroundImage(UIImage(systemName: Constants.forwardImageName), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = .lightGray
+        button.backgroundColor = UIColor(named: Constants.backgroundGrayColorName)
         return button
     }()
 
@@ -36,11 +39,27 @@ final class LikesAndCommentsControl: UIControl {
         label.textColor = .white
         label.text = Constants.zeroText
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.backgroundColor = UIColor(named: Constants.backgroundGrayColorName)
+        return label
+    }()
+
+    private let postDateLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.backgroundColor = UIColor(named: Constants.backgroundGrayColorName)
         return label
     }()
 
     // MARK: - Private properties
 
+    private let dateFormatter: DateFormatter? = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = Constants.dateFormat
+        return formatter
+    }()
+
+    private var dateTextCacheMap: [IndexPath: String] = [:]
     private var likesCount = 0
     private var isTapped = false
     private var likeColor: UIColor = .white
@@ -57,6 +76,12 @@ final class LikesAndCommentsControl: UIControl {
         configControl()
     }
 
+    // MARK: - Public methods
+
+    func configure(_ post: PostItem, indexPath: IndexPath) {
+        postDateLabel.text = getCellDateText(indexPath: indexPath, time: Double(post.date))
+    }
+
     // MARK: - Private methods
 
     private func configControl() {
@@ -66,11 +91,23 @@ final class LikesAndCommentsControl: UIControl {
         addSubview(commentButton)
         addSubview(shareButton)
         addSubview(likesCounterLabel)
+        addSubview(postDateLabel)
         createLikeButtonAnchors()
         createCounterAnchors()
         createCommentButtonAchors()
         createShareButtonAnchors()
+        createPostDateLableAnchors()
         likeButton.addTarget(self, action: #selector(tapOnLikeAction), for: .touchUpInside)
+    }
+
+    private func getCellDateText(indexPath: IndexPath, time: Double) -> String {
+        guard let stringDate = dateTextCacheMap[indexPath] else {
+            let date = Date(timeIntervalSince1970: time)
+            let stringDate = dateFormatter?.string(from: date)
+            dateTextCacheMap[indexPath] = stringDate
+            return stringDate ?? ""
+        }
+        return stringDate
     }
 
     private func createLikeButtonAnchors() {
@@ -87,6 +124,13 @@ final class LikesAndCommentsControl: UIControl {
         commentButton.trailingAnchor.constraint(equalTo: shareButton.leadingAnchor, constant: -50).isActive = true
         commentButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
         commentButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+    }
+
+    private func createPostDateLableAnchors() {
+        postDateLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5).isActive = true
+        postDateLabel.topAnchor.constraint(equalTo: topAnchor, constant: 5).isActive = true
+        postDateLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        postDateLabel.widthAnchor.constraint(equalToConstant: 150).isActive = true
     }
 
     private func createShareButtonAnchors() {
@@ -125,5 +169,6 @@ extension LikesAndCommentsControl {
         static let forwardImageName = "arrowshape.turn.up.forward"
         static let backgroundGrayColorName = "backgroundGray"
         static let zeroText = "0"
+        static let dateFormat = "dd.MM.yyyy HH.mm"
     }
 }

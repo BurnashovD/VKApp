@@ -5,6 +5,14 @@ import UIKit
 
 /// Таблица новостей
 final class MainTableViewController: UITableViewController {
+    // MARK: - Visual components
+
+    private let postRefreshControl: UIRefreshControl = {
+        let refresh = UIRefreshControl()
+        refresh.tintColor = .white
+        return refresh
+    }()
+
     // MARK: - Private properties
 
     private let cellTypes: [CellTypes] = [.author, .overview, .postImage, .likes]
@@ -15,21 +23,35 @@ final class MainTableViewController: UITableViewController {
     private var postsItems: [PostItem] = []
     private var profiles: [UserItem] = []
     private var groups: [GroupItem] = []
+    private var nextPost = ""
+    private var isLoading = false
 
     // MARK: - LifeCycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        configUI()
         fetchPosts()
     }
 
     // MARK: - Private methods
 
+    private func configUI() {
+        view.addSubview(postRefreshControl)
+        postRefreshControl.addTarget(self, action: #selector(refreshNewsfeedAction), for: .valueChanged)
+    }
+
     private func fetchPosts() {
-        networkService.fetchPosts(Constants.newsFeedMethodName) { [weak self] items in
-            guard let item = items.items, let self = self else { return }
-            self.postsItems = item
-            self.fetchPostsProfiles()
+        networkService.fetchPosts(Constants.newsFeedMethodName) { [weak self] result in
+            switch result {
+            case let .fulfilled(items):
+                guard let item = items.items, let post = items.nextPost, let self = self else { return }
+                self.postsItems = item
+                self.nextPost = post
+                self.fetchPostsProfiles()
+            case let .rejected(error):
+                print(error.localizedDescription)
+            }
         }
     }
 
@@ -62,6 +84,54 @@ final class MainTableViewController: UITableViewController {
             }
         }
     }
+
+    private func getRefreshedNews(_ items: [PostItem]) {
+        postRefreshControl.endRefreshing()
+        postsItems = items + postsItems
+        filterAuthorItems()
+        tableView.reloadData()
+    }
+
+    private func getForwardPosts(_ oldPostsCount: Int) {
+        isLoading = true
+        networkService.fetchRefreshedPosts(Constants.newsFeedMethodName, startFrom: nextPost) { [weak self] result in
+            switch result {
+            case let .fulfilled(item):
+                guard let self = self, let post = item.items else { return }
+                let newSections = (oldPostsCount ..< (oldPostsCount + post.count)).map { $0 }
+                self.postsItems.append(contentsOf: post)
+                self.filterAuthorItems()
+                self.tableView.insertSections(IndexSet(newSections), with: .automatic)
+                self.isLoading = false
+            case let .rejected(error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+
+    private func fetchRefreshedPosts(_ freshDate: TimeInterval) {
+        networkService
+            .fetchRefreshedPosts(Constants.newsFeedMethodName, startTime: freshDate) { [weak self] result in
+                switch result {
+                case let .fulfilled(post):
+                    guard
+                        let self = self,
+                        let items = post.items
+                    else { return }
+                    self.getRefreshedNews(items)
+                case let .rejected(error):
+                    print(error.localizedDescription)
+                }
+            }
+    }
+
+    @objc private func refreshNewsfeedAction() {
+        var freshDate: TimeInterval?
+
+        guard let firstItem = postsItems.first?.date else { return }
+        freshDate = Double(firstItem) + 1
+        fetchRefreshedPosts(freshDate ?? 0)
+    }
 }
 
 /// Constants and CellTypes
@@ -85,6 +155,8 @@ extension MainTableViewController {
         static let likesCellIdentifier = "likes"
         static let videoText = "video"
         static let newsFeedMethodName = "newsfeed.get"
+        static let photoText = "photo"
+        static let loadingText = "Loading..."
     }
 
     enum CellTypes {
@@ -95,11 +167,16 @@ extension MainTableViewController {
     }
 }
 
-// MARK: - UITableViewDelegate, UITableViewDataSource
+// MARK: - UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching
 
-extension MainTableViewController {
+extension MainTableViewController: UITableViewDataSourcePrefetching {
     override func numberOfSections(in tableView: UITableView) -> Int {
-        postsItems.count
+        guard !postsItems.isEmpty else {
+            tableView.showEmptyMessage(Constants.loadingText)
+            return 0
+        }
+        tableView.hideEmptyMessage()
+        return postsItems.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -149,7 +226,8 @@ extension MainTableViewController {
                 return cell
             }
         case .postImage:
-            if postsItems[indexPath.section].url != "" {
+            let post = postsItems[indexPath.section]
+            if post.url != "", post.type == Constants.photoText {
                 guard let cell = tableView
                     .dequeueReusableCell(
                         withIdentifier: Constants.postPhotoCellIdentifier,
@@ -158,7 +236,7 @@ extension MainTableViewController {
                 else { return UITableViewCell() }
                 cell.configure(
                     postsItems[indexPath.section],
-                    photoService: photoCacheService
+                    networkService: networkService
                 )
                 return cell
             } else {
@@ -178,11 +256,32 @@ extension MainTableViewController {
                     for: indexPath
                 ) as? LikesTableViewCell
             else { return UITableViewCell() }
+            cell.configure(postsItems[indexPath.section], indexPath: indexPath)
             return cell
         }
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        UITableView.automaticDimension
+        let type = cellTypes[indexPath.row]
+        let post = postsItems[indexPath.section]
+        switch type {
+        case .postImage:
+            guard post.type == Constants.photoText else { fallthrough }
+            let tableWidth = tableView.bounds.width
+            let cellHeight = tableWidth * post.aspectRatio
+            return cellHeight
+        default:
+            return UITableView.automaticDimension
+        }
+    }
+
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        let oldPostsCount = postsItems.count
+        guard
+            let maxRow = indexPaths.map(\.section).max(),
+            maxRow > postsItems.count - 5,
+            isLoading == false
+        else { return }
+        getForwardPosts(oldPostsCount)
     }
 }

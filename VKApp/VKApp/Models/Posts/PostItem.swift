@@ -21,6 +21,16 @@ final class PostItem: Decodable {
     var name: String = ""
     /// Фото автора
     var profileImage: String = ""
+    /// Дата
+    var date: Int = 0
+    /// Ширина фото
+    var width: Int = 0
+    /// Высота фото
+    var height: Int = 0
+    /// Соотношение сторон
+    var aspectRatio: CGFloat {
+        CGFloat(height) / CGFloat(width)
+    }
 
     // MARK: - CodingKeys
 
@@ -31,6 +41,7 @@ final class PostItem: Decodable {
         case ownerId = "owner_id"
         case views
         case groups
+        case date
         case profiles
     }
 
@@ -46,6 +57,8 @@ final class PostItem: Decodable {
 
     enum SizesKeys: String, CodingKey {
         case url
+        case width
+        case height
     }
 
     enum ViewsKeys: String, CodingKey {
@@ -66,9 +79,12 @@ final class PostItem: Decodable {
         let sizesContainer = try? sizisValue?.nestedContainer(keyedBy: SizesKeys.self)
         ownerId = try container.decode(Int.self, forKey: .ownerId)
         text = try container.decode(String.self, forKey: .text)
+        date = try container.decode(Int.self, forKey: .date)
         count = try viewsContainer?.decodeIfPresent(Int.self, forKey: .count) ?? 0
         type = try attContainer?.decode(String.self, forKey: .type) ?? ""
         postId = try photoContainer?.decodeIfPresent(Int.self, forKey: .postId) ?? 0
         url = try sizesContainer?.decodeIfPresent(String.self, forKey: .url) ?? ""
+        width = try sizesContainer?.decodeIfPresent(Int.self, forKey: .width) ?? 0
+        height = try sizesContainer?.decodeIfPresent(Int.self, forKey: .height) ?? 0
     }
 }
