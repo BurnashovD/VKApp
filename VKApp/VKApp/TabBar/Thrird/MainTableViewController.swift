@@ -109,11 +109,7 @@ final class MainTableViewController: UITableViewController {
         }
     }
 
-    @objc private func refreshNewsfeedAction() {
-        var freshDate: TimeInterval?
-
-        guard let firstItem = postsItems.first?.date else { return }
-        freshDate = Double(firstItem) + 1
+    private func fetchRefreshedPosts(_ freshDate: TimeInterval) {
         networkService
             .fetchRefreshedPosts(Constants.newsFeedMethodName, startTime: freshDate) { [weak self] result in
                 switch result {
@@ -127,6 +123,14 @@ final class MainTableViewController: UITableViewController {
                     print(error.localizedDescription)
                 }
             }
+    }
+
+    @objc private func refreshNewsfeedAction() {
+        var freshDate: TimeInterval?
+
+        guard let firstItem = postsItems.first?.date else { return }
+        freshDate = Double(firstItem) + 1
+        fetchRefreshedPosts(freshDate ?? 0)
     }
 }
 
