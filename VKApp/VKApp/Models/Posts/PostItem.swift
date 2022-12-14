@@ -23,9 +23,9 @@ final class PostItem: Decodable {
     var profileImage: String = ""
     /// Дата
     var date: Int = 0
-    /// Длина фото
-    var width: Int = 0
     /// Ширина фото
+    var width: Int = 0
+    /// Высота фото
     var height: Int = 0
     /// Соотношение сторон
     var aspectRatio: CGFloat {
