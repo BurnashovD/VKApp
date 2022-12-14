@@ -42,11 +42,16 @@ final class MainTableViewController: UITableViewController {
     }
 
     private func fetchPosts() {
-        networkService.fetchPosts(Constants.newsFeedMethodName) { [weak self] items in
-            guard let item = items.items, let post = items.nextPost, let self = self else { return }
-            self.postsItems = item
-            self.nextPost = post
-            self.fetchPostsProfiles()
+        networkService.fetchPosts(Constants.newsFeedMethodName) { [weak self] result in
+            switch result {
+            case let .fulfilled(items):
+                guard let item = items.items, let post = items.nextPost, let self = self else { return }
+                self.postsItems = item
+                self.nextPost = post
+                self.fetchPostsProfiles()
+            case let .rejected(error):
+                print(error.localizedDescription)
+            }
         }
     }
 
@@ -80,21 +85,47 @@ final class MainTableViewController: UITableViewController {
         }
     }
 
+    private func getRefreshedNews(_ items: [PostItem]) {
+        postRefreshControl.endRefreshing()
+        postsItems = items + postsItems
+        filterAuthorItems()
+        tableView.reloadData()
+    }
+
+    private func getForwardPosts(_ oldPostsCount: Int) {
+        isLoading = true
+        networkService.fetchRefreshedPosts(Constants.newsFeedMethodName, startFrom: nextPost) { [weak self] result in
+            switch result {
+            case let .fulfilled(item):
+                guard let self = self, let post = item.items else { return }
+                let newSections = (oldPostsCount ..< (oldPostsCount + post.count)).map { $0 }
+                self.postsItems.append(contentsOf: post)
+                self.filterAuthorItems()
+                self.tableView.insertSections(IndexSet(newSections), with: .automatic)
+                self.isLoading = false
+            case let .rejected(error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+
     @objc private func refreshNewsfeedAction() {
         var freshDate: TimeInterval?
 
         guard let firstItem = postsItems.first?.date else { return }
         freshDate = Double(firstItem) + 1
         networkService
-            .fetchRefreshedPosts(Constants.newsFeedMethodName, startTime: freshDate) { [weak self] post in
-                guard
-                    let self = self,
-                    let items = post.items
-                else { return }
-                self.postRefreshControl.endRefreshing()
-                self.postsItems = items + self.postsItems
-                self.filterAuthorItems()
-                self.tableView.reloadData()
+            .fetchRefreshedPosts(Constants.newsFeedMethodName, startTime: freshDate) { [weak self] result in
+                switch result {
+                case let .fulfilled(post):
+                    guard
+                        let self = self,
+                        let items = post.items
+                    else { return }
+                    self.getRefreshedNews(items)
+                case let .rejected(error):
+                    print(error.localizedDescription)
+                }
             }
     }
 }
@@ -247,14 +278,6 @@ extension MainTableViewController: UITableViewDataSourcePrefetching {
             maxRow > postsItems.count - 5,
             isLoading == false
         else { return }
-        isLoading = true
-        networkService.fetchRefreshedPosts(Constants.newsFeedMethodName, startFrom: nextPost) { [weak self] item in
-            guard let self = self, let post = item.items else { return }
-            let newSections = (oldPostsCount ..< (oldPostsCount + post.count)).map { $0 }
-            self.postsItems.append(contentsOf: post)
-            self.filterAuthorItems()
-            self.tableView.insertSections(IndexSet(newSections), with: .automatic)
-            self.isLoading = false
-        }
+        getForwardPosts(oldPostsCount)
     }
 }

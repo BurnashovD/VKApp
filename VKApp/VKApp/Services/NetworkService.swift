@@ -128,21 +128,17 @@ final class NetworkService {
 
     func fetchPosts(
         _ method: String,
-        _ completion: @escaping (Posts) -> Void
+        _ completion: @escaping (Result<Posts>) -> Void
     ) {
         let url = "\(Constants.baseURLText)\(Constants.methodText)\(method)"
-        DispatchQueue.global().async {
-            AF.request(url, parameters: self.fetchPostsParametersNames).responseJSON { response in
-                guard let data = response.data else { return }
-                do {
-                    guard let postsResults = try? JSONDecoder().decode(PostResponse.self, from: data).response
-                    else { return }
-                    DispatchQueue.main.async {
-                        completion(postsResults)
-                    }
-                } catch {
-                    print(error.localizedDescription)
-                }
+        AF.request(url, parameters: fetchPostsParametersNames).responseJSON { response in
+            guard let data = response.data else { return }
+            do {
+                guard let postsResults = try? JSONDecoder().decode(PostResponse.self, from: data).response
+                else { return }
+                completion(.fulfilled(postsResults))
+            } catch {
+                completion(.rejected(error))
             }
         }
     }
@@ -151,7 +147,7 @@ final class NetworkService {
         _ method: String,
         startTime: TimeInterval? = nil,
         startFrom: String? = nil,
-        _ completion: @escaping (Posts) -> Void
+        _ completion: @escaping (Result<Posts>) -> Void
     ) {
         var parameters = fetchPostsParametersNames
         if startTime != nil {
@@ -161,18 +157,14 @@ final class NetworkService {
         }
 
         let url = "\(Constants.baseURLText)\(Constants.methodText)\(method)"
-        DispatchQueue.global().async {
-            AF.request(url, parameters: parameters).responseJSON { response in
-                guard let data = response.data else { return }
-                do {
-                    guard let postsResults = try? JSONDecoder().decode(PostResponse.self, from: data).response
-                    else { return }
-                    DispatchQueue.main.async {
-                        completion(postsResults)
-                    }
-                } catch {
-                    print(error.localizedDescription)
-                }
+        AF.request(url, parameters: parameters).responseJSON { response in
+            guard let data = response.data else { return }
+            do {
+                guard let postsResults = try? JSONDecoder().decode(PostResponse.self, from: data).response
+                else { return }
+                completion(.fulfilled(postsResults))
+            } catch {
+                completion(.rejected(error))
             }
         }
     }
@@ -187,19 +179,14 @@ final class NetworkService {
             Constants.vText: Constants.apiVersionText
         ]
         let url = "\(Constants.baseURLText)\(Constants.methodText)\(method)"
-        DispatchQueue.global().async {
-            AF.request(url, parameters: parameters).responseJSON { response in
-                guard let data = response.data else { return }
-                do {
-                    guard let postsResults = try? JSONDecoder().decode(PostResponse.self, from: data).response
-                    else { return }
-
-                    DispatchQueue.main.async {
-                        completion(postsResults)
-                    }
-                } catch {
-                    print(error.localizedDescription)
-                }
+        AF.request(url, parameters: parameters).responseJSON { response in
+            guard let data = response.data else { return }
+            do {
+                guard let postsResults = try? JSONDecoder().decode(PostResponse.self, from: data).response
+                else { return }
+                completion(postsResults)
+            } catch {
+                print(error.localizedDescription)
             }
         }
     }
@@ -214,19 +201,14 @@ final class NetworkService {
             Constants.vText: Constants.apiVersionText
         ]
         let url = "\(Constants.baseURLText)\(Constants.methodText)\(method)"
-        DispatchQueue.global().async {
-            AF.request(url, parameters: parameters).responseJSON { response in
-                guard let data = response.data else { return }
-                do {
-                    guard let postsResults = try? JSONDecoder().decode(PostResponse.self, from: data).response.groups
-                    else { return }
-
-                    DispatchQueue.main.async {
-                        completion(postsResults)
-                    }
-                } catch {
-                    print(error.localizedDescription)
-                }
+        AF.request(url, parameters: parameters).responseJSON { response in
+            guard let data = response.data else { return }
+            do {
+                guard let postsResults = try? JSONDecoder().decode(PostResponse.self, from: data).response.groups
+                else { return }
+                completion(postsResults)
+            } catch {
+                print(error.localizedDescription)
             }
         }
     }
@@ -259,9 +241,7 @@ final class NetworkService {
     func fetchUserPhotos(_ url: String, _ completion: @escaping (Data?) -> Void) {
         AF.request(url).response { response in
             guard let data = response.data else { return }
-            DispatchQueue.main.async {
-                completion(data)
-            }
+            completion(data)
         }
     }
 }

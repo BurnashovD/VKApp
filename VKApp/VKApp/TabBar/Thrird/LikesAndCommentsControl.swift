@@ -59,7 +59,7 @@ final class LikesAndCommentsControl: UIControl {
         return formatter
     }()
 
-    private var dateTextCache: [IndexPath: String] = [:]
+    private var dateTextCacheMap: [IndexPath: String] = [:]
     private var likesCount = 0
     private var isTapped = false
     private var likeColor: UIColor = .white
@@ -101,10 +101,10 @@ final class LikesAndCommentsControl: UIControl {
     }
 
     private func getCellDateText(indexPath: IndexPath, time: Double) -> String {
-        guard let stringDate = dateTextCache[indexPath] else {
+        guard let stringDate = dateTextCacheMap[indexPath] else {
             let date = Date(timeIntervalSince1970: time)
             let stringDate = dateFormatter?.string(from: date)
-            dateTextCache[indexPath] = stringDate
+            dateTextCacheMap[indexPath] = stringDate
             return stringDate ?? ""
         }
         return stringDate
