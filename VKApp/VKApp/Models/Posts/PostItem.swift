@@ -31,6 +31,12 @@ final class PostItem: Decodable {
     var aspectRatio: CGFloat {
         CGFloat(height) / CGFloat(width)
     }
+    /// Тип фото
+    var photoType: String = ""
+    /// Текущее фото
+    var currentPhoto: String = ""
+    /// Данные фото
+    var sizes: [PhotoSizes]? = []
 
     // MARK: - CodingKeys
 
@@ -59,6 +65,7 @@ final class PostItem: Decodable {
         case url
         case width
         case height
+        case photoType = "type"
     }
 
     enum ViewsKeys: String, CodingKey {
@@ -77,6 +84,7 @@ final class PostItem: Decodable {
         let photoContainer = try? attContainer?.nestedContainer(keyedBy: PhotoKeys.self, forKey: .photo)
         var sizisValue = try? photoContainer?.nestedUnkeyedContainer(forKey: .sizes)
         let sizesContainer = try? sizisValue?.nestedContainer(keyedBy: SizesKeys.self)
+        sizes = try photoContainer?.decodeIfPresent([PhotoSizes].self, forKey: .sizes)
         ownerId = try container.decode(Int.self, forKey: .ownerId)
         text = try container.decode(String.self, forKey: .text)
         date = try container.decode(Int.self, forKey: .date)
@@ -86,5 +94,6 @@ final class PostItem: Decodable {
         url = try sizesContainer?.decodeIfPresent(String.self, forKey: .url) ?? ""
         width = try sizesContainer?.decodeIfPresent(Int.self, forKey: .width) ?? 0
         height = try sizesContainer?.decodeIfPresent(Int.self, forKey: .height) ?? 0
+        photoType = try sizesContainer?.decodeIfPresent(String.self, forKey: .photoType) ?? ""
     }
 }

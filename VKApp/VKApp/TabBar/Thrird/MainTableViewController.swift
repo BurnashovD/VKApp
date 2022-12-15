@@ -23,6 +23,7 @@ final class MainTableViewController: UITableViewController {
     private var postsItems: [PostItem] = []
     private var profiles: [UserItem] = []
     private var groups: [GroupItem] = []
+    private var photoSizes: [PhotoSizes] = []
     private var nextPost = ""
     private var isLoading = false
 
@@ -82,6 +83,17 @@ final class MainTableViewController: UITableViewController {
                 post.name = "\(name) \(surname)"
                 post.profileImage = photo
             }
+        }
+        filterPostPhoto()
+    }
+
+    private func filterPostPhoto() {
+        postsItems.forEach { post in
+            let sizes = post.sizes?.filter { item in
+                item.type == Constants.rPhotoTypeName
+            }.first
+            guard let size = sizes?.url else { return }
+            post.currentPhoto = size
         }
     }
 
@@ -157,6 +169,7 @@ extension MainTableViewController {
         static let newsFeedMethodName = "newsfeed.get"
         static let photoText = "photo"
         static let loadingText = "Loading..."
+        static let rPhotoTypeName = "r"
     }
 
     enum CellTypes {
