@@ -16,6 +16,6 @@ final class PostPhotoTableViewCell: UITableViewCell {
         _ post: PostItem,
         networkService: NetworkService
     ) {
-        postPhotoImageView.fetchUserPhotos(post.url, networkService: networkService)
+        postPhotoImageView.fetchUserPhotos(post.currentPhoto, networkService: networkService)
     }
 }

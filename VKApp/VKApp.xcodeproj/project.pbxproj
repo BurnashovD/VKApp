@@ -37,6 +37,7 @@
 		A5463A932933ACBC00BBC5E0 /* GroupItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5463A922933ACBC00BBC5E0 /* GroupItem.swift */; };
 		A566188729342EBE00B9A28F /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A566188629342EBE00B9A28F /* RealmService.swift */; };
 		A56618892934376900B9A28F /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56618882934376900B9A28F /* UIImageView+Extension.swift */; };
+		A569868F294B126B0083271E /* PhotoSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A569868E294B126B0083271E /* PhotoSizes.swift */; };
 		A56C0751293ECAAF00183AA9 /* LikesAndCommentsControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56C0750293ECAAF00183AA9 /* LikesAndCommentsControl.swift */; };
 		A56C0753293ECF0600183AA9 /* LikesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56C0752293ECF0600183AA9 /* LikesTableViewCell.swift */; };
 		A577642E293F7C92000EB6F4 /* EmptyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A577642D293F7C92000EB6F4 /* EmptyTableViewCell.swift */; };
@@ -131,6 +132,7 @@
 		A5463A922933ACBC00BBC5E0 /* GroupItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupItem.swift; sourceTree = "<group>"; };
 		A566188629342EBE00B9A28F /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		A56618882934376900B9A28F /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
+		A569868E294B126B0083271E /* PhotoSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSizes.swift; sourceTree = "<group>"; };
 		A56C0750293ECAAF00183AA9 /* LikesAndCommentsControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesAndCommentsControl.swift; sourceTree = "<group>"; };
 		A56C0752293ECF0600183AA9 /* LikesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesTableViewCell.swift; sourceTree = "<group>"; };
 		A577642D293F7C92000EB6F4 /* EmptyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTableViewCell.swift; sourceTree = "<group>"; };
@@ -337,6 +339,7 @@
 				A5776430293FDDFD000EB6F4 /* PostResponse.swift */,
 				A5776432293FDE3B000EB6F4 /* Post.swift */,
 				A577643A293FE041000EB6F4 /* PostItem.swift */,
+				A569868E294B126B0083271E /* PhotoSizes.swift */,
 			);
 			path = Posts;
 			sourceTree = "<group>";
@@ -775,6 +778,7 @@
 				A50F15562919A5810029C985 /* Posts.swift in Sources */,
 				A507CFF3291AE50A00076C3A /* LoadingDotsView.swift in Sources */,
 				A5B221332913407D005363EE /* GlobalGroupsTableViewCell.swift in Sources */,
+				A569868F294B126B0083271E /* PhotoSizes.swift in Sources */,
 				A5463A8D2933AC5700BBC5E0 /* PhotoResponse.swift in Sources */,
 				A5F3D6732911C97B004EB22A /* GlobalSearchTableViewController.swift in Sources */,
 				A516BC3229104307008802FC /* SceneDelegate.swift in Sources */,
